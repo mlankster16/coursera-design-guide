@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Design tokens — Coursera Design Guide (Duke CTL)
+   Values are final and deliberate; see _design-reference/HANDOFF.md.
+   Every text/background pair here was checked against WCAG AA
+   (4.5:1 body, 3:1 large text). Re-check contrast before substituting.
+   ========================================================================== */
+
+:root {
+  /* --- Level colors -----------------------------------------------------
+     Semantic, not decorative. Each maps to a level of the Coursera
+     hierarchy and matches the color faculty see in the Google Docs
+     design template they fill in. */
+  --level-specialization: #00539b;
+  --level-specialization-dark: #00447f;
+  --level-specialization-tint: #f2f6fb;
+  --level-specialization-tint-border: #cfe0f0;
+  --level-specialization-wash: #fafcfe;
+
+  --level-course: #17724a;
+  --level-course-dark: #125e3d;
+  --level-course-tint: #f0f6f2;
+  --level-course-tint-border: #cfe2d8;
+  --level-course-wash: #fafcfb;
+
+  --level-module: #6b4e9e;
+  --level-module-tint: #f6f3fa;
+  --level-module-tint-border: #e3dbf0;
+  --level-module-wash: #fbfafd;
+
+  --level-assets: #b4700c;
+  --level-assets-tint: #fdf6ec;
+  --level-assets-tint-border: #f0dcc0;
+  /* Second, warmer gold tint used on the Overview mapping table's
+     Learning Assets row and its learner-time note block. */
+  --level-assets-tint-warm: #fcf7ee;
+  --note-gold-bg: #fff8ee;
+  --note-gold-title: #8a4a00;
+  --note-gold-body: #5f4526;
+  --gold-body: #6b4a11;
+  --gold-border-soft: #ebd9be;
+
+  /* Copper warning panel. The title uses the darker copper because the base
+     #C84E00 does not clear AA for small text on this tint. */
+  --warn-bg: #fcf5f0;
+  --warn-title: #a84200;
+
+  /* Darker variants — required for small text on light grounds, where the
+     base color fails AA. Do not swap these back to the base color. */
+  --level-module-dark: #5a3f87;
+  --level-assets-dark: #8a5a0b;
+
+  /* Module step-badge scale (steps 1-4, then gold for step 5) */
+  --badge-1: #6b4e9e;
+  --badge-2: #5a3f87;
+  --badge-3: #493274;
+  --badge-4: #3a2760;
+  --badge-5: #8a5a0b;
+
+  /* --- Dimension colors — Learning Assets page only --------------------- */
+  --dim-design: #00539b;
+  --dim-a11y: #339898;
+  --dim-a11y-text: #2c8080;
+  --dim-copyright: #c84e00;
+
+  /* --- Base palette ----------------------------------------------------- */
+  --navy: #012169;
+  --blue: #00539b;
+  --copper: #c84e00;
+  --gold: #ffd960;
+  --teal: #339898;
+
+  --text-body: #3a424e;
+  --text-strong: #1f2833;
+  --text-secondary: #4a5361;
+  --text-muted: #5a6472;
+  --text-subtle: #6b737f; /* also the eyebrow gray — 4.79:1, do not lighten */
+
+  --rule: #e4e2dd; /* hairline divider, non-text */
+  --rule-card: #d8dee7; /* card border */
+  --rule-strong: #c9cdd4;
+
+  --bg-page: #efede8;
+  --bg-card: #ffffff;
+  --panel-warm: #fbfaf7;
+  --panel-cool: #f6f8fb;
+
+  --nav-inactive-1c: #a8bedc;
+
+  /* --- Typography ------------------------------------------------------- */
+  --font-display: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --font-body: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* --- Measure — three fixed pixel values, no others.
+     Container width and measure are separate rules: panels always span
+     their column; line length is capped on the text *inside* them. */
+  --measure-section: 660px; /* paragraphs directly inside a section */
+  --measure-body: 730px; /* panel text, field values, list items, cells */
+  --measure-hero: 525px; /* hero left column (narrower grid column) */
+
+  /* --- Layout ----------------------------------------------------------- */
+  --shell-width: 1080px; /* 968px inner after 56px side padding */
+  --section-pad-y: 64px;
+  --section-pad-x: 56px;
+
+  /* --- Radius / shadow — nothing else is rounded, only two shadows ------ */
+  --radius-panel: 3px;
+  --radius-card: 4px;
+  --shadow-card: 0 2px 40px rgba(1, 33, 105, 0.1);
+  --shadow-hover: 0 6px 20px rgba(1, 33, 105, 0.08);
+}

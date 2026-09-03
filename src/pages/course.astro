@@ -1,0 +1,853 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const stats = [
+  { figure: '2–4 learning objectives', label: 'per course' },
+  { figure: '3–6 modules', label: 'per course' },
+  { figure: '2–8 hours', label: 'of learner time' },
+  { figure: 'Course Certificate', label: 'on completing the course' },
+];
+
+const steps = [
+  { id: 'step1', n: 1, label: 'Write objectives' },
+  { id: 'step2', n: 2, label: 'Check objectives' },
+  { id: 'step3', n: 3, label: 'Focus the scope' },
+  { id: 'step4', n: 4, label: 'Design for flexibility' },
+  { id: 'step5', n: 5, label: 'Complete the plan' },
+];
+
+/* Green scale, darkening across the five steps. */
+const badge = ['#17724A', '#125E3D', '#0E4C31', '#0A3A25', '#1F2833'];
+
+const ladder = [
+  { level: 'Topic', focus: 'What the Course is about', example: 'Business data' },
+  {
+    level: 'Knowledge',
+    focus: 'What learners know or understand',
+    example: 'Characteristics of useful business data',
+  },
+  { level: 'Skill', focus: 'What learners can perform', example: 'Evaluate the quality of a dataset' },
+  {
+    level: 'Course-level objective',
+    focus: 'What learners can do in a meaningful context',
+    example:
+      'Evaluate whether available data is appropriate for investigating a business question',
+    strong: true,
+  },
+];
+
+const goodVerbs = [
+  'analyze',
+  'apply',
+  'create',
+  'compare',
+  'design',
+  'evaluate',
+  'identify',
+  'interpret',
+  'recommend',
+  'communicate',
+];
+
+const weakVerbs = ['understand', 'learn', 'know', 'become familiar with', 'explore'];
+
+const checks = [
+  {
+    q: 'Is it observable?',
+    a: 'Could learners demonstrate the objective through something they do, create, analyze, evaluate, or decide?',
+  },
+  {
+    q: 'Is it achievable within this Course?',
+    a: 'Can learners reasonably reach the objective through the instruction, practice, feedback, and assessment included in the Course?',
+  },
+  {
+    q: 'Is it meaningful to learners?',
+    a: 'Does the capability have recognizable value beyond completing the Course? Can learners see how they might use it in a professional, academic, or other real-world context?',
+  },
+  {
+    q: 'Is it appropriate for a self-paced online experience?',
+    a: 'Can learners build and demonstrate the capability without depending on live discussion, immediate instructor support, or synchronous participation?',
+  },
+  {
+    q: 'If this Course is part of a larger learning pathway, does it fit?',
+    a: 'Do the objectives support the broader goals of the Specialization, certificate, or program while still giving the Course a clear purpose of its own?',
+  },
+];
+
+const objectives = [
+  'Translate a business need into a focused question that can be investigated with data.',
+  'Identify the data needed to investigate a business question.',
+  'Evaluate a dataset for relevance, completeness, and basic quality concerns.',
+  'Prepare a simple dataset for an introductory business analysis.',
+];
+
+const scopeQuestions = [
+  'What knowledge or skills will learners gain from this?',
+  'Will they need it to achieve the Course objectives?',
+  'Will it help them practice or demonstrate what they should be able to do?',
+];
+
+const includeItems = [
+  'identify the data fields relevant to a business question;',
+  'check for missing, duplicate, or inconsistent values;',
+  'restructure and format a simple dataset; and',
+  'document data-preparation decisions.',
+];
+
+const excludeItems = [
+  'advanced statistical modeling;',
+  'complex programming techniques;',
+  'large-scale data engineering; or',
+  'specialized methods that are not used in the Course analysis.',
+];
+
+const taggedSkills = [
+  'Business Problem Framing',
+  'Data Requirements Analysis',
+  'Data Quality Assessment',
+  'Spreadsheet Analysis',
+  'Exploratory Data Analysis',
+];
+---
+
+<PageLayout
+  title="Course"
+  description="How to design a Coursera Course: write and check objectives, focus the scope, and complete the plan."
+  level="course"
+>
+  <div class="levelpage" data-level="course">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow">Course</p>
+        <h1 class="hero__title">Designing a Coursera Course</h1>
+        <p class="hero__lead">
+          Start by defining the Course's purpose: What should learners be able to do by the end of
+          this Course?
+        </p>
+        <p class="hero__lead">
+          Use that answer to write a small set of Course-level objectives. Those objectives will
+          guide the Modules, where you'll break the larger capability into manageable stages and
+          align it with practice and assessment.
+        </p>
+      </div>
+
+      <div class="hero__rail">
+        <p class="eyebrow hero__rail-eyebrow">A Course at a glance</p>
+        <div class="hero__stats">
+          {
+            stats.map((s) => (
+              <div>
+                <p class="hero__stat-figure">{s.figure}</p>
+                <p class="hero__stat-label">{s.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Step jump rail -->
+    <nav class="steprail steprail--5" aria-label="Steps on this page">
+      {
+        steps.map((s) => (
+          <a class="steprail__link" href={`#${s.id}`}>
+            <span class="steprail__n">{s.n}</span>
+            <span class="steprail__label">{s.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="step" id="step1">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[0]}`}>1</span>
+        <span class="step__count">Step 1 of 5</span>
+      </div>
+      <h2 class="step__title">Write Course objectives</h2>
+      <p class="step__p step__p--gap">
+        Once the Course has a clear purpose, translate that purpose into 2–4 course-level learning
+        objectives. A strong Course objective describes something learners can demonstrate by the end
+        of the Course. It should be broad enough for several Modules to contribute to its
+        development, while still being achievable within the Course itself.
+      </p>
+
+      <div class="ladder" data-keep>
+        <div class="ladder__row ladder__row--head">
+          <div class="ladder__cell">Level</div>
+          <div class="ladder__cell">Focus</div>
+          <div class="ladder__cell">Example</div>
+        </div>
+        {
+          ladder.map((r) => (
+            <div class="ladder__row">
+              <div class="ladder__cell ladder__cell--level">{r.level}</div>
+              <div class="ladder__cell ladder__cell--focus">{r.focus}</div>
+              <div class:list={['ladder__cell', r.strong && 'ladder__cell--strong']}>
+                {r.example}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="prompt">By the end of this Course, learners will be able to…</p>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">Consider using observable action verbs such as</p>
+          <div class="verbs">
+            {goodVerbs.map((v) => <span class="verb">{v}</span>)}
+          </div>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">These verbs may need more specificity</p>
+          <div class="verbs verbs--gap">
+            {weakVerbs.map((v) => <span class="verb verb--weak">{v}</span>)}
+          </div>
+          <p class="verbs__note">
+            They may describe your instructional intention, but they do not clearly indicate what
+            learners will be able to demonstrate.
+          </p>
+        </div>
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">
+          Writing Course objectives for Foundations of Data Analytics for Business
+        </h3>
+        <p class="example__p">
+          Now let's zoom in on the first Course in the Specialization: <em
+            >Foundations of Data Analytics for Business</em
+          >.
+        </p>
+
+        <div class="journey">
+          <div class="journey__head">
+            <span class="journey__title">Data Analytics for Business Decisions</span>
+            <span class="journey__kind">Specialization</span>
+          </div>
+          <div class="journey__course">
+            <div class="journey__course-head">
+              <span class="journey__n">1</span>
+              <p class="journey__course-title">Foundations of Data Analytics for Business</p>
+            </div>
+            <p class="journey__body">
+              Learners begin by translating a business need into a question that can be investigated
+              with data. They identify the data they need, evaluate its basic quality, and prepare it
+              for analysis.
+            </p>
+            <p class="journey__leave">
+              <strong>Learners leave with:</strong> a focused business question and an analysis-ready
+              dataset.
+            </p>
+          </div>
+        </div>
+
+        <p class="example__p">
+          That purpose can be translated into a small set of observable Course-level objectives.
+        </p>
+
+        <div class="objbox">
+          <p class="objbox__eyebrow">By the end of the Course, learners will be able to:</p>
+          <ul class="objbox__list">
+            {objectives.map((o) => <li>{o}</li>)}
+          </ul>
+        </div>
+
+        <p class="example__p">
+          These objectives describe what learners can demonstrate, rather than topics the instructor
+          intends to cover. For example, “data quality” names a subject. “Evaluate a dataset for
+          relevance, completeness, and basic quality concerns” describes what learners will do with
+          their knowledge of that subject.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step2">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[1]}`}>2</span>
+        <span class="step__count">Step 2 of 5</span>
+      </div>
+      <h2 class="step__title">Check your objectives</h2>
+
+      <div class="checklist">
+        {
+          checks.map((c) => (
+            <div class="checklist__row" data-keep>
+              <span class="checklist__box" aria-hidden="true" />
+              <div>
+                <p class="checklist__q">{c.q}</p>
+                <p class="checklist__a">{c.a}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step" id="step3">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[2]}`}>3</span>
+        <span class="step__count">Step 3 of 5</span>
+      </div>
+      <h2 class="step__title">Focus the Course scope</h2>
+      <p class="step__q">
+        Now that you've checked your objectives, use them to guide decisions about the Course's
+        scope.
+      </p>
+      <p class="step__p step__p--tight">For each topic, resource, or activity, ask:</p>
+
+      <ul class="qlist">
+        {scopeQuestions.map((q) => <li>{q}</li>)}
+      </ul>
+
+      <p class="step__p step__p--gap">
+        These questions can help you decide what to include, what to leave out, and how to organize
+        the learning around the Course's purpose. A strong Course is not simply a collection of
+        related topics; each element should help learners develop the knowledge and skills they need
+        to achieve the intended outcomes.
+      </p>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">You might ask</p>
+          <p class="askpair__q">
+            What knowledge and skills do learners need to achieve the Course objectives?
+          </p>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">Rather than asking</p>
+          <p class="askpair__q">Which topics should this Course cover?</p>
+        </div>
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Using a Course objective to guide scope</h3>
+        <p class="example__p">
+          Consider one objective from <em>Foundations of Data Analytics for Business</em>:
+        </p>
+
+        <div class="objbox">
+          <p class="objbox__eyebrow">Course objective</p>
+          <p class="objbox__quote">
+            Learners will be able to prepare a simple dataset for an introductory business analysis.
+          </p>
+        </div>
+
+        <p class="example__p example__p--gap">
+          This objective can help faculty distinguish between content that directly supports the
+          intended learning and content that, while interesting or valuable, may not be necessary at
+          this stage.
+        </p>
+
+        <div class="inout">
+          <div class="inout__card inout__card--in">
+            <p class="eyebrow inout__eyebrow">Include</p>
+            <p class="inout__intro">Learners will likely need opportunities to:</p>
+            <ul class="inout__list">
+              {includeItems.map((i) => <li>{i}</li>)}
+            </ul>
+            <p class="inout__note">
+              Each element contributes directly to learners’ ability to prepare data for an
+              introductory analysis.
+            </p>
+          </div>
+          <div class="inout__card inout__card--out">
+            <p class="eyebrow inout__eyebrow">Consider leaving out</p>
+            <p class="inout__intro">Learners may not need:</p>
+            <ul class="inout__list">
+              {excludeItems.map((i) => <li>{i}</li>)}
+            </ul>
+            <p class="inout__note">
+              These topics may be valuable in another context, but they are not necessary for
+              achieving this Course objective. Including them could increase the Course’s time and
+              complexity without adding to the skill learners are expected to develop.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step" id="step4">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[3]}`}>4</span>
+        <span class="step__count">Step 4 of 5</span>
+      </div>
+      <h2 class="step__title">Design for flexibility</h2>
+      <p class="step__p">
+        Coursera Courses often work well when they are modular and self-contained. When possible,
+        provide enough context for learners to understand the Course's purpose, why the learning
+        matters, and what prior knowledge or skills they need to succeed without requiring them to
+        have completed a specific earlier Course.
+      </p>
+      <p class="step__p step__p--gap">
+        Some subjects are best learned through a sequence. When learners genuinely need knowledge or
+        skills from an earlier Course, make that dependency clear. The goal is not to eliminate
+        prerequisites, but to make Courses as portable and understandable on their own as the
+        learning allows.
+      </p>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">More modular</p>
+          <p class="askpair__quote">
+            This course assumes familiarity with basic spreadsheet formulas and functions.
+          </p>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">More dependent on a specific sequence</p>
+          <p class="askpair__quote">
+            As you learned in Course 1, you will now build on the framework introduced in Module 3…
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5: template -->
+    <section class="step step--last" id="step5">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[4]}`}>5</span>
+        <span class="step__count">Step 5 of 5</span>
+      </div>
+      <h2 class="step__title">Complete your Course plan</h2>
+      <p class="step__q">
+        Use this page to work through the decisions, then record them in the Design Document. This
+        section repeats for each course.
+      </p>
+
+      <div class="tmpl">
+        <div class="tmpl__bar">
+          <span class="tmpl__bar-title">Course 1</span>
+          <span class="tmpl__bar-note">Repeats per course</span>
+        </div>
+
+        <div class="tmpl__link-row">
+          <a
+            class="ext"
+            href="https://www.coursera.org/search?query=duke%20university"
+            target="_blank"
+            rel="noopener">See a sample Course Landing Page ↗</a
+          > on Coursera
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Course title</p>
+          <div class="tmpl__value"><p>Foundations of Data Analytics for Business</p></div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Course description</p>
+          <div class="tmpl__value">
+            <p>
+              Learn how to turn a business need into a question that data can help answer. You'll
+              practice identifying useful data, evaluating its relevance and quality, and preparing
+              data for an introductory analysis using realistic business examples.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__row">
+          <div class="tmpl__field">
+            <p class="tmpl__label">Estimated time to complete</p>
+            <div class="tmpl__value"><p>Approximately 7 hours</p></div>
+          </div>
+          <div class="tmpl__field">
+            <p class="tmpl__label">Difficulty level</p>
+            <div class="tmpl__value"><p>Beginner</p></div>
+          </div>
+        </div>
+
+        <div class="tmpl__row">
+          <div class="tmpl__field">
+            <p class="tmpl__label">Primary domain / sub-domain</p>
+            <div class="tmpl__value"><p>Business → Business Analytics</p></div>
+          </div>
+          <div class="tmpl__field">
+            <p class="tmpl__label">Secondary domain / sub-domain</p>
+            <div class="tmpl__value"><p>Data Science → Data Analysis</p></div>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Tagged skills</p>
+          <div class="tmpl__chips">
+            {taggedSkills.map((s) => <span class="tmpl__chip">{s}</span>)}
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Recommended background</p>
+          <div class="tmpl__value">
+            <p>
+              No prior experience with data analytics or programming. Basic familiarity with
+              spreadsheets and workplace math is helpful
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">What learners will learn</p>
+          <div class="tmpl__value">
+            <ol>
+              {objectives.map((o) => <li>{o}</li>)}
+            </ol>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Instructor information and bio source link</p>
+          <div class="tmpl__value">
+            <p>
+              Jordan Lee is a faculty member specializing in business analytics and
+              evidence-informed decision-making. Their teaching and research focus on helping
+              organizations use data to frame questions, evaluate performance, and make more informed
+              decisions.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__cta">
+          <a class="btn btn--level" href="#" data-template-link>Open the template in Google Docs ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .steprail--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .step--last {
+    padding-bottom: 8px;
+  }
+
+  .step__p--gap {
+    margin-bottom: 36px;
+  }
+
+  .step__p--tight {
+    margin-bottom: 16px;
+  }
+
+  /* --- Objective ladder --------------------------------------------------- */
+  .ladder {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    margin: 0 0 32px;
+  }
+
+  .ladder__row {
+    display: grid;
+    grid-template-columns: 170px 1fr 1.4fr;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ladder__row:last-child {
+    border-bottom: 0;
+  }
+
+  .ladder__row--head {
+    background: var(--tint);
+    border-bottom: 1px solid var(--tint-border);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    font-weight: 700;
+  }
+
+  .ladder__cell {
+    padding: 13px 20px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+  }
+
+  .ladder__row--head .ladder__cell {
+    border-left-color: var(--tint-border);
+  }
+
+  .ladder__cell:first-child {
+    border-left: 0;
+  }
+
+  .ladder__cell--level {
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  .ladder__cell--focus {
+    color: var(--text-subtle);
+  }
+
+  .ladder__cell--strong {
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .prompt {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: 23px;
+    color: var(--navy);
+  }
+
+  /* --- Verb chips --------------------------------------------------------- */
+  .verbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verbs--gap {
+    margin: 0 0 14px;
+  }
+
+  .verb {
+    background: var(--bg-card);
+    border: 1px solid var(--tint-border);
+    border-radius: 2px;
+    padding: 6px 12px;
+    font-size: 14.5px;
+    color: var(--text-strong);
+  }
+
+  .verb--weak {
+    border-color: var(--rule);
+    color: var(--text-subtle);
+  }
+
+  .verbs__note {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-subtle);
+    max-width: var(--measure-body);
+  }
+
+  .askpair__eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .askpair__quote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .askpair__weak .askpair__quote {
+    color: var(--text-muted);
+  }
+
+  /* --- Objective checklist ------------------------------------------------ */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+  }
+
+  .checklist__row {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .checklist__box {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: var(--radius-panel);
+    border: 2px solid var(--accent);
+    display: block;
+  }
+
+  .checklist__q {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .checklist__a {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Hanging-bullet question list --------------------------------------- */
+  .qlist {
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .qlist li {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-strong);
+    padding-left: 18px;
+    position: relative;
+    max-width: var(--measure-section);
+  }
+
+  .qlist li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+  }
+
+  /* --- Objective pull-out ------------------------------------------------- */
+  .objbox {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-panel);
+    padding: 20px 24px;
+    margin: 0 0 20px;
+  }
+
+  .objbox__eyebrow {
+    margin: 0 0 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    font-weight: 700;
+    max-width: var(--measure-body);
+  }
+
+  .objbox__list {
+    margin: 0;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .objbox__list li {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .objbox__quote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .example__p--gap {
+    margin-bottom: 24px;
+  }
+
+  /* --- Include / leave out ------------------------------------------------ */
+  .inout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .inout__card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    padding: 22px 24px;
+  }
+
+  .inout__card--in {
+    border-top: 3px solid var(--accent);
+  }
+
+  .inout__card--out {
+    border-top: 3px solid var(--rule-strong);
+  }
+
+  .inout__eyebrow {
+    margin: 0 0 4px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    color: var(--accent-dark);
+  }
+
+  .inout__card--out .inout__eyebrow {
+    color: var(--text-subtle);
+  }
+
+  .inout__intro {
+    margin: 0 0 14px;
+    font-size: 16px;
+    color: var(--text-strong);
+  }
+
+  .inout__list {
+    margin: 0 0 14px;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .inout__list li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .inout__note {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text-subtle);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Template ----------------------------------------------------------- */
+  .tmpl__link-row {
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+
+  .tmpl__link-row .ext {
+    color: var(--accent);
+  }
+
+  .btn--level {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn--level:hover {
+    background: var(--gold);
+    color: var(--text-strong);
+  }
+</style>

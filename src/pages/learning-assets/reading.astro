@@ -1,0 +1,1413 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const traits = [
+  {
+    title: 'Flexible format',
+    body: 'Text, images, code, media, files, links, and embedded tools can work together in a Reading.',
+  },
+  {
+    title: 'Essential or optional',
+    body: 'Consider whether learners need the material to continue through the Module or whether it offers additional support or exploration.',
+  },
+  {
+    title: 'Designed for self-paced learning',
+    body: 'Give learners enough context to understand what they are looking at, why it matters, and what they should do with it.',
+  },
+];
+
+const steps = [
+  { id: 'step1', n: 1, label: 'Decide its role' },
+  { id: 'step2', n: 2, label: 'Design for learners' },
+  { id: 'step3', n: 3, label: 'Make it easy to work through' },
+];
+
+const roles = [
+  {
+    kind: 'Reading',
+    sub: 'Part of the learning path',
+    body: 'Use a Reading when learners need the material to understand, practice, or complete what comes next. For example:',
+    items: [
+      'An explanation the Module depends on',
+      'Instructions for an activity',
+      'A reference learners will use during practice',
+      'Vocabulary or concepts that build on another asset',
+    ],
+    primary: true,
+  },
+  {
+    kind: 'Resource',
+    sub: 'Available when useful',
+    body: 'Use a Resource when the material can support or extend learning but is not necessary for learners to continue. For example:',
+    items: [
+      'Further reading',
+      'Additional background',
+      'An alternative explanation or perspective',
+      'Material relevant to particular interests or needs',
+    ],
+    primary: false,
+  },
+];
+
+const oscar = [
+  'Observe',
+  'State observations',
+  'Clarify role',
+  'Ask why',
+  'Respond',
+];
+
+const qmdSteps = [
+  'Click on the link provided to access the .qmd (Quarto Markdown) file.',
+  'Go to the More file actions button in the top right of your screen to access additional menu items.',
+  'Click Download.',
+  'Once clicked, the file should automatically download to your ‘Downloads’ folder or your specified download location.',
+];
+
+const inRecord = [
+  'Heart rate 104 bpm',
+  'SpO₂ 94%',
+  'Diagnosis I50.9 CHF',
+  'Prior admissions, 12 months — 3',
+  'Medications — 6 active',
+];
+
+const notInRecord = [
+  'Seemed more confused than usual this morning',
+  'Mentioned chest tightness in passing',
+  'Has not eaten since yesterday evening',
+  'Expressed worry about going home alone',
+];
+
+const outputs = [
+  { label: 'Risk score', value: '74 — elevated deterioration risk' },
+  { label: 'Alert', value: 'Readmission risk flagged — follow-up recommended' },
+  {
+    label: 'Draft text',
+    value:
+      'Patient with known CHF presenting with elevated heart rate and reduced oxygen saturation. Consider diuresis review prior to discharge.',
+  },
+];
+
+const terms = [
+  {
+    term: 'Input',
+    body: 'Any documented piece of information the system uses to do its analysis. Vital signs, lab values, diagnoses, prior admissions, medication changes. If it was not documented, it was not an input — and the system is working without it.',
+  },
+  {
+    term: 'Output',
+    body: 'Whatever the system produces after processing its inputs. A score, a risk category, a ranked list, a drafted paragraph. Outputs can look confident and complete — they are shaped entirely by what the system had access to.',
+  },
+];
+
+const a11yItems = [
+  'Use a logical heading structure.',
+  'Provide alternative text for meaningful images.',
+  'Describe important information from complex visuals in the surrounding text.',
+  'Use selectable text for code rather than screenshots.',
+  'Provide accessible alternatives to embedded files or media where needed.',
+  'Do not rely on color alone to communicate meaning.',
+];
+
+const draftChecks = [
+  { label: 'Purpose', body: 'Is it clear what learners should gain or do?' },
+  {
+    label: 'Essential or optional',
+    body: 'Have you decided whether this belongs in the learning path or as a supplemental Resource?',
+  },
+  { label: 'Structure', body: 'Can learners quickly see how the Reading is organized?' },
+  {
+    label: 'Links and tools',
+    body: 'Do learners know where links lead, and what they will need to access external tools?',
+  },
+  {
+    label: 'Accessibility',
+    body: 'Have you identified images, graphics, media, files, or interactions that may need an accessible alternative?',
+  },
+  { label: 'Copyright and permissions', body: 'Have you flagged third-party material for review?' },
+  { label: 'Time', body: 'Does the estimate reflect everything learners are being asked to do?' },
+];
+---
+
+<PageLayout
+  title="Reading"
+  description="Full guidance for designing a Coursera Reading: its role, structure, and accessibility."
+  level="assets"
+  breadcrumb="Reading"
+  backToAssets
+>
+  <div class="levelpage" data-level="assets">
+    <!-- Hero -->
+    <div class="rhero" data-cap="head">
+      <div class="rhero__top">
+        <div>
+          <p class="eyebrow hero__eyebrow">Reading</p>
+          <h1 class="hero__title">Designing a Reading</h1>
+          <p class="hero__lead">
+            Readings give learners space to work through information at their own pace. They can
+            explain or reinforce an idea, provide a reference learners can return to, guide learners
+            through a task, or connect them with material outside Coursera.
+          </p>
+          <p class="hero__lead">
+            A Reading might be as simple as a few paragraphs introducing a PDF or external resource,
+            or as rich as a designed page with graphics, code, embedded media, and interactive tools.
+          </p>
+        </div>
+
+        <div class="rhero__rail">
+          <p class="rhero__rail-body">
+            Not sure how to structure a Reading for your content? Your Learning Experience Designer
+            can help you decide what to include, how to organize it, and which format will best
+            support learners.
+          </p>
+        </div>
+      </div>
+
+      <div class="traits">
+        {
+          traits.map((t) => (
+            <div class="traits__item">
+              <p class="traits__title">{t.title}</p>
+              <p class="traits__body">{t.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Step jump rail -->
+    <nav class="steprail steprail--3" aria-label="Steps on this page">
+      {
+        steps.map((s) => (
+          <a class="steprail__link" href={`#${s.id}`}>
+            <span class="steprail__n">{s.n}</span>
+            <span class="steprail__label">{s.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="step" id="step1">
+      <div class="step__head">
+        <span class="step__badge">1</span>
+        <span class="step__count">Step 1 of 3</span>
+      </div>
+      <h2 class="step__title">Decide the Reading’s role</h2>
+
+      <div class="start" data-keep>
+        <p class="start__eyebrow">Where to start?</p>
+        <p class="start__q">Is this essential or optional?</p>
+      </div>
+
+      <p class="step__p step__p--gap">
+        Coursera allows you to make reading material available as either part of the learning path or
+        as an additional resource. Consider whether learners need to work through the material as
+        part of the Module or whether it offers useful support or additional depth.</p
+      >
+
+      <div class="cards2">
+        {
+          roles.map((r) => (
+            <div class:list={['rcard', !r.primary && 'rcard--muted']} data-keep>
+              <p class="rcard__kind">{r.kind}</p>
+              <p class:list={['rcard__sub', !r.primary && 'rcard__sub--muted']}>{r.sub}</p>
+              <p class="rcard__body">{r.body}</p>
+              <ul class:list={['bullets', !r.primary && 'bullets--muted']}>
+                {r.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="ask ask--gap" data-keep>
+        <p class="ask__eyebrow">A useful question</p>
+        <p class="ask__q">
+          If a learner skipped this, would they still have what they need to complete the Module
+          successfully?
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step2">
+      <div class="step__head">
+        <span class="step__badge">2</span>
+        <span class="step__count">Step 2 of 3</span>
+      </div>
+      <h2 class="step__title">Design for what learners need</h2>
+      <p class="step__q">
+        Readings can support learners in different ways. Start by identifying what learners need from
+        the Reading, then choose a structure and format that support that purpose. Each pattern below
+        is paired with a published Reading from a Duke Course.
+      </p>
+
+      <div class="meta" data-keep>
+        <p class="meta__eyebrow">About these examples</p>
+        <p class="meta__body">
+          Each example shows the Reading’s wording and layout as they appear in the course. Links are
+          shown as text rather than live links because the originals point to course files or enrolled
+          learners’ views.
+        </p>
+      </div>
+
+      <!-- Example 1 -->
+      <div class="rexample" data-keep>
+        <p class="eyebrow rexample__eyebrow">Example 1</p>
+        <h3 class="rexample__title">Orient learners to something they’ll read or use</h3>
+        <p class="rexample__intro">
+          Sometimes the main content already exists in a workbook, article, report, PDF, or other
+          document. The Coursera Reading can provide just enough context to help learners know where
+          to go, what to focus on, and what to do.
+        </p>
+
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__kind">Reading</span>
+            <span class="mock__course">Stress First Aid for Healthcare Workers</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">Workbook, pages 9–10</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">10 minutes</span>
+          </div>
+          <div class="mock__body">
+            <p class="mock__eyebrow">Workbook (pg. 9–10)</p>
+            <p class="mock__p">
+              Using the Stress First Aid for Health Care Workers Workbook you downloaded from the
+              National Center for Post Traumatic Stress Disorder, read and complete the short
+              activities on pages 9–10 that cover the check action — and specifically the OSCAR
+              Method of checking in with a peer. Think carefully about how you might start a
+              conversation with a peer who you were concerned about.
+            </p>
+            <div class="chips">
+              {
+                oscar.map((o, i) => (
+                  <span class="chip">
+                    <span class="chip__n">{i + 1}</span>
+                    {o}
+                  </span>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <p class="notice__eyebrow">What to notice</p>
+          <p class="notice__body">
+            The Reading does not duplicate the workbook. Instead, it helps learners approach it with
+            a purpose by identifying a specific page range, naming a method to focus on, and offering
+            a question to consider.
+          </p>
+          <p class="notice__body notice__body--last">
+            The 10-minute estimate refers to completing the workbook activities, not reading the
+            introductory text.
+          </p>
+        </div>
+      </div>
+
+      <!-- Example 2 -->
+      <div class="rexample" data-keep>
+        <p class="eyebrow rexample__eyebrow">Example 2</p>
+        <h3 class="rexample__title">Guide learners into an external tool or activity</h3>
+        <p class="rexample__intro">
+          A Reading can also serve as a bridge between Coursera and something learners will use
+          elsewhere, such as software, a survey, an external lab, a dataset, or another web-based
+          tool.
+        </p>
+        <p class="rexample__intro">
+          When learners need to leave Coursera, help them understand where they are going, what they
+          will do, what they need to have ready, and how to get started if the process is unfamiliar.
+        </p>
+
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__kind">Reading</span>
+            <span class="mock__course">Data Visualization and Transformation with R</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">Code along: My First Data Visualization</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">20 minutes</span>
+          </div>
+          <div class="mock__body">
+            <p class="mock__eyebrow">Code along :: My first data visualization</p>
+            <p class="mock__p">
+              For your first code along video, download and open this qmd file in RStudio to follow
+              along:
+            </p>
+            <p class="mock__p">
+              <span class="mock__file">1-1-unvotes.qmd</span>
+              <span class="mock__aside">A live link in the Course</span>
+            </p>
+            <p class="mock__p">
+              If you’re not sure how to download this file or open it in RStudio, follow the
+              instructions below to get started.
+            </p>
+            <p class="mock__sub">Step 1: Download the QMD file</p>
+            <ul class="mock__list">
+              {qmdSteps.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <p class="rexample__after">
+          The Reading continues through opening RStudio, opening the file, responding to the
+          package-install prompt, and following along with the code.
+        </p>
+
+        <div class="notice">
+          <p class="notice__eyebrow">What to notice</p>
+          <p class="notice__body notice__body--last">
+            Learners can use the level of support that works for them. Those who already know the
+            workflow can follow the link and continue. Those who are less familiar with it can use
+            the numbered steps and screenshots provided at points where the interface may be
+            unfamiliar.
+          </p>
+        </div>
+      </div>
+
+      <!-- Example 3 -->
+      <div class="rexample" data-keep>
+        <p class="eyebrow rexample__eyebrow">Example 3</p>
+        <h3 class="rexample__title">Connect learners with outside material</h3>
+        <p class="rexample__intro">
+          You do not always need to recreate useful material that already exists. A Reading can
+          introduce an external video, article, website, or other source and help learners understand
+          why it is included and what to pay attention to.
+        </p>
+
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__kind">Reading</span>
+            <span class="mock__course">Climate Science</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">YouTube plug-in with contextual framing</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">5 minutes</span>
+          </div>
+          <div class="mock__body">
+            <p class="mock__eyebrow">Charles Keeling and NOAA’s Mauna Loa Observatory</p>
+            <p class="mock__p">
+              <span class="mock__link">This video</span> shows how the pioneering measurements of CO₂
+              by Charles Keeling at Mauna Loa laid the foundation of our understanding of the human
+              impact of climate.
+            </p>
+            <div class="embed">
+              <p class="embed__label">Embedded YouTube player</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <p class="notice__eyebrow">What to notice</p>
+          <p class="notice__body">
+            The Reading provides enough framing for learners to understand what the video is about
+            and why it belongs in the learning experience, without repeating the video’s content.
+          </p>
+          <p class="notice__body notice__body--last">
+            The words “This video” also serve as the link, allowing learners to watch it in YouTube’s
+            own player if the embedded version does not work well for them.
+          </p>
+        </div>
+
+        <div class="warn" data-keep>
+          <p class="warn__title">Before embedding third-party media</p>
+          <p class="warn__body">
+            Publicly available does not necessarily mean cleared for use in a public, commercial
+            Coursera Course. Check the rights holder’s terms before including externally produced
+            video or other media, and share anything you are unsure about with your CTL team.
+          </p>
+          <p class="warn__body">
+            For example, TED Talks are freely viewable and widely shared. However, TED’s usage policy
+            does not permit commercial or corporate use, which includes use in a paid Coursera Course.
+          </p>
+          <a class="ext ext--copper" href="#">TED Talks usage policy — commercial use ↗</a>
+        </div>
+      </div>
+
+      <!-- Example 4 -->
+      <div class="rexample" data-keep>
+        <p class="eyebrow rexample__eyebrow">Example 4</p>
+        <h3 class="rexample__title">Build on something learners have already encountered</h3>
+        <p class="rexample__intro">
+          A Reading can give learners time to revisit an idea after a video or activity. It might help
+          them examine an example, compare concepts, or develop vocabulary they will need later.
+        </p>
+
+        <div class="mock">
+          <div class="mock__bar">
+            <span class="mock__kind">Reading</span>
+            <span class="mock__course">Seeing AI in Nursing Practice</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">Term Spotlight: Inputs and Outputs</span>
+            <span class="mock__dot" aria-hidden="true">·</span>
+            <span class="mock__detail">10 minutes</span>
+          </div>
+          <div class="mock__body">
+            <p class="mock__eyebrow">How information shapes the AI output</p>
+            <p class="mock__p">
+              AI systems rely on information available in the records or other data sources they are
+              designed to access. This might include vital signs, lab values, nursing notes,
+              medication changes, or prior admissions. We call this information the system’s inputs.
+            </p>
+            <p class="mock__p">
+              What the system does not have access to can be just as important. For example, it may
+              not know that a patient seemed more confused this morning, mentioned chest tightness in
+              passing, or has not eaten since yesterday evening — unless those observations were
+              documented in a source the system can access.
+            </p>
+            <p class="mock__p">
+              After processing its inputs, the system produces a result, known as the output. The
+              graphic below illustrates this process for a single patient. As you review it, consider
+              how missing, incomplete, or outdated information might affect the output.
+            </p>
+
+            <figure class="io">
+              <figcaption class="io__cap">Inputs and outputs for a single patient</figcaption>
+              <div class="io__body">
+                <div class="io__inputs">
+                  <p class="io__eyebrow">Inputs — T. Nguyen, Rm 415</p>
+                  <div class="io__pair">
+                    <div class="io__card">
+                      <p class="io__card-title">In the record</p>
+                      <p class="io__card-note">available as inputs</p>
+                      <ul class="bullets bullets--io">
+                        {inRecord.map((i) => <li>{i}</li>)}
+                      </ul>
+                    </div>
+                    <div class="io__card">
+                      <p class="io__card-title">Not in the record</p>
+                      <p class="io__card-note">not an input</p>
+                      <ul class="bullets bullets--io">
+                        {notInRecord.map((i) => <li>{i}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="io__outputs">
+                  <p class="io__eyebrow">Outputs — produced by the system</p>
+                  <div class="io__outlist">
+                    {
+                      outputs.map((o) => (
+                        <div class="io__out">
+                          <p class="io__out-label">{o.label}</p>
+                          <p class="io__out-value">{o.value}</p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <p class="io__closing">
+                    These outputs were shaped entirely by what was documented. The confusion, the
+                    chest tightness, the missed meals, the worry about going home — none of it was an
+                    input. The system is working without it.
+                  </p>
+                </div>
+              </div>
+            </figure>
+
+            <div class="termcards">
+              {
+                terms.map((t) => (
+                  <div class="termcard">
+                    <p class="termcard__eyebrow">Term</p>
+                    <p class="termcard__term">{t.term}</p>
+                    <p class="termcard__body">{t.body}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <p class="mock__eyebrow">In practice</p>
+            <p class="mock__p">
+              AI outputs can appear precise and complete. But that appearance reflects how the output
+              was formatted, not necessarily how much relevant information the system had or how
+              reliable the result is.
+            </p>
+            <p class="mock__p mock__p--last">
+              Treat each output as one piece of information among many, shaped by what was documented,
+              how current it was, and what may have been missing. This mindset can help you interpret
+              AI outputs thoughtfully and bring your own clinical judgment to the decision-making
+              process.
+            </p>
+          </div>
+        </div>
+
+        <div class="notice">
+          <p class="notice__eyebrow">What to notice</p>
+          <p class="notice__body">
+            Each element serves a different learning purpose. The prose introduces the idea, the
+            graphic gives learners a concrete case to examine, the term cards reinforce key
+            vocabulary, and the closing section connects the concept to practice.
+          </p>
+          <p class="notice__body notice__body--last">
+            This example does not require specialized design tools. It uses text, a table-like layout,
+            and consistent color, all of which can be included in a Coursera Reading.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step" id="step3">
+      <div class="step__head">
+        <span class="step__badge">3</span>
+        <span class="step__count">Step 3 of 3</span>
+      </div>
+      <h2 class="step__title">Make the Reading easy to work through</h2>
+      <p class="step__p step__p--gap">
+        Whatever role a Reading serves, a few design choices can make it easier for learners to use
+        rather than skim.
+      </p>
+
+      <div class="choices">
+        <div class="choices__item" data-keep>
+          <p class="choices__title">Make the purpose clear</p>
+          <p class="choices__body">
+            Help learners understand early what they should gain from the Reading and how they will
+            use it.
+          </p>
+          <p class="choices__body choices__body--last">
+            If there is something they need to do, such as download a file, complete specific pages,
+            watch a video, or open a tool, make that clear near the beginning.
+          </p>
+        </div>
+
+        <div class="choices__item" data-keep>
+          <p class="choices__title">Make it easy to scan</p>
+          <p class="choices__body">
+            Use descriptive headings, short sections, bullets for related ideas, and numbered steps
+            for sequences.
+          </p>
+          <p class="choices__body choices__body--last">
+            Avoid generic headings such as “Overview” when a more specific heading, such as <em
+              >Download the QMD file</em
+            > or <em>How information shapes the AI output</em>, gives learners a clearer sense of what
+            to expect.
+          </p>
+        </div>
+
+        <div class="choices__item" data-keep>
+          <p class="choices__title">Give links context</p>
+          <p class="choices__body">Use descriptive link text so learners know where they are going.</p>
+          <p class="choices__body choices__body--last">
+            Instead of <span class="inline-code">Click here</span>, try <span class="inline-code"
+              >Stress First Aid for Health Care Workers Workbook</span
+            >.
+          </p>
+        </div>
+
+        <div class="choices__item" data-keep>
+          <p class="choices__title">Build accessibility in</p>
+          <ul class="bullets bullets--a11y">
+            {a11yItems.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Content gap carried over from the design source. -->
+      <div class="include" data-keep>
+        <div class="include__head">
+          <p class="include__title">What can a Reading include?</p>
+        </div>
+        <div class="include__body">
+          <p class="include__eyebrow">Content needed</p>
+          <p class="include__note">
+            This section was collapsed in the source document, so its contents were not available.
+            Send the list to your LXD and it will be set here.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ready to share -->
+    <section class="step step--last">
+      <h2 class="step__title">Ready to share your draft?</h2>
+      <p class="step__q">Before sending your Reading to your CTL team, consider:</p>
+
+      <div class="ready">
+        {
+          draftChecks.map((c) => (
+            <div class="ready__row" data-keep>
+              <span class="ready__box" aria-hidden="true" />
+              <p class="ready__label">{c.label}</p>
+              <p class="ready__body">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="note-gold" data-keep>
+        <p class="note-gold__head">You do not need to have everything resolved</p>
+        <p class="note-gold__text">
+          Your Learning Experience Designer can help you think through the Reading’s structure,
+          accessibility, media, external tools, and role within the larger Module. Share questions or
+          uncertainties as part of the draft.
+        </p>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .steprail--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .steprail__n {
+    color: var(--level-assets-dark);
+  }
+
+  .step--last {
+    padding-bottom: 8px;
+  }
+
+  .step__badge {
+    background: var(--level-assets-dark);
+  }
+
+  .step__p,
+  .step__q {
+    max-width: var(--measure-section);
+  }
+
+  .step__p {
+    margin: 0 0 18px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  .step__p--gap {
+    margin-bottom: 26px;
+  }
+
+  .step__q {
+    margin: 0 0 24px;
+  }
+
+  /* --- Hero: two-column top plus a three-trait strip ---------------------- */
+  .rhero {
+    padding: 72px var(--section-pad-x) 60px;
+    background: var(--panel-warm);
+  }
+
+  .rhero__top {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: start;
+    margin: 0 0 44px;
+  }
+
+  .rhero__rail {
+    border-left: 3px solid var(--level-assets);
+    padding: 4px 0 4px 26px;
+  }
+
+  .rhero__rail-body {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .traits {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .traits__item {
+    border-top: 3px solid var(--level-assets);
+    padding: 20px 0 0;
+  }
+
+  .traits__title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 23px;
+    line-height: 1.25;
+    color: var(--navy);
+  }
+
+  .traits__body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- "Where to start?" prompt ------------------------------------------- */
+  .start {
+    background: var(--level-specialization-tint);
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+    margin: 0 0 26px;
+  }
+
+  .start__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .start__q {
+    margin: 0;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Reading vs Resource cards ------------------------------------------ */
+  .cards2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 0 0 26px;
+  }
+
+  .rcard {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    padding: 24px 26px;
+  }
+
+  .rcard--muted {
+    border-top-color: var(--rule-strong);
+  }
+
+  .rcard__kind {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--navy);
+  }
+
+  .rcard__sub {
+    margin: 0 0 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .rcard__sub--muted {
+    color: var(--text-subtle);
+  }
+
+  .rcard__body {
+    margin: 0 0 14px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .bullets {
+    --bullet-color: var(--level-assets-dark);
+    gap: 9px;
+  }
+
+  .bullets li {
+    padding-left: 16px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .bullets--muted {
+    --bullet-color: var(--text-subtle);
+  }
+
+  .bullets--a11y {
+    --bullet-color: var(--dim-a11y-text);
+  }
+
+  /* --- Blue question panels ----------------------------------------------- */
+  .ask {
+    background: var(--level-specialization-tint);
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+  }
+
+  .ask__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .ask__q {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Neutral meta panel -------------------------------------------------- */
+  .meta {
+    background: #f4f5f7;
+    border-left: 3px solid var(--text-subtle);
+    padding: 18px 22px;
+    margin: 0 0 30px;
+  }
+
+  .meta__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .meta__body {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Worked examples ----------------------------------------------------- */
+  .rexample {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    background: #fdfcfa;
+    padding: 32px 34px;
+    margin: 0 0 22px;
+  }
+
+  .rexample__eyebrow {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    color: var(--level-assets-dark);
+  }
+
+  .rexample__title {
+    margin: 0 0 14px;
+    font-size: 27px;
+  }
+
+  .rexample__intro {
+    margin: 0 0 16px;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .rexample__after {
+    margin: 18px 0 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Mock Coursera Reading preview --------------------------------------- */
+  .mock {
+    border: 1px solid var(--rule-strong);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    background: var(--bg-card);
+    margin: 6px 0 22px;
+  }
+
+  .mock__bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 12px 22px;
+    border-bottom: 1px solid var(--rule-card);
+  }
+
+  .mock__kind {
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .mock__course {
+    font-size: 13.5px;
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .mock__dot,
+  .mock__detail {
+    font-size: 13.5px;
+    color: var(--text-subtle);
+  }
+
+  .mock__body {
+    padding: 26px 28px;
+  }
+
+  .mock__eyebrow {
+    margin: 0 0 18px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .mock__p {
+    margin: 0 0 20px;
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .mock__p--last {
+    margin-bottom: 0;
+  }
+
+  .mock__sub {
+    margin: 0 0 12px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .mock__list {
+    margin: 0;
+    padding: 0 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .mock__list li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* Links in the mock are shown as text, because the originals point at
+     course files and enrolled learners' views. */
+  .mock__file,
+  .mock__link {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+
+  .mock__aside {
+    margin-left: 10px;
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: 2px;
+    padding: 9px 14px;
+    font-size: 14.5px;
+    color: var(--text-strong);
+  }
+
+  .chip__n {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .embed {
+    border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-panel);
+    background: var(--panel-warm);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .embed__label {
+    margin: 0;
+    font-size: 13.5px;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+  }
+
+  /* --- Inputs / outputs figure ---------------------------------------------- */
+  .io {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    margin: 0 0 22px;
+  }
+
+  .io__cap {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--rule-card);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .io__body {
+    padding: 20px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .io__eyebrow {
+    margin: 0 0 10px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .io__pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .io__card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    padding: 18px 20px;
+  }
+
+  .io__card-title {
+    margin: 0 0 3px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .io__card-note {
+    margin: 0 0 12px;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+    color: var(--text-subtle);
+  }
+
+  .bullets--io li {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .io__outlist {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+
+  .io__out {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-left: 3px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    padding: 14px 18px;
+  }
+
+  .io__out-label {
+    margin: 0 0 3px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .io__out-value {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .io__closing {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    max-width: var(--measure-body);
+  }
+
+  .termcards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 0 0 22px;
+  }
+
+  .termcard {
+    background: var(--level-specialization-tint);
+    border-left: 3px solid var(--blue);
+    padding: 18px 20px;
+  }
+
+  .termcard__eyebrow {
+    margin: 0 0 3px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .termcard__term {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--navy);
+  }
+
+  .termcard__body {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Notice / warning panels ---------------------------------------------- */
+  .notice {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 20px 24px;
+    margin: 22px 0 0;
+  }
+
+  .notice__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .notice__body {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  .notice__body--last {
+    margin-bottom: 0;
+  }
+
+  .warn {
+    background: var(--warn-bg);
+    border-left: 3px solid var(--copper);
+    padding: 22px 26px;
+    margin: 22px 0 0;
+  }
+
+  .warn__title {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--warn-title);
+  }
+
+  .warn__body {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .ext--copper {
+    color: var(--warn-title);
+    font-size: 14.5px;
+  }
+
+  .ext--copper:hover {
+    color: var(--warn-title);
+  }
+
+  /* --- Design choices ------------------------------------------------------- */
+  .choices {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 32px;
+  }
+
+  .choices__item {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .choices__title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 23px;
+    color: var(--navy);
+  }
+
+  .choices__body {
+    margin: 0 0 12px;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .choices__body--last {
+    margin-bottom: 0;
+  }
+
+  .inline-code {
+    background: var(--panel-warm);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 2px 7px;
+    font-size: 15.5px;
+    color: var(--text-strong);
+  }
+
+  /* --- Pending "What can a Reading include?" section ------------------------ */
+  .include {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+  }
+
+  .include__head {
+    padding: 20px 26px;
+    background: var(--panel-warm);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .include__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--navy);
+  }
+
+  .include__body {
+    padding: 22px 26px;
+  }
+
+  .include__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .include__note {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Draft readiness checklist -------------------------------------------- */
+  .ready {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 30px;
+  }
+
+  .ready__row {
+    display: grid;
+    grid-template-columns: 34px 200px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ready__box {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    border-radius: var(--radius-panel);
+    border: 2px solid var(--level-assets);
+    display: block;
+  }
+
+  .ready__label {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .ready__body {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Gold note ------------------------------------------------------------- */
+  .note-gold {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 24px 28px;
+  }
+
+  .note-gold__head {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--level-assets-dark);
+  }
+
+  .note-gold__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  .ask--gap {
+    margin: 0;
+  }
+</style>

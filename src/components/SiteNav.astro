@@ -1,0 +1,227 @@
+---
+import { pages, assetLinks, assetHref, levelColor, url, type LevelKey } from '../data/site';
+
+interface Props {
+  /** Which top-level item is active. Learning Asset sub-pages pass 'assets'. */
+  active: LevelKey;
+}
+const { active } = Astro.props;
+---
+
+<div class="masthead">
+  <a href={url('/')}>
+    <img
+      src={url('/assets/ctl-logo-white.png')}
+      alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning"
+    />
+  </a>
+</div>
+
+<nav class="nav" aria-label="Site">
+  <a class="nav__wordmark" href={url('/')}>Coursera Design Guide</a>
+
+  <div class="nav__items">
+    {
+      pages.map((p) =>
+        p.key === 'assets' ? (
+          <div class="nav__group" data-assets-menu>
+            <a
+              class="nav__link nav__link--group"
+              href={url(p.href)}
+              style={`--nav-accent:${levelColor.assets}`}
+              aria-current={active === 'assets' ? 'page' : undefined}
+            >
+              {p.label}
+              <span class="nav__caret" aria-hidden="true">▾</span>
+            </a>
+
+            <button
+              class="nav__toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="assets-menu"
+            >
+              <span class="visually-hidden">Show all Learning Assets</span>
+            </button>
+
+            <ul class="nav__dropdown" id="assets-menu" hidden>
+              <li>
+                <a class="nav__dd-link nav__dd-link--all" href={url('/learning-assets')}>
+                  All Learning Assets
+                </a>
+              </li>
+              {
+                assetLinks.map((a) => (
+                  <li>
+                    <a class="nav__dd-link" href={url(assetHref(a))} data-built={a.page ? 'true' : 'false'}>
+                      {a.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        ) : (
+          <a
+            class="nav__link"
+            href={url(p.href)}
+            style={`--nav-accent:${levelColor[p.key]}`}
+            aria-current={active === p.key ? 'page' : undefined}
+          >
+            {p.label}
+          </a>
+        )
+      )
+    }
+  </div>
+</nav>
+
+<style>
+  .nav__group {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav__link--group {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+
+  .nav__caret {
+    font-size: 9px;
+    line-height: 1;
+    position: relative;
+    top: -1px;
+  }
+
+  /* The whole item is one hit area: the link navigates, the invisible
+     button overlays the caret so keyboard and screen-reader users can
+     open the menu without leaving the page. */
+  .nav__toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 16px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .nav__toggle:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .nav__dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    min-width: 232px;
+    background: #fff;
+    border: 1px solid var(--rule-card);
+    border-top: 3px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .nav__dropdown[hidden] {
+    display: none;
+  }
+
+  .nav__dd-link {
+    display: block;
+    padding: 8px 20px;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav__dd-link:hover,
+  .nav__dd-link:focus-visible {
+    background: var(--level-assets-tint);
+    color: var(--level-assets-dark);
+  }
+
+  .nav__dd-link--all {
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Assets without a page of their own jump to their section on the
+     Learning Assets page. Marked so they read as a different kind of
+     destination. */
+  .nav__dd-link[data-built='false'] {
+    color: var(--text-subtle);
+  }
+
+  .nav__dd-link[data-built='false']::after {
+    content: '§';
+    margin-left: 7px;
+    font-size: 11px;
+    color: var(--rule-strong);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>
+
+<script>
+  const group = document.querySelector<HTMLElement>('[data-assets-menu]');
+  if (group) {
+    const toggle = group.querySelector<HTMLButtonElement>('.nav__toggle')!;
+    const menu = group.querySelector<HTMLElement>('.nav__dropdown')!;
+    let hoverTimer: number | undefined;
+
+    const setOpen = (open: boolean) => {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    };
+
+    // Pointer: open on hover, with a short close delay so the diagonal
+    // trip from the nav item to the menu does not dismiss it.
+    group.addEventListener('mouseenter', () => {
+      window.clearTimeout(hoverTimer);
+      setOpen(true);
+    });
+    group.addEventListener('mouseleave', () => {
+      hoverTimer = window.setTimeout(() => setOpen(false), 180);
+    });
+
+    // Keyboard / click on the caret.
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      setOpen(menu.hidden);
+    });
+
+    group.addEventListener('focusin', () => setOpen(true));
+    group.addEventListener('focusout', (e) => {
+      if (!group.contains(e.relatedTarget as Node)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,1122 @@
+/* ==========================================================================
+   Base + shared patterns — Coursera Design Guide
+   Page-specific layout lives in each page's scoped <style> block.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  /* Required: capped elements that also carry padding overhang the
+     paragraph above them by exactly the padding under content-box. */
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-page);
+  font-family: var(--font-body);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--blue);
+}
+a:hover {
+  color: var(--level-module);
+}
+
+img {
+  max-width: 100%;
+}
+
+:where(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: 500; /* never bolder — set at display sizes, 600+ looks heavy */
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+:where(p, li) {
+  text-wrap: pretty;
+}
+
+/* --- Page shell ---------------------------------------------------------- */
+
+.page {
+  padding: 40px 24px;
+}
+
+.shell {
+  width: var(--shell-width);
+  margin: 0 auto;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-card);
+}
+
+@media screen {
+  .shell {
+    overflow: hidden;
+  }
+}
+
+/* --- Shared chrome: masthead + nav -------------------------------------- */
+
+.masthead {
+  display: flex;
+  align-items: center;
+  padding: 16px var(--section-pad-x);
+  background: var(--navy);
+}
+
+.masthead img {
+  height: 30px;
+  width: auto;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 22px var(--section-pad-x);
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav__wordmark {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--navy);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.nav__items {
+  display: flex;
+  gap: 28px;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+}
+
+/* All five labels are the same color regardless of level. Only the active
+   underline is level-colored. Explicit client correction — do not color
+   the labels by level. */
+.nav__link {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.nav__link:hover {
+  color: var(--navy);
+}
+
+.nav__link[aria-current] {
+  color: var(--navy);
+  font-weight: 600;
+  border-bottom-color: var(--nav-accent, var(--navy));
+}
+
+/* --- Breadcrumb bar (Learning Assets sub-pages) ------------------------- */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px var(--section-pad-x);
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel-warm);
+}
+
+.breadcrumb a {
+  font-size: 13px;
+  color: var(--level-assets-dark);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb__sep {
+  color: var(--text-subtle);
+}
+
+.breadcrumb__current {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* --- Sections ----------------------------------------------------------- */
+
+.section {
+  padding: var(--section-pad-y) var(--section-pad-x);
+}
+
+.section--warm {
+  background: var(--panel-warm);
+}
+
+.section--cool {
+  background: var(--panel-cool);
+}
+
+.section__hr {
+  border-top: 1px solid var(--rule);
+}
+
+/* --- Typography roles --------------------------------------------------- */
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-subtle);
+}
+
+.eyebrow--copper {
+  color: var(--copper);
+  letter-spacing: 0.18em;
+}
+
+.eyebrow--sm {
+  font-size: 11px;
+}
+
+.h1 {
+  margin: 0 0 24px;
+  font-size: 54px;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  margin: 0 0 28px;
+  font-size: 36px;
+}
+
+.h2--sub {
+  font-size: 32px;
+}
+
+.h3 {
+  margin: 0 0 14px;
+  font-size: 26px;
+}
+
+.lead {
+  font-size: 17.5px;
+  line-height: 1.65;
+  color: var(--text-body);
+}
+
+.body {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+.body--sm {
+  font-size: 15.5px;
+  line-height: 1.65;
+}
+
+.caption {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-subtle);
+}
+
+/* --- Measure utilities — the only three caps in the system -------------- */
+
+.m-section {
+  max-width: var(--measure-section);
+}
+.m-body {
+  max-width: var(--measure-body);
+}
+.m-hero {
+  max-width: var(--measure-hero);
+}
+
+/* --- Panels ------------------------------------------------------------- */
+
+/* A panel spans the full width of its column. Never narrow a panel to
+   control line length — cap the text inside it instead. */
+.panel {
+  padding: 24px 26px;
+  border-radius: var(--radius-panel);
+}
+
+.callout {
+  background: var(--level-specialization-tint);
+  border-left: 3px solid var(--blue);
+  padding: 24px 26px;
+}
+
+.note-gold {
+  background: var(--note-gold-bg);
+  border: 1px solid var(--level-assets-tint-border);
+  border-radius: var(--radius-panel);
+  padding: 22px 26px;
+}
+
+.note-purple {
+  background: var(--level-module-tint);
+  border: 1px solid var(--level-module-tint-border);
+  border-radius: var(--radius-panel);
+  padding: 22px 26px;
+}
+
+/* --- Hanging-bullet list ------------------------------------------------ */
+
+.bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+
+.bullets li {
+  padding-left: 14px;
+  position: relative;
+  max-width: var(--measure-body);
+}
+
+.bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--bullet-color, var(--text-subtle));
+  font-weight: 700;
+}
+
+/* --- Level cards (Overview step two) ------------------------------------ */
+
+.level-card {
+  border: 1px solid var(--rule-card);
+  border-top: 4px solid var(--level, var(--navy));
+  border-radius: var(--radius-panel);
+  padding: 24px 22px 26px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.level-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-hover);
+}
+
+/* --- Step badges (Module) ---------------------------------------------- */
+
+.step-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+}
+
+.step-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: #fff;
+  background: var(--badge, var(--level-module));
+  flex: none;
+}
+
+/* --- Accordion ---------------------------------------------------------- */
+
+.accordion {
+  border-top: 1px solid var(--rule);
+}
+
+.accordion__row {
+  border-bottom: 1px solid var(--rule);
+}
+
+.accordion__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 20px 4px;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.accordion__btn:hover {
+  background: var(--panel-warm);
+}
+
+.accordion__btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+.accordion__label {
+  flex: none;
+  width: 236px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.accordion__summary {
+  flex: 1;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-subtle);
+}
+
+.accordion__glyph {
+  width: 16px;
+  flex: none;
+  text-align: center;
+  color: var(--blue);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.accordion__panel {
+  padding: 0 44px 24px 4px;
+}
+
+.accordion__panel p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: var(--measure-body);
+}
+
+.accordion__row[data-open='false'] .accordion__panel {
+  display: none;
+}
+
+/* --- CTA ---------------------------------------------------------------- */
+
+.cta {
+  background: var(--navy);
+  border-radius: var(--radius-card);
+  padding: 44px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 26px;
+  border-radius: var(--radius-panel);
+  background: #fff;
+  color: var(--navy);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  /* Without nowrap the PDF renderer orphans the trailing glyph onto a
+     second line, pushing it outside the button box. */
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn--gold {
+  background: var(--level-assets-dark);
+  color: #fff;
+}
+
+.btn--gold:hover {
+  background: var(--gold);
+  color: var(--text-strong);
+}
+
+/* --- External links ----------------------------------------------------- */
+
+.ext {
+  white-space: nowrap;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ext:hover {
+  text-decoration: underline;
+}
+
+/* --- Page footer -------------------------------------------------------- */
+
+.pagefoot {
+  margin: 56px var(--section-pad-x) 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pagefoot a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pagefoot__dir {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pagefoot__name {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.pagefoot__next {
+  text-align: right;
+}
+
+.pagefoot--single {
+  justify-content: flex-start;
+}
+
+/* --- Print -------------------------------------------------------------- */
+
+@page {
+  margin: 0.5in;
+}
+
+@media print {
+  html,
+  body {
+    height: auto !important;
+    background: #fff !important;
+  }
+  body,
+  .page,
+  .shell {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    padding: 0 !important;
+  }
+  .shell {
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+  [data-rail] {
+    position: static !important;
+  }
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+  [data-keep] {
+    break-inside: avoid;
+  }
+  /* Accordions are force-expanded before print so nothing is lost in
+     the PDF the client circulates for review. */
+  .accordion__row .accordion__panel {
+    display: block !important;
+  }
+  .nav__dropdown {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Level page pattern — Specialization, Course, Module
+   Each page sets --accent / --accent-dark / --tint / --tint-border / --wash
+   once on its root element; every block below follows.
+   ========================================================================== */
+
+.levelpage[data-level='specialization'] {
+  --accent: var(--level-specialization);
+  --accent-dark: var(--level-specialization-dark);
+  --tint: var(--level-specialization-tint);
+  --tint-border: var(--level-specialization-tint-border);
+  --wash: var(--level-specialization-wash);
+}
+
+.levelpage[data-level='course'] {
+  --accent: var(--level-course);
+  --accent-dark: var(--level-course-dark);
+  --tint: var(--level-course-tint);
+  --tint-border: var(--level-course-tint-border);
+  --wash: var(--level-course-wash);
+}
+
+.levelpage[data-level='module'] {
+  --accent: var(--level-module);
+  --accent-dark: var(--level-module-dark);
+  --tint: var(--level-module-tint);
+  --tint-border: var(--level-module-tint-border);
+  --wash: var(--level-module-wash);
+}
+
+.levelpage[data-level='assets'] {
+  --accent: var(--level-assets);
+  --accent-dark: var(--level-assets-dark);
+  --tint: var(--level-assets-tint);
+  --tint-border: var(--level-assets-tint-border);
+  --wash: var(--panel-warm);
+}
+
+/* --- Hero with a stats rail --------------------------------------------- */
+
+.hero {
+  padding: 72px var(--section-pad-x) 60px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: start;
+  background: var(--panel-warm);
+}
+
+.hero__eyebrow {
+  margin: 0 0 20px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+}
+
+.hero__title {
+  margin: 0 0 24px;
+  font-size: 50px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.hero__lead {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-hero);
+}
+
+.hero__lead:last-child {
+  margin-bottom: 0;
+}
+
+.hero__lead em {
+  color: var(--text-strong);
+}
+
+.hero__rail {
+  border-left: 3px solid var(--accent);
+  padding: 4px 0 4px 26px;
+}
+
+.hero__rail-eyebrow {
+  margin: 0 0 18px;
+  letter-spacing: 0.18em;
+}
+
+.hero__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero__stat-figure {
+  margin: 0 0 2px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--navy);
+}
+
+.hero__stat-label {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-subtle);
+}
+
+/* --- Step jump rail ------------------------------------------------------ */
+
+/* 1px gaps over the divider color fake hairline borders between cells. */
+.steprail {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.steprail__link {
+  text-decoration: none;
+  background: var(--bg-card);
+  padding: 18px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.steprail__link:hover {
+  background: var(--tint);
+}
+
+.steprail__n {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.steprail__label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* --- Numbered step sections --------------------------------------------- */
+
+.step {
+  padding: 64px var(--section-pad-x) 0;
+  scroll-margin-top: 12px;
+}
+
+.step__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 14px;
+}
+
+.step__badge {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--badge, var(--accent));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step__count {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  font-weight: 700;
+}
+
+.step__title {
+  margin: 0 0 12px;
+  font-size: 36px;
+}
+
+.step__q {
+  margin: 0 0 28px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: var(--measure-section);
+}
+
+.step__p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-section);
+}
+
+.step__p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- "A few ideas to keep in mind" triptych ----------------------------- */
+
+.ideas__eyebrow {
+  margin: 30px 0 16px;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+}
+
+.ideas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0 0 36px;
+}
+
+.ideas__item {
+  border-top: 3px solid var(--accent);
+  padding: 20px 0 0;
+}
+
+.ideas__title {
+  margin: 0 0 8px;
+  font-size: 17.5px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.ideas__body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-body);
+}
+
+/* --- "You might ask" / "Rather than asking" pair ------------------------ */
+
+.askpair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 0 0 36px;
+}
+
+.askpair__good,
+.askpair__weak {
+  padding: 22px 26px;
+}
+
+.askpair__good {
+  background: var(--tint);
+  border-left: 3px solid var(--accent);
+}
+
+.askpair__weak {
+  background: var(--panel-warm);
+  border-left: 3px solid var(--rule-strong);
+}
+
+.askpair__eyebrow {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  color: var(--accent-dark);
+}
+
+.askpair__weak .askpair__eyebrow {
+  color: var(--text-subtle);
+}
+
+.askpair__q {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-strong);
+  max-width: var(--measure-body);
+}
+
+.askpair__weak .askpair__q {
+  color: var(--text-subtle);
+}
+
+/* --- Worked example ------------------------------------------------------ */
+
+.example {
+  border: 1px solid var(--rule-card);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-panel);
+  background: var(--wash);
+  padding: 32px 34px;
+}
+
+.example__eyebrow {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  letter-spacing: 0.18em;
+  color: var(--accent-dark);
+}
+
+.example__title {
+  margin: 0 0 20px;
+  font-size: 27px;
+}
+
+.example__p {
+  margin: 0 0 16px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-body);
+}
+
+.example__p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Template section (mirrors the Google Docs design template) ---------
+   Structure is prescribed by that document. Do not restyle without
+   checking it against the live template. */
+
+.tmpl {
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+.tmpl__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 26px;
+  background: var(--accent);
+}
+
+.tmpl__bar-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+
+.tmpl__bar-note {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tint-border);
+  font-weight: 700;
+}
+
+.tmpl__link-row {
+  padding: 16px 26px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--panel-warm);
+}
+
+.tmpl__field {
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.tmpl__field:last-child {
+  border-bottom: 0;
+}
+
+.tmpl__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.tmpl__row > .tmpl__field + .tmpl__field {
+  border-left: 1px solid var(--rule);
+}
+
+.tmpl__label {
+  margin: 0 0 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.tmpl__help {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text-subtle);
+  max-width: var(--measure-body);
+}
+
+.tmpl__value {
+  background: var(--tint);
+  border: 1px solid var(--tint-border);
+  border-radius: var(--radius-panel);
+  padding: 14px 18px;
+}
+
+.tmpl__value p,
+.tmpl__value li {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-body);
+}
+
+.tmpl__value ol {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.tmpl__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tmpl__chip {
+  background: var(--tint);
+  border: 1px solid var(--tint-border);
+  border-radius: var(--radius-panel);
+  padding: 6px 12px;
+  font-size: 14px;
+  color: var(--accent-dark);
+}
+
+.tmpl__cta {
+  padding: 24px 26px;
+  background: var(--panel-warm);
+  border-top: 1px solid var(--rule);
+}
+
+/* --- Grid tables (1px gaps over the divider color fake hairlines) ------- */
+
+.gtable {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+.gtable__cell {
+  background: var(--bg-card);
+  padding: 12px 16px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.gtable__cell p {
+  margin: 0;
+  max-width: var(--measure-body);
+}
+
+.gtable__head {
+  background: var(--tint);
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+
+/* --- Course journey stack (Specialization + Course worked examples) ----- */
+
+.journey {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+  margin: 0 0 24px;
+  background: var(--bg-card);
+}
+
+.journey__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 22px;
+  background: var(--tint);
+  border-bottom: 1px solid var(--rule);
+}
+
+.journey__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.journey__kind {
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-dark);
+}
+
+.journey__course {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.journey__course:last-child {
+  border-bottom: 0;
+}
+
+.journey__course-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 8px;
+}
+
+.journey__n {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.journey__course-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.journey__body {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-body);
+}
+
+.journey__leave {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: var(--measure-body);
+}
+
+.journey__leave strong {
+  color: var(--accent-dark);
+}

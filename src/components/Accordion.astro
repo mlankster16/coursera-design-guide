@@ -1,0 +1,74 @@
+---
+export interface AccordionRow {
+  label: string;
+  summary: string;
+  body: string;
+}
+
+interface Props {
+  rows: AccordionRow[];
+  id: string;
+}
+const { rows, id } = Astro.props;
+---
+
+<div class="accordion" data-accordion>
+  {
+    rows.map((r, i) => (
+      <div class="accordion__row" data-open="false">
+        <button
+          class="accordion__btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls={`${id}-panel-${i}`}
+          id={`${id}-btn-${i}`}
+        >
+          <span class="accordion__label">{r.label}</span>
+          <span class="accordion__summary">{r.summary}</span>
+          <span class="accordion__glyph" aria-hidden="true">+</span>
+        </button>
+        <div
+          class="accordion__panel"
+          id={`${id}-panel-${i}`}
+          role="region"
+          aria-labelledby={`${id}-btn-${i}`}
+        >
+          <p set:html={r.body} />
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-accordion]').forEach((group) => {
+    const rows = Array.from(group.querySelectorAll<HTMLElement>('.accordion__row'));
+
+    const set = (row: HTMLElement, open: boolean) => {
+      row.dataset.open = String(open);
+      const btn = row.querySelector<HTMLButtonElement>('.accordion__btn')!;
+      btn.setAttribute('aria-expanded', String(open));
+      row.querySelector<HTMLElement>('.accordion__glyph')!.textContent = open ? '–' : '+';
+    };
+
+    rows.forEach((row) => {
+      row.querySelector<HTMLButtonElement>('.accordion__btn')!.addEventListener('click', () => {
+        const willOpen = row.dataset.open !== 'true';
+        // Single-open (radio) behaviour: opening one row closes the others.
+        rows.forEach((r) => set(r, false));
+        if (willOpen) set(row, true);
+      });
+    });
+
+    // The client exports these pages to PDF to circulate for review, so
+    // force every row open before printing and restore afterwards.
+    let before: boolean[] = [];
+    window.addEventListener('beforeprint', () => {
+      before = rows.map((r) => r.dataset.open === 'true');
+      rows.forEach((r) => set(r, true));
+    });
+    window.addEventListener('afterprint', () => {
+      rows.forEach((r, i) => set(r, before[i] ?? false));
+    });
+  });
+</script>

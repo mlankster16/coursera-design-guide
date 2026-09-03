@@ -1,0 +1,1348 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const stats = [
+  { figure: '1–3 learning objectives', label: 'per Module' },
+  { figure: '~30 minutes minimum', label: 'of learner time' },
+  { figure: '0–5 lessons*', label: '*optional grouping' },
+  { figure: '1 graded assessment', label: 'required per Module' },
+];
+
+const steps = [
+  { id: 'step1', n: 1, label: 'Write objectives' },
+  { id: 'step2', n: 2, label: 'Map learning path' },
+  { id: 'step3', n: 3, label: 'Choose assets' },
+  { id: 'step4', n: 4, label: 'Design practice' },
+  { id: 'step5', n: 5, label: 'Complete the plan' },
+];
+
+const moduleVerbs = [
+  'identify',
+  'compare',
+  'calculate',
+  'apply',
+  'analyze',
+  'interpret',
+  'evaluate',
+  'create',
+  'recommend',
+  'communicate',
+];
+
+const supportingObjectives = [
+  'Identify the variables and records needed to investigate a business question.',
+  'Evaluate a dataset for relevance, completeness, and basic quality concerns.',
+  'Document concerns that could affect the proposed analysis.',
+];
+
+const considerations = [
+  { title: 'The starting point', body: 'What should learners already know or be able to do?' },
+  {
+    title: 'The learning gap',
+    body: 'What new knowledge, process, or judgment do they need to develop?',
+  },
+  { title: 'The difficult points', body: 'Where might learners become confused or make mistakes?' },
+  {
+    title: 'The path forward',
+    body: 'What should be explained, modeled, practiced, and reinforced?',
+  },
+  {
+    title: 'The demonstration',
+    body: 'What will allow learners to show that they have achieved the Module objectives?',
+  },
+];
+
+const arc = [
+  { n: 1, label: 'Frame', body: 'Establish what learners will do and why it matters.' },
+  { n: 2, label: 'Explain', body: 'Introduce the essential concepts, process, or framework.' },
+  {
+    n: 3,
+    label: 'Model',
+    body: 'Show how an expert approaches the task, applies the process, or makes decisions.',
+  },
+  {
+    n: 4,
+    label: 'Practice',
+    body: 'Let learners try part or all of the task with appropriate support.',
+  },
+  {
+    n: 5,
+    label: 'Provide feedback',
+    body: 'Help learners recognize what is working, correct misunderstandings, and decide what to try next.',
+  },
+  {
+    n: 6,
+    label: 'Apply or assess',
+    body: 'Ask learners to demonstrate the Module objectives in a meaningful context.',
+  },
+];
+
+const pathRows = [
+  {
+    stage: 'Frame',
+    experience:
+      'Encounter a scenario in which a team has data but is unsure whether it can support a decision',
+    role: 'Establish why evaluating the data matters',
+  },
+  {
+    stage: 'Explain',
+    experience:
+      'Learn how relevance, completeness, level of detail, and basic quality affect an analysis',
+    role: 'Introduce criteria for evaluating data',
+  },
+  {
+    stage: 'Model',
+    experience: 'Watch an expert inspect a sample dataset and explain their reasoning aloud',
+    role: 'Make the evaluation process visible',
+  },
+  {
+    stage: 'Practice',
+    experience: 'Use a checklist to inspect a second dataset and identify concerns',
+    role: 'Try the process with support',
+  },
+  {
+    stage: 'Provide feedback',
+    experience:
+      'Compare observations with an annotated response and review explanations of overlooked concerns',
+    role: 'Correct misunderstandings and refine the judgment',
+  },
+  {
+    stage: 'Apply or assess',
+    experience: 'Complete a Data Fitness Review for a new business question and dataset',
+    role: 'Demonstrate the Module objectives independently',
+  },
+];
+
+const assetTable = [
+  {
+    asset: 'Video',
+    use: 'Hear a focused explanation, see a process demonstrated, or observe expert reasoning',
+  },
+  {
+    asset: 'Reading',
+    use: 'Study detailed information, review a framework, examine graphics or code, or return to a reference while completing a task',
+  },
+  {
+    asset: 'Interactive Plugin',
+    use: 'Manipulate information, explore a model, use an external tool, or see how choices affect an outcome',
+  },
+  {
+    asset: 'Coach Dialogue',
+    use: 'Explain their reasoning, reflect, make decisions, or receive personalized guidance through an AI-supported conversation',
+  },
+  {
+    asset: 'Coach Role Play',
+    use: 'Practice interpersonal or job-related skills through a realistic interaction with an AI persona',
+  },
+  {
+    asset: 'Assessments',
+    use: 'Check understanding, practice with feedback, or demonstrate achievement of the Module objectives',
+  },
+  {
+    asset: 'Programming Assignments',
+    use: 'Write, modify, debug, or evaluate code and receive feedback on its performance',
+  },
+  {
+    asset: 'Coursera Labs',
+    use: 'Practice with code, data, software, or technical tools in a configured, in-browser environment',
+  },
+];
+
+const assetQuestions = [
+  'Does the learner need to read, watch, listen, interact, converse, practice, or create?',
+  'Would an explanation, reusable reference, demonstration, guided practice, feedback, or opportunity to demonstrate the objective be most helpful?',
+  'Would this format add meaningful value, or might another asset serve the same purpose?',
+  'What instructions, preparation, or support will learners need to use the asset independently?',
+  'How will the asset connect to what learners encountered before and what they will do next?',
+];
+
+const assetChoices = [
+  {
+    need: 'Understand why evaluating data matters and learn the relevant criteria',
+    asset: 'Reading',
+    role: 'Introduces the business scenario, explains the criteria, and provides a reusable data-quality checklist',
+  },
+  {
+    need: 'Observe how an expert evaluates data',
+    asset: 'Video',
+    role: 'Uses a think-aloud demonstration to make the decision-making process visible',
+  },
+  {
+    need: 'Try the process with support',
+    asset: 'Ungraded Assessment',
+    role: "Provides a practice dataset and explanatory feedback on learners' judgments",
+  },
+  {
+    need: 'Demonstrate the Module objectives',
+    asset: 'Graded Assessment',
+    role: 'Asks learners to complete a Data Fitness Review for a new business question and dataset',
+  },
+];
+
+const supportStages = [
+  {
+    title: 'Before they begin',
+    body: 'Make the task and its purpose clear. Identify what learners should already know, explain what they will do, and show what a successful response or approach looks like. Clear instructions, completion criteria, and a worked example can reduce uncertainty before learners start.',
+  },
+  {
+    title: 'While they practice',
+    body: 'Give learners an opportunity to use the knowledge or skill with support before asking them to demonstrate it independently. Checklists, templates, guiding questions, decision tools, and reminders can help learners focus on the important parts of the task without removing the need to think.',
+  },
+  {
+    title: 'After they respond',
+    body: 'Provide feedback that explains more than whether an answer is correct. Help learners understand why an approach is effective, what a mistake may reveal, and what they should reconsider or try next. When possible, connect feedback to the relevant concept, example, or Course resource.',
+  },
+  {
+    title: 'If they get stuck',
+    body: 'Give learners a clear way forward. Direct them to a specific explanation, worked example, hint, or practice opportunity rather than simply telling them to try again. Make sure essential guidance is available in accessible formats and does not depend on an instructor responding in the moment.',
+  },
+  {
+    title: 'When they are ready to demonstrate the objective',
+    body: 'Use an assessment that requires the capability described in the Module objectives. If learners are expected to evaluate a dataset, for example, the assessment should ask them to evaluate data and explain their judgment — not only recall definitions related to data quality.',
+  },
+];
+
+const stuckSupports = [
+  'A worked example of a completed review',
+  'The downloadable data-quality checklist',
+  'A short explanation of records, fields, and level of detail',
+  'A list of common data-quality concerns',
+  'An annotated version of the practice dataset',
+];
+
+const lessonRows = [
+  ['1', 'Reading the numbers', 'Video', 'Choosing and interpreting common summary measures'],
+  ['2', 'Reading the numbers', 'Reading', 'Quick reference: mean, median, range, and percentage'],
+  ['3', 'Reading the numbers', 'Video', 'From customer data to a business insight'],
+  ['4', 'Putting it in context', 'Reading', 'Checklist: interpreting measures in context'],
+  ['5', 'Putting it in context', 'Hands-on activity', 'Guided case: calculate and interpret measures'],
+  ['6', 'Putting it in context', 'Practice quiz', 'Scenario questions with feedback'],
+];
+---
+
+<PageLayout
+  title="Module"
+  description="How to design a Coursera Module: write objectives, map the learning path, choose assets, and design practice."
+  level="module"
+>
+  <div class="levelpage" data-level="module">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow">Module</p>
+        <h1 class="hero__title">Designing a Coursera Module</h1>
+        <p class="hero__lead">
+          Begin by considering the Module’s role in the course: What will help learners move from
+          where they are to what they should be able to do next?
+        </p>
+        <p class="hero__lead">
+          Use that answer to write a small set of Module objectives and map the learning path. Then
+          choose the explanations, examples, practice, feedback, and assessment that learners will
+          need to reach those objectives.
+        </p>
+      </div>
+
+      <div class="hero__rail">
+        <p class="eyebrow hero__rail-eyebrow">A Module at a glance</p>
+        <div class="hero__stats">
+          {
+            stats.map((s) => (
+              <div>
+                <p class="hero__stat-figure">{s.figure}</p>
+                <p class="hero__stat-label">{s.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Step jump rail -->
+    <nav class="steprail steprail--5" aria-label="Steps on this page">
+      {
+        steps.map((s) => (
+          <a class="steprail__link" href={`#${s.id}`}>
+            <span class="steprail__n">{s.n}</span>
+            <span class="steprail__label">{s.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="step step--module" id="step1">
+      <p class="eyebrow step__eyebrow">Step one</p>
+      <h2 class="step__title step__title--module">Write the Module objectives</h2>
+      <p class="step__p step__p--gap">
+        Course objectives describe the larger skills learners should develop by the end of the
+        course. Module objectives break those skills into smaller, achievable steps.
+      </p>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">You might ask</p>
+          <p class="askpair__q">
+            Which part of the larger Course learning goal will this Module help learners develop?
+          </p>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">Rather than asking</p>
+          <p class="askpair__q">What topic should this Module cover?</p>
+        </div>
+      </div>
+
+      <p class="step__p step__p--gap">
+        A Module might introduce a concept, guide learners through a process, help them analyze an
+        example, or give them an opportunity to apply a skill in a realistic situation.
+      </p>
+
+      <div class="example example--gap" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">
+          Writing Module objectives for Identifying and Evaluating Business Data
+        </h3>
+
+        <div class="context">
+          <div class="context__row" data-depth="0">
+            <span class="context__label">Specialization</span>
+            <span class="context__value">Data Analytics for Business Decisions</span>
+          </div>
+          <div class="context__row" data-depth="1">
+            <span class="context__label">Course 1</span>
+            <span class="context__value">Foundations of Data Analytics for Business</span>
+          </div>
+          <div class="context__row" data-depth="2">
+            <span class="context__label context__label--here">Module</span>
+            <span class="context__value context__value--here"
+              >Identifying and Evaluating Business Data</span
+            >
+          </div>
+        </div>
+
+        <p class="example__p">
+          In <em>Foundations of Data Analytics for Business</em>, one Course objective is:
+        </p>
+        <div class="objbox objbox--plain">
+          <p class="objbox__eyebrow">Course objective</p>
+          <p class="objbox__text">
+            By the end of this Course, learners will be able to evaluate a dataset for relevance,
+            completeness, and basic quality concerns.
+          </p>
+        </div>
+
+        <p class="example__p">A Module can develop a focused part of that learning goal:</p>
+        <div class="objbox objbox--accent">
+          <p class="objbox__eyebrow objbox__eyebrow--teal">Module objective</p>
+          <p class="objbox__quote">
+            By the end of this Module, learners will be able to determine whether an available
+            dataset is appropriate for investigating a business question.
+          </p>
+        </div>
+
+        <p class="example__p">Supporting Module objectives might include:</p>
+        <ul class="plainlist">
+          {supportingObjectives.map((o) => <li>{o}</li>)}
+        </ul>
+
+        <p class="example__p">
+          These objectives give the Module a clear destination. Learners are not simply being
+          introduced to “data quality.” They are learning to make and explain a practical judgment
+          about whether data is fit for a particular purpose.
+        </p>
+      </div>
+
+      <div class="note-gold" data-keep>
+        <p class="note-gold__head">Keep Module objectives actionable</p>
+        <p class="note-gold__text">
+          As with Course objectives, describe something learners can demonstrate, rather than simply
+          a topic they will encounter or something they will “understand.”
+        </p>
+        <p class="note-gold__sub">Consider observable verbs such as</p>
+        <div class="verbs">
+          {moduleVerbs.map((v) => <span class="verb">{v}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step step--module" id="step2">
+      <p class="eyebrow step__eyebrow">Step two</p>
+      <h2 class="step__title step__title--module">Map the learning path</h2>
+      <p class="step__p step__p--gap">
+        Once the Module objectives are clear, work backward from what learners will need to
+        demonstrate. Consider where learners are likely to begin, what may be new or difficult, and
+        what sequence of experiences will help them develop the intended skills.
+      </p>
+
+      <p class="eyebrow consider__eyebrow">Consider</p>
+      <div class="consider" data-keep>
+        {
+          considerations.map((c) => (
+            <div class="consider__cell">
+              <p class="consider__title">{c.title}</p>
+              <p class="consider__body">{c.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="step__p step__p--gap">
+        Not every Module needs to follow the same sequence. Some skills require more explanation,
+        while others benefit from repeated practice or multiple examples. However, many effective
+        Modules include some version of this learning arc:
+      </p>
+
+      <div class="arclist" data-keep>
+        {
+          arc.map((a) => (
+            <div class="arclist__row">
+              <span class="arclist__n">{a.n}</span>
+              <span class="arclist__label">{a.label}</span>
+              <span class="arclist__body">{a.body}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="step__p step__p--gap">
+        These stages do not need to appear only once or in a fixed order. A complex Module might move
+        between explanation, modeling, practice, and feedback several times before learners are ready
+        to apply the full skill independently.
+      </p>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Mapping the learning path</h3>
+        <p class="example__p">
+          In <em>Identifying and Evaluating Business Data</em>, learners are working toward this
+          Module objective:
+        </p>
+        <div class="objbox objbox--plain">
+          <p class="objbox__text">
+            Determine whether an available dataset is appropriate for investigating a business
+            question.
+          </p>
+        </div>
+        <p class="example__p example__p--gap">
+          Learners may already understand that a dataset contains records and fields. The new
+          challenge is learning to judge whether the data is appropriate for a specific question. The
+          Module therefore needs to do more than explain the characteristics of quality data. It
+          needs to make the evaluation process visible and give learners an opportunity to use it.
+        </p>
+
+        <div class="dtable dtable--path">
+          <div class="dtable__head">
+            <div class="dtable__cell">Stage</div>
+            <div class="dtable__cell">Learner experience</div>
+            <div class="dtable__cell">Role in the learning path</div>
+          </div>
+          {
+            pathRows.map((r) => (
+              <div class="dtable__row">
+                <div class="dtable__cell dtable__cell--key">{r.stage}</div>
+                <div class="dtable__cell">{r.experience}</div>
+                <div class="dtable__cell">{r.role}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="example__p example__p--top">
+          Each stage addresses a different learner need. A Reading might introduce useful data-quality
+          criteria, but information alone may not prepare learners to make the judgment. Learners
+          also need to see the criteria applied, try the process themselves, learn from feedback, and
+          use what they have learned in a new context.
+        </p>
+        <p class="example__p">
+          Mapping the learning path before selecting or building assets can help ensure that each
+          part of the Module has a clear role in moving learners toward the objectives.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step step--module" id="step3">
+      <p class="eyebrow step__eyebrow">Step three</p>
+      <h2 class="step__title step__title--module">Choose learning assets intentionally</h2>
+      <p class="step__p">
+        After mapping the learning path, consider what learners may need at each stage. Then choose
+        the Coursera asset that best supports that part of the experience.
+      </p>
+      <p class="step__p">
+        Begin with the learner’s experience rather than the format. A worked example, for instance,
+        is an instructional strategy that might be delivered through a video or a reading. Practice
+        might take place through an ungraded assessment, Coach Role Play, a programming assignment,
+        an interactive plugin, or a Coursera Lab.
+      </p>
+      <p class="step__p step__p--gap">
+        The same asset can serve different purposes. A video might explain a concept, demonstrate a
+        process, or make expert reasoning visible. What matters is how the asset helps learners
+        progress toward the Module objectives.
+      </p>
+
+      <h3 class="h3">Learning assets available in Coursera</h3>
+      <div class="dtable dtable--assets" data-keep>
+        <div class="dtable__head">
+          <div class="dtable__cell">Coursera asset</div>
+          <div class="dtable__cell">Especially useful when learners need to…</div>
+        </div>
+        {
+          assetTable.map((a) => (
+            <div class="dtable__row">
+              <div class="dtable__cell dtable__cell--asset">{a.asset}</div>
+              <div class="dtable__cell">{a.use}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="note-gold note-gold--gap" data-keep>
+        <p class="note-gold__text note-gold__text--only">
+          Each Module must include at least one graded Assessment. Ungraded Assessments are also
+          encouraged as opportunities for learners to practice, check their understanding, and
+          receive feedback before graded work.
+        </p>
+      </div>
+
+      <h3 class="h3">Choose an asset that fits the learning need</h3>
+      <p class="step__p step__p--tight">As you consider the options, ask:</p>
+      <ul class="qlist">
+        {assetQuestions.map((q) => <li>{q}</li>)}
+      </ul>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">You might ask</p>
+          <p class="askpair__q">
+            What does the learner need to do next, and which Coursera asset might support that need
+            most effectively?
+          </p>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">Rather than asking</p>
+          <p class="askpair__q">How many videos and readings should this Module contain?</p>
+        </div>
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Choosing assets for a purpose</h3>
+        <p class="example__p example__p--gap">
+          In <em>Identifying and Evaluating Business Data</em>, learners need to understand
+          data-fitness criteria, observe how those criteria are applied, practice using them, and
+          evaluate a new dataset independently.
+        </p>
+
+        <div class="dtable dtable--choices">
+          <div class="dtable__head">
+            <div class="dtable__cell">Learner need</div>
+            <div class="dtable__cell">Coursera asset</div>
+            <div class="dtable__cell">Role in the learning path</div>
+          </div>
+          {
+            assetChoices.map((c) => (
+              <div class="dtable__row">
+                <div class="dtable__cell">{c.need}</div>
+                <div class="dtable__cell dtable__cell--key">{c.asset}</div>
+                <div class="dtable__cell">{c.role}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="example__p example__p--top">
+          The Module does not need to use every available asset or include variety simply for its own
+          sake. Each selected asset should have a clear purpose. In this example, the Reading
+          introduces and supports, the Video models, the ungraded Assessment provides practice and
+          feedback, and the graded Assessment asks learners to apply what they have learned
+          independently.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step step--module" id="step4">
+      <p class="eyebrow step__eyebrow">Step four</p>
+      <h2 class="step__title step__title--module">Design practice, feedback, and support</h2>
+      <p class="step__p">
+        In a face-to-face course, an instructor can notice hesitation, clarify an instruction, offer
+        another example, or help a learner recover from a mistake. In an asynchronous Module, that
+        support needs to be anticipated and built into the learning path.
+      </p>
+      <p class="step__p step__p--tight">Consider what learners will need at each stage:</p>
+
+      <div class="stages" data-keep>
+        {
+          supportStages.map((s) => (
+            <div class="stages__row">
+              <p class="stages__title">{s.title}</p>
+              <p class="stages__body">{s.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="progression" data-keep>
+        <p class="progression__intro">
+          The goal is to build a progression from supported practice to independent application:
+        </p>
+        <div class="progression__row">
+          <span class="progression__step">See what is expected</span>
+          <span class="progression__arrow" aria-hidden="true">→</span>
+          <span class="progression__step">Try it with support</span>
+          <span class="progression__arrow" aria-hidden="true">→</span>
+          <span class="progression__step">Learn from feedback</span>
+          <span class="progression__arrow" aria-hidden="true">→</span>
+          <span class="progression__step">Apply it independently</span>
+        </div>
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Building support into the Module</h3>
+        <p class="example__p example__p--gap">
+          In <em>Identifying and Evaluating Business Data</em>, learners are preparing to complete a
+          graded Data Fitness Review. The Module builds support around that task so learners can
+          progress from guided practice to independent evaluation.
+        </p>
+
+        <div class="phases">
+          <div class="phases__item">
+            <p class="phases__eyebrow">Before learners begin</p>
+            <p class="phases__body">
+              Learners review a worked example of a completed Data Fitness Review and the criteria
+              used to evaluate it. The instructions explain what they will examine, what they will
+              produce, and how their review will be evaluated.
+            </p>
+          </div>
+
+          <div class="phases__item">
+            <p class="phases__eyebrow">While learners practice</p>
+            <p class="phases__body">
+              Learners use a downloadable data-quality checklist to inspect a practice dataset.
+              Guiding questions prompt them to consider its relevance, completeness, level of detail,
+              and basic quality.
+            </p>
+          </div>
+
+          <div class="phases__item">
+            <p class="phases__eyebrow">After learners respond</p>
+            <p class="phases__body">
+              Learners receive feedback that identifies what they may have overlooked, explains why
+              it matters, and prompts them to reconsider their judgment:
+            </p>
+            <div class="feedback">
+              <p class="feedback__eyebrow">Feedback on the practice activity</p>
+              <p class="feedback__quote">
+                The dataset includes customer purchase totals, but it does not include the dates of
+                those purchases. Without dates, it cannot show how purchasing has changed over time.
+                What additional information would you need before using this dataset to investigate
+                the business question?
+              </p>
+            </div>
+          </div>
+
+          <div class="phases__item">
+            <p class="phases__eyebrow">If learners get stuck</p>
+            <p class="phases__body">They can return to support matched to the task:</p>
+            <ul class="plainlist">
+              {stuckSupports.map((s) => <li>{s}</li>)}
+            </ul>
+          </div>
+
+          <div class="phases__item">
+            <p class="phases__eyebrow">When learners are ready to demonstrate the objective</p>
+            <p class="phases__body">
+              The graded Data Fitness Review presents a new business question and dataset. Learners
+              apply the same criteria independently, document their concerns, and determine whether
+              the data is appropriate for the proposed analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5: template -->
+    <section class="step step--module step--last" id="step5">
+      <p class="eyebrow step__eyebrow">Step five</p>
+      <h2 class="step__title step__title--module">Complete your Module plan</h2>
+      <p class="step__p step__p--gap">
+        Use this page to work through the decisions for each Module, then record them in the Design
+        Document.
+      </p>
+
+      <div class="tmpl">
+        <div class="tmpl__bar">
+          <span class="tmpl__bar-title">Course 2 · Module 1</span>
+          <span class="tmpl__bar-note">Repeats per module</span>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Module title</p>
+          <p class="tmpl__help">Draft what learners will learn, do, or produce in this Module.</p>
+          <div class="tmpl__value"><p>Interpreting Summary Measures</p></div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Module description</p>
+          <p class="tmpl__help">
+            Draft a learner-friendly 2-3 sentence summary of the Module content and learning
+            outcomes.
+          </p>
+          <div class="tmpl__value">
+            <p>
+              This Module focuses on what summary measures reveal about a business question. You'll
+              calculate common measures for a customer dataset and practice interpreting them in
+              context, then decide which conclusions the numbers actually support.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Module learning objectives</p>
+          <p class="tmpl__help">
+            Write 1-3 actionable, measurable learning objectives that describe what learners will be
+            able to do by the end of the Module.
+          </p>
+          <div class="tmpl__value">
+            <ol>
+              <li>Identify variables relevant to a business question.</li>
+              <li>Calculate appropriate summary measures for a dataset.</li>
+              <li>Interpret those measures in the context of the business question.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tmpl__row">
+          <div class="tmpl__field">
+            <p class="tmpl__label">Estimated learning time</p>
+            <div class="tmpl__value"><p>Approximately 45 minutes</p></div>
+          </div>
+          <div class="tmpl__field">
+            <p class="tmpl__label">Graded assessment title</p>
+            <div class="tmpl__value"><p>Interpreting Summary Measures</p></div>
+          </div>
+        </div>
+
+        <!-- This subsection switches to gold because it concerns learning assets. -->
+        <div class="tmpl__field tmpl__field--gold" data-keep>
+          <p class="tmpl__label tmpl__label--gold">Lessons &amp; Learning Assets</p>
+          <p class="tmpl__help">
+            For anything created outside this template, please include a link to the final or draft
+            source. This will help your Learning Experience Designer build the content directly from
+            the source. Lessons are optional, so you may leave this column blank or remove it if
+            you're not using lessons.
+          </p>
+          <p class="tmpl__aim">
+            Aim for a minimum of: 3–6 videos · 1–2 readings · 1–2 activities · 1 auto-graded quiz
+          </p>
+
+          <div class="dtable dtable--lessons">
+            <div class="dtable__head dtable__head--gold">
+              <div class="dtable__cell">#</div>
+              <div class="dtable__cell">Lesson (optional)</div>
+              <div class="dtable__cell">Asset type</div>
+              <div class="dtable__cell">Asset title</div>
+              <div class="dtable__cell">Source link</div>
+            </div>
+            {
+              lessonRows.map((r) => (
+                <div class="dtable__row">
+                  <div class="dtable__cell">{r[0]}</div>
+                  <div class="dtable__cell">{r[1]}</div>
+                  <div class="dtable__cell dtable__cell--key">{r[2]}</div>
+                  <div class="dtable__cell">{r[3]}</div>
+                  <div class="dtable__cell dtable__cell--link">[ link ]</div>
+                </div>
+              ))
+            }
+            <div class="dtable__more">…</div>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">
+            Additional build notes, dependencies, or accessibility information
+          </p>
+          <div class="tmpl__value">
+            <p>
+              Customer dataset supplied as a spreadsheet. No specialized software required. Checklist
+              needs a screen-reader-friendly version.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__cta">
+          <p class="tmpl__label">Course 2 · Module 1 Graded Quiz</p>
+          <p class="tmpl__help">
+            Before writing your questions, please review the Coursera Graded Quiz Template and
+            Guidelines. The quiz should assess the objectives for this module.
+          </p>
+          <a class="btn btn--gold" href="#" data-template-link>Open the template in Google Docs ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .steprail--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* Module steps open with an eyebrow rather than a numbered badge. */
+  .step--module {
+    padding: 72px var(--section-pad-x) 0;
+  }
+
+  .step--last {
+    padding-bottom: 8px;
+  }
+
+  .step__eyebrow {
+    margin: 0 0 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .step__title--module {
+    margin: 0 0 24px;
+    font-size: 38px;
+  }
+
+  .step__p--gap {
+    margin-bottom: 36px;
+  }
+
+  .step__p--tight {
+    margin-bottom: 24px;
+  }
+
+  .h3 {
+    margin: 0 0 16px;
+  }
+
+  /* --- Hierarchy context rows --------------------------------------------- */
+  .context {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 0 24px;
+    max-width: var(--measure-body);
+  }
+
+  /* Each level indents one step further, and its label column narrows to
+     match, so the titles stair-step down the hierarchy. */
+  .context__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-left: calc(var(--depth) * 18px);
+  }
+
+  .context__row[data-depth='0'] {
+    --depth: 0;
+    --label-w: 112px;
+  }
+
+  .context__row[data-depth='1'] {
+    --depth: 1;
+    --label-w: 94px;
+  }
+
+  .context__row[data-depth='2'] {
+    --depth: 2;
+    --label-w: 76px;
+  }
+
+  .context__label {
+    flex: none;
+    width: var(--label-w);
+    padding-top: 3px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .context__label--here {
+    color: var(--accent);
+  }
+
+  .context__value {
+    flex: 1;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-strong);
+  }
+
+  .context__value--here {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* --- Objective boxes ----------------------------------------------------- */
+  .objbox {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    padding: 20px 24px;
+    margin: 0 0 20px;
+  }
+
+  .objbox--accent {
+    border-left: 3px solid var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .objbox__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+    max-width: var(--measure-body);
+  }
+
+  .objbox__eyebrow--teal {
+    color: var(--dim-a11y-text);
+  }
+
+  .objbox__text {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .objbox__quote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .plainlist {
+    margin: 0 0 16px;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .plainlist li {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .example--gap {
+    margin-bottom: 36px;
+  }
+
+  .example__p--gap {
+    margin-bottom: 24px;
+  }
+
+  .example__p--top {
+    margin-top: 20px;
+  }
+
+  /* --- Gold notes ---------------------------------------------------------- */
+  .note-gold {
+    background: var(--level-assets-tint);
+    border-color: var(--level-assets-tint-border);
+    padding: 24px 28px;
+  }
+
+  .note-gold--gap {
+    margin: 0 0 36px;
+  }
+
+  .note-gold__head {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--level-assets-dark);
+  }
+
+  .note-gold__text {
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  .note-gold__text--only {
+    margin: 0;
+  }
+
+  .note-gold__sub {
+    margin: 0 0 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .verbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .verb {
+    background: var(--bg-card);
+    border: 1px solid var(--gold-border-soft);
+    border-radius: 2px;
+    padding: 6px 12px;
+    font-size: 14.5px;
+    color: var(--text-strong);
+  }
+
+  /* --- "Consider" grid ----------------------------------------------------- */
+  .consider__eyebrow {
+    margin: 0 0 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .consider {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 0 0 36px;
+  }
+
+  .consider__cell {
+    background: var(--bg-card);
+    padding: 20px 24px;
+  }
+
+  .consider__title {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .consider__body {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Learning arc rows ---------------------------------------------------- */
+  .arclist {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 24px;
+  }
+
+  .arclist__row {
+    display: grid;
+    grid-template-columns: 30px 172px 1fr;
+    gap: 18px;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .arclist__n {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--accent);
+  }
+
+  .arclist__label {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .arclist__body {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Data tables ---------------------------------------------------------- */
+  .dtable {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    background: var(--bg-card);
+    margin: 0 0 26px;
+  }
+
+  .dtable__head,
+  .dtable__row {
+    display: grid;
+  }
+
+  .dtable__head {
+    background: var(--panel-cool);
+    border-bottom: 1px solid var(--rule-card);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  .dtable__head--gold {
+    background: var(--level-assets-tint);
+    color: var(--level-assets-dark);
+    border-bottom-color: var(--level-assets-tint-border);
+  }
+
+  .dtable__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .dtable__row:last-child {
+    border-bottom: 0;
+  }
+
+  .dtable__cell {
+    padding: 16px 20px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+    max-width: var(--measure-body);
+  }
+
+  .dtable__head .dtable__cell {
+    padding: 14px 20px;
+    border-left-color: var(--rule-card);
+  }
+
+  .dtable__head--gold .dtable__cell {
+    border-left-color: var(--level-assets-tint-border);
+  }
+
+  .dtable__cell:first-child {
+    border-left: 0;
+  }
+
+  .dtable__cell--key {
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .dtable__cell--asset {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 18px 22px;
+  }
+
+  .dtable__cell--link {
+    color: var(--text-subtle);
+    white-space: nowrap;
+  }
+
+  .dtable--path .dtable__head,
+  .dtable--path .dtable__row {
+    grid-template-columns: 150px 1fr 1fr;
+  }
+
+  .dtable--assets .dtable__head,
+  .dtable--assets .dtable__row {
+    grid-template-columns: 230px 1fr;
+  }
+
+  .dtable--choices .dtable__head,
+  .dtable--choices .dtable__row {
+    grid-template-columns: 1fr 190px 1fr;
+  }
+
+  .dtable--lessons .dtable__head,
+  .dtable--lessons .dtable__row {
+    grid-template-columns: 44px 1fr 150px 1.5fr 88px;
+  }
+
+  .dtable--lessons .dtable__cell {
+    font-size: 15px;
+    padding: 12px 16px;
+  }
+
+  .dtable__more {
+    padding: 10px 16px;
+    color: var(--text-subtle);
+    border-top: 1px solid var(--rule);
+  }
+
+  /* --- Support stages ------------------------------------------------------- */
+  .stages {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 30px;
+  }
+
+  .stages__row {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stages__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .stages__body {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Progression strip ----------------------------------------------------- */
+  .progression {
+    background: var(--tint);
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px;
+    margin: 0 0 36px;
+  }
+
+  .progression__intro {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .progression__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .progression__step {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: 2px;
+    padding: 10px 16px;
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .progression__arrow {
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* --- Support phases --------------------------------------------------------- */
+  .phases {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .phases__eyebrow {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    font-weight: 700;
+  }
+
+  .phases__body {
+    margin: 0 0 16px;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .phases__item > .phases__body:last-child {
+    margin-bottom: 0;
+  }
+
+  .feedback {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 20px 24px;
+  }
+
+  .feedback__eyebrow {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+    max-width: var(--measure-body);
+  }
+
+  .feedback__quote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Template --------------------------------------------------------------- */
+  .tmpl__label {
+    font-size: 15px;
+    color: var(--level-module-dark);
+  }
+
+  /* The Lessons & Learning Assets subsection switches to gold because it
+     concerns learning assets. */
+  .tmpl__label--gold {
+    color: var(--level-assets-dark);
+  }
+
+  .tmpl__field--gold {
+    padding: 28px 26px;
+  }
+
+  .tmpl__aim {
+    margin: 0 0 14px;
+    font-size: 14.5px;
+    color: var(--level-assets-dark);
+    font-weight: 600;
+  }
+
+  .tmpl__value {
+    border-radius: 2px;
+  }
+
+  .tmpl__cta {
+    background: var(--panel-warm);
+  }
+
+  .tmpl__cta .tmpl__help {
+    margin-bottom: 16px;
+  }
+</style>

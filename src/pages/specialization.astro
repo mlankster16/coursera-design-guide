@@ -1,0 +1,501 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const stats = [
+  { figure: '3–6 courses', label: 'the whole program' },
+  { figure: '8–48 hours', label: 'total learner time' },
+  { figure: '1+ project per course', label: 'hands-on, real-world' },
+  { figure: 'Specialization Certificate', label: 'on completing every course' },
+];
+
+const steps = [
+  { id: 'step1', n: 1, label: 'Define the goal' },
+  { id: 'step2', n: 2, label: 'Shape the journey' },
+  { id: 'step3', n: 3, label: 'Complete the plan' },
+];
+
+const ideas = [
+  {
+    title: 'Make the value clear.',
+    body: 'Help learners quickly understand who the Specialization is for, what it will help them accomplish, and why that matters.',
+  },
+  {
+    title: 'Connect learning to practical goals.',
+    body: 'Focus on skills and knowledge learners can use in a professional, academic, or other real-world context.',
+  },
+  {
+    title: 'Respect the learner’s time.',
+    body: 'Prioritize what is essential and design toward a focused, achievable outcome.',
+  },
+];
+
+const courses = [
+  {
+    n: 1,
+    title: 'Foundations of Data Analytics for Business',
+    body: 'Learners begin by translating a business need into a question that can be investigated with data. They identify the data they need, evaluate its basic quality, and prepare it for analysis.',
+    leave: 'a focused business question and an analysis-ready dataset.',
+    hours: '7 hours',
+    outcome: 'A focused business question and an analysis-ready dataset',
+  },
+  {
+    n: 2,
+    title: 'Analyzing and Visualizing Business Data',
+    body: 'Learners use appropriate analytical methods to investigate their question. They interpret the results and create visualizations that make important patterns and findings easier to understand.',
+    leave: 'analytical findings and supporting visualizations.',
+    hours: '9 hours',
+    outcome: 'Analytical findings and supporting visualizations',
+  },
+  {
+    n: 3,
+    title: 'Communicating Data-Driven Recommendations',
+    body: 'Learners determine what conclusions the evidence supports, account for limitations or uncertainty, and communicate a recommendation to a relevant audience.',
+    leave: 'a clear, evidence-informed recommendation.',
+    hours: '8 hours',
+    outcome: 'A clear, evidence-informed recommendation',
+  },
+];
+
+const skills = [
+  'Data Cleaning',
+  'Exploratory Data Analysis',
+  'Data Visualization',
+  'Spreadsheet Analysis',
+  'Business Intelligence',
+  'Data Storytelling',
+  'Evidence-Based Decision-Making',
+];
+---
+
+<PageLayout
+  title="Specialization"
+  description="How to design a Coursera Specialization: define the goal, shape the journey, and complete the plan."
+  level="specialization"
+>
+  <div class="levelpage" data-level="specialization">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow">Specialization</p>
+        <h1 class="hero__title">Designing a Coursera Specialization</h1>
+        <p class="hero__lead">
+          When exploring Coursera Specializations, learners are often trying to understand three
+          things: <em>Is this for me? What will I be able to do? And how will this learning support
+          my goals?</em>
+        </p>
+        <p class="hero__lead">
+          Let these questions guide your design. Start by identifying the learners you hope to
+          reach, the goals they are working toward, and the skills or knowledge they should develop
+          by the end of the Specialization.
+        </p>
+      </div>
+
+      <div class="hero__rail">
+        <p class="eyebrow hero__rail-eyebrow">A Specialization at a glance</p>
+        <div class="hero__stats">
+          {
+            stats.map((s) => (
+              <div>
+                <p class="hero__stat-figure">{s.figure}</p>
+                <p class="hero__stat-label">{s.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Step jump rail -->
+    <nav class="steprail steprail--3" aria-label="Steps on this page">
+      {
+        steps.map((s) => (
+          <a class="steprail__link" href={`#${s.id}`}>
+            <span class="steprail__n">{s.n}</span>
+            <span class="steprail__label">{s.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Step 1 -->
+    <section class="step" id="step1">
+      <div class="step__head">
+        <span class="step__badge">1</span>
+        <span class="step__count">Step 1 of 3</span>
+      </div>
+      <h2 class="step__title">Define the goal</h2>
+      <p class="step__q">
+        What should learners be able to do by the end of this Specialization?
+      </p>
+      <p class="step__p">
+        A strong Specialization begins with a clear understanding of the learners you hope to serve
+        and what they want to accomplish. Before planning individual Courses, take some time to
+        consider who the experience is for, what goals they are working toward, and what they should
+        be able to do by the end.
+      </p>
+      <p class="step__p">
+        Coursera learners are often looking for learning that feels relevant, useful, and manageable
+        alongside their other responsibilities. As you design, help them see how the Specialization
+        connects to their goals and how the time they invest will support their progress.
+      </p>
+
+      <p class="eyebrow ideas__eyebrow">A few ideas to keep in mind</p>
+      <div class="ideas">
+        {
+          ideas.map((i) => (
+            <div class="ideas__item" data-keep>
+              <p class="ideas__title">{i.title}</p>
+              <p class="ideas__body">{i.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Defining the goal for Data Analytics for Business Decisions</h3>
+        <p class="example__p">
+          Suppose you are designing a Specialization on <em>Data Analytics for Business Decisions</em
+          >. It may be tempting to begin with a list of topics or tools to cover. Instead, begin with
+          the learner and a practical need.
+        </p>
+        <p class="example__p">
+          This Specialization is intended for professionals who use data or make decisions informed
+          by data but may not have formal training in analytics. They want to become more confident
+          asking useful questions, interpreting evidence, and recommending a course of action.
+        </p>
+        <p class="example__p">That learner need leads to a focused end goal:</p>
+
+        <div class="goalbox">
+          <p class="goalbox__eyebrow">The goal</p>
+          <p class="goalbox__body">
+            By the end of the Specialization, learners will be able to frame a business question,
+            analyze and visualize relevant data, and communicate an evidence-informed
+            recommendation.
+          </p>
+        </div>
+
+        <p class="example__p">
+          This is more useful than a broad goal such as “understand the fundamentals of data
+          analytics.” It describes what learners will be able to do, connects the learning to a
+          recognizable need, and provides a practical boundary for deciding what belongs in the
+          Specialization.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step2">
+      <div class="step__head">
+        <span class="step__badge">2</span>
+        <span class="step__count">Step 2 of 3</span>
+      </div>
+      <h2 class="step__title">Shape the journey</h2>
+      <p class="step__q">
+        How should the Courses work together to help learners reach that goal?
+      </p>
+      <p class="step__p">
+        Courses may introduce, develop, integrate, or apply different skills. Some Specializations
+        work best as a clear progression in which each Course builds on the one before it. Others may
+        include Courses that are more modular and useful on their own.
+      </p>
+      <p class="step__p step__p--gap">
+        There is no single required structure. What matters is that each Course has a distinct
+        purpose and that the relationship among the Courses is intentional and easy for learners to
+        understand.
+      </p>
+
+      <div class="askpair" data-keep>
+        <div class="askpair__good">
+          <p class="eyebrow askpair__eyebrow">You might ask</p>
+          <p class="askpair__q">What should each Course contribute to the larger learner journey?</p>
+        </div>
+        <div class="askpair__weak">
+          <p class="eyebrow askpair__eyebrow">Rather than asking</p>
+          <p class="askpair__q">How should I divide my content into three Courses?</p>
+        </div>
+      </div>
+
+      <div class="example" data-keep>
+        <p class="eyebrow example__eyebrow">Example</p>
+        <h3 class="example__title">Shaping the journey for Data Analytics for Business Decisions</h3>
+        <p class="example__p">
+          Once the overall goal is clear, consider what learners need to accomplish at each stage of
+          the journey.
+        </p>
+        <p class="example__p">
+          Rather than dividing data analytics content into three roughly equal groups of topics, give
+          each Course a distinct role in helping learners move toward the Specialization goal.
+        </p>
+
+        <div class="journey">
+          <div class="journey__head">
+            <span class="journey__title">Data Analytics for Business Decisions</span>
+            <span class="journey__kind">Specialization</span>
+          </div>
+          {
+            courses.map((c) => (
+              <div class="journey__course">
+                <div class="journey__course-head">
+                  <span class="journey__n">{c.n}</span>
+                  <p class="journey__course-title">{c.title}</p>
+                </div>
+                <p class="journey__body">{c.body}</p>
+                <p class="journey__leave">
+                  <strong>Learners leave with:</strong> {c.leave}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="example__p">Together, the Courses create a recognizable progression:</p>
+        <div class="arc">
+          <span class="arc__step">Frame and prepare</span>
+          <span class="arc__arrow" aria-hidden="true">→</span>
+          <span class="arc__step">Analyze and visualize</span>
+          <span class="arc__arrow" aria-hidden="true">→</span>
+          <span class="arc__step">Recommend and communicate</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: template -->
+    <section class="step step--last" id="step3">
+      <div class="step__head">
+        <span class="step__badge">3</span>
+        <span class="step__count">Step 3 of 3</span>
+      </div>
+      <h2 class="step__title">Complete your Specialization plan</h2>
+      <p class="step__q">
+        Use this page to work through the decisions, then record them in the Design Document.
+      </p>
+
+      <div class="tmpl">
+        <div class="tmpl__bar">
+          <span class="tmpl__bar-title">Specialization Landing Page</span>
+          <span class="tmpl__bar-note">Complete once</span>
+        </div>
+
+        <div class="tmpl__link-row">
+          <a
+            class="ext"
+            href="https://www.coursera.org/search?query=duke%20university"
+            target="_blank"
+            rel="noopener">See a sample Specialization Landing Page ↗</a
+          > on Coursera
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Specialization title</p>
+          <div class="tmpl__value"><p>Data Analytics for Business Decisions</p></div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">About this Specialization</p>
+          <div class="tmpl__value">
+            <p>
+              Learn to use data to answer business questions and make evidence-informed
+              recommendations. Across three courses, you'll practice working with real-world
+              datasets, identify patterns and trends, create clear visualizations, and communicate
+              insights to support better decisions.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Projects overview</p>
+          <div class="tmpl__value">
+            <p>
+              Learners analyze business data to investigate a practical question, identify meaningful
+              trends, create visualizations, and recommend an action. Projects are built around
+              common workplace tasks such as evaluating customer behavior, monitoring performance, or
+              identifying opportunities for improvement.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__row">
+          <div class="tmpl__field">
+            <p class="tmpl__label">Who this is for</p>
+            <div class="tmpl__value">
+              <p>
+                Professionals who use data, or make decisions informed by data, but may not have
+                formal training in analytics
+              </p>
+            </div>
+          </div>
+          <div class="tmpl__field">
+            <p class="tmpl__label">Recommended background</p>
+            <div class="tmpl__value">
+              <p>
+                No prior experience in data analytics or programming. Familiarity with basic
+                workplace math is helpful
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">What will you learn</p>
+          <div class="tmpl__value">
+            <ol>
+              <li>Frame a business question that can be investigated with data.</li>
+              <li>Analyze and visualize relevant data to identify meaningful findings.</li>
+              <li>Communicate an evidence-informed recommendation to a business audience.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Skills learners will gain</p>
+          <div class="tmpl__chips">
+            {skills.map((s) => <span class="tmpl__chip">{s}</span>)}
+          </div>
+        </div>
+
+        <div class="tmpl__row">
+          <div class="tmpl__field">
+            <p class="tmpl__label">Estimated total learning time</p>
+            <div class="tmpl__value"><p>Approximately 24 hours</p></div>
+          </div>
+          <div class="tmpl__field">
+            <p class="tmpl__label">Difficulty level</p>
+            <div class="tmpl__value"><p>Beginner</p></div>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Tools, technology, or platforms</p>
+          <div class="tmpl__value">
+            <p>
+              A web browser and spreadsheet software. All datasets and practice materials are
+              provided
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Courses in this Specialization</p>
+          <div class="gtable gtable--courses">
+            <div class="gtable__cell gtable__head">#</div>
+            <div class="gtable__cell gtable__head">Course title</div>
+            <div class="gtable__cell gtable__head">Main outcomes</div>
+            <div class="gtable__cell gtable__head">Est. time</div>
+            {
+              courses.map((c) => (
+                <>
+                  <div class="gtable__cell">{c.n}</div>
+                  <div class="gtable__cell">{c.title}</div>
+                  <div class="gtable__cell">{c.outcome}</div>
+                  <div class="gtable__cell">{c.hours}</div>
+                </>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="tmpl__field">
+          <p class="tmpl__label">Specialization project or culminating experience (optional)</p>
+          <div class="tmpl__value">
+            <p>
+              Learners investigate a business question using a provided dataset, clean and analyze
+              the data, create visualizations to communicate key findings, and develop an
+              evidence-informed recommendation for a business audience.
+            </p>
+          </div>
+        </div>
+
+        <div class="tmpl__cta">
+          <a class="btn btn--level" href="#" data-template-link>Open the template in Google Docs ↗</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .steprail--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .step--last {
+    padding-bottom: 8px;
+  }
+
+  .step__p--gap {
+    margin-bottom: 36px;
+  }
+
+  /* --- "The goal" pull-out inside the worked example --------------------- */
+  .goalbox {
+    background: var(--tint);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin: 0 0 16px;
+  }
+
+  .goalbox__eyebrow {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+
+  .goalbox__body {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Progression arc --------------------------------------------------- */
+  .arc {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .arc__step {
+    background: var(--tint);
+    border: 1px solid var(--tint-border);
+    border-radius: var(--radius-panel);
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .arc__arrow {
+    color: var(--copper);
+    font-size: 18px;
+  }
+
+  /* --- Template ---------------------------------------------------------- */
+  .gtable--courses {
+    grid-template-columns: 44px 1.5fr 2fr 88px;
+  }
+
+  .tmpl__link-row {
+    font-size: 15px;
+    color: var(--text-secondary);
+  }
+
+  .tmpl__link-row .ext {
+    color: var(--accent);
+  }
+
+  .btn--level {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn--level:hover {
+    background: var(--gold);
+    color: var(--text-strong);
+  }
+</style>

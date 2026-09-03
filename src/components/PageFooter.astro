@@ -1,0 +1,47 @@
+---
+import { neighbours, levelColor, url, type LevelKey } from '../data/site';
+
+interface Props {
+  /** The page's own level. Footer shows its hierarchy neighbours. */
+  level?: LevelKey;
+  /** Sub-pages (Video, Reading) show a single "← Back to" link instead. */
+  backTo?: { label: string; href: string; color: string };
+}
+const { level, backTo } = Astro.props;
+
+const { prev, next } = level ? neighbours(level) : { prev: undefined, next: undefined };
+const single = Boolean(backTo) || !prev || !next;
+---
+
+{
+  (prev || next || backTo) && (
+    <div class:list={['pagefoot', single && 'pagefoot--single']}>
+      {backTo ? (
+        <a href={url(backTo.href)}>
+          <span class="pagefoot__dir">← Back to</span>
+          <span class="pagefoot__name" style={`color:${backTo.color}`}>
+            {backTo.label}
+          </span>
+        </a>
+      ) : (
+        prev && (
+          <a href={url(prev.href)}>
+            <span class="pagefoot__dir">← Zoom out</span>
+            <span class="pagefoot__name" style={`color:${levelColor[prev.key]}`}>
+              {prev.label}
+            </span>
+          </a>
+        )
+      )}
+
+      {!backTo && next && (
+        <a class="pagefoot__next" href={url(next.href)}>
+          <span class="pagefoot__dir">Zoom in →</span>
+          <span class="pagefoot__name" style={`color:${levelColor[next.key]}`}>
+            {next.label}
+          </span>
+        </a>
+      )}
+    </div>
+  )
+}

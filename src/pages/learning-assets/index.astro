@@ -1,0 +1,417 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import assetData from '../../data/learning-assets-data.json';
+import { assetLinks, url } from '../../data/site';
+
+interface Asset {
+  n: string;
+  slug: string;
+  use: string;
+  note?: string;
+  /** Learner-friendly design */
+  d: string[];
+  /** Accessibility essentials */
+  a: string[];
+  /** Copyright and permissions */
+  c: string[];
+}
+
+/* The page is built from the data file, not by hand. Order comes from
+   assetLinks so the nav dropdown, the hero jump list, and the sections
+   below can never drift apart. */
+const assets = assetLinks.map((link, i) => {
+  const data = (assetData as Asset[]).find((a) => a.slug === link.slug)!;
+  return { ...data, link, index: String(i + 1).padStart(2, '0') };
+});
+
+/* The three dimensions are the organizing system: same three, same order,
+   same colors in every asset section, so a reader can scan one concern
+   down the whole page. Preserve it. */
+const dimensions = [
+  { key: 'd' as const, label: 'Learner-friendly design', cls: 'dim--design' },
+  { key: 'a' as const, label: 'Accessibility essentials', cls: 'dim--a11y' },
+  { key: 'c' as const, label: 'Copyright and permissions', cls: 'dim--copyright' },
+];
+
+const overview = [
+  {
+    cls: 'dim--design',
+    title: 'Design for independent learning',
+    body: [
+      'State the purpose, provide the necessary context, explain what learners should do, and anticipate where they may need clarification or support.',
+    ],
+  },
+  {
+    cls: 'dim--a11y',
+    title: 'Make the asset accessible',
+    body: [
+      'Use clear structure and language, provide text alternatives for non-text content, and avoid relying on a single sensory or interaction mode.',
+    ],
+  },
+  {
+    cls: 'dim--copyright',
+    title: 'Use materials responsibly',
+    body: [
+      'Create your own materials whenever possible, cite sources, and confirm permission before reproducing third-party text, media, data, code, cases, or other content.',
+      'When using AI to support content development, verify its output and avoid including confidential, personally identifiable, or copyrighted information.',
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="Learning Assets"
+  description="Guidance for producing each of the eight Coursera learning asset types."
+  level="assets"
+>
+  <div class="levelpage" data-level="assets">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow">Learning Assets</p>
+        <h1 class="hero__title">Designing Learning Assets</h1>
+        <p class="hero__lead">
+          At this stage, you have identified the assets needed for each Module. Now you’ll develop
+          those assets for an asynchronous, public online Course.
+        </p>
+        <p class="hero__lead">
+          Creating an online asset often requires more intentional planning than preparing for a
+          class session. Explanations, instructions, examples, feedback, and learner support need to
+          be built into the asset because you will not be present to clarify them in the moment.
+        </p>
+      </div>
+
+      <nav class="hero__rail" aria-label="Assets on this page">
+        <p class="eyebrow hero__rail-eyebrow">Eight assets to choose from</p>
+        <div class="jumplist">
+          {
+            assets.map((a) => (
+              <a class="jumplist__link" href={`#${a.slug}`}>
+                <span class="jumplist__n">{a.index}</span>
+                {a.n}
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+    </div>
+
+    <!-- Three dimensions -->
+    <section class="section section--tight">
+      <h2 class="h2 h2--tight">Three dimensions to consider</h2>
+      <p class="step__p step__p--gap">
+        As you design each asset, consider three dimensions. Every asset below is organized around
+        the same three, so you can read down a single column if one of them is your concern.
+      </p>
+
+      <div class="dims">
+        {
+          overview.map((o) => (
+            <div class:list={['dims__item', o.cls]} data-keep>
+              <p class="dims__title">{o.title}</p>
+              {o.body.map((b) => <p class="dims__body">{b}</p>)}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="note-gold" data-keep>
+        <p class="note-gold__head">A note on copyright</p>
+        <p class="note-gold__text">
+          Copyright guidance on this page is intended to help identify materials that may require
+          review. Copyright and licensing decisions can depend on the material, its source, and how
+          you plan to use it.
+        </p>
+        <p class="note-gold__text note-gold__text--last">
+          If you are unsure whether an item can be included, share it with your CTL team before
+          production.
+        </p>
+      </div>
+    </section>
+
+    <!-- Eight asset sections -->
+    {
+      assets.map((a, i) => (
+        <section class:list={['asset', i === 0 && 'asset--first']} id={a.slug} data-keep>
+          <div class="asset__head">
+            <span class="eyebrow asset__index">{a.index}</span>
+            <h2 class="asset__title">{a.n}</h2>
+          </div>
+
+          <p class="asset__use">{a.use}</p>
+          {a.note && <p class="asset__note">{a.note}</p>}
+
+          <div class="dimgrid">
+            {
+              dimensions.map((dim) => (
+                <div class:list={['dim', dim.cls]}>
+                  <p class="dim__head">{dim.label}</p>
+                  <ul class="dim__list">
+                    {a[dim.key].map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              ))
+            }
+          </div>
+
+          <a
+            class:list={['asset__more', !a.link.page && 'asset__more--pending']}
+            href={a.link.page ? url(a.link.page) : undefined}
+            aria-disabled={a.link.page ? undefined : 'true'}
+          >
+            {a.link.guidance}
+          </a>
+        </section>
+      ))
+    }
+  </div>
+</PageLayout>
+
+<style>
+  /* --- Dimension colors — this page only.
+     Each dimension keeps the same color in the overview and in every one of
+     the eight asset sections. */
+  .dim--design {
+    --dim: var(--dim-design);
+    --dim-text: var(--dim-design);
+  }
+
+  .dim--a11y {
+    --dim: var(--dim-a11y);
+    --dim-text: var(--dim-a11y-text);
+  }
+
+  .dim--copyright {
+    --dim: var(--dim-copyright);
+    --dim-text: var(--dim-copyright);
+  }
+
+  /* --- Hero jump list ------------------------------------------------------ */
+  .jumplist {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .jumplist__link {
+    text-decoration: none;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 9px 0;
+    border-top: 1px solid var(--rule);
+    font-size: 15px;
+    color: var(--text-strong);
+  }
+
+  .jumplist__link:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .jumplist__link:hover {
+    color: var(--level-assets-dark);
+  }
+
+  .jumplist__n {
+    flex: none;
+    font-size: 11px;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  /* --- Three dimensions overview ------------------------------------------- */
+  .section--tight {
+    padding: 64px var(--section-pad-x) 0;
+  }
+
+  .h2--tight {
+    margin: 0 0 14px;
+  }
+
+  .step__p {
+    margin: 0 0 18px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-section);
+  }
+
+  .step__p--gap {
+    margin-bottom: 34px;
+  }
+
+  .dims {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin: 0 0 34px;
+  }
+
+  .dims__item {
+    border-top: 3px solid var(--dim);
+    padding: 20px 0 0;
+  }
+
+  .dims__title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 23px;
+    color: var(--navy);
+  }
+
+  .dims__body {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .dims__body:last-child {
+    margin-bottom: 0;
+  }
+
+  .note-gold {
+    background: var(--level-assets-tint);
+    border-color: var(--level-assets-tint-border);
+    padding: 24px 28px;
+  }
+
+  .note-gold__head {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--level-assets-dark);
+  }
+
+  .note-gold__text {
+    margin: 0 0 12px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  .note-gold__text--last {
+    margin-bottom: 0;
+  }
+
+  /* --- Asset sections ------------------------------------------------------ */
+  .asset {
+    padding: 52px var(--section-pad-x) 0;
+    scroll-margin-top: 12px;
+  }
+
+  .asset--first {
+    padding-top: 56px;
+  }
+
+  .asset__head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 0 0 12px;
+  }
+
+  .asset__index {
+    flex: none;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  /* nowrap + flex:none keeps the asset name on one line. */
+  .asset__title {
+    margin: 0;
+    flex: none;
+    white-space: nowrap;
+    font-size: 32px;
+  }
+
+  .asset__use {
+    margin: 0 0 26px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-section);
+  }
+
+  .asset__note {
+    margin: -12px 0 26px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--level-assets-dark);
+    background: var(--level-assets-tint);
+    border-left: 3px solid var(--level-assets);
+    padding: 14px 20px;
+    max-width: var(--measure-body);
+  }
+
+  .dimgrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    padding: 26px 0 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .dim {
+    min-width: 0;
+  }
+
+  .dim__head {
+    margin: 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid var(--dim);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim-text);
+    font-weight: 700;
+  }
+
+  .dim__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .dim__list li {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .dim__list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--dim);
+  }
+
+  .asset__more {
+    display: inline-block;
+    margin: 24px 0 0;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--level-assets-dark);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .asset__more:hover {
+    text-decoration: underline;
+    color: var(--level-assets-dark);
+  }
+
+  /* Assets whose own page has not been built yet. */
+  .asset__more--pending {
+    color: var(--text-subtle);
+    cursor: default;
+    pointer-events: none;
+  }
+</style>

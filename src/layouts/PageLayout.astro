@@ -1,0 +1,66 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import SiteNav from '../components/SiteNav.astro';
+import PageFooter from '../components/PageFooter.astro';
+import { levelColor, url, type LevelKey } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Active top-level nav item. Asset sub-pages pass 'assets'. */
+  level: LevelKey;
+  /** Breadcrumb shown on Learning Assets sub-pages. */
+  breadcrumb?: string;
+  /** Set on sub-pages so the footer shows "← Back to Learning Assets". */
+  backToAssets?: boolean;
+}
+const { title, description, level, breadcrumb, backToAssets } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Coursera Design Guide | Duke CTL</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <div class="shell">
+        <SiteNav active={level} />
+
+        {
+          breadcrumb && (
+            <div class="breadcrumb">
+              <a href={url('/learning-assets')}>Learning Assets</a>
+              <span class="breadcrumb__sep" aria-hidden="true">›</span>
+              <span class="breadcrumb__current">{breadcrumb}</span>
+            </div>
+          )
+        }
+
+        <main>
+          <slot />
+        </main>
+
+        {
+          backToAssets ? (
+            <PageFooter
+              backTo={{ label: 'Learning Assets', href: '/learning-assets', color: levelColor.assets }}
+            />
+          ) : (
+            <PageFooter level={level} />
+          )
+        }
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,525 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Accordion from '../components/Accordion.astro';
+import { url } from '../data/site';
+
+/* Copy on this page is client-authored and final. The three paragraphs in
+   "What is Coursera?" beyond the opening platform sentence are
+   designer-drafted and pending client review — flag, do not edit. */
+
+const heroRail = [
+  {
+    title: 'Where you are now',
+    body: 'Use this guide before or after your first conversation with a Learning Experience Designer.',
+  },
+  {
+    title: 'What comes next',
+    body: 'You’ll complete a Design Document with your LXD. Use this guide as a reference as you work.',
+  },
+  {
+    title: 'Time to read',
+    body: 'About five minutes. Use the tabs above when you’re ready for more detail.',
+  },
+];
+
+const mapRows = [
+  {
+    level: 'specialization',
+    duke: 'Your whole course',
+    dukeSub: 'A semester of material',
+    coursera: 'A Specialization',
+    courseraSub: '3–6 courses · 8–48 hours of learner time',
+  },
+  {
+    level: 'course',
+    duke: 'A unit or theme',
+    dukeSub: 'Often several weeks of your syllabus',
+    coursera: 'A Course',
+    courseraSub: '3–6 modules · 2–8 hours of learner time',
+  },
+  {
+    level: 'module',
+    duke: 'A topic inside that unit',
+    dukeSub: 'A concept, method, or skill',
+    coursera: 'A Module',
+    courseraSub: '2–5 lessons · 30 min–2 hours of learner time',
+  },
+  {
+    level: 'assets',
+    duke: 'A lecture, reading, activity, or assessment',
+    dukeSub: 'The pieces you already have',
+    coursera: 'Learning assets',
+    courseraSub: 'Video, reading, activity, quiz',
+  },
+];
+
+const levelCards = [
+  {
+    label: 'Specialization',
+    question: 'What larger goal are learners working toward?',
+    color: 'var(--level-specialization)',
+    href: '/specialization',
+  },
+  {
+    label: 'Course',
+    question: 'What meaningful skills should learners develop?',
+    color: 'var(--level-course)',
+    href: '/course',
+  },
+  {
+    label: 'Module',
+    question: 'What smaller learning steps will help them get there?',
+    color: 'var(--level-module)',
+    href: '/module',
+  },
+  {
+    label: 'Learning Assets',
+    question: 'What experience will best support each step?',
+    color: 'var(--level-assets)',
+    href: '/learning-assets',
+  },
+];
+
+const reuseRows = [
+  {
+    label: 'Start with skills',
+    summary: 'Begin with what learners should be able to do.',
+    body: 'Coursera learners are often professionals building a specific skill. We’ll begin with what they should be able to do by the end, then work backward to the materials, framing, and assessments that will help them get there.',
+  },
+  {
+    label: 'Keep videos focused',
+    summary: 'Shorter, focused videos tend to work best for learners.',
+    body: 'Learners tend to engage best with videos under about ten minutes. We can help identify natural breaks in longer recordings and shape them into shorter, focused segments.',
+  },
+  {
+    label: 'Balance learning formats',
+    summary: 'Readings can be valuable, but learners also need opportunities to practice.',
+    body: 'A course made up mostly of readings may not provide enough variety or practice. Together, we’ll look at where a video, audio conversation, visual, or hands-on activity might communicate an idea more effectively.',
+  },
+  {
+    label: 'Build in accessibility',
+    summary: 'It is easier to plan for accessibility before materials are produced.',
+    body: 'Clear structure, readable language, accessible documents and slides, meaningful alt text, appropriate color contrast, and multiple ways to engage with content help make a course more usable and welcoming for everyone.',
+  },
+  {
+    label: 'Check content permissions',
+    summary: 'Materials created by others may need clearance for public, commercial use.',
+    body: 'Images, figures, video clips, datasets, and other materials you did not create may require permission or an appropriate license. We’ll review them together to make sure they can be used with a public, global audience.',
+  },
+  {
+    label: 'Plan for tool access',
+    summary: 'Choose tools learners can access freely and widely.',
+    body: 'Paid or license-restricted tools may be out of reach for learners outside Duke or unavailable in some countries. When a tool is essential, we’ll plan together for how learners can access it.',
+  },
+];
+---
+
+<PageLayout
+  title="Overview"
+  description="How a Duke course maps onto Coursera, and what you'll decide with your Learning Experience Designer."
+  level="overview"
+>
+  <!-- Hero -->
+  <div class="ohero">
+    <div>
+      <p class="eyebrow eyebrow--copper ohero__eyebrow">For Duke faculty</p>
+      <h1 class="h1">Turn your teaching expertise into a Coursera learning experience.</h1>
+      <p class="lead m-body">
+        A Learning Experience Designer (LXD) from Duke’s Center for Teaching and Learning will work
+        with you throughout the process. This guide introduces the decisions you’ll make together.
+      </p>
+    </div>
+
+    <div class="ohero__rail">
+      {
+        heroRail.map((r) => (
+          <div>
+            <p class="ohero__rail-title">{r.title}</p>
+            <p class="caption m-body ohero__rail-body">{r.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- What is Coursera? -->
+  <section class="section section--tight">
+    <h2 class="h2 h2--close">What is Coursera?</h2>
+    <div class="split split--callout">
+      <div>
+        <p class="body m-body stack">
+          Coursera is a global online learning platform where learners take short, self-paced
+          courses to build practical skills.
+        </p>
+        <p class="body m-body stack">
+          Learners come from around the world and bring a wide range of backgrounds and goals. Many
+          are working professionals fitting study around a job, so they move through material on
+          their own schedule and without an instructor present to answer questions in the moment.
+        </p>
+        <p class="body m-body">
+          That audience shapes the design decisions in this guide: courses are shorter than a
+          semester, organized around skills learners can apply, and built so that explanation,
+          practice, and feedback are all included in the materials themselves.
+        </p>
+      </div>
+
+      <div class="callout" data-keep>
+        <p class="eyebrow callout__eyebrow">See it in practice</p>
+        <p class="body--sm m-body callout__body">
+          Duke already offers courses and Specializations on Coursera. Browsing a few is a good way
+          to see the format before you plan your own.
+        </p>
+        <a
+          class="ext"
+          href="https://www.coursera.org/search?query=duke%20university"
+          target="_blank"
+          rel="noopener">Explore Duke courses on Coursera ↗</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Step one: mapping table -->
+  <section class="section section--step">
+    <p class="eyebrow eyebrow--step">Step one</p>
+    <h2 class="h2 h2--close">How your Duke course maps to Coursera</h2>
+    <p class="body--sm m-section step__intro">
+      These are rough comparisons, not one-to-one equivalents. Read each row from left to right.
+    </p>
+
+    <div class="maptable">
+      <div class="maptable__head">
+        <p class="eyebrow maptable__head-cell">Your Duke course</p>
+        <div></div>
+        <p class="eyebrow maptable__head-cell maptable__head-cell--right">Your Coursera course</p>
+      </div>
+
+      {
+        mapRows.map((r) => (
+          <div class="maptable__row" data-keep>
+            <div>
+              <p class="maptable__title">{r.duke}</p>
+              <p class="maptable__sub">{r.dukeSub}</p>
+            </div>
+            <div class="maptable__arrow" aria-hidden="true">
+              →
+            </div>
+            <div class="maptable__cell" data-level={r.level}>
+              <p class="maptable__title maptable__title--level">{r.coursera}</p>
+              <p class="maptable__sub">{r.courseraSub}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="note-gold maptable__note" data-keep>
+      <p class="note-gold__title">One number to keep in mind: learner time</p>
+      <p class="note-gold__body m-body">
+        Learner time includes videos, readings, quizzes, practice activities, projects, and any
+        other work required to complete the course. Estimate the time a learner spends rather than
+        the amount of material you provide.
+      </p>
+    </div>
+  </section>
+
+  <!-- Step two: the four levels -->
+  <section class="section section--step">
+    <p class="eyebrow eyebrow--step">Step two</p>
+    <h2 class="h2 h2--close">How the pieces fit together</h2>
+    <p class="body--sm m-section step__intro">
+      A Coursera learning experience is built from connected pieces. Start with the larger learning
+      goal, then work toward the courses, Modules, and learning assets that help learners reach it.
+    </p>
+
+    <div class="cardgrid">
+      {
+        levelCards.map((c) => (
+          <a class="level-card" href={url(c.href)} style={`--level:${c.color}`}>
+            <div>
+              <p class="level-card__label">{c.label}</p>
+              <p class="level-card__q">{c.question}</p>
+            </div>
+            <p class="level-card__open">Open →</p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Step three: reuse accordion -->
+  <section class="section section--step">
+    <p class="eyebrow eyebrow--step">Step three</p>
+    <h2 class="h2 h2--close">Can you use materials you already have?</h2>
+    <p class="body--sm m-section step__intro">
+      In most cases, yes. You and your LXD will look at six things together as you decide what can
+      be adapted for a Coursera audience.
+    </p>
+
+    <Accordion id="reuse" rows={reuseRows} />
+  </section>
+
+  <!-- CTA -->
+  <div class="section cta-wrap">
+    <div class="cta">
+      <div>
+        <h2 class="cta__title">Ready to start planning?</h2>
+        <p class="cta__body m-body">
+          The planning template is a blank version of this guide. You’ll complete it with your LXD.
+        </p>
+      </div>
+      <a class="btn" href="#" data-template-link>Open the planning template ↗</a>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  /* --- Hero -------------------------------------------------------------- */
+  .ohero {
+    padding: 72px var(--section-pad-x) 60px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: start;
+    background: var(--panel-warm);
+  }
+
+  .ohero__eyebrow {
+    margin: 0 0 14px;
+  }
+
+  .ohero__rail {
+    border-left: 3px solid var(--copper);
+    padding: 4px 0 4px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .ohero__rail-title {
+    margin: 0 0 5px;
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--navy);
+  }
+
+  .ohero__rail-body {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  /* --- Sections ---------------------------------------------------------- */
+  .section--tight {
+    padding: 64px var(--section-pad-x) 0;
+  }
+
+  .section--step {
+    padding: 64px var(--section-pad-x) 12px;
+  }
+
+  .h2--close {
+    margin: 0 0 12px;
+  }
+
+  .eyebrow--step {
+    margin: 0 0 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .step__intro {
+    margin: 0 0 34px;
+    color: var(--text-secondary);
+  }
+
+  .stack {
+    margin: 0 0 16px;
+  }
+
+  .body:last-child {
+    margin-bottom: 0;
+  }
+
+  /* --- What is Coursera? split ------------------------------------------ */
+  .split--callout {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .split--callout > div > p:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout__eyebrow {
+    margin: 0 0 8px;
+    color: var(--blue);
+    letter-spacing: 0.16em;
+  }
+
+  .callout__body {
+    margin: 0 0 16px;
+    color: var(--text-body);
+  }
+
+  .callout .ext {
+    display: inline-block;
+    font-size: 15px;
+    color: var(--blue);
+  }
+
+  /* --- Mapping table ---------------------------------------------------- */
+  .maptable {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .maptable__head,
+  .maptable__row {
+    display: grid;
+    grid-template-columns: 1fr 44px 1fr;
+  }
+
+  .maptable__head {
+    align-items: baseline;
+    border-bottom: 2px solid var(--navy);
+    padding: 0 0 10px;
+  }
+
+  .maptable__head-cell {
+    margin: 0;
+    color: var(--text-strong);
+  }
+
+  /* Matches the 20px padding + 3px rule of the tinted cells below, so the
+     header label sits on the same left edge as the level names. */
+  .maptable__head-cell--right {
+    padding-left: 23px;
+    color: var(--navy);
+  }
+
+  .maptable__row {
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0;
+  }
+
+  .maptable__title {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  .maptable__sub {
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--text-subtle);
+  }
+
+  .maptable__arrow {
+    text-align: center;
+    color: var(--copper);
+    font-size: 18px;
+  }
+
+  .maptable__cell {
+    background: var(--tint);
+    border-left: 3px solid var(--level);
+    padding: 16px 20px;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .maptable__title--level {
+    color: var(--level);
+  }
+
+  .maptable__cell[data-level='specialization'] {
+    --level: var(--level-specialization);
+    --tint: var(--level-specialization-tint);
+  }
+  .maptable__cell[data-level='course'] {
+    --level: var(--level-course);
+    --tint: var(--level-course-tint);
+  }
+  .maptable__cell[data-level='module'] {
+    --level: var(--level-module);
+    --tint: var(--level-module-tint);
+  }
+  .maptable__cell[data-level='assets'] {
+    --level: var(--level-assets);
+    --tint: var(--level-assets-tint-warm);
+  }
+
+  .maptable__note {
+    margin-top: 32px;
+  }
+
+  .note-gold__title {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--note-gold-title);
+  }
+
+  .note-gold__body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--note-gold-body);
+  }
+
+  /* --- Level cards ------------------------------------------------------- */
+  .cardgrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .level-card__label {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--navy);
+  }
+
+  .level-card__q {
+    margin: 0 0 18px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .level-card__open {
+    margin: 0;
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* --- CTA -------------------------------------------------------------- */
+  .cta-wrap {
+    padding: 64px var(--section-pad-x);
+  }
+
+  .cta__title {
+    margin: 0 0 10px;
+    font-size: 32px;
+    color: #fff;
+  }
+
+  .cta__body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #b9cae4;
+  }
+
+  .cta .btn {
+    flex: none;
+    font-size: 15.5px;
+    font-weight: 700;
+    padding: 15px 28px;
+  }
+</style>

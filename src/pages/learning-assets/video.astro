@@ -1,0 +1,1463 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const steps = [
+  { id: 'step1', n: 1, label: 'Define the purpose' },
+  { id: 'step2', n: 2, label: 'Draft the script' },
+  { id: 'step3', n: 3, label: 'Plan the visuals' },
+  { id: 'step4', n: 4, label: 'Plan the recording' },
+  { id: 'step5', n: 5, label: 'Ready for recording' },
+];
+
+const roles = {
+  head: ['You bring', 'You may work with CTL on', 'Your project scope may determine'],
+  rows: [
+    ['Subject-matter expertise', 'Script refinement', 'Level of visual-design support'],
+    ['Learning message', 'Visual planning', 'Recording pathway'],
+    ['Draft script', 'Recording preparation', 'Media Producer involvement'],
+    ['Source materials', 'Production and editing', 'Studio or on-location options'],
+  ],
+};
+
+const purposes = [
+  {
+    purpose: 'Course welcome',
+    can: 'Introduce you, the Course, and what learners can expect',
+    length: '2–3 minutes',
+  },
+  {
+    purpose: 'Module introduction',
+    can: 'Preview what learners will do and why it matters',
+    length: '1–2 minutes',
+  },
+  {
+    purpose: 'Teaching video',
+    can: 'Explain or demonstrate one focused concept, process, or judgment',
+    length: '5–8 minutes',
+  },
+];
+
+const beforeWriting = [
+  {
+    q: 'What should learners take away?',
+    a: 'What is the one main thing learners should understand, notice, or be able to do?',
+  },
+  {
+    q: 'Why does it matter?',
+    a: 'What question, problem, example, or consequence makes the idea relevant?',
+  },
+  {
+    q: 'What context do learners need?',
+    a: 'What should they already know, and what can be provided elsewhere?',
+  },
+  {
+    q: 'What happens next?',
+    a: 'What will learners read, practice, answer, create, or consider afterward?',
+  },
+];
+
+const structure = [
+  {
+    label: 'Open',
+    lead: 'Give learners a reason to keep watching.',
+    body: 'Introduce a question, problem, scenario, or purpose.',
+  },
+  {
+    label: 'Develop',
+    lead: 'Explain, demonstrate, or model the idea.',
+    body: 'Focus on the essential message and use examples where helpful.',
+  },
+  {
+    label: 'Connect',
+    lead: 'Reinforce the main takeaway.',
+    body: 'Connect learners to what they will do next.',
+  },
+];
+
+const speakingTips = [
+  'Use conversational language and sentences you would naturally say to a learner.',
+  'Prefer short, direct sentences, and remove repetition or detail that does not support the purpose.',
+  'Read the script aloud as you draft. If a sentence is difficult to say, revise it.',
+  'Add visual notes as you write, so that the narration and visuals work together.',
+];
+
+const wordCounts = [
+  { time: '2 minutes', words: '280 words' },
+  { time: '3 minutes', words: '420 words' },
+  { time: '5 minutes', words: '700 words' },
+  { time: '8 minutes', words: '1,100 words' },
+];
+
+const examples = [
+  {
+    title: 'A short video with one clear job',
+    source: 'Stress First Aid · What Is Occupational Stress?',
+    intro:
+      'This teaching video does one thing: it defines occupational stress, gives learners a few concrete examples, and leaves them with a memorable way to think about the concept. The whole script is 267 words.',
+    stats: [
+      { label: 'Script', value: '267 words' },
+      { label: 'Runtime', value: '1:47' },
+      { label: 'Measured pace', value: '~150 wpm' },
+      { label: 'Format', value: 'Narrated slides' },
+    ],
+    beats: [
+      {
+        label: 'Open · Hook',
+        quotes: [
+          '“The National Institute for Occupational Safety and Health defines occupational stress as the harmful physical and emotional responses that occur when the requirements of the job do not match the capabilities, resources, or needs of the worker. How can your organization provide resources to reduce occupational stress?”',
+        ],
+        note: 'Opens on an authoritative definition and turns it straight into a question the learner has a stake in. The slide carries the definition, so the narration is not reading it aloud twice.',
+      },
+      {
+        label: 'Develop · Body',
+        quotes: [
+          '“Sometimes we experience heavy workloads associated with infrequent rest breaks… Sometimes the challenge is associated with management style… with interpersonal relationships… with work roles…”',
+          '“Stress commonly gets a bad rap. I would argue that stress is neither good nor bad, but it’s about the moderate point in between. We’re trying to find the Goldilocks Zone.”',
+        ],
+        note: 'Six parallel examples, each one sentence, then the turn to the actual idea — the Goldilocks Zone. The parallel phrasing is what lets six examples pass quickly instead of dragging.',
+      },
+      {
+        label: 'Connect · Conclusion',
+        quotes: [
+          '“I like to think of stress much like rainfall. We want enough of it to grow, but not so much that we drown.”',
+        ],
+        note: 'One sentence. An analogy learners will still have long after the definition has gone.',
+      },
+    ],
+    notice:
+      'The video stays focused, lets the visual carry part of the explanation, and ends on something memorable. It is short because the learning goal is focused — not because every video should be this length.',
+  },
+  {
+    title: 'A longer video that carries a narrative',
+    source: 'Space Medicine · History: Origins of Medicine and Aerospace',
+    intro:
+      'This one runs nearly two and a half times as long and does something harder: it traces two separate histories and brings them together. At 637 words it is still one idea, told as a story.',
+    stats: [
+      { label: 'Script', value: '637 words' },
+      { label: 'Runtime', value: '4:21' },
+      { label: 'Measured pace', value: '~146 wpm' },
+      { label: 'Format', value: 'Green screen and animation' },
+    ],
+    beats: [
+      {
+        label: 'Open · Hook',
+        quotes: [
+          '“Ever since the Wright brothers designed the first motorized plane in their bike shop in Ohio, the utility of flight has been paramount in military and scientific advancements… keeping that human alive throughout the flight has been a necessary field of study, and has given rise to the field of aerospace medicine.”',
+        ],
+        note: 'Opens on a concrete scene — a bike shop in Ohio — then names the field the video is about. A history video that began with dates would have lost learners in the first sentence.',
+      },
+      {
+        label: 'Develop · Body',
+        quotes: [
+          '“To examine the intersection of flight and medicine, we first need to look at the histories of each of these fields independently.”',
+          '“Before we arrive at the military space program, we first need to discuss the history of medicine.”',
+        ],
+        note: 'Two threads, developed separately and signposted out loud so learners always know which one they are in. Flight runs from balloons to jets and rockets; medicine from the classical era to germ theory.',
+      },
+      {
+        label: 'Connect · Conclusion',
+        quotes: [
+          '“These wars are also where we see the first major investigations into aerospace medicine and the role of flight doctors.”',
+        ],
+        note: 'The two threads meet on the same event, which is the point the whole video was built toward — and it hands straight off to the next video in the Module.',
+      },
+    ],
+    notice:
+      'A broad historical topic works here because the video gives learners a roadmap and then follows it. Two related threads are developed before they are brought together, and the conclusion sets up what comes next rather than simply summarizing.',
+  },
+];
+
+const visualPaths = [
+  {
+    title: 'I am creating my own visuals',
+    body: 'Create the slides or visual materials that accompany your script. The Duke video templates and Video Design Guidelines can help you get started. Your responsibilities may include:',
+    items: [
+      'creating or adapting visuals',
+      'identifying and sourcing media',
+      'planning visual timing',
+      'checking accessibility and permissions',
+    ],
+  },
+  {
+    title: 'I am working with a CTL designer',
+    body: 'You do not need to create finished visuals on your own. Instead, provide the content and context your designer needs to develop the visuals with you. Helpful materials may include:',
+    items: [
+      'a final or near-final script',
+      'visual notes',
+      'source files',
+      'figures, data, diagrams, or images',
+      'notes about what learners should notice',
+    ],
+  },
+];
+
+const sayingSeeing = [
+  ['“There are three parts of this process…”', 'A simple diagram that builds as you explain'],
+  ['“Notice what happens here…”', 'An image, demonstration, annotation, or screen capture'],
+  ['“Sales increased most sharply in…”', 'The relevant portion of a graph highlighted'],
+  [
+    'A story, transition, or brief framing statement',
+    'The instructor on screen, with no additional visual needed',
+  ],
+];
+
+const slideTips = [
+  'Use one large image per slide rather than several small ones. Bigger images are easier to process and hold up on a phone.',
+  'Do not write complete sentences. Put keywords and phrases on the slide and speak the sentences.',
+  'Introduce one bullet at a time so learners look where you are looking.',
+  'Annotate images with arrows and labels to point at the specific feature you are discussing.',
+  'Make data visual. Show the trend rather than reading the numbers.',
+  'Close with a single summary slide — “in this video, we covered…”.',
+];
+
+const specs = [
+  ['Aspect ratio', '16:9 widescreen', 'Standard for video; anything else letterboxes or crops'],
+  ['Minimum text size', '20 pt', 'The smallest readable size on most phones; larger is better'],
+  [
+    'Bottom of the frame',
+    'Leave the lower quarter clear',
+    'Captions render here and will cover anything you put there',
+  ],
+  ['Right of the frame', 'Leave the right quarter clear', 'Reserved for animation and post-production'],
+  [
+    'If you will be on screen',
+    'Leave a third of the slide free',
+    'Gives the producer somewhere to place you that is not over your content',
+  ],
+  ['Transitions', 'Simple fades, or none', 'Complex transitions read as distraction, not polish'],
+];
+
+const contrastTips = [
+  'Check text against its background with a contrast checker before you build the whole deck.',
+  'Dark image, light text. Light background, dark text. Reduce an image’s opacity if text has to sit on top of it.',
+  'Never let color be the only thing carrying meaning — pair it with a label, a shape, or a position.',
+  'Keep one consistent template across the Course so learners are not relearning your layout each video.',
+];
+
+const attributionTips = [
+  'Attribute non-original images beneath the image in smaller but still readable type, or on a credits slide at the end.',
+  'An attribution names the creator, the title of the work if it has one, and where you found it.',
+  'Confirm that any permission you obtain covers distribution through a public, global Course.',
+  'When you are unsure whether something can be included, send it to your CTL team before production rather than after.',
+];
+
+const readiness = [
+  { label: 'Purpose', body: 'I can state what learners should gain from this video.' },
+  {
+    label: 'Script',
+    body: 'My script is focused, conversational, and comfortable to say aloud. I have worked with CTL on refinement as needed.',
+  },
+  {
+    label: 'Visuals',
+    body: 'My visuals are complete, or my designer has the source materials and context needed to develop them.',
+  },
+  {
+    label: 'Media',
+    body: 'Images, figures, clips, music, and other third-party materials have been identified for review and clearance.',
+  },
+  {
+    label: 'Production',
+    body: 'I know how and where the video will be recorded, and I understand what my project team needs from me.',
+  },
+  {
+    label: 'Rehearsal',
+    body: 'I have read the full video aloud, with visuals where possible, and checked the timing.',
+  },
+];
+---
+
+<PageLayout
+  title="Video"
+  description="Full guidance for designing an instructional video: purpose, script, visuals, and recording."
+  level="assets"
+  breadcrumb="Video"
+  backToAssets
+>
+  <div class="levelpage" data-level="assets">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow">Video</p>
+        <h1 class="hero__title">Designing an Instructional Video</h1>
+        <p class="hero__lead">
+          Video can be especially useful when learners benefit from hearing an explanation, seeing a
+          process demonstrated, or observing expert reasoning.
+        </p>
+        <p class="hero__lead">
+          Once you and your Learning Experience Designer decide that video is a good fit, you’ll work
+          together to plan the message, script, visuals, and production approach. The details will
+          vary by project, so your Project Manager or Learning Experience Designer can help clarify
+          the workflow and level of support available to you.
+        </p>
+      </div>
+
+      <div class="hero__rail">
+        <p class="hero__rail-title">How you and CTL will work together</p>
+        <p class="hero__rail-body">
+          You bring the subject-matter expertise and help shape the learning message. Depending on
+          your project, your CTL team may support you with script refinement, visual planning,
+          recording preparation, production, or editing.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step jump rail -->
+    <nav class="steprail steprail--5" aria-label="Steps on this page">
+      {
+        steps.map((s) => (
+          <a class="steprail__link" href={`#${s.id}`}>
+            <span class="steprail__n">{s.n}</span>
+            <span class="steprail__label">{s.label}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Roles table -->
+    <section class="section section--open">
+      <div class="dtable dtable--roles" data-keep>
+        <div class="dtable__head dtable__head--gold">
+          {roles.head.map((h) => <div class="dtable__cell">{h}</div>)}
+        </div>
+        {
+          roles.rows.map((r) => (
+            <div class="dtable__row">
+              <div class="dtable__cell dtable__cell--key">{r[0]}</div>
+              <div class="dtable__cell">{r[1]}</div>
+              <div class="dtable__cell">{r[2]}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="ask" data-keep>
+        <p class="ask__title">Not sure what applies to your project?</p>
+        <p class="ask__body">
+          Your CTL Project Manager or Learning Experience Designer can help you understand the
+          workflow and next steps.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 1 -->
+    <section class="step" id="step1">
+      <div class="step__head">
+        <span class="step__badge">1</span>
+        <span class="step__count">Step 1 of 5</span>
+      </div>
+      <h2 class="step__title">Define the video’s purpose</h2>
+
+      <div class="start" data-keep>
+        <p class="start__eyebrow">Where to start?</p>
+        <p class="start__q">
+          What should learners be able to do, understand, notice, or think differently after
+          watching?
+        </p>
+      </div>
+
+      <p class="step__p">
+        A focused purpose can help you decide what to include, what to leave out, and which visuals
+        or examples will be most useful.
+      </p>
+
+      <p class="eyebrow sub-eyebrow">Common video purposes</p>
+      <div class="dtable dtable--purposes" data-keep>
+        <div class="dtable__head dtable__head--gold">
+          <div class="dtable__cell">Video purpose</div>
+          <div class="dtable__cell">What it can do</div>
+          <div class="dtable__cell">Typical length</div>
+        </div>
+        {
+          purposes.map((p) => (
+            <div class="dtable__row">
+              <div class="dtable__cell dtable__cell--key">{p.purpose}</div>
+              <div class="dtable__cell">{p.can}</div>
+              <div class="dtable__cell">{p.length}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="step__p">
+        These lengths are planning guides, not strict requirements. If a topic becomes difficult to
+        follow at the intended length, it may be worth dividing it into two shorter videos.
+      </p>
+    </section>
+
+    <!-- Step 2 -->
+    <section class="step" id="step2">
+      <div class="step__head">
+        <span class="step__badge">2</span>
+        <span class="step__count">Step 2 of 5</span>
+      </div>
+      <h2 class="step__title">Draft the script</h2>
+      <p class="step__p">
+        A script can help you focus the message, plan the visuals, rehearse before recording, and
+        identify material that may not be essential.
+      </p>
+      <p class="step__p step__p--gap">
+        You will draft the script, and your CTL team can help refine it for clarity, pacing, visuals,
+        and recording readiness.
+      </p>
+
+      <h3 class="h3">Before you write</h3>
+      <div class="qa" data-keep>
+        {
+          beforeWriting.map((b) => (
+            <div class="qa__row">
+              <p class="qa__q">{b.q}</p>
+              <p class="qa__a">{b.a}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <h3 class="h3">A simple structure</h3>
+      <div class="flow" data-keep>
+        {
+          structure.map((s, i) => (
+            <>
+              {i > 0 && (
+                <div class="flow__arrow" aria-hidden="true">
+                  →
+                </div>
+              )}
+              <div class="flow__item">
+                <p class="flow__label">{s.label}</p>
+                <p class="flow__lead">{s.lead}</p>
+                <p class="flow__body">{s.body}</p>
+              </div>
+            </>
+          ))
+        }
+      </div>
+
+      <h3 class="h3">Write for speaking</h3>
+      <ul class="glist">
+        {speakingTips.map((t) => <li>{t}</li>)}
+      </ul>
+
+      <div class="note-gold note-gold--gap" data-keep>
+        <p class="note-gold__head">If scriptwriting feels unfamiliar</p>
+        <p class="note-gold__text note-gold__text--only">
+          You might begin by explaining the concept aloud as if you were speaking to a learner. You
+          can then transcribe that explanation and shape it into a focused script. This can be a
+          comfortable way to preserve your natural voice while adding structure.
+        </p>
+      </div>
+
+      <h3 class="h3">Plan the length</h3>
+      <p class="step__p step__p--tight">
+        As a general planning guide, finished instructional videos often use approximately 135–150
+        spoken words per minute.
+      </p>
+
+      <div class="counts" data-keep>
+        {
+          wordCounts.map((w) => (
+            <div class="counts__cell">
+              <p class="counts__time">{w.time}</p>
+              <p class="counts__words">{w.words}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="step__p step__p--gap">
+        If a draft runs well beyond its target, consider whether the idea might be clearer as two
+        shorter videos rather than a faster read.
+      </p>
+
+      <h3 class="h3">Script templates</h3>
+      <p class="step__p step__p--tight">
+        Two templates are available, depending on how much scaffolding you want while you write.
+      </p>
+
+      <div class="cards2">
+        <div class="tcard">
+          <p class="tcard__title">Guided template</p>
+          <p class="tcard__body">
+            Framing and support throughout — prompts for purpose, structure, visual notes, and pacing
+            as you draft.
+          </p>
+          <a class="btn-outline" href="#" data-template-link>Make a copy ↗</a>
+        </div>
+        <div class="tcard">
+          <p class="tcard__title">Simple template</p>
+          <p class="tcard__body">
+            Just the script — a clean layout for narration and visual notes, with no prompts.
+          </p>
+          <a class="btn-outline" href="#" data-template-link>Make a copy ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Worked examples -->
+    <section class="section section--open">
+      {
+        examples.map((ex) => (
+          <div class="vexample" data-keep>
+            <p class="eyebrow vexample__eyebrow">Example</p>
+            <h3 class="vexample__title">{ex.title}</h3>
+            <p class="vexample__source">{ex.source}</p>
+            <p class="vexample__intro">{ex.intro}</p>
+
+            <div class="statrow">
+              {
+                ex.stats.map((s) => (
+                  <div class="statrow__cell">
+                    <p class="statrow__label">{s.label}</p>
+                    <p class="statrow__value">{s.value}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="beats">
+              {
+                ex.beats.map((b) => (
+                  <div class="beats__row">
+                    <div>
+                      <p class="beats__label">{b.label}</p>
+                      {b.quotes.map((q) => <p class="beats__quote">{q}</p>)}
+                    </div>
+                    <p class="beats__note">{b.note}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="vexample__links">
+              <a class="ext ext--gold" href="#">View full script ↗</a>
+              <a class="ext ext--gold" href="#">Watch on Warpwire ↗</a>
+            </div>
+
+            <div class="notice">
+              <p class="notice__eyebrow">What to notice</p>
+              <p class="notice__body">{ex.notice}</p>
+            </div>
+          </div>
+        ))
+      }
+
+      <p class="step__p step__p--muted">
+        Both examples sit between 135 and 150 spoken words per minute, which is where the planning
+        figures in the table above come from.
+      </p>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step" id="step3">
+      <div class="step__head">
+        <span class="step__badge">3</span>
+        <span class="step__count">Step 3 of 5</span>
+      </div>
+      <h2 class="step__title">Plan the visuals</h2>
+      <p class="step__p step__p--gap">
+        Visuals can help learners focus attention, understand relationships, follow a process, or see
+        an example. Not every sentence needs a slide.
+      </p>
+
+      <h3 class="h3">How will your visuals be created?</h3>
+      <p class="step__p step__p--tight">
+        The level of visual-design support will depend on your project scope. Depending on your
+        project, you may create your own visuals or work with a CTL Learning Experience Designer.
+      </p>
+
+      <div class="cards2 cards2--gap">
+        {
+          visualPaths.map((v) => (
+            <div class="tcard" data-keep>
+              <p class="tcard__title tcard__title--sm">{v.title}</p>
+              <p class="tcard__body">{v.body}</p>
+              <ul class="tcard__list">
+                {v.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <h3 class="h3">Decide what learners need to see</h3>
+      <p class="step__p step__p--tight">
+        As you work through the script, consider what learners need to see at each moment. Visuals
+        can clarify an idea, focus attention, demonstrate a process, or direct learners to something
+        important. They do not need to fill the screen at all times.
+      </p>
+
+      <div class="start" data-keep>
+        <p class="start__eyebrow">Where to start?</p>
+        <p class="start__q">What does a learner need to see at this moment?</p>
+      </div>
+
+      <div class="dtable dtable--saying" data-keep>
+        <div class="dtable__head dtable__head--gold">
+          <div class="dtable__cell">If you are saying…</div>
+          <div class="dtable__cell">Learners might benefit from seeing…</div>
+        </div>
+        {
+          sayingSeeing.map((r) => (
+            <div class="dtable__row">
+              <div class="dtable__cell dtable__cell--quote">{r[0]}</div>
+              <div class="dtable__cell">{r[1]}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <h3 class="h3">Build image-centric slides</h3>
+      <ul class="glist">
+        {slideTips.map((t) => <li>{t}</li>)}
+      </ul>
+
+      <figure class="figph" data-keep>
+        <div class="figph__box">
+          <p class="figph__label">Image placeholder — dense slide rebuilt as three</p>
+        </div>
+        <figcaption class="figph__caption">
+          One dense slide, rebuilt as three. Each new slide carries one label on one large image.
+        </figcaption>
+      </figure>
+
+      <h3 class="h3">The specifications</h3>
+      <div class="dtable dtable--specs" data-keep>
+        <div class="dtable__head dtable__head--gold">
+          <div class="dtable__cell">Setting</div>
+          <div class="dtable__cell">Requirement</div>
+          <div class="dtable__cell">Why</div>
+        </div>
+        {
+          specs.map((r) => (
+            <div class="dtable__row">
+              <div class="dtable__cell dtable__cell--key">{r[0]}</div>
+              <div class="dtable__cell">{r[1]}</div>
+              <div class="dtable__cell">{r[2]}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <figure class="figph" data-keep>
+        <div class="figph__box">
+          <p class="figph__label">Image placeholder — caption and animation safe zones</p>
+        </div>
+        <figcaption class="figph__caption">
+          The zones the table describes. Captions land in the band across the bottom.
+        </figcaption>
+      </figure>
+
+      <h3 class="h3">Color and contrast</h3>
+      <ul class="glist">
+        {contrastTips.map((t) => <li>{t}</li>)}
+      </ul>
+
+      <h3 class="h3">Attribution and clearance</h3>
+      <p class="step__p step__p--tight">
+        Coursera Courses are public and commercial, so everything on screen needs to be yours,
+        licensed, in the public domain, or cleared. That includes images, figures, charts, data,
+        music, and footage.
+      </p>
+
+      <div class="note-gold" data-keep>
+        <ul class="glist glist--inpanel">
+          {attributionTips.map((t) => <li>{t}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Step 4 -->
+    <section class="step" id="step4">
+      <div class="step__head">
+        <span class="step__badge">4</span>
+        <span class="step__count">Step 4 of 5</span>
+      </div>
+      <h2 class="step__title">Plan the recording</h2>
+      <p class="step__p step__p--gap">
+        Your recording pathway will depend on your project scope and the type of video you are
+        creating. Before scheduling a recording, check with your CTL Project Manager or Learning
+        Experience Designer so you can confirm the approach that best fits your project.
+      </p>
+
+      <h3 class="h3">Three recording options</h3>
+      <div class="dtable dtable--pathways" data-keep>
+        <div class="dtable__head dtable__head--gold">
+          <div class="dtable__cell">Pathway</div>
+          <div class="dtable__cell">May be a good fit when…</div>
+          <div class="dtable__cell">What to expect</div>
+        </div>
+        <div class="dtable__row">
+          <div class="dtable__cell dtable__cell--key">Self-record at home</div>
+          <div class="dtable__cell">
+            You are responsible for recording your own footage and the project uses a straightforward
+            setup.
+          </div>
+          <div class="dtable__cell">
+            Set up your recording environment, record and re-record as needed, and provide the files
+            according to the project workflow.
+          </div>
+        </div>
+        <div class="dtable__row">
+          <div class="dtable__cell dtable__cell--key">Bryan Center Studios</div>
+          <div class="dtable__cell">
+            You would like access to Duke studio space and equipment through a <a
+              class="ext ext--gold"
+              href="#">self-service process ↗</a
+            >.
+          </div>
+          <div class="dtable__cell">Reserve studio time and operate the available equipment yourself.</div>
+        </div>
+        <div class="dtable__row">
+          <div class="dtable__cell dtable__cell--key">Work with a CTL Media Producer</div>
+          <div class="dtable__cell">
+            The project involves studio or on-location production, specialized formats, or more
+            involved production planning.
+          </div>
+          <div class="dtable__cell">
+            A Media Producer will plan the shoot with you, support the technical production, and
+            complete the edit. Advance scheduling is helpful.
+          </div>
+        </div>
+      </div>
+
+      <div class="note-gold note-gold--gap" data-keep>
+        <p class="note-gold__head">Plan ahead for on-location recording</p>
+        <p class="note-gold__text note-gold__text--only">
+          On-location recording can be a good choice when the setting adds important context. These
+          recordings benefit from advance planning with your Media Producer so that location,
+          permissions, travel, sound, lighting, and other production details can be considered.
+        </p>
+      </div>
+
+      <h3 class="h3">A common production starting point</h3>
+      <p class="step__p">
+        For many teaching videos, a studio recording with a green screen and teleprompter can provide
+        a polished starting point while allowing visuals to be composed around the instructor.
+      </p>
+      <p class="step__p step__p--gap">
+        Other approaches may be useful when they support the learning, including interviews,
+        discussion panels, Lightboard, demonstrations, animation, or on-location recording. Your
+        Learning Experience Designer and Media Producer can help you consider which approach fits
+        your video and project scope. <a class="ext ext--gold" href="#"
+          >This video examples gallery ↗</a
+        > shows each of these as a finished Duke course video, with notes on what each one took to
+        produce.
+      </p>
+
+      <div class="ask" data-keep>
+        <p class="ask__title">Not sure which path applies?</p>
+        <p class="ask__body">
+          Before scheduling a studio or on-location recording, check with your CTL Project Manager or
+          Learning Experience Designer. They can help you understand which recording pathway and next
+          steps fit your project.
+        </p>
+      </div>
+    </section>
+
+    <!-- Step 5 -->
+    <section class="step step--last" id="step5">
+      <div class="step__head">
+        <span class="step__badge">5</span>
+        <span class="step__count">Step 5 of 5</span>
+      </div>
+      <h2 class="step__title">Ready for recording</h2>
+      <p class="step__p step__p--tight">
+        Before recording, review the learning message, script, visuals, media, and recording plan.
+        The following check can help you and your project team identify anything that may still need
+        attention.
+      </p>
+
+      <p class="eyebrow sub-eyebrow">Ready to move forward?</p>
+      <div class="ready">
+        {
+          readiness.map((r) => (
+            <div class="ready__row" data-keep>
+              <span class="ready__box" aria-hidden="true" />
+              <p class="ready__label">{r.label}</p>
+              <p class="ready__body">{r.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="note-gold" data-keep>
+        <p class="note-gold__head">Ready?</p>
+        <p class="note-gold__text note-gold__text--only">
+          Rehearse the full video aloud, from beginning to end, and check the timing. Listen for
+          awkward phrasing, unnecessary repetition, visual timing issues, and places where learners
+          may benefit from additional context.
+        </p>
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .steprail--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .steprail__n {
+    color: var(--level-assets-dark);
+  }
+
+  .steprail__label {
+    line-height: 1.35;
+  }
+
+  .section--open {
+    padding: 56px var(--section-pad-x) 0;
+  }
+
+  .step--last {
+    padding-bottom: 8px;
+  }
+
+  .step__badge {
+    background: var(--level-assets-dark);
+  }
+
+  .step__p {
+    margin: 0 0 18px;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-section);
+  }
+
+  .step__p--gap {
+    margin-bottom: 36px;
+  }
+
+  .step__p--tight {
+    margin-bottom: 22px;
+  }
+
+  .step__p--muted {
+    margin: 0;
+    color: var(--text-subtle);
+  }
+
+  .h3 {
+    margin: 0 0 18px;
+    font-size: 26px;
+  }
+
+  .sub-eyebrow {
+    margin: 0 0 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+  }
+
+  /* --- Hero rail (a panel here, not a stats list) -------------------------- */
+  .hero__rail-title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--navy);
+  }
+
+  .hero__rail-body {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Data tables --------------------------------------------------------- */
+  .dtable {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    background: var(--bg-card);
+    margin: 0 0 20px;
+  }
+
+  .dtable__head,
+  .dtable__row {
+    display: grid;
+  }
+
+  .dtable__head--gold {
+    background: var(--level-assets-tint);
+    border-bottom: 1px solid var(--level-assets-tint-border);
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .dtable__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .dtable__row:last-child {
+    border-bottom: 0;
+  }
+
+  .dtable__cell {
+    padding: 15px 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+    max-width: var(--measure-body);
+  }
+
+  .dtable__head .dtable__cell {
+    padding: 13px 20px;
+    border-left-color: var(--level-assets-tint-border);
+  }
+
+  .dtable__cell:first-child {
+    border-left: 0;
+  }
+
+  .dtable__cell--key {
+    color: var(--text-strong);
+    font-weight: 600;
+  }
+
+  .dtable__cell--quote {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--text-strong);
+  }
+
+  .dtable--roles .dtable__head,
+  .dtable--roles .dtable__row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .dtable--purposes .dtable__head,
+  .dtable--purposes .dtable__row {
+    grid-template-columns: 200px 1fr 140px;
+  }
+
+  .dtable--saying .dtable__head,
+  .dtable--saying .dtable__row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dtable--specs .dtable__head,
+  .dtable--specs .dtable__row {
+    grid-template-columns: 190px 230px 1fr;
+  }
+
+  .dtable--pathways .dtable__head,
+  .dtable--pathways .dtable__row {
+    grid-template-columns: 210px 1fr 1fr;
+  }
+
+  /* --- Blue "ask your team" panel ------------------------------------------ */
+  .ask {
+    background: var(--level-specialization-tint);
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+    margin: 20px 0 0;
+  }
+
+  .ask__title {
+    margin: 0 0 6px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+
+  .ask__body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- "Where to start?" prompt -------------------------------------------- */
+  .start {
+    background: var(--level-specialization-tint);
+    border-left: 3px solid var(--blue);
+    padding: 20px 24px;
+    margin: 0 0 26px;
+  }
+
+  .start__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 700;
+    max-width: var(--measure-body);
+  }
+
+  .start__q {
+    margin: 0;
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Question / answer rows ---------------------------------------------- */
+  .qa {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 36px;
+  }
+
+  .qa__row {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .qa__q {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .qa__a {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Open → Develop → Connect flow --------------------------------------- */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr 30px 1fr 30px 1fr;
+    align-items: stretch;
+    margin: 0 0 36px;
+  }
+
+  .flow__item {
+    border-top: 3px solid var(--level-assets);
+    padding: 18px 20px 0 0;
+  }
+
+  .flow__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--level-assets-dark);
+    padding-top: 18px;
+  }
+
+  .flow__label {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--navy);
+  }
+
+  .flow__lead {
+    margin: 0 0 8px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text-strong);
+  }
+
+  .flow__body {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* --- Gold hanging-bullet list -------------------------------------------- */
+  .glist {
+    margin: 0 0 30px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .glist li {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-body);
+    padding-left: 16px;
+    position: relative;
+    max-width: var(--measure-section);
+  }
+
+  .glist li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--level-assets-dark);
+  }
+
+  .glist--inpanel {
+    margin: 0;
+  }
+
+  .glist--inpanel li {
+    max-width: var(--measure-body);
+    color: var(--gold-body);
+  }
+
+  /* --- Gold notes ----------------------------------------------------------- */
+  .note-gold {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 24px 28px;
+  }
+
+  .note-gold--gap {
+    margin: 0 0 36px;
+  }
+
+  .note-gold__head {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--level-assets-dark);
+  }
+
+  .note-gold__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Word-count grid ------------------------------------------------------ */
+  .counts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 0 0 18px;
+  }
+
+  .counts__cell {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 18px 20px;
+  }
+
+  .counts__time {
+    margin: 0 0 4px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .counts__words {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--navy);
+  }
+
+  /* --- Two-up cards --------------------------------------------------------- */
+  .cards2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cards2--gap {
+    margin: 0 0 36px;
+  }
+
+  .tcard {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    padding: 24px 26px;
+  }
+
+  .tcard__title {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--navy);
+  }
+
+  .tcard__title--sm {
+    margin-bottom: 10px;
+    font-size: 23px;
+  }
+
+  .tcard__body {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .tcard__list {
+    margin: 0;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .tcard__list li {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: var(--bg-card);
+    border: 1px solid var(--rule-strong);
+    color: var(--text-strong);
+    font-size: 14.5px;
+    font-weight: 700;
+    padding: 10px 19px;
+    border-radius: var(--radius-panel);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--level-assets-dark);
+    color: var(--level-assets-dark);
+  }
+
+  /* --- Worked video examples ----------------------------------------------- */
+  .vexample {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    background: #fdfcfa;
+    padding: 32px 34px;
+    margin: 0 0 24px;
+  }
+
+  .vexample__eyebrow {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.18em;
+    color: var(--level-assets-dark);
+  }
+
+  .vexample__title {
+    margin: 0 0 8px;
+    font-size: 27px;
+  }
+
+  .vexample__source {
+    margin: 0 0 6px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--text-subtle);
+  }
+
+  .vexample__intro {
+    margin: 0 0 22px;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  /* 1px gaps over the tint border fake hairlines between the stat cells. */
+  .statrow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--level-assets-tint-border);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    margin: 0 0 24px;
+  }
+
+  .statrow__cell {
+    background: var(--bg-card);
+    padding: 14px 18px;
+  }
+
+  .statrow__label {
+    margin: 0 0 3px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+    font-weight: 700;
+  }
+
+  .statrow__value {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .beats {
+    border-top: 1px solid var(--rule);
+  }
+
+  .beats__row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .beats__label {
+    margin: 0 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .beats__quote {
+    margin: 0 0 12px;
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--text-strong);
+    max-width: var(--measure-body);
+  }
+
+  .beats__quote:last-child {
+    margin-bottom: 0;
+  }
+
+  .beats__note {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: var(--measure-body);
+  }
+
+  .vexample__links {
+    display: flex;
+    gap: 24px;
+    padding: 18px 0 0;
+  }
+
+  .ext--gold {
+    color: var(--level-assets-dark);
+    font-size: 14.5px;
+  }
+
+  .ext--gold:hover {
+    color: var(--level-assets-dark);
+  }
+
+  .notice {
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 20px 24px;
+    margin: 22px 0 0;
+  }
+
+  .notice__eyebrow {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
+  }
+
+  .notice__body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gold-body);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Figure placeholders -------------------------------------------------- */
+  .figph {
+    margin: 0 0 30px;
+  }
+
+  .figph__box {
+    border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-panel);
+    background: var(--panel-warm);
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .figph__label {
+    margin: 0;
+    font-size: 13.5px;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+  }
+
+  .figph__caption {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-subtle);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Readiness checklist -------------------------------------------------- */
+  .ready {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin: 0 0 30px;
+  }
+
+  .ready__row {
+    display: grid;
+    grid-template-columns: 34px 150px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ready__box {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    border-radius: var(--radius-panel);
+    border: 2px solid var(--level-assets);
+    display: block;
+  }
+
+  .ready__label {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .ready__body {
+    margin: 0;
+    font-size: 16.5px;
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+</style>
