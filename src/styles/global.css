@@ -894,10 +894,12 @@ img {
    Structure is prescribed by that document. Do not restyle without
    checking it against the live template. */
 
+/* No overflow clipping here: the best-practice popovers hang out of this
+   box, and hiding overflow cut off the ones on the lower fields. The
+   header bar and footer round their own outer corners instead. */
 .tmpl {
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-panel);
-  overflow: hidden;
 }
 
 .tmpl__bar {
@@ -907,6 +909,7 @@ img {
   gap: 24px;
   padding: 16px 26px;
   background: var(--accent);
+  border-radius: var(--radius-panel) var(--radius-panel) 0 0;
 }
 
 .tmpl__bar-title {
@@ -1005,6 +1008,7 @@ img {
   padding: 24px 26px;
   background: var(--panel-warm);
   border-top: 1px solid var(--rule);
+  border-radius: 0 0 var(--radius-panel) var(--radius-panel);
 }
 
 /* --- Grid tables (1px gaps over the divider color fake hairlines) ------- */
