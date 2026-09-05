@@ -1,5 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import WorkedExample from '../components/WorkedExample.astro';
+import BestPractice from '../components/BestPractice.astro';
 
 const stats = [
   { figure: '3–6 courses', label: 'the whole program' },
@@ -65,6 +67,12 @@ const skills = [
   'Data Storytelling',
   'Evidence-Based Decision-Making',
 ];
+
+const objectives = [
+  'Frame a business question that can be investigated with data.',
+  'Analyze and visualize relevant data to identify meaningful findings.',
+  'Communicate an evidence-informed recommendation to a business audience.',
+];
 ---
 
 <PageLayout
@@ -79,14 +87,14 @@ const skills = [
         <p class="eyebrow hero__eyebrow">Specialization</p>
         <h1 class="hero__title">Designing a Coursera Specialization</h1>
         <p class="hero__lead">
-          When exploring Coursera Specializations, learners are often trying to understand three
-          things: <em>Is this for me? What will I be able to do? And how will this learning support
-          my goals?</em>
+          When exploring a Specialization, learners are often asking: Is this for me? What will I be
+          able to do? And how will this learning support my goals?
         </p>
         <p class="hero__lead">
-          Let these questions guide your design. Start by identifying the learners you hope to
-          reach, the goals they are working toward, and the skills or knowledge they should develop
-          by the end of the Specialization.
+          Use these questions to guide the design. Identify your audience, the goals they are working
+          toward, and what they should know and be able to do by the end of the Specialization. Then
+          shape the sequence of Courses to create a clear path and show how each Course contributes to
+          learners’ progress.
         </p>
       </div>
 
@@ -151,9 +159,7 @@ const skills = [
         }
       </div>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Defining the goal for Data Analytics for Business Decisions</h3>
+      <WorkedExample id="wx-goal" lead="Defining the goal for" name="Data Analytics for Business Decisions">
         <p class="example__p">
           Suppose you are designing a Specialization on <em>Data Analytics for Business Decisions</em
           >. It may be tempting to begin with a list of topics or tools to cover. Instead, begin with
@@ -181,7 +187,7 @@ const skills = [
           recognizable need, and provides a practical boundary for deciding what belongs in the
           Specialization.
         </p>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 2 -->
@@ -216,9 +222,11 @@ const skills = [
         </div>
       </div>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Shaping the journey for Data Analytics for Business Decisions</h3>
+      <WorkedExample
+        id="wx-journey"
+        lead="Shaping the journey for"
+        name="Data Analytics for Business Decisions"
+      >
         <p class="example__p">
           Once the overall goal is clear, consider what learners need to accomplish at each stage of
           the journey.
@@ -257,7 +265,7 @@ const skills = [
           <span class="arc__arrow" aria-hidden="true">→</span>
           <span class="arc__step">Recommend and communicate</span>
         </div>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 3: template -->
@@ -268,7 +276,10 @@ const skills = [
       </div>
       <h2 class="step__title">Complete your Specialization plan</h2>
       <p class="step__q">
-        Use this page to work through the decisions, then record them in the Design Document.
+        Use this page to work through the course-design decisions, then record them in the Design
+        Document. The sample below shows how those decisions might come together for the example
+        <strong>Specialization: <span class="nostyle">Data Analytics for Business Decisions</span></strong
+        >. Use it as a reference as you develop your own plan.
       </p>
 
       <div class="tmpl">
@@ -287,68 +298,157 @@ const skills = [
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Specialization title</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Specialization title</p>
+            <BestPractice title="Specialization title">
+              <p>
+                Write for the learner deciding whether to click. A strong title makes the <strong
+                  >topic and value of the Specialization immediately clear</strong
+                >. Favor specific, familiar language over academic or internally meaningful
+                terminology.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value"><p>Data Analytics for Business Decisions</p></div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">About this Specialization</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">About this Specialization</p>
+            <BestPractice title="About this Specialization">
+              <p>
+                Lead with what learners will <strong>gain or be able to do</strong>, rather than with
+                a list of topics. Help learners quickly understand who the Specialization is for,
+                what they will experience, and why it is worth their time.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
-              Learn to use data to answer business questions and make evidence-informed
-              recommendations. Across three courses, you'll practice working with real-world
-              datasets, identify patterns and trends, create clear visualizations, and communicate
-              insights to support better decisions.
+              Designed for professionals, students, and career changers who want to use data more
+              effectively in business settings, this beginner-level Specialization introduces the
+              process of turning business needs into focused questions, analyzing relevant data, and
+              communicating evidence-informed recommendations. Across three courses, learners will
+              frame business questions, identify and prepare data, analyze and visualize findings,
+              and develop recommendations for a business audience. Learners will build skills in
+              business problem framing, data requirements analysis, data cleaning, spreadsheet
+              analysis, exploratory data analysis, data visualization, and data storytelling.
+              Assessments include quizzes, guided practice, applied assignments, and a culminating
+              project using a realistic business scenario and dataset.
+            </p>
+            <p>
+              The series is designed for learners who may work with data or make data-informed
+              decisions but do not have formal training in analytics. It offers a practical,
+              end-to-end learning experience focused on the kinds of tasks professionals commonly
+              encounter at work. Learners will leave with a portfolio-ready project, a foundation for
+              further study, and a shareable Coursera certificate.
+            </p>
+            <p>
+              Led by Jordan Lee, a faculty member specializing in business analytics and
+              evidence-informed decision-making, the Specialization emphasizes the connection between
+              business context, analytical methods, and clear communication. This is an increasingly
+              important capability as organizations rely on data to guide decisions.
             </p>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Projects overview</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Projects overview</p>
+            <BestPractice title="Projects overview">
+              <p>
+                Describe what learners will <strong>make, analyze, evaluate, or solve</strong>.
+                Projects should reflect realistic situations learners may encounter beyond the course
+                — not simply serve as longer versions of quizzes.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
-              Learners analyze business data to investigate a practical question, identify meaningful
-              trends, create visualizations, and recommend an action. Projects are built around
-              common workplace tasks such as evaluating customer behavior, monitoring performance, or
-              identifying opportunities for improvement.
+              In the culminating project, learners investigate an authentic business question using a
+              realistic dataset, prepare and analyze the data, create visualizations to communicate
+              key findings, and develop an evidence-informed recommendation for a business audience.
+              The project brings together common workplace tasks such as evaluating customer
+              behavior, monitoring performance, or identifying opportunities for improvement.
             </p>
           </div>
         </div>
 
         <div class="tmpl__row">
           <div class="tmpl__field">
-            <p class="tmpl__label">Who this is for</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Who this is for</p>
+              <BestPractice title="Who this is for">
+                <p>
+                  Describe learners in terms they are likely to recognize: their <strong
+                    >role, goals, or reasons for learning</strong
+                  >. Be specific enough to help the right learners identify themselves, while
+                  avoiding requirements that unnecessarily exclude interested learners.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value">
               <p>
-                Professionals who use data, or make decisions informed by data, but may not have
-                formal training in analytics
+                Professionals who work with data or make decisions informed by data but may not have
+                formal training in analytics; students and career changers seeking a practical
+                introduction to business analytics; and managers or team members who want to
+                communicate more effectively with data professionals.
               </p>
             </div>
           </div>
           <div class="tmpl__field">
-            <p class="tmpl__label">Recommended background</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Recommended background</p>
+              <BestPractice title="Recommended background" align="right">
+                <p>
+                  Include only the knowledge or experience learners <strong
+                    >actually need to succeed</strong
+                  >. Distinguish essential preparation from helpful context so that ideal
+                  qualifications do not become unnecessary barriers to enrollment.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value">
               <p>
                 No prior experience in data analytics or programming. Familiarity with basic
-                workplace math is helpful
+                workplace math is helpful.
               </p>
             </div>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">What will you learn</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">What will you learn</p>
+            <BestPractice title="What will you learn">
+              <p>
+                Describe <strong>observable capabilities</strong>, not topics learners will encounter
+                or ideas they will “understand.” Begin with an action verb such as <strong
+                  >evaluate, apply, analyze, design,</strong
+                > or <strong>recommend</strong>, and make sure the objectives represent the <strong
+                  >full Specialization</strong
+                >, not just one course.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <ol>
-              <li>Frame a business question that can be investigated with data.</li>
-              <li>Analyze and visualize relevant data to identify meaningful findings.</li>
-              <li>Communicate an evidence-informed recommendation to a business audience.</li>
+              {objectives.map((o) => <li>{o}</li>)}
             </ol>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Skills learners will gain</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Skills learners will gain</p>
+            <BestPractice title="Skills learners will gain">
+              <p>
+                Name <strong>specific, recognizable skills learners can demonstrate</strong>, rather
+                than broad subject areas. Choose terms learners might use to describe their
+                capabilities on a résumé, on LinkedIn, or in a conversation with an employer.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__chips">
             {skills.map((s) => <span class="tmpl__chip">{s}</span>)}
           </div>
@@ -356,47 +456,122 @@ const skills = [
 
         <div class="tmpl__row">
           <div class="tmpl__field">
-            <p class="tmpl__label">Estimated total learning time</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Estimated total learning time</p>
+              <BestPractice title="Estimated total learning time">
+                <p>
+                  Estimate the learner's <strong>total experience</strong>, not just the length of
+                  the instructional content. Include time for watching, reading, practicing,
+                  completing projects, and taking assessments. Account for the reality that Coursera
+                  learners often study in shorter sessions around other responsibilities.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Approximately 24 hours</p></div>
           </div>
           <div class="tmpl__field">
-            <p class="tmpl__label">Difficulty level</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Difficulty level</p>
+              <BestPractice title="Difficulty level" align="right">
+                <p>
+                  Choose the level based on the <strong
+                    >knowledge, skills, and independence required of the learner</strong
+                  >, not on the sophistication of the subject itself. A complex topic can still be
+                  appropriate for beginners when concepts are introduced from the ground up.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Beginner</p></div>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Tools, technology, or platforms</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Tools, technology, or platforms</p>
+            <BestPractice title="Tools, technology, or platforms">
+              <p>
+                Identify anything learners need to <strong
+                  >access or use to complete the learning experience</strong
+                >, including external tools, software, accounts, or platforms. Make requirements
+                visible early, and flag any paid licenses or institutional access requirements.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
               A web browser and spreadsheet software. All datasets and practice materials are
-              provided
+              provided.
             </p>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Courses in this Specialization</p>
-          <div class="gtable gtable--courses">
-            <div class="gtable__cell gtable__head">#</div>
-            <div class="gtable__cell gtable__head">Course title</div>
-            <div class="gtable__cell gtable__head">Main outcomes</div>
-            <div class="gtable__cell gtable__head">Est. time</div>
+          <p class="tmpl__label tmpl__label--solo">Courses in this Specialization</p>
+          <div class="ctable">
+            <div class="ctable__head">
+              <div class="ctable__cell">#</div>
+              <div class="ctable__cell">
+                <span class="ctable__label">Course title</span>
+                <BestPractice title="Course title" size="sm">
+                  <p>
+                    Give each course a <strong
+                      >distinct purpose within the larger learner journey</strong
+                    >. Learners should be able to see how their capabilities will develop from one
+                    course to the next.
+                  </p>
+                </BestPractice>
+              </div>
+              <div class="ctable__cell">
+                <span class="ctable__label">Main outcomes</span>
+                <BestPractice title="Main outcomes" size="sm">
+                  <p>
+                    Give each course an outcome that is <strong
+                      >meaningful on its own while contributing to the larger Specialization
+                      outcome</strong
+                    >. Organize courses around meaningful stages of the work learners will do, rather
+                    than dividing them simply by topic or amount of content.
+                  </p>
+                </BestPractice>
+              </div>
+              <div class="ctable__cell">
+                <span class="ctable__label">Est. time</span>
+                <BestPractice title="Est. time" size="sm" align="right">
+                  <p>
+                    Aim for a <strong
+                      >reasonable and relatively balanced learner experience across courses</strong
+                    >, while allowing the work itself to determine the exact length. Include all
+                    learning activities (i.e., video, readings, activities, and assessments) in this
+                    estimate.
+                  </p>
+                </BestPractice>
+              </div>
+            </div>
             {
               courses.map((c) => (
-                <>
-                  <div class="gtable__cell">{c.n}</div>
-                  <div class="gtable__cell">{c.title}</div>
-                  <div class="gtable__cell">{c.outcome}</div>
-                  <div class="gtable__cell">{c.hours}</div>
-                </>
+                <div class="ctable__row">
+                  <div class="ctable__cell">{c.n}</div>
+                  <div class="ctable__cell">{c.title}</div>
+                  <div class="ctable__cell">{c.outcome}</div>
+                  <div class="ctable__cell">{c.hours}</div>
+                </div>
               ))
             }
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Specialization project or culminating experience (optional)</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Specialization project or culminating experience (optional)</p>
+            <BestPractice title="Specialization project or culminating experience (optional)">
+              <p>
+                Use a culminating experience to help learners <strong
+                  >integrate skills from across the Specialization</strong
+                >, rather than simply repeat an assignment from the final course. Give learners a
+                realistic problem, decision, product, or scenario that requires them to draw on
+                multiple capabilities.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
               Learners investigate a business question using a provided dataset, clean and analyze
@@ -427,6 +602,11 @@ const skills = [
     margin-bottom: 36px;
   }
 
+  /* The Specialization name inside the bolded lead-in stays upright. */
+  .nostyle {
+    font-style: normal;
+  }
+
   /* --- "The goal" pull-out inside the worked example --------------------- */
   .goalbox {
     background: var(--tint);
@@ -437,7 +617,7 @@ const skills = [
 
   .goalbox__eyebrow {
     margin: 0 0 8px;
-    font-size: 11.5px;
+    font-size: var(--fs-1);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-weight: 700;
@@ -446,7 +626,7 @@ const skills = [
 
   .goalbox__body {
     margin: 0;
-    font-size: 17px;
+    font-size: var(--fs-3);
     line-height: 1.65;
     color: var(--text-strong);
     max-width: var(--measure-body);
@@ -465,23 +645,39 @@ const skills = [
     border: 1px solid var(--tint-border);
     border-radius: var(--radius-panel);
     padding: 10px 16px;
-    font-size: 15px;
+    font-size: var(--fs-2);
     font-weight: 600;
     color: var(--accent-dark);
   }
 
   .arc__arrow {
     color: var(--copper);
-    font-size: 18px;
+    font-size: var(--fs-4);
   }
 
   /* --- Template ---------------------------------------------------------- */
-  .gtable--courses {
-    grid-template-columns: 44px 1.5fr 2fr 88px;
+
+  /* The label and its ⓘ trigger share a row; the row is the popover's
+     positioning context, so it must not clip. */
+  .tmpl__labelrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 12px;
+  }
+
+  .tmpl__labelrow .tmpl__label {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .tmpl__label--solo {
+    margin: 0 0 12px;
   }
 
   .tmpl__link-row {
-    font-size: 15px;
+    font-size: var(--fs-2);
     color: var(--text-secondary);
   }
 
@@ -489,9 +685,71 @@ const skills = [
     color: var(--accent);
   }
 
+  .tmpl__bar-note {
+    color: #fff;
+  }
+
+  /* --- Courses table ----------------------------------------------------- */
+  .ctable {
+    border: 1px solid var(--rule-card);
+    border-radius: 2px;
+  }
+
+  .ctable__head,
+  .ctable__row {
+    display: grid;
+    grid-template-columns: 40px 1.3fr 1.5fr 110px;
+  }
+
+  .ctable__head {
+    background: var(--tint);
+    border-bottom: 1px solid var(--tint-border);
+    border-radius: 2px 2px 0 0;
+  }
+
+  .ctable__head .ctable__cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px;
+    font-size: var(--fs-1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    font-weight: 700;
+    border-left: 1px solid var(--tint-border);
+  }
+
+  .ctable__label {
+    white-space: nowrap;
+  }
+
+  .ctable__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ctable__row:last-child {
+    border-bottom: 0;
+  }
+
+  .ctable__row .ctable__cell {
+    padding: 14px 12px;
+    font-size: var(--fs-2);
+    line-height: 1.55;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+    max-width: var(--measure-body);
+  }
+
+  .ctable__cell:first-child {
+    border-left: 0;
+  }
+
   .btn--level {
     background: var(--accent);
     color: #fff;
+    font-size: var(--fs-2);
   }
 
   .btn--level:hover {

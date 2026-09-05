@@ -90,6 +90,28 @@
   --font-display: 'EB Garamond', Garamond, 'Times New Roman', serif;
   --font-body: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
+  /* Type scale — deliberately short. Earlier drafts used a dozen
+     near-identical sizes (11, 11.5, 12, 13.5, 14.5, 15.5, 16, 16.5, 17.5);
+     those were consolidated into these seven steps. Use a token, not a
+     literal, so the scale cannot drift back out.
+
+       fs-1  eyebrows, captions, small labels, table headers
+       fs-2  dense body — table cells, panel notes, helper text
+       fs-3  body copy and leads
+       fs-4  emphasized row titles, accordion labels
+       fs-5  display sub-headings, stat figures, pull quotes, footer names
+       fs-6  h3
+       fs-7  h2 (section)
+       fs-8  h1 */
+  --fs-1: 14px;
+  --fs-2: 15px;
+  --fs-3: 17px;
+  --fs-4: 19px;
+  --fs-5: 22px;
+  --fs-6: 26px;
+  --fs-7: 36px;
+  --fs-8: 50px;
+
   /* --- Measure — three fixed pixel values, no others.
      Container width and measure are separate rules: panels always span
      their column; line length is capped on the text *inside* them. */

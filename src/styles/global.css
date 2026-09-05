@@ -87,7 +87,8 @@ img {
 
 .nav__wordmark {
   font-family: var(--font-display);
-  font-size: 21px;
+  font-size: var(--fs-5);
+  white-space: nowrap;
   color: var(--navy);
   letter-spacing: 0.01em;
   text-decoration: none;
@@ -96,7 +97,7 @@ img {
 .nav__items {
   display: flex;
   gap: 28px;
-  font-size: 13.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.02em;
 }
 
@@ -133,7 +134,7 @@ img {
 }
 
 .breadcrumb a {
-  font-size: 13px;
+  font-size: var(--fs-1);
   color: var(--level-assets-dark);
   white-space: nowrap;
   text-decoration: none;
@@ -143,11 +144,12 @@ img {
 }
 
 .breadcrumb__sep {
-  color: var(--text-subtle);
+  font-size: var(--fs-3);
+  color: var(--text-muted);
 }
 
 .breadcrumb__current {
-  font-size: 13px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-strong);
@@ -176,7 +178,7 @@ img {
 /* --- Typography roles --------------------------------------------------- */
 
 .eyebrow {
-  font-size: 12px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -189,49 +191,49 @@ img {
 }
 
 .eyebrow--sm {
-  font-size: 11px;
+  font-size: var(--fs-1);
 }
 
 .h1 {
   margin: 0 0 24px;
-  font-size: 54px;
+  font-size: var(--fs-8);
   line-height: 1.08;
   letter-spacing: -0.01em;
 }
 
 .h2 {
   margin: 0 0 28px;
-  font-size: 36px;
+  font-size: var(--fs-7);
 }
 
 .h2--sub {
-  font-size: 32px;
+  font-size: var(--fs-7);
 }
 
 .h3 {
   margin: 0 0 14px;
-  font-size: 26px;
+  font-size: var(--fs-6);
 }
 
 .lead {
-  font-size: 17.5px;
+  font-size: var(--fs-3);
   line-height: 1.65;
   color: var(--text-body);
 }
 
 .body {
-  font-size: 16.5px;
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-body);
 }
 
 .body--sm {
-  font-size: 15.5px;
+  font-size: var(--fs-2);
   line-height: 1.65;
 }
 
 .caption {
-  font-size: 14.5px;
+  font-size: var(--fs-2);
   line-height: 1.6;
   color: var(--text-subtle);
 }
@@ -337,7 +339,7 @@ img {
   display: grid;
   place-items: center;
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: var(--fs-5);
   color: #fff;
   background: var(--badge, var(--level-module));
   flex: none;
@@ -380,14 +382,14 @@ img {
 .accordion__label {
   flex: none;
   width: 236px;
-  font-size: 18px;
+  font-size: var(--fs-4);
   font-weight: 600;
   color: var(--text-strong);
 }
 
 .accordion__summary {
   flex: 1;
-  font-size: 14.5px;
+  font-size: var(--fs-2);
   line-height: 1.5;
   color: var(--text-subtle);
 }
@@ -397,7 +399,7 @@ img {
   flex: none;
   text-align: center;
   color: var(--blue);
-  font-size: 20px;
+  font-size: var(--fs-5);
   line-height: 1;
 }
 
@@ -407,7 +409,7 @@ img {
 
 .accordion__panel p {
   margin: 0;
-  font-size: 15.5px;
+  font-size: var(--fs-2);
   line-height: 1.7;
   color: var(--text-secondary);
   max-width: var(--measure-body);
@@ -435,7 +437,7 @@ img {
   border-radius: var(--radius-panel);
   background: #fff;
   color: var(--navy);
-  font-size: 14.5px;
+  font-size: var(--fs-2);
   font-weight: 600;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -490,7 +492,7 @@ img {
 }
 
 .pagefoot__dir {
-  font-size: 12px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-subtle);
@@ -500,7 +502,8 @@ img {
 
 .pagefoot__name {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: var(--fs-5);
+  white-space: nowrap;
 }
 
 .pagefoot__next {
@@ -623,14 +626,14 @@ img {
 
 .hero__title {
   margin: 0 0 24px;
-  font-size: 50px;
+  font-size: var(--fs-8);
   line-height: 1.1;
   letter-spacing: -0.01em;
 }
 
 .hero__lead {
   margin: 0 0 18px;
-  font-size: 17px;
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-hero);
@@ -663,13 +666,13 @@ img {
 .hero__stat-figure {
   margin: 0 0 2px;
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: var(--fs-5);
   color: var(--navy);
 }
 
 .hero__stat-label {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fs-2);
   color: var(--text-subtle);
 }
 
@@ -699,12 +702,13 @@ img {
 
 .steprail__n {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: var(--fs-5);
   color: var(--accent);
 }
 
 .steprail__label {
-  font-size: 14.5px;
+  font-size: var(--fs-2);
+  line-height: 1.35;
   font-weight: 600;
   color: var(--text-strong);
 }
@@ -731,14 +735,14 @@ img {
   background: var(--badge, var(--accent));
   color: #fff;
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: var(--fs-5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .step__count {
-  font-size: 12px;
+  font-size: var(--fs-1);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-subtle);
@@ -747,12 +751,12 @@ img {
 
 .step__title {
   margin: 0 0 12px;
-  font-size: 36px;
+  font-size: var(--fs-7);
 }
 
 .step__q {
   margin: 0 0 28px;
-  font-size: 17px;
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-secondary);
   max-width: var(--measure-section);
@@ -760,7 +764,7 @@ img {
 
 .step__p {
   margin: 0 0 18px;
-  font-size: 17px;
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-section);
@@ -774,7 +778,7 @@ img {
 
 .ideas__eyebrow {
   margin: 30px 0 16px;
-  font-size: 11.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.16em;
 }
 
@@ -792,14 +796,14 @@ img {
 
 .ideas__title {
   margin: 0 0 8px;
-  font-size: 17.5px;
+  font-size: var(--fs-3);
   font-weight: 600;
   color: var(--text-strong);
 }
 
 .ideas__body {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-2);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-body);
@@ -831,7 +835,7 @@ img {
 
 .askpair__eyebrow {
   margin: 0 0 8px;
-  font-size: 11.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.16em;
   color: var(--accent-dark);
 }
@@ -842,7 +846,7 @@ img {
 
 .askpair__q {
   margin: 0;
-  font-size: 17px;
+  font-size: var(--fs-3);
   line-height: 1.6;
   color: var(--text-strong);
   max-width: var(--measure-body);
@@ -864,19 +868,19 @@ img {
 
 .example__eyebrow {
   margin: 0 0 8px;
-  font-size: 11.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.18em;
   color: var(--accent-dark);
 }
 
 .example__title {
   margin: 0 0 20px;
-  font-size: 27px;
+  font-size: var(--fs-6);
 }
 
 .example__p {
   margin: 0 0 16px;
-  font-size: 16.5px;
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-body);
@@ -906,14 +910,14 @@ img {
 }
 
 .tmpl__bar-title {
-  font-size: 14px;
+  font-size: var(--fs-2);
   font-weight: 700;
   color: #fff;
   letter-spacing: 0.03em;
 }
 
 .tmpl__bar-note {
-  font-size: 12px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--tint-border);
@@ -946,14 +950,14 @@ img {
 
 .tmpl__label {
   margin: 0 0 8px;
-  font-size: 14.5px;
+  font-size: var(--fs-2);
   font-weight: 700;
   color: var(--accent);
 }
 
 .tmpl__help {
   margin: 0 0 10px;
-  font-size: 14px;
+  font-size: var(--fs-2);
   font-style: italic;
   color: var(--text-subtle);
   max-width: var(--measure-body);
@@ -969,7 +973,7 @@ img {
 .tmpl__value p,
 .tmpl__value li {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-2);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-body);
@@ -993,7 +997,7 @@ img {
   border: 1px solid var(--tint-border);
   border-radius: var(--radius-panel);
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: var(--fs-2);
   color: var(--accent-dark);
 }
 
@@ -1017,7 +1021,7 @@ img {
 .gtable__cell {
   background: var(--bg-card);
   padding: 12px 16px;
-  font-size: 15.5px;
+  font-size: var(--fs-2);
   line-height: 1.6;
   color: var(--text-body);
 }
@@ -1029,7 +1033,7 @@ img {
 
 .gtable__head {
   background: var(--tint);
-  font-size: 11.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -1059,12 +1063,12 @@ img {
 
 .journey__title {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: var(--fs-5);
   color: var(--navy);
 }
 
 .journey__kind {
-  font-size: 11.5px;
+  font-size: var(--fs-1);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 700;
@@ -1090,20 +1094,20 @@ img {
 .journey__n {
   flex: none;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: var(--fs-5);
   color: var(--accent);
 }
 
 .journey__course-title {
   margin: 0;
-  font-size: 17px;
+  font-size: var(--fs-3);
   font-weight: 700;
   color: var(--navy);
 }
 
 .journey__body {
   margin: 0 0 8px;
-  font-size: 16px;
+  font-size: var(--fs-2);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-body);
@@ -1111,7 +1115,7 @@ img {
 
 .journey__leave {
   margin: 0;
-  font-size: 15.5px;
+  font-size: var(--fs-2);
   line-height: 1.6;
   color: var(--text-secondary);
   max-width: var(--measure-body);

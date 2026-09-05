@@ -1,11 +1,13 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import WorkedExample from '../components/WorkedExample.astro';
+import BestPractice from '../components/BestPractice.astro';
 
 const stats = [
-  { figure: '2–4 learning objectives', label: 'per course' },
-  { figure: '3–6 modules', label: 'per course' },
+  { figure: '2–4 learning objectives', label: 'per Course' },
+  { figure: '3–6 modules', label: 'per Course' },
   { figure: '2–8 hours', label: 'of learner time' },
-  { figure: 'Course Certificate', label: 'on completing the course' },
+  { figure: 'Course Certificate', label: 'on completing the Course' },
 ];
 
 const steps = [
@@ -20,18 +22,23 @@ const steps = [
 const badge = ['#17724A', '#125E3D', '#0E4C31', '#0A3A25', '#1F2833'];
 
 const ladder = [
-  { level: 'Topic', focus: 'What the Course is about', example: 'Business data' },
+  { level: 'Topic', focus: 'The subject or area the Course addresses', example: 'Business data' },
   {
     level: 'Knowledge',
-    focus: 'What learners know or understand',
+    focus: 'What learners should know or understand about the topic',
     example: 'Characteristics of useful business data',
   },
-  { level: 'Skill', focus: 'What learners can perform', example: 'Evaluate the quality of a dataset' },
+  {
+    level: 'Skill',
+    focus: 'A specific capability learners can develop and demonstrate',
+    example: 'Evaluate a dataset using defined quality criteria',
+  },
   {
     level: 'Course-level objective',
-    focus: 'What learners can do in a meaningful context',
+    focus:
+      'What learners will accomplish by applying their knowledge and skill in a meaningful context',
     example:
-      'Evaluate whether available data is appropriate for investigating a business question',
+      'Determine whether available data is relevant, complete, and suitable for addressing a business question',
     strong: true,
   },
 ];
@@ -51,26 +58,32 @@ const goodVerbs = [
 
 const weakVerbs = ['understand', 'learn', 'know', 'become familiar with', 'explore'];
 
+const translations = [
+  { verb: 'Evaluate', rest: ' a dataset for relevance and completeness.' },
+  { verb: 'Recommend', rest: ' a data source for a specific business question.' },
+  { verb: 'Design', rest: ' a simple analysis plan to address a business need.' },
+];
+
 const checks = [
   {
     q: 'Is it observable?',
-    a: 'Could learners demonstrate the objective through something they do, create, analyze, evaluate, or decide?',
+    a: 'Can learners demonstrate the objective through something they <strong>do, create, analyze, evaluate, or decide</strong>?',
   },
   {
     q: 'Is it achievable within this Course?',
-    a: 'Can learners reasonably reach the objective through the instruction, practice, feedback, and assessment included in the Course?',
+    a: 'Can learners reasonably achieve the objective through the course’s instruction, practice, feedback, and assessment?',
   },
   {
     q: 'Is it meaningful to learners?',
-    a: 'Does the capability have recognizable value beyond completing the Course? Can learners see how they might use it in a professional, academic, or other real-world context?',
+    a: 'Does the objective describe a capability learners can use beyond the course in a professional, academic, or other real-world context?',
   },
   {
     q: 'Is it appropriate for a self-paced online experience?',
-    a: 'Can learners build and demonstrate the capability without depending on live discussion, immediate instructor support, or synchronous participation?',
+    a: 'Can learners develop and demonstrate the capability through the course activities and assessments, without depending on live discussion, immediate instructor support, or synchronous participation?',
   },
   {
-    q: 'If this Course is part of a larger learning pathway, does it fit?',
-    a: 'Do the objectives support the broader goals of the Specialization, certificate, or program while still giving the Course a clear purpose of its own?',
+    q: 'Does it fit the larger learning pathway?',
+    a: 'If the course is part of a specialization, certificate, or program, do its objectives support the broader pathway goals while giving the course a clear purpose of its own?',
   },
 ];
 
@@ -83,8 +96,8 @@ const objectives = [
 
 const scopeQuestions = [
   'What knowledge or skills will learners gain from this?',
-  'Will they need it to achieve the Course objectives?',
-  'Will it help them practice or demonstrate what they should be able to do?',
+  'Do learners need it to achieve a course objective?',
+  'Will it give learners an opportunity to practice or demonstrate what they should be able to do?',
 ];
 
 const includeItems = [
@@ -122,13 +135,10 @@ const taggedSkills = [
         <p class="eyebrow hero__eyebrow">Course</p>
         <h1 class="hero__title">Designing a Coursera Course</h1>
         <p class="hero__lead">
-          Start by defining the Course's purpose: What should learners be able to do by the end of
-          this Course?
-        </p>
-        <p class="hero__lead">
-          Use that answer to write a small set of Course-level objectives. Those objectives will
-          guide the Modules, where you'll break the larger capability into manageable stages and
-          align it with practice and assessment.
+          A well-designed Course brings together knowledge and skills that learners can apply in a
+          meaningful context. Define what learners should be able to do by the end of the Course,
+          then use the Course-level objectives to organize the Modules and align learning activities
+          with instruction, practice, feedback, and assessment.
         </p>
       </div>
 
@@ -167,16 +177,16 @@ const taggedSkills = [
       </div>
       <h2 class="step__title">Write Course objectives</h2>
       <p class="step__p step__p--gap">
-        Once the Course has a clear purpose, translate that purpose into 2–4 course-level learning
-        objectives. A strong Course objective describes something learners can demonstrate by the end
-        of the Course. It should be broad enough for several Modules to contribute to its
-        development, while still being achievable within the Course itself.
+        Once the Course has a clear purpose, translate that purpose into 2–4 Course-level learning
+        objectives. Use the table below to move from the subject of the Course to what learners will
+        be able to demonstrate. A Course-level objective typically brings together relevant knowledge
+        and skills in a meaningful context.
       </p>
 
       <div class="ladder" data-keep>
         <div class="ladder__row ladder__row--head">
-          <div class="ladder__cell">Level</div>
-          <div class="ladder__cell">Focus</div>
+          <div class="ladder__cell">Element</div>
+          <div class="ladder__cell">What it helps identify</div>
           <div class="ladder__cell">Example</div>
         </div>
         {
@@ -192,7 +202,9 @@ const taggedSkills = [
         }
       </div>
 
-      <p class="prompt">By the end of this Course, learners will be able to…</p>
+      <h3 class="h3 h3--spaced">Draft your objectives</h3>
+      <p class="step__p step__p--tight">Use the following stem to begin each objective:</p>
+      <p class="stem">By the end of this Course, learners will be able to…</p>
 
       <div class="askpair" data-keep>
         <div class="askpair__good">
@@ -202,46 +214,66 @@ const taggedSkills = [
           </div>
         </div>
         <div class="askpair__weak">
-          <p class="eyebrow askpair__eyebrow">These verbs may need more specificity</p>
+          <p class="eyebrow askpair__eyebrow">Some verbs may need more specificity</p>
           <div class="verbs verbs--gap">
             {weakVerbs.map((v) => <span class="verb verb--weak">{v}</span>)}
           </div>
           <p class="verbs__note">
-            They may describe your instructional intention, but they do not clearly indicate what
-            learners will be able to demonstrate.
+            These verbs may describe your instructional intention, but on their own, they do not
+            clearly indicate what learners will be able to demonstrate.
           </p>
         </div>
       </div>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">
-          Writing Course objectives for Foundations of Data Analytics for Business
-        </h3>
-        <p class="example__p">
-          Now let's zoom in on the first Course in the Specialization: <em
-            >Foundations of Data Analytics for Business</em
-          >.
+      <p class="step__p step__p--tight">
+        Complete the verb with what learners will act on and, when helpful, the context or criteria.
+        A broad instructional intention such as “<strong
+          >understand how data can support a business decision</strong
+        >” can be translated into different observable objectives, depending on what learners should
+        demonstrate:
+      </p>
+      <ul class="qlist qlist--tight">
+        {
+          translations.map((t) => (
+            <li>
+              <strong>{t.verb}</strong>
+              {t.rest}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="step__p step__p--gap">
+        Choose the objective(s) that best match what learners should be able to demonstrate by the
+        end of the Course.
+      </p>
+
+      <WorkedExample
+        id="wx-objectives"
+        lead="Writing Course objectives for"
+        name="Foundations of Data Analytics for Business"
+      >
+        <p class="example__p example__p--lead">
+          Throughout this guide, we use <strong>Data Analytics for Business Decisions</strong> as a
+          worked example. On the Specialization page, you saw how its three Courses work together.
+          Here, we’ll look more closely at the first Course, <strong
+            >Foundations of Data Analytics for Business</strong
+          >, and translate its purpose into Course-level objectives.
         </p>
 
-        <div class="journey">
-          <div class="journey__head">
-            <span class="journey__title">Data Analytics for Business Decisions</span>
-            <span class="journey__kind">Specialization</span>
+        <div class="ctx">
+          <div class="ctx__bar">
+            <span><strong>Specialization</strong>: Data Analytics for Business Decisions</span>
           </div>
-          <div class="journey__course">
-            <div class="journey__course-head">
-              <span class="journey__n">1</span>
-              <p class="journey__course-title">Foundations of Data Analytics for Business</p>
-            </div>
-            <p class="journey__body">
+          <div class="ctx__body">
+            <p class="ctx__course"><strong>Course 1</strong>: Foundations of Data Analytics for Business</p>
+            <p class="ctx__p">
               Learners begin by translating a business need into a question that can be investigated
               with data. They identify the data they need, evaluate its basic quality, and prepare it
               for analysis.
             </p>
-            <p class="journey__leave">
-              <strong>Learners leave with:</strong> a focused business question and an analysis-ready
-              dataset.
+            <p class="ctx__leave">
+              <strong>Learners leave with:</strong> a focused business question and a simple,
+              analysis-ready dataset.
             </p>
           </div>
         </div>
@@ -259,11 +291,11 @@ const taggedSkills = [
 
         <p class="example__p">
           These objectives describe what learners can demonstrate, rather than topics the instructor
-          intends to cover. For example, “data quality” names a subject. “Evaluate a dataset for
-          relevance, completeness, and basic quality concerns” describes what learners will do with
-          their knowledge of that subject.
+          intends to cover. For example, <strong>“data quality”</strong> names a subject. <strong
+            >“Evaluate a dataset for relevance, completeness, and common quality issues”</strong
+          > describes what learners will do with their knowledge of that subject.
         </p>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 2 -->
@@ -281,7 +313,7 @@ const taggedSkills = [
               <span class="checklist__box" aria-hidden="true" />
               <div>
                 <p class="checklist__q">{c.q}</p>
-                <p class="checklist__a">{c.a}</p>
+                <p class="checklist__a" set:html={c.a} />
               </div>
             </div>
           ))
@@ -307,10 +339,9 @@ const taggedSkills = [
       </ul>
 
       <p class="step__p step__p--gap">
-        These questions can help you decide what to include, what to leave out, and how to organize
-        the learning around the Course's purpose. A strong Course is not simply a collection of
-        related topics; each element should help learners develop the knowledge and skills they need
-        to achieve the intended outcomes.
+        Use your answers to decide what to include, leave out, or save for another Course. A strong
+        Course is not simply a collection of related topics. Each element should help learners develop
+        the knowledge and skills they need to achieve the intended outcomes.
       </p>
 
       <div class="askpair" data-keep>
@@ -326,12 +357,8 @@ const taggedSkills = [
         </div>
       </div>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Using a Course objective to guide scope</h3>
-        <p class="example__p">
-          Consider one objective from <em>Foundations of Data Analytics for Business</em>:
-        </p>
+      <WorkedExample id="wx-scope" lead="Using a Course objective to" name="guide scope">
+        <p class="example__p">Consider one objective from Course 1:</p>
 
         <div class="objbox">
           <p class="objbox__eyebrow">Course objective</p>
@@ -341,9 +368,9 @@ const taggedSkills = [
         </div>
 
         <p class="example__p example__p--gap">
-          This objective can help faculty distinguish between content that directly supports the
-          intended learning and content that, while interesting or valuable, may not be necessary at
-          this stage.
+          This objective helps faculty distinguish between content that directly supports the
+          intended learning and content that, while interesting or valuable, may not be necessary in
+          this Course.
         </p>
 
         <div class="inout">
@@ -371,7 +398,7 @@ const taggedSkills = [
             </p>
           </div>
         </div>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 4 -->
@@ -398,7 +425,7 @@ const taggedSkills = [
         <div class="askpair__good">
           <p class="eyebrow askpair__eyebrow">More modular</p>
           <p class="askpair__quote">
-            This course assumes familiarity with basic spreadsheet formulas and functions.
+            This Course assumes familiarity with basic spreadsheet formulas and functions.
           </p>
         </div>
         <div class="askpair__weak">
@@ -418,14 +445,18 @@ const taggedSkills = [
       </div>
       <h2 class="step__title">Complete your Course plan</h2>
       <p class="step__q">
-        Use this page to work through the decisions, then record them in the Design Document. This
-        section repeats for each course.
+        Use this page to work through the course-design decisions, then record them in the Design
+        Document. The sample below shows how those decisions might come together for <strong
+          >Course 1: Foundations of Data Analytics</strong
+        > in the example <strong
+          >Specialization: <span class="nostyle">Data Analytics for Business Decisions</span></strong
+        >. Use it as a reference as you develop your own plan.
       </p>
 
       <div class="tmpl">
         <div class="tmpl__bar">
           <span class="tmpl__bar-title">Course 1</span>
-          <span class="tmpl__bar-note">Repeats per course</span>
+          <span class="tmpl__bar-note">Repeats per Course</span>
         </div>
 
         <div class="tmpl__link-row">
@@ -438,62 +469,175 @@ const taggedSkills = [
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Course title</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Course title</p>
+            <BestPractice title="Course title">
+              <p>
+                Write for the learner deciding whether this Course is relevant to them. A strong
+                title makes the <strong>topic and learner value immediately clear</strong> while
+                giving the Course a distinct purpose. Favor specific, familiar language over academic
+                numbering or internal terminology.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value"><p>Foundations of Data Analytics for Business</p></div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Course description</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Course description</p>
+            <BestPractice title="Course description">
+              <p>
+                Describe the Course from the learner's perspective. Lead with what learners will
+                <strong>gain or be able to do</strong>, rather than with a list of topics. Provide
+                enough context for the Course to make sense on its own, even when it is part of a
+                larger learning pathway.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
-              Learn how to turn a business need into a question that data can help answer. You'll
-              practice identifying useful data, evaluating its relevance and quality, and preparing
-              data for an introductory analysis using realistic business examples.
+              Designed for professionals, students, and career changers who want to use data more
+              effectively in business settings, this beginner-level course introduces the process of
+              turning a business need into a question that data can help answer. Learners will
+              practice framing business questions, identifying data requirements, evaluating data for
+              relevance and quality, and preparing a simple dataset for analysis.
+            </p>
+            <p>
+              Through realistic business examples, guided practice, quizzes, and applied activities,
+              learners will build foundational skills in business problem framing, data requirements
+              analysis, data quality assessment, and spreadsheet-based data preparation. These skills
+              can help learners communicate more effectively with data professionals, make more
+              informed decisions, and prepare for further study or roles involving business
+              analytics.
+            </p>
+            <p>
+              Taught by Jordan Lee, a faculty member specializing in business analytics and
+              evidence-informed decision-making, the course offers an applied, self-paced
+              introduction to the full process from business question to analysis-ready dataset.
             </p>
           </div>
         </div>
 
         <div class="tmpl__row">
           <div class="tmpl__field">
-            <p class="tmpl__label">Estimated time to complete</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Estimated time to complete</p>
+              <BestPractice title="Estimated time to complete">
+                <p>
+                  Estimate the learner's <strong>total experience</strong>, including videos,
+                  readings, practice, activities, and assessments — not just instructional content.
+                  Keep the scope realistic for a self-paced Coursera Course that learners may
+                  complete in shorter sessions around other responsibilities.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Approximately 7 hours</p></div>
           </div>
           <div class="tmpl__field">
-            <p class="tmpl__label">Difficulty level</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Difficulty level</p>
+              <BestPractice title="Difficulty level" align="right">
+                <p>
+                  Choose the level based on the <strong
+                    >knowledge, skills, and independence learners need to succeed</strong
+                  >, not on how sophisticated the subject sounds. A complex topic can still be
+                  appropriate for beginners when foundational concepts and sufficient support are
+                  built into the Course.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Beginner</p></div>
           </div>
         </div>
 
         <div class="tmpl__row">
           <div class="tmpl__field">
-            <p class="tmpl__label">Primary domain / sub-domain</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Primary domain / sub-domain</p>
+              <BestPractice title="Primary domain / sub-domain">
+                <p>
+                  Choose the category that most directly reflects the <strong
+                    >Course's primary subject and learner value</strong
+                  >. Use the most specific appropriate Coursera domain rather than trying to
+                  represent every discipline the Course touches.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Business → Business Analytics</p></div>
           </div>
           <div class="tmpl__field">
-            <p class="tmpl__label">Secondary domain / sub-domain</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Secondary domain / sub-domain</p>
+              <BestPractice title="Secondary domain / sub-domain" align="right">
+                <p>
+                  Use a secondary domain when another area meaningfully represents the Course. It
+                  should describe a substantial part of the learning experience, not simply broaden
+                  discoverability.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Data Science → Data Analysis</p></div>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Tagged skills</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Tagged skills</p>
+            <BestPractice title="Tagged skills">
+              <p>
+                Choose <strong
+                  >specific skills learners will actively practice or demonstrate in this Course</strong
+                >. Avoid broad subject labels, and select tags that align closely with the Course
+                objectives, activities, and assessments.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__chips">
             {taggedSkills.map((s) => <span class="tmpl__chip">{s}</span>)}
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Recommended background</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Recommended background</p>
+            <BestPractice title="Recommended background">
+              <p>
+                Include only the knowledge or experience learners <strong
+                  >actually need before beginning the Course</strong
+                >. Distinguish true prerequisites from experience that may simply be helpful, and
+                avoid creating unnecessary barriers for otherwise appropriate learners.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
-              No prior experience with data analytics or programming. Basic familiarity with
-              spreadsheets and workplace math is helpful
+              No prior experience with data analytics or programming is required. Basic familiarity
+              with spreadsheets and workplace mathematics may be helpful.
             </p>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">What learners will learn</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">What learners will learn</p>
+            <BestPractice title="What learners will learn">
+              <p>
+                Write <strong>2–4 observable, measurable Course objectives</strong> that describe
+                meaningful capabilities learners should be able to demonstrate by the end of the
+                Course. Objectives should be achievable within the Course and valuable to learners
+                beyond simply completing it.
+              </p>
+              <p>
+                Begin with action verbs such as <strong
+                  >analyze, apply, create, evaluate, identify, interpret, recommend,</strong
+                > or <strong>communicate</strong>. Verbs such as <em>understand, learn,</em> or <em
+                  >become familiar with</em
+                > may describe your instructional intention, but they do not clearly indicate what
+                learners will be able to demonstrate.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <ol>
               {objectives.map((o) => <li>{o}</li>)}
@@ -502,12 +646,26 @@ const taggedSkills = [
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Instructor information and bio source link</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Instructor information and bio source link</p>
+            <BestPractice title="Instructor information and bio source link">
+              <p>
+                Provide concise, learner-facing information that establishes the instructor's <strong
+                  >relevant expertise and connection to the Course topic</strong
+                >. Prioritize experience that helps learners understand why this instructor is well
+                positioned to guide the learning experience.
+              </p>
+              <p>
+                If an approved faculty bio and headshot already exist, provide a build-ready source
+                link rather than recreating the material.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
-              Jordan Lee is a faculty member specializing in business analytics and
+              <strong>Jordan Lee</strong> is a faculty member specializing in business analytics and
               evidence-informed decision-making. Their teaching and research focus on helping
-              organizations use data to frame questions, evaluate performance, and make more informed
+              organizations frame questions, evaluate performance, and use data to make more informed
               decisions.
             </p>
           </div>
@@ -538,6 +696,10 @@ const taggedSkills = [
     margin-bottom: 16px;
   }
 
+  .nostyle {
+    font-style: normal;
+  }
+
   /* --- Objective ladder --------------------------------------------------- */
   .ladder {
     border: 1px solid var(--rule-card);
@@ -559,7 +721,7 @@ const taggedSkills = [
   .ladder__row--head {
     background: var(--tint);
     border-bottom: 1px solid var(--tint-border);
-    font-size: 11px;
+    font-size: var(--fs-1);
     letter-spacing: 0.13em;
     text-transform: uppercase;
     color: var(--accent-dark);
@@ -568,7 +730,7 @@ const taggedSkills = [
 
   .ladder__cell {
     padding: 13px 20px;
-    font-size: 15.5px;
+    font-size: var(--fs-2);
     line-height: 1.6;
     color: var(--text-body);
     border-left: 1px solid var(--rule);
@@ -596,10 +758,16 @@ const taggedSkills = [
     font-weight: 600;
   }
 
-  .prompt {
-    margin: 0 0 16px;
+  /* --- Objective stem ----------------------------------------------------- */
+  .h3--spaced {
+    margin: 44px 0 12px;
+  }
+
+  .stem {
+    margin: 0 0 20px;
     font-family: var(--font-display);
-    font-size: 23px;
+    font-size: var(--fs-5);
+    line-height: 1.4;
     color: var(--navy);
   }
 
@@ -619,20 +787,20 @@ const taggedSkills = [
     border: 1px solid var(--tint-border);
     border-radius: 2px;
     padding: 6px 12px;
-    font-size: 14.5px;
+    font-size: var(--fs-2);
     color: var(--text-strong);
   }
 
   .verb--weak {
     border-color: var(--rule);
-    color: var(--text-subtle);
+    color: var(--text-muted);
   }
 
   .verbs__note {
     margin: 0;
-    font-size: 15px;
+    font-size: var(--fs-2);
     line-height: 1.6;
-    color: var(--text-subtle);
+    color: var(--text-muted);
     max-width: var(--measure-body);
   }
 
@@ -643,7 +811,7 @@ const taggedSkills = [
   .askpair__quote {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 20px;
+    font-size: var(--fs-5);
     line-height: 1.55;
     color: var(--text-strong);
     max-width: var(--measure-body);
@@ -681,17 +849,21 @@ const taggedSkills = [
 
   .checklist__q {
     margin: 0 0 6px;
-    font-size: 18px;
+    font-size: var(--fs-4);
     font-weight: 600;
     color: var(--navy);
   }
 
   .checklist__a {
     margin: 0;
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     line-height: 1.7;
     color: var(--text-body);
     max-width: var(--measure-body);
+  }
+
+  .checklist__a :global(strong) {
+    color: var(--text-strong);
   }
 
   /* --- Hanging-bullet question list --------------------------------------- */
@@ -704,11 +876,16 @@ const taggedSkills = [
     gap: 12px;
   }
 
+  .qlist--tight {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
   .qlist li {
-    font-size: 17px;
-    line-height: 1.6;
+    font-size: var(--fs-3);
+    line-height: 1.65;
     color: var(--text-strong);
-    padding-left: 18px;
+    padding-left: 16px;
     position: relative;
     max-width: var(--measure-section);
   }
@@ -733,7 +910,7 @@ const taggedSkills = [
 
   .objbox__eyebrow {
     margin: 0 0 12px;
-    font-size: 11.5px;
+    font-size: var(--fs-1);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--accent-dark);
@@ -750,7 +927,7 @@ const taggedSkills = [
   }
 
   .objbox__list li {
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     line-height: 1.6;
     color: var(--text-body);
     max-width: var(--measure-body);
@@ -759,14 +936,71 @@ const taggedSkills = [
   .objbox__quote {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 21px;
+    font-size: var(--fs-5);
     line-height: 1.5;
     color: var(--text-strong);
     max-width: var(--measure-body);
   }
 
+  .example__p--lead {
+    margin-bottom: 20px;
+  }
+
   .example__p--gap {
     margin-bottom: 24px;
+  }
+
+  /* --- Specialization / Course context card -------------------------------- */
+  .ctx {
+    background: var(--bg-card);
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    margin: 0 0 22px;
+  }
+
+  .ctx__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 13px 22px;
+    background: var(--level-specialization);
+    font-size: var(--fs-3);
+    color: #fff;
+  }
+
+  .ctx__body {
+    padding: 22px 24px;
+  }
+
+  .ctx__course {
+    margin: 0 0 8px;
+    font-size: var(--fs-3);
+    color: var(--accent);
+  }
+
+  /* Indented to sit under the Course label above. */
+  .ctx__p {
+    margin: 0 0 10px;
+    padding-left: 32px;
+    font-size: var(--fs-3);
+    line-height: 1.65;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .ctx__leave {
+    margin: 0;
+    padding-left: 32px;
+    font-size: var(--fs-2);
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .ctx__leave strong {
+    color: var(--text-strong);
+    font-weight: 600;
   }
 
   /* --- Include / leave out ------------------------------------------------ */
@@ -793,7 +1027,7 @@ const taggedSkills = [
 
   .inout__eyebrow {
     margin: 0 0 4px;
-    font-size: 11.5px;
+    font-size: var(--fs-1);
     letter-spacing: 0.16em;
     color: var(--accent-dark);
   }
@@ -804,7 +1038,7 @@ const taggedSkills = [
 
   .inout__intro {
     margin: 0 0 14px;
-    font-size: 16px;
+    font-size: var(--fs-2);
     color: var(--text-strong);
   }
 
@@ -817,7 +1051,7 @@ const taggedSkills = [
   }
 
   .inout__list li {
-    font-size: 16px;
+    font-size: var(--fs-2);
     line-height: 1.6;
     color: var(--text-body);
     max-width: var(--measure-body);
@@ -825,15 +1059,28 @@ const taggedSkills = [
 
   .inout__note {
     margin: 0;
-    font-size: 15px;
+    font-size: var(--fs-2);
     line-height: 1.65;
     color: var(--text-subtle);
     max-width: var(--measure-body);
   }
 
   /* --- Template ----------------------------------------------------------- */
+  .tmpl__labelrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 12px;
+  }
+
+  .tmpl__labelrow .tmpl__label {
+    margin: 0;
+    white-space: nowrap;
+  }
+
   .tmpl__link-row {
-    font-size: 15px;
+    font-size: var(--fs-2);
     color: var(--text-secondary);
   }
 
@@ -841,9 +1088,14 @@ const taggedSkills = [
     color: var(--accent);
   }
 
+  .tmpl__bar-note {
+    color: #fff;
+  }
+
   .btn--level {
     background: var(--accent);
     color: #fff;
+    font-size: var(--fs-2);
   }
 
   .btn--level:hover {

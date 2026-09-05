@@ -1,5 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import WorkedExample from '../components/WorkedExample.astro';
+import BestPractice from '../components/BestPractice.astro';
 
 const stats = [
   { figure: '1–3 learning objectives', label: 'per Module' },
@@ -10,70 +12,119 @@ const stats = [
 
 const steps = [
   { id: 'step1', n: 1, label: 'Write objectives' },
-  { id: 'step2', n: 2, label: 'Map learning path' },
-  { id: 'step3', n: 3, label: 'Choose assets' },
-  { id: 'step4', n: 4, label: 'Design practice' },
+  { id: 'step2', n: 2, label: 'Plan backward' },
+  { id: 'step3', n: 3, label: 'Design learning path' },
+  { id: 'step4', n: 4, label: 'Choose assets' },
   { id: 'step5', n: 5, label: 'Complete the plan' },
 ];
 
-const moduleVerbs = [
-  'identify',
-  'compare',
-  'calculate',
-  'apply',
-  'analyze',
-  'interpret',
-  'evaluate',
-  'create',
-  'recommend',
-  'communicate',
+/* Purple scale, darkening across the five steps. */
+const badge = ['#6B4E9E', '#5A3F87', '#493274', '#3A2760', '#8A5A0B'];
+
+const moduleObjectives = [
+  'Identify the data needed to investigate a business question.',
+  'Evaluate an available dataset for relevance, completeness, and basic quality concerns.',
+  'Document limitations that could affect the proposed analysis.',
 ];
 
-const supportingObjectives = [
-  'Identify the variables and records needed to investigate a business question.',
-  'Evaluate a dataset for relevance, completeness, and basic quality concerns.',
-  'Document concerns that could affect the proposed analysis.',
+const planningQuestions = [
+  {
+    n: 1,
+    title: 'The final task',
+    body: 'What will learners do, create, analyze, evaluate, or decide to show that they have achieved the Module objectives?',
+  },
+  {
+    n: 2,
+    title: 'What a successful response looks like',
+    body: 'What should learners include, do, or decide to complete the task successfully? How will the activity help learners recognize whether they have met the expectations?',
+  },
+  {
+    n: 3,
+    title: 'What learners already know',
+    body: 'What should learners already know or be able to do before they begin?',
+  },
+  {
+    n: 4,
+    title: 'What learners still need to learn',
+    body: 'What new knowledge, steps, or decision-making skills do learners need to develop? Where might they become confused or make mistakes?',
+  },
+  {
+    n: 5,
+    title: 'How learners will know they are on track',
+    body: 'What feedback, answer explanation, model, checklist, or other support will help learners judge their own work?',
+  },
 ];
 
-const considerations = [
-  { title: 'The starting point', body: 'What should learners already know or be able to do?' },
+const evidenceRows = [
   {
-    title: 'The learning gap',
-    body: 'What new knowledge, process, or judgment do they need to develop?',
-  },
-  { title: 'The difficult points', body: 'Where might learners become confused or make mistakes?' },
-  {
-    title: 'The path forward',
-    body: 'What should be explained, modeled, practiced, and reinforced?',
+    objective: 'Identify the data needed',
+    evidence:
+      'Specify the variables, records, time period, and level of detail needed to investigate a business question',
   },
   {
-    title: 'The demonstration',
-    body: 'What will allow learners to show that they have achieved the Module objectives?',
+    objective: 'Evaluate an available dataset',
+    evidence: 'Compare the available data with those requirements and identify concerns',
+  },
+  {
+    objective: 'Document limitations',
+    evidence:
+      'Explain how missing, incomplete, or poor-quality data could affect the proposed analysis',
+  },
+];
+
+const backwardRows = [
+  {
+    q: 'What does a successful response look like?',
+    a: 'The review identifies the data the question requires, evaluates the dataset’s relevance and completeness, notes basic quality concerns, and explains how any limitations could affect the analysis.',
+  },
+  {
+    q: 'What do learners already know?',
+    a: 'Learners can recognize common parts of a dataset, including records, fields, and values.',
+  },
+  {
+    q: 'What do learners still need to learn?',
+    a: 'They need criteria for evaluating data in relation to a particular question and practice explaining why a limitation matters.',
+  },
+  {
+    q: 'Where might they struggle?',
+    a: 'Learners may focus on whether the data appears clean without noticing that essential variables, time periods, or levels of detail are missing.',
+  },
+  {
+    q: 'How will they know they are on track?',
+    a: 'A worked example, data-quality checklist, guiding questions, and explanatory feedback will help them compare their reasoning with the evaluation criteria.',
   },
 ];
 
 const arc = [
-  { n: 1, label: 'Frame', body: 'Establish what learners will do and why it matters.' },
-  { n: 2, label: 'Explain', body: 'Introduce the essential concepts, process, or framework.' },
+  {
+    n: 1,
+    label: 'Frame',
+    body: 'Introduce what learners will do, why it matters, and how it connects to the Module objectives.',
+  },
+  {
+    n: 2,
+    label: 'Explain',
+    body: 'Introduce the essential concepts, process, or framework learners will need.',
+  },
   {
     n: 3,
     label: 'Model',
-    body: 'Show how an expert approaches the task, applies the process, or makes decisions.',
+    body: 'Show how an expert approaches the task, applies the process, or makes decisions. Think aloud where helpful.',
   },
   {
     n: 4,
     label: 'Practice',
-    body: 'Let learners try part or all of the task with appropriate support.',
+    body: 'Give learners an opportunity to try part or all of the task with appropriate guidance.',
   },
   {
     n: 5,
-    label: 'Provide feedback',
-    body: 'Help learners recognize what is working, correct misunderstandings, and decide what to try next.',
+    label: 'Give feedback',
+    body: 'Help learners recognize what is working, correct misunderstandings, and decide what to try next. Feedback may include automated responses, answer explanations, worked examples, checklists, or prompts for self-review.',
   },
   {
     n: 6,
     label: 'Apply or assess',
-    body: 'Ask learners to demonstrate the Module objectives in a meaningful context.',
+    body: 'Ask learners to use what they have learned in a meaningful context. This may be an auto-graded assessment or an ungraded activity with clear guidance for self-checking.',
   },
 ];
 
@@ -81,35 +132,37 @@ const pathRows = [
   {
     stage: 'Frame',
     experience:
-      'Encounter a scenario in which a team has data but is unsure whether it can support a decision',
-    role: 'Establish why evaluating the data matters',
+      'Encounter a scenario in which a team has customer data but is unsure whether it can answer a particular business question',
+    role: 'Establishes why the quality and usefulness of data must be judged in relation to its intended purpose',
   },
   {
     stage: 'Explain',
     experience:
-      'Learn how relevance, completeness, level of detail, and basic quality affect an analysis',
-    role: 'Introduce criteria for evaluating data',
+      'Learn how relevance, completeness, level of detail, and basic quality affect whether data can support an analysis',
+    role: 'Introduces the criteria learners will use in the Data Fitness Review',
   },
   {
     stage: 'Model',
-    experience: 'Watch an expert inspect a sample dataset and explain their reasoning aloud',
-    role: 'Make the evaluation process visible',
+    experience:
+      'Watch an expert identify what data a question requires, inspect a sample dataset, and explain their judgment aloud',
+    role: 'Makes the reasoning and documentation process visible',
   },
   {
     stage: 'Practice',
-    experience: 'Use a checklist to inspect a second dataset and identify concerns',
-    role: 'Try the process with support',
+    experience:
+      'Use the criteria and a checklist to inspect a second dataset and draft a supported conclusion',
+    role: 'Lets learners try the major parts of the final task with guidance',
   },
   {
-    stage: 'Provide feedback',
+    stage: 'Give feedback',
     experience:
-      'Compare observations with an annotated response and review explanations of overlooked concerns',
-    role: 'Correct misunderstandings and refine the judgment',
+      'Compare their observations with an annotated response and review explanations of concerns they may have missed',
+    role: 'Helps learners check their reasoning, correct misunderstandings, and recognize what a complete evaluation includes',
   },
   {
     stage: 'Apply or assess',
     experience: 'Complete a Data Fitness Review for a new business question and dataset',
-    role: 'Demonstrate the Module objectives independently',
+    role: 'Asks learners to demonstrate the Module objectives independently',
   },
 ];
 
@@ -156,73 +209,99 @@ const assetQuestions = [
   'How will the asset connect to what learners encountered before and what they will do next?',
 ];
 
-const assetChoices = [
+const chosenAssets = [
   {
-    need: 'Understand why evaluating data matters and learn the relevant criteria',
-    asset: 'Reading',
-    role: 'Introduces the business scenario, explains the criteria, and provides a reusable data-quality checklist',
+    path: 'Frame the task',
+    type: 'Video',
+    title: 'Start With the Business Question',
+    purpose:
+      'Introduces a realistic scenario and explains why data must be evaluated in relation to the question it is intended to address',
   },
   {
-    need: 'Observe how an expert evaluates data',
-    asset: 'Video',
-    role: 'Uses a think-aloud demonstration to make the decision-making process visible',
+    path: 'Identify the data needed',
+    type: 'Reading',
+    title: 'From a Business Question to Data Requirements',
+    purpose:
+      'Helps learners identify the variables, records, time period, and level of detail a question requires',
   },
   {
-    need: 'Try the process with support',
-    asset: 'Ungraded Assessment',
-    role: "Provides a practice dataset and explanatory feedback on learners' judgments",
+    path: 'Introduce the evaluation criteria',
+    type: 'Video',
+    title: 'Is the Data Fit for the Question?',
+    purpose:
+      'Explains how relevance, completeness, and basic quality affect whether data can support an analysis',
   },
   {
-    need: 'Demonstrate the Module objectives',
-    asset: 'Graded Assessment',
-    role: 'Asks learners to complete a Data Fitness Review for a new business question and dataset',
+    path: 'Provide a reusable reference',
+    type: 'Reading',
+    title: 'Data Fitness Criteria and Checklist',
+    purpose:
+      'Gives learners criteria and a checklist they can use during the model, practice activity, and assessment',
+  },
+  {
+    path: 'Model the process',
+    type: 'Video',
+    title: 'Think Aloud: Inspecting a Sample Dataset',
+    purpose: 'Shows an expert comparing a dataset with a business question and documenting concerns',
+  },
+  {
+    path: 'Practice with support',
+    type: 'Hands-on activity',
+    title: 'Practice Data Fitness Review',
+    purpose: 'Gives learners a second dataset to evaluate using guiding questions and the checklist',
+  },
+  {
+    path: 'Prepare learners to communicate their judgment',
+    type: 'Video',
+    title: 'Documenting Data Limitations',
+    purpose: 'Models how to explain why a limitation matters and how it could affect an analysis',
+  },
+  {
+    path: 'Demonstrate the Module objectives',
+    type: 'Auto-graded quiz',
+    title: 'Data Fitness Review',
+    purpose:
+      'Presents a new business question and dataset and asks learners to identify requirements, evaluate the data, and make supported judgments',
   },
 ];
 
-const supportStages = [
-  {
-    title: 'Before they begin',
-    body: 'Make the task and its purpose clear. Identify what learners should already know, explain what they will do, and show what a successful response or approach looks like. Clear instructions, completion criteria, and a worked example can reduce uncertainty before learners start.',
-  },
-  {
-    title: 'While they practice',
-    body: 'Give learners an opportunity to use the knowledge or skill with support before asking them to demonstrate it independently. Checklists, templates, guiding questions, decision tools, and reminders can help learners focus on the important parts of the task without removing the need to think.',
-  },
-  {
-    title: 'After they respond',
-    body: 'Provide feedback that explains more than whether an answer is correct. Help learners understand why an approach is effective, what a mistake may reveal, and what they should reconsider or try next. When possible, connect feedback to the relevant concept, example, or Course resource.',
-  },
-  {
-    title: 'If they get stuck',
-    body: 'Give learners a clear way forward. Direct them to a specific explanation, worked example, hint, or practice opportunity rather than simply telling them to try again. Make sure essential guidance is available in accessible formats and does not depend on an instructor responding in the moment.',
-  },
-  {
-    title: 'When they are ready to demonstrate the objective',
-    body: 'Use an assessment that requires the capability described in the Module objectives. If learners are expected to evaluate a dataset, for example, the assessment should ask them to evaluate data and explain their judgment — not only recall definitions related to data quality.',
-  },
-];
-
-const stuckSupports = [
-  'A worked example of a completed review',
-  'The downloadable data-quality checklist',
-  'A short explanation of records, fields, and level of detail',
-  'A list of common data-quality concerns',
-  'An annotated version of the practice dataset',
-];
-
+/* Step 5 template — the lesson plan. Titles are plain text: these are
+   sample assets, so there is nothing real to link to yet. */
 const lessonRows = [
-  ['1', 'Reading the numbers', 'Video', 'Choosing and interpreting common summary measures'],
-  ['2', 'Reading the numbers', 'Reading', 'Quick reference: mean, median, range, and percentage'],
-  ['3', 'Reading the numbers', 'Video', 'From customer data to a business insight'],
-  ['4', 'Putting it in context', 'Reading', 'Checklist: interpreting measures in context'],
-  ['5', 'Putting it in context', 'Hands-on activity', 'Guided case: calculate and interpret measures'],
-  ['6', 'Putting it in context', 'Practice quiz', 'Scenario questions with feedback'],
+  ['1', 'Identify the data the question requires', 'Video', 'Start With the Business Question'],
+  [
+    '2',
+    'Identify the data the question requires',
+    'Reading',
+    'From a Business Question to Data Requirements',
+  ],
+  ['3', 'Evaluate whether the data is fit for purpose', 'Video', 'Is the Data Fit for the Question?'],
+  [
+    '4',
+    'Evaluate whether the data is fit for purpose',
+    'Reading',
+    'Data Fitness Criteria and Checklist',
+  ],
+  [
+    '5',
+    'Evaluate whether the data is fit for purpose',
+    'Video',
+    'Think Aloud: Inspecting a Sample Dataset',
+  ],
+  [
+    '6',
+    'Evaluate whether the data is fit for purpose',
+    'Hands-on activity',
+    'Practice Data Fitness Review',
+  ],
+  ['7', 'Complete a Data Fitness Review', 'Video', 'Documenting Data Limitations'],
+  ['8', 'Complete a Data Fitness Review', 'Auto-graded quiz', 'Data Fitness Review'],
 ];
 ---
 
 <PageLayout
   title="Module"
-  description="How to design a Coursera Module: write objectives, map the learning path, choose assets, and design practice."
+  description="How to design a Coursera Module: write objectives, plan backward from the learning task, design the learning path, and choose assets."
   level="module"
 >
   <div class="levelpage" data-level="module">
@@ -232,13 +311,10 @@ const lessonRows = [
         <p class="eyebrow hero__eyebrow">Module</p>
         <h1 class="hero__title">Designing a Coursera Module</h1>
         <p class="hero__lead">
-          Begin by considering the Module’s role in the course: What will help learners move from
-          where they are to what they should be able to do next?
-        </p>
-        <p class="hero__lead">
-          Use that answer to write a small set of Module objectives and map the learning path. Then
-          choose the explanations, examples, practice, feedback, and assessment that learners will
-          need to reach those objectives.
+          A well-designed Module develops a focused part of the knowledge or skill learners need to
+          achieve a Course-level objective. Define what learners should know or be able to do by the
+          end of the Module, then plan the instruction, practice, feedback, and assessment that will
+          help them get there.
         </p>
       </div>
 
@@ -271,18 +347,21 @@ const lessonRows = [
 
     <!-- Step 1 -->
     <section class="step step--module" id="step1">
-      <p class="eyebrow step__eyebrow">Step one</p>
-      <h2 class="step__title step__title--module">Write the Module objectives</h2>
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[0]}`}>1</span>
+        <span class="step__count">Step 1 of 5</span>
+      </div>
+      <h2 class="step__title">Write the Module objectives</h2>
       <p class="step__p step__p--gap">
         Course objectives describe the larger skills learners should develop by the end of the
-        course. Module objectives break those skills into smaller, achievable steps.
+        Course. Module objectives break those skills into smaller, achievable steps.
       </p>
 
       <div class="askpair" data-keep>
         <div class="askpair__good">
           <p class="eyebrow askpair__eyebrow">You might ask</p>
           <p class="askpair__q">
-            Which part of the larger Course learning goal will this Module help learners develop?
+            Which part of a larger Course objective will this Module help learners develop?
           </p>
         </div>
         <div class="askpair__weak">
@@ -292,16 +371,16 @@ const lessonRows = [
       </div>
 
       <p class="step__p step__p--gap">
-        A Module might introduce a concept, guide learners through a process, help them analyze an
-        example, or give them an opportunity to apply a skill in a realistic situation.
+        A Module might introduce a concept, guide learners through a process, make an expert's
+        reasoning visible, or give learners an opportunity to apply a skill. Write 1–3 objectives
+        that describe what learners will be able to demonstrate by the end.
       </p>
 
-      <div class="example example--gap" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">
-          Writing Module objectives for Identifying and Evaluating Business Data
-        </h3>
-
+      <WorkedExample
+        id="wx-objectives"
+        lead="Writing Module objectives for"
+        name="Identifying and Evaluating Business Data"
+      >
         <div class="context">
           <div class="context__row" data-depth="0">
             <span class="context__label">Specialization</span>
@@ -312,7 +391,7 @@ const lessonRows = [
             <span class="context__value">Foundations of Data Analytics for Business</span>
           </div>
           <div class="context__row" data-depth="2">
-            <span class="context__label context__label--here">Module</span>
+            <span class="context__label context__label--here">Module 1</span>
             <span class="context__value context__value--here"
               >Identifying and Evaluating Business Data</span
             >
@@ -325,71 +404,155 @@ const lessonRows = [
         <div class="objbox objbox--plain">
           <p class="objbox__eyebrow">Course objective</p>
           <p class="objbox__text">
-            By the end of this Course, learners will be able to evaluate a dataset for relevance,
-            completeness, and basic quality concerns.
+            By the end of this Course, learners will be able to determine whether available data is
+            relevant, complete, and suitable for addressing a business question.
           </p>
         </div>
 
-        <p class="example__p">A Module can develop a focused part of that learning goal:</p>
+        <p class="example__p">
+          The Module develops this larger capability through three focused objectives:
+        </p>
         <div class="objbox objbox--accent">
-          <p class="objbox__eyebrow objbox__eyebrow--teal">Module objective</p>
-          <p class="objbox__quote">
-            By the end of this Module, learners will be able to determine whether an available
-            dataset is appropriate for investigating a business question.
+          <p class="objbox__eyebrow objbox__eyebrow--accent">Module objectives</p>
+          <p class="objbox__text objbox__text--stem">
+            By the end of this Module, learners will be able to:
           </p>
+          <ul class="bullets bullets--accent">
+            {moduleObjectives.map((o) => <li>{o}</li>)}
+          </ul>
         </div>
-
-        <p class="example__p">Supporting Module objectives might include:</p>
-        <ul class="plainlist">
-          {supportingObjectives.map((o) => <li>{o}</li>)}
-        </ul>
 
         <p class="example__p">
           These objectives give the Module a clear destination. Learners are not simply being
           introduced to “data quality.” They are learning to make and explain a practical judgment
           about whether data is fit for a particular purpose.
         </p>
-      </div>
-
-      <div class="note-gold" data-keep>
-        <p class="note-gold__head">Keep Module objectives actionable</p>
-        <p class="note-gold__text">
-          As with Course objectives, describe something learners can demonstrate, rather than simply
-          a topic they will encounter or something they will “understand.”
-        </p>
-        <p class="note-gold__sub">Consider observable verbs such as</p>
-        <div class="verbs">
-          {moduleVerbs.map((v) => <span class="verb">{v}</span>)}
-        </div>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 2 -->
     <section class="step step--module" id="step2">
-      <p class="eyebrow step__eyebrow">Step two</p>
-      <h2 class="step__title step__title--module">Map the learning path</h2>
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[1]}`}>2</span>
+        <span class="step__count">Step 2 of 5</span>
+      </div>
+      <h2 class="step__title">Plan backward from the learning task</h2>
+      <p class="step__p">
+        Once the Module objectives are clear, design the Module around how learners will show what
+        they have learned.
+      </p>
+      <p class="step__p step__p--strong">What will learners do to show what they’ve learned?</p>
       <p class="step__p step__p--gap">
-        Once the Module objectives are clear, work backward from what learners will need to
-        demonstrate. Consider where learners are likely to begin, what may be new or difficult, and
-        what sequence of experiences will help them develop the intended skills.
+        Start with the task learners should be able to complete by the end of the Module. Then work
+        backward to identify what they already know, what they still need to learn, and what practice
+        and feedback will help them succeed.
       </p>
 
-      <p class="eyebrow consider__eyebrow">Consider</p>
-      <div class="consider" data-keep>
+      <p class="step__p step__p--tight">Use these questions to clarify the learning path:</p>
+      <div class="arclist" data-keep>
         {
-          considerations.map((c) => (
-            <div class="consider__cell">
-              <p class="consider__title">{c.title}</p>
-              <p class="consider__body">{c.body}</p>
+          planningQuestions.map((q) => (
+            <div class="arclist__row arclist__row--stacked">
+              <span class="arclist__n">{q.n}</span>
+              <div class="arclist__stack">
+                <p class="arclist__label">{q.title}</p>
+                <p class="arclist__body">{q.body}</p>
+              </div>
             </div>
           ))
         }
       </div>
 
-      <p class="step__p step__p--gap">
-        Not every Module needs to follow the same sequence. Some skills require more explanation,
-        while others benefit from repeated practice or multiple examples. However, many effective
-        Modules include some version of this learning arc:
+      <WorkedExample
+        id="wx-task"
+        lead="Turning Module objectives into"
+        name="a learning task"
+      >
+        <p class="example__p">
+          In <em>Identifying and Evaluating Business Data</em>, learners are working toward three
+          Module objectives:
+        </p>
+        <ul class="bullets bullets--accent bullets--gap">
+          {moduleObjectives.map((o) => <li>{o}</li>)}
+        </ul>
+
+        <p class="example__p">
+          To plan the final task, consider what learners would need to do to provide evidence of each
+          objective:
+        </p>
+
+        <div class="dtable dtable--evidence">
+          <div class="dtable__head">
+            <div class="dtable__cell">Module objective</div>
+            <div class="dtable__cell">Evidence of learning</div>
+          </div>
+          {
+            evidenceRows.map((r) => (
+              <div class="dtable__row">
+                <div class="dtable__cell dtable__cell--key">{r.objective}</div>
+                <div class="dtable__cell">{r.evidence}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="example__p example__p--top">
+          These actions can be brought together in one meaningful task. Learners could receive a
+          business question and an unfamiliar dataset, inspect the data in relation to the question,
+          and document whether the dataset is fit for the proposed analysis.
+        </p>
+        <p class="example__p">
+          For this Module, we will call that task a <strong>Data Fitness Review</strong>.
+        </p>
+
+        <div class="objbox objbox--accent">
+          <p class="objbox__eyebrow objbox__eyebrow--accent">The final task</p>
+          <p class="objbox__text">
+            Complete a Data Fitness Review that evaluates whether an available dataset is suitable
+            for addressing a business question and documents concerns that could affect the proposed
+            analysis.
+          </p>
+        </div>
+
+        <p class="example__p">Now work backward from that task:</p>
+
+        <div class="dtable dtable--backward">
+          <div class="dtable__head">
+            <div class="dtable__cell">Planning question</div>
+            <div class="dtable__cell">Decision for this Module</div>
+          </div>
+          {
+            backwardRows.map((r) => (
+              <div class="dtable__row">
+                <div class="dtable__cell dtable__cell--key">{r.q}</div>
+                <div class="dtable__cell">{r.a}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="example__p example__p--top">
+          These decisions establish what the Module must prepare learners to do. The next step is to
+          arrange the necessary explanation, modeling, practice, and feedback into a coherent learning
+          path.
+        </p>
+      </WorkedExample>
+    </section>
+
+    <!-- Step 3 -->
+    <section class="step step--module" id="step3">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[2]}`}>3</span>
+        <span class="step__count">Step 3 of 5</span>
+      </div>
+      <h2 class="step__title">Design the learning path</h2>
+      <p class="step__p">
+        Modules do not need to follow one fixed structure. Some topics require more explanation,
+        while others benefit from repeated practice, multiple examples, or opportunities to make and
+        correct mistakes.
+      </p>
+      <p class="step__p step__p--tight">
+        Many effective Modules include some version of this learning arc:
       </p>
 
       <div class="arclist" data-keep>
@@ -405,29 +568,24 @@ const lessonRows = [
       </div>
 
       <p class="step__p step__p--gap">
-        These stages do not need to appear only once or in a fixed order. A complex Module might move
-        between explanation, modeling, practice, and feedback several times before learners are ready
-        to apply the full skill independently.
+        These stages may repeat or overlap. For example, learners may move through explanation,
+        modeling, practice, and feedback several times before completing the final task.
       </p>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Mapping the learning path</h3>
+      <WorkedExample
+        id="wx-path"
+        lead="Mapping and supporting"
+        name="the learning path"
+      >
         <p class="example__p">
-          In <em>Identifying and Evaluating Business Data</em>, learners are working toward this
-          Module objective:
+          The backward-planning process established that learners will complete a <strong
+            >Data Fitness Review</strong
+          >. To succeed, they will need to identify the data a business question requires, evaluate an
+          available dataset against those requirements, and explain how its limitations could affect
+          an analysis.
         </p>
-        <div class="objbox objbox--plain">
-          <p class="objbox__text">
-            Determine whether an available dataset is appropriate for investigating a business
-            question.
-          </p>
-        </div>
         <p class="example__p example__p--gap">
-          Learners may already understand that a dataset contains records and fields. The new
-          challenge is learning to judge whether the data is appropriate for a specific question. The
-          Module therefore needs to do more than explain the characteristics of quality data. It
-          needs to make the evaluation process visible and give learners an opportunity to use it.
+          The learning path prepares learners for each part of that task:
         </p>
 
         <div class="dtable dtable--path">
@@ -448,25 +606,29 @@ const lessonRows = [
         </div>
 
         <p class="example__p example__p--top">
-          Each stage addresses a different learner need. A Reading might introduce useful data-quality
-          criteria, but information alone may not prepare learners to make the judgment. Learners
-          also need to see the criteria applied, try the process themselves, learn from feedback, and
-          use what they have learned in a new context.
+          Each stage prepares learners for something the final task requires. The explanation
+          introduces the evaluation criteria, the model shows how to apply and document them, the
+          practice lets learners try the process with support, and the feedback helps them refine
+          their judgment before working independently.
         </p>
         <p class="example__p">
-          Mapping the learning path before selecting or building assets can help ensure that each
-          part of the Module has a clear role in moving learners toward the objectives.
+          The path may still move among explanation, modeling, practice, and feedback more than once.
+          What matters is that learners receive the preparation they need before being asked to
+          complete the Data Fitness Review on their own.
         </p>
-      </div>
+      </WorkedExample>
     </section>
 
-    <!-- Step 3 -->
-    <section class="step step--module" id="step3">
-      <p class="eyebrow step__eyebrow">Step three</p>
-      <h2 class="step__title step__title--module">Choose learning assets intentionally</h2>
+    <!-- Step 4 -->
+    <section class="step step--module" id="step4">
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[3]}`}>4</span>
+        <span class="step__count">Step 4 of 5</span>
+      </div>
+      <h2 class="step__title">Choose Learning Assets intentionally</h2>
       <p class="step__p">
         After mapping the learning path, consider what learners may need at each stage. Then choose
-        the Coursera asset that best supports that part of the experience.
+        the Coursera Learning Asset that best supports that part of the experience.
       </p>
       <p class="step__p">
         Begin with the learner’s experience rather than the format. A worked example, for instance,
@@ -480,7 +642,7 @@ const lessonRows = [
         progress toward the Module objectives.
       </p>
 
-      <h3 class="h3">Learning assets available in Coursera</h3>
+      <h3 class="h3">Learning Assets available in Coursera</h3>
       <div class="dtable dtable--assets" data-keep>
         <div class="dtable__head">
           <div class="dtable__cell">Coursera asset</div>
@@ -504,7 +666,7 @@ const lessonRows = [
         </p>
       </div>
 
-      <h3 class="h3">Choose an asset that fits the learning need</h3>
+      <h3 class="h3">Choose a Learning Asset that fits the learning need</h3>
       <p class="step__p step__p--tight">As you consider the options, ask:</p>
       <ul class="qlist">
         {assetQuestions.map((q) => <li>{q}</li>)}
@@ -514,8 +676,8 @@ const lessonRows = [
         <div class="askpair__good">
           <p class="eyebrow askpair__eyebrow">You might ask</p>
           <p class="askpair__q">
-            What does the learner need to do next, and which Coursera asset might support that need
-            most effectively?
+            What does the learner need to do next, and which Coursera Learning Asset might support
+            that need most effectively?
           </p>
         </div>
         <div class="askpair__weak">
@@ -524,203 +686,190 @@ const lessonRows = [
         </div>
       </div>
 
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Choosing assets for a purpose</h3>
+      <WorkedExample
+        id="wx-assets"
+        lead="Choosing Learning Assets to"
+        name="support your Module objectives"
+      >
+        <p class="example__p">
+          The learning path for <strong>Module 1: Identifying and Evaluating Business Data</strong>
+          establishes what learners need to experience: an introduction to the evaluation criteria, a
+          model of expert reasoning, supported practice with feedback, and an opportunity to complete
+          the Data Fitness Review independently.
+        </p>
         <p class="example__p example__p--gap">
-          In <em>Identifying and Evaluating Business Data</em>, learners need to understand
-          data-fitness criteria, observe how those criteria are applied, practice using them, and
-          evaluate a new dataset independently.
+          The next step is to organize those experiences into Lessons and select the Coursera Learning
+          Assets that will support them.
         </p>
 
-        <div class="dtable dtable--choices">
+        <div class="dtable dtable--chosen">
           <div class="dtable__head">
-            <div class="dtable__cell">Learner need</div>
-            <div class="dtable__cell">Coursera asset</div>
-            <div class="dtable__cell">Role in the learning path</div>
+            <div class="dtable__cell">Learning path</div>
+            <div class="dtable__cell">Learning Assets</div>
+            <div class="dtable__cell">Learning purpose</div>
           </div>
           {
-            assetChoices.map((c) => (
+            chosenAssets.map((c) => (
               <div class="dtable__row">
-                <div class="dtable__cell">{c.need}</div>
-                <div class="dtable__cell dtable__cell--key">{c.asset}</div>
-                <div class="dtable__cell">{c.role}</div>
+                <div class="dtable__cell dtable__cell--key">{c.path}</div>
+                <div class="dtable__cell">
+                  <p class="chosen__type">{c.type}</p>
+                  <p class="chosen__title">{c.title}</p>
+                </div>
+                <div class="dtable__cell">{c.purpose}</div>
               </div>
             ))
           }
         </div>
 
         <p class="example__p example__p--top">
-          The Module does not need to use every available asset or include variety simply for its own
-          sake. Each selected asset should have a clear purpose. In this example, the Reading
-          introduces and supports, the Video models, the ungraded Assessment provides practice and
-          feedback, and the graded Assessment asks learners to apply what they have learned
-          independently.
+          These assets can be organized into a smaller number of Lessons. A Lesson is not a single
+          asset; it is a purposeful segment of the learning path that may bring several assets
+          together.
         </p>
-      </div>
-    </section>
-
-    <!-- Step 4 -->
-    <section class="step step--module" id="step4">
-      <p class="eyebrow step__eyebrow">Step four</p>
-      <h2 class="step__title step__title--module">Design practice, feedback, and support</h2>
-      <p class="step__p">
-        In a face-to-face course, an instructor can notice hesitation, clarify an instruction, offer
-        another example, or help a learner recover from a mistake. In an asynchronous Module, that
-        support needs to be anticipated and built into the learning path.
-      </p>
-      <p class="step__p step__p--tight">Consider what learners will need at each stage:</p>
-
-      <div class="stages" data-keep>
-        {
-          supportStages.map((s) => (
-            <div class="stages__row">
-              <p class="stages__title">{s.title}</p>
-              <p class="stages__body">{s.body}</p>
-            </div>
-          ))
-        }
-      </div>
-
-      <div class="progression" data-keep>
-        <p class="progression__intro">
-          The goal is to build a progression from supported practice to independent application:
+        <p class="example__p example__p--tight">For example:</p>
+        <ul class="plainlist">
+          <li>
+            <strong>Lesson 1: Identify the data the question requires</strong> includes a Video and a
+            Reading.
+          </li>
+          <li>
+            <strong>Lesson 2: Evaluate whether the data is fit for purpose</strong> includes two
+            Videos, a Reading, and a hands-on activity.
+          </li>
+          <li>
+            <strong>Lesson 3: Complete a Data Fitness Review</strong> includes a Video and the
+            auto-graded quiz.
+          </li>
+        </ul>
+        <p class="example__p">
+          The Module meets Coursera’s asset expectations while keeping every selection connected to
+          the learning path. The goal is not to minimize the number of assets, but to avoid adding
+          assets that do not help learners progress toward the final task.
         </p>
-        <div class="progression__row">
-          <span class="progression__step">See what is expected</span>
-          <span class="progression__arrow" aria-hidden="true">→</span>
-          <span class="progression__step">Try it with support</span>
-          <span class="progression__arrow" aria-hidden="true">→</span>
-          <span class="progression__step">Learn from feedback</span>
-          <span class="progression__arrow" aria-hidden="true">→</span>
-          <span class="progression__step">Apply it independently</span>
-        </div>
-      </div>
-
-      <div class="example" data-keep>
-        <p class="eyebrow example__eyebrow">Example</p>
-        <h3 class="example__title">Building support into the Module</h3>
-        <p class="example__p example__p--gap">
-          In <em>Identifying and Evaluating Business Data</em>, learners are preparing to complete a
-          graded Data Fitness Review. The Module builds support around that task so learners can
-          progress from guided practice to independent evaluation.
-        </p>
-
-        <div class="phases">
-          <div class="phases__item">
-            <p class="phases__eyebrow">Before learners begin</p>
-            <p class="phases__body">
-              Learners review a worked example of a completed Data Fitness Review and the criteria
-              used to evaluate it. The instructions explain what they will examine, what they will
-              produce, and how their review will be evaluated.
-            </p>
-          </div>
-
-          <div class="phases__item">
-            <p class="phases__eyebrow">While learners practice</p>
-            <p class="phases__body">
-              Learners use a downloadable data-quality checklist to inspect a practice dataset.
-              Guiding questions prompt them to consider its relevance, completeness, level of detail,
-              and basic quality.
-            </p>
-          </div>
-
-          <div class="phases__item">
-            <p class="phases__eyebrow">After learners respond</p>
-            <p class="phases__body">
-              Learners receive feedback that identifies what they may have overlooked, explains why
-              it matters, and prompts them to reconsider their judgment:
-            </p>
-            <div class="feedback">
-              <p class="feedback__eyebrow">Feedback on the practice activity</p>
-              <p class="feedback__quote">
-                The dataset includes customer purchase totals, but it does not include the dates of
-                those purchases. Without dates, it cannot show how purchasing has changed over time.
-                What additional information would you need before using this dataset to investigate
-                the business question?
-              </p>
-            </div>
-          </div>
-
-          <div class="phases__item">
-            <p class="phases__eyebrow">If learners get stuck</p>
-            <p class="phases__body">They can return to support matched to the task:</p>
-            <ul class="plainlist">
-              {stuckSupports.map((s) => <li>{s}</li>)}
-            </ul>
-          </div>
-
-          <div class="phases__item">
-            <p class="phases__eyebrow">When learners are ready to demonstrate the objective</p>
-            <p class="phases__body">
-              The graded Data Fitness Review presents a new business question and dataset. Learners
-              apply the same criteria independently, document their concerns, and determine whether
-              the data is appropriate for the proposed analysis.
-            </p>
-          </div>
-        </div>
-      </div>
+      </WorkedExample>
     </section>
 
     <!-- Step 5: template -->
     <section class="step step--module step--last" id="step5">
-      <p class="eyebrow step__eyebrow">Step five</p>
-      <h2 class="step__title step__title--module">Complete your Module plan</h2>
-      <p class="step__p step__p--gap">
-        Use this page to work through the decisions for each Module, then record them in the Design
-        Document.
+      <div class="step__head">
+        <span class="step__badge" style={`--badge:${badge[4]}`}>5</span>
+        <span class="step__count">Step 5 of 5</span>
+      </div>
+      <h2 class="step__title">Complete your Module plan</h2>
+      <p class="step__q">
+        Use this page to work through the course-design decisions, then record them in the Design
+        Document. The sample below shows how those decisions might come together for <strong
+          >Module 1: Identifying and Evaluating Business Data</strong
+        > from <strong>Course 1: Foundations of Data Analytics</strong> in the example <strong
+          >Specialization: <span class="nostyle">Data Analytics for Business Decisions</span></strong
+        >. Use it as a reference as you develop your own plan.
       </p>
 
       <div class="tmpl">
         <div class="tmpl__bar">
-          <span class="tmpl__bar-title">Course 2 · Module 1</span>
+          <span class="tmpl__bar-title">Course 1 · Module 1</span>
           <span class="tmpl__bar-note">Repeats per module</span>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Module title</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Module title</p>
+            <BestPractice title="Module title">
+              <p>
+                Give the Module a <strong>clear, focused purpose within the Course</strong>. A strong
+                title signals what learners will learn, do, or produce—not simply where the Module
+                appears in the sequence. Favor descriptive titles over labels such as <em
+                  >Module 2</em
+                > or <em>Introduction to…</em>
+              </p>
+            </BestPractice>
+          </div>
           <p class="tmpl__help">Draft what learners will learn, do, or produce in this Module.</p>
-          <div class="tmpl__value"><p>Interpreting Summary Measures</p></div>
+          <div class="tmpl__value"><p>Identifying and Evaluating Business Data</p></div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Module description</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Module description</p>
+            <BestPractice title="Module description">
+              <p>
+                Orient learners to <strong>what they will accomplish and why it matters</strong>.
+                Keep the description learner-facing and focused on the Module’s purpose rather than
+                listing every topic or learning asset.
+              </p>
+            </BestPractice>
+          </div>
           <p class="tmpl__help">
             Draft a learner-friendly 2-3 sentence summary of the Module content and learning
             outcomes.
           </p>
           <div class="tmpl__value">
             <p>
-              This Module focuses on what summary measures reveal about a business question. You'll
-              calculate common measures for a customer dataset and practice interpreting them in
-              context, then decide which conclusions the numbers actually support.
+              Learn how to determine whether available data can address a business question. You will
+              identify the data a question requires, evaluate a sample dataset for relevance,
+              completeness, and quality concerns, and document limitations that could affect an
+              analysis.
             </p>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">Module learning objectives</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Module learning objectives</p>
+            <BestPractice title="Module learning objectives">
+              <p>
+                Break the larger Course objectives into <strong
+                  >1–3 smaller learning goals learners can reasonably achieve within this Module</strong
+                >. Each objective should describe something learners can demonstrate and help guide
+                the practice and assessment you design.
+              </p>
+              <p>
+                Begin with observable verbs such as <strong
+                  >identify, calculate, apply, analyze, interpret, evaluate, create,</strong
+                > or <strong>recommend</strong>.
+              </p>
+            </BestPractice>
+          </div>
           <p class="tmpl__help">
             Write 1-3 actionable, measurable learning objectives that describe what learners will be
             able to do by the end of the Module.
           </p>
           <div class="tmpl__value">
             <ol>
-              <li>Identify variables relevant to a business question.</li>
-              <li>Calculate appropriate summary measures for a dataset.</li>
-              <li>Interpret those measures in the context of the business question.</li>
+              {moduleObjectives.map((o) => <li>{o}</li>)}
             </ol>
           </div>
         </div>
 
         <div class="tmpl__row">
           <div class="tmpl__field">
-            <p class="tmpl__label">Estimated learning time</p>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Estimated learning time</p>
+              <BestPractice title="Estimated learning time">
+                <p>
+                  Estimate the <strong>complete learner experience</strong>, including videos,
+                  readings, activities, practice, and the graded assessment—not just the time spent
+                  viewing instructional content. Keep the Module focused enough to feel like a
+                  manageable step in a self-paced Course.
+                </p>
+              </BestPractice>
+            </div>
             <div class="tmpl__value"><p>Approximately 45 minutes</p></div>
           </div>
           <div class="tmpl__field">
-            <p class="tmpl__label">Graded assessment title</p>
-            <div class="tmpl__value"><p>Interpreting Summary Measures</p></div>
+            <div class="tmpl__labelrow">
+              <p class="tmpl__label">Graded assessment title</p>
+              <BestPractice title="Graded assessment title" align="right">
+                <p>
+                  Use a learner-facing title that reflects the <strong
+                    >learning being demonstrated</strong
+                  >, rather than a generic label such as <em>Module 2 Quiz</em>. The assessment title
+                  should help learners understand what they are about to do.
+                </p>
+              </BestPractice>
+            </div>
+            <div class="tmpl__value"><p>Data Fitness Review</p></div>
           </div>
         </div>
 
@@ -740,30 +889,103 @@ const lessonRows = [
           <div class="dtable dtable--lessons">
             <div class="dtable__head dtable__head--gold">
               <div class="dtable__cell">#</div>
-              <div class="dtable__cell">Lesson (optional)</div>
-              <div class="dtable__cell">Asset type</div>
-              <div class="dtable__cell">Asset title</div>
-              <div class="dtable__cell">Source link</div>
+              <div class="dtable__cell">
+                <span class="dtable__label">Lesson (optional)</span>
+                <BestPractice title="Lesson (optional)" tone="gold" size="sm">
+                  <p>
+                    Use Lessons when they help organize several learning assets around a <strong
+                      >meaningful subtopic, task, or stage of learning</strong
+                    >. A Lesson should make the Module easier to navigate—not add another layer of
+                    structure simply for its own sake.
+                  </p>
+                  <p>
+                    Short Modules may not need Lessons at all. Learning assets can appear directly in
+                    the Module when that creates a clearer experience for learners.
+                  </p>
+                </BestPractice>
+              </div>
+              <div class="dtable__cell">
+                <span class="dtable__label">Asset type</span>
+                <BestPractice title="Asset type" tone="gold" size="sm" width={440}>
+                  <p>
+                    Choose the learning asset based on <strong
+                      >what learners need to do at that point in the learning experience</strong
+                    >, rather than defaulting to video.
+                  </p>
+                  <p>Different formats support different purposes:</p>
+                  <ul class="bp__list">
+                    <li>Explain or demonstrate → Video</li>
+                    <li>Provide reference or step-by-step guidance → Reading</li>
+                    <li>Connect learning to experience or reason through a case → Dialogue</li>
+                    <li>Try a skill directly → Hands-on Practice, Lab, or interactive activity</li>
+                    <li>Check understanding and receive feedback → Practice Quiz</li>
+                    <li>Demonstrate achievement → Graded Assessment</li>
+                  </ul>
+                  <p>When appropriate, aim for a rhythm of:</p>
+                  <p class="bp__rhythm">Learn → Try → Receive feedback → Apply</p>
+                  <p>
+                    This often gives learners more opportunities to use what they are learning than
+                    placing all instruction first and all assessment at the end.
+                  </p>
+                </BestPractice>
+              </div>
+              <div class="dtable__cell">
+                <span class="dtable__label">Asset title</span>
+                <BestPractice title="Asset title" tone="gold" size="sm" align="right" width={440}>
+                  <p>
+                    Use <strong>specific, learner-facing titles</strong> that tell learners what they
+                    are about to learn or do. Avoid production labels such as <em>Video 2</em>, <em
+                      >Reading 1</em
+                    >, or <em>Activity</em>. Clear titles also make the learning path easier to scan
+                    in a self-paced Course.
+                  </p>
+                  <p>
+                    <strong>Linking the source.</strong> Link to the <strong
+                      >most current source material your Learning Experience Designer should use to
+                      build the asset</strong
+                    >. Make sure the source is accessible to the project team, and indicate whether it
+                    is draft, under review, or final when useful.
+                  </p>
+                  <p>
+                    Whenever possible, link to editable source material rather than a copy created
+                    only for review.
+                  </p>
+                </BestPractice>
+              </div>
             </div>
             {
               lessonRows.map((r) => (
                 <div class="dtable__row">
                   <div class="dtable__cell">{r[0]}</div>
                   <div class="dtable__cell">{r[1]}</div>
-                  <div class="dtable__cell dtable__cell--key">{r[2]}</div>
-                  <div class="dtable__cell">{r[3]}</div>
-                  <div class="dtable__cell dtable__cell--link">[ link ]</div>
+                  <div class="dtable__cell dtable__cell--type">{r[2]}</div>
+                  <div class="dtable__cell dtable__cell--title">{r[3]}</div>
                 </div>
               ))
             }
-            <div class="dtable__more">…</div>
           </div>
         </div>
 
         <div class="tmpl__field">
-          <p class="tmpl__label">
-            Additional build notes, dependencies, or accessibility information
-          </p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">
+              Additional build notes, dependencies, or accessibility information
+            </p>
+            <BestPractice title="Additional build notes, dependencies, or accessibility information">
+              <p>
+                Use this space for information the Learning Experience Designer needs that <strong
+                  >isn’t clear from the source material itself</strong
+                >. Note required sequencing, dependencies between assets, setup needs, accessibility
+                considerations, external tools, or special build behavior.
+              </p>
+              <p>
+                For a self-paced Course, pay particular attention to anything learners may need in
+                order to complete the experience without live instructor support. Consider whether
+                learners will know what to do, what materials or tools they need, and how they can
+                check their progress.
+              </p>
+            </BestPractice>
+          </div>
           <div class="tmpl__value">
             <p>
               Customer dataset supplied as a spreadsheet. No specialized software required. Checklist
@@ -773,7 +995,27 @@ const lessonRows = [
         </div>
 
         <div class="tmpl__cta">
-          <p class="tmpl__label">Course 2 · Module 1 Graded Quiz</p>
+          <div class="tmpl__labelrow">
+            <p class="tmpl__label">Course 1 · Module 1 Graded Quiz</p>
+            <BestPractice title="Graded quiz">
+              <p>
+                Build the quiz around the <strong>Module objectives</strong>, rather than testing
+                isolated facts from videos or readings. When the objective calls for application,
+                interpretation, or decision-making, design questions that ask learners to apply,
+                interpret, distinguish, or decide.
+              </p>
+              <p>
+                Provide useful feedback for <strong>both correct and incorrect responses</strong>.
+                Feedback can explain why an answer works, clarify a misconception, or point learners
+                toward what they may want to review.
+              </p>
+              <p>
+                Use the <strong>Graded Quiz Import Template in your Design Document</strong> when
+                drafting quiz questions. Working in the template helps organize questions, answer
+                options, correct answers, and feedback in a format that supports the Coursera build.
+              </p>
+            </BestPractice>
+          </div>
           <p class="tmpl__help">
             Before writing your questions, please review the Coursera Graded Quiz Template and
             Guidelines. The quiz should assess the objectives for this module.
@@ -790,23 +1032,12 @@ const lessonRows = [
     grid-template-columns: repeat(5, 1fr);
   }
 
-  /* Module steps open with an eyebrow rather than a numbered badge. */
   .step--module {
-    padding: 72px var(--section-pad-x) 0;
+    padding: 68px var(--section-pad-x) 0;
   }
 
   .step--last {
     padding-bottom: 8px;
-  }
-
-  .step__eyebrow {
-    margin: 0 0 8px;
-    letter-spacing: 0.18em;
-  }
-
-  .step__title--module {
-    margin: 0 0 24px;
-    font-size: 38px;
   }
 
   .step__p--gap {
@@ -814,11 +1045,21 @@ const lessonRows = [
   }
 
   .step__p--tight {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
+  }
+
+  .step__p--strong {
+    margin-bottom: 28px;
+    font-weight: 600;
+    color: var(--text-strong);
   }
 
   .h3 {
     margin: 0 0 16px;
+  }
+
+  .nostyle {
+    font-style: normal;
   }
 
   /* --- Hierarchy context rows --------------------------------------------- */
@@ -851,14 +1092,14 @@ const lessonRows = [
 
   .context__row[data-depth='2'] {
     --depth: 2;
-    --label-w: 76px;
+    --label-w: 80px;
   }
 
   .context__label {
     flex: none;
     width: var(--label-w);
     padding-top: 3px;
-    font-size: 11px;
+    font-size: var(--fs-1);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-subtle);
@@ -872,7 +1113,7 @@ const lessonRows = [
   .context__value {
     flex: 1;
     min-width: 0;
-    font-size: 16px;
+    font-size: var(--fs-2);
     line-height: 1.5;
     color: var(--text-strong);
   }
@@ -898,7 +1139,7 @@ const lessonRows = [
 
   .objbox__eyebrow {
     margin: 0 0 6px;
-    font-size: 11.5px;
+    font-size: var(--fs-1);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-subtle);
@@ -906,25 +1147,34 @@ const lessonRows = [
     max-width: var(--measure-body);
   }
 
-  .objbox__eyebrow--teal {
-    color: var(--dim-a11y-text);
+  .objbox__eyebrow--accent {
+    color: var(--accent-dark);
   }
 
   .objbox__text {
     margin: 0;
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     line-height: 1.5;
     color: var(--text-strong);
     max-width: var(--measure-body);
   }
 
-  .objbox__quote {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 21px;
-    line-height: 1.5;
-    color: var(--text-strong);
-    max-width: var(--measure-body);
+  .objbox__text--stem {
+    margin-bottom: 10px;
+  }
+
+  .bullets--accent {
+    --bullet-color: var(--accent);
+  }
+
+  .bullets--accent li {
+    font-size: var(--fs-3);
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  .bullets--gap {
+    margin-bottom: 20px;
   }
 
   .plainlist {
@@ -936,18 +1186,18 @@ const lessonRows = [
   }
 
   .plainlist li {
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     line-height: 1.6;
     color: var(--text-body);
     max-width: var(--measure-body);
   }
 
-  .example--gap {
-    margin-bottom: 36px;
-  }
-
   .example__p--gap {
     margin-bottom: 24px;
+  }
+
+  .example__p--tight {
+    margin-bottom: 12px;
   }
 
   .example__p--top {
@@ -965,91 +1215,20 @@ const lessonRows = [
     margin: 0 0 36px;
   }
 
-  .note-gold__head {
-    margin: 0 0 8px;
-    font-size: 16.5px;
-    font-weight: 700;
-    color: var(--level-assets-dark);
-  }
-
   .note-gold__text {
-    margin: 0 0 16px;
-    font-size: 16px;
+    margin: 0;
+    font-size: var(--fs-2);
     line-height: 1.7;
     color: var(--gold-body);
     max-width: var(--measure-body);
   }
 
-  .note-gold__text--only {
-    margin: 0;
-  }
-
-  .note-gold__sub {
-    margin: 0 0 12px;
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--level-assets-dark);
-    font-weight: 700;
-  }
-
-  .verbs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .verb {
-    background: var(--bg-card);
-    border: 1px solid var(--gold-border-soft);
-    border-radius: 2px;
-    padding: 6px 12px;
-    font-size: 14.5px;
-    color: var(--text-strong);
-  }
-
-  /* --- "Consider" grid ----------------------------------------------------- */
-  .consider__eyebrow {
-    margin: 0 0 14px;
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-  }
-
-  .consider {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin: 0 0 36px;
-  }
-
-  .consider__cell {
-    background: var(--bg-card);
-    padding: 20px 24px;
-  }
-
-  .consider__title {
-    margin: 0 0 5px;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .consider__body {
-    margin: 0;
-    font-size: 15.5px;
-    line-height: 1.65;
-    color: var(--text-secondary);
-    max-width: var(--measure-body);
-  }
-
-  /* --- Learning arc rows ---------------------------------------------------- */
+  /* --- Learning arc / planning question rows -------------------------------- */
   .arclist {
     display: flex;
     flex-direction: column;
     border-top: 1px solid var(--rule);
-    margin: 0 0 24px;
+    margin: 0 0 36px;
   }
 
   .arclist__row {
@@ -1061,20 +1240,40 @@ const lessonRows = [
     border-bottom: 1px solid var(--rule);
   }
 
+  /* The step-2 planning questions stack their title above the body rather
+     than sitting in a fixed label column. */
+  .arclist__row--stacked {
+    grid-template-columns: 30px minmax(0, 1fr);
+    padding: 20px 0;
+  }
+
+  .arclist__stack {
+    min-width: 0;
+  }
+
+  .arclist__stack .arclist__label {
+    display: block;
+    margin: 0 0 5px;
+  }
+
+  .arclist__stack .arclist__body {
+    display: block;
+  }
+
   .arclist__n {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: var(--fs-5);
     color: var(--accent);
   }
 
   .arclist__label {
-    font-size: 17px;
+    font-size: var(--fs-3);
     font-weight: 700;
     color: var(--navy);
   }
 
   .arclist__body {
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     line-height: 1.65;
     color: var(--text-body);
     max-width: var(--measure-body);
@@ -1084,7 +1283,6 @@ const lessonRows = [
   .dtable {
     border: 1px solid var(--rule-card);
     border-radius: var(--radius-panel);
-    overflow: hidden;
     background: var(--bg-card);
     margin: 0 0 26px;
   }
@@ -1097,7 +1295,8 @@ const lessonRows = [
   .dtable__head {
     background: var(--panel-cool);
     border-bottom: 1px solid var(--rule-card);
-    font-size: 11.5px;
+    border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+    font-size: var(--fs-1);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -1120,20 +1319,30 @@ const lessonRows = [
 
   .dtable__cell {
     padding: 16px 20px;
-    font-size: 16px;
-    line-height: 1.65;
+    font-size: var(--fs-2);
+    line-height: 1.6;
     color: var(--text-body);
     border-left: 1px solid var(--rule);
     max-width: var(--measure-body);
   }
 
   .dtable__head .dtable__cell {
+    /* The ⓘ popovers hang off these cells, so each is a positioning
+       context and must lay its label and trigger out in a row. */
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     padding: 14px 20px;
     border-left-color: var(--rule-card);
   }
 
   .dtable__head--gold .dtable__cell {
     border-left-color: var(--level-assets-tint-border);
+  }
+
+  .dtable__label {
+    white-space: nowrap;
   }
 
   .dtable__cell:first-child {
@@ -1146,15 +1355,20 @@ const lessonRows = [
   }
 
   .dtable__cell--asset {
-    font-size: 16.5px;
+    font-size: var(--fs-3);
     font-weight: 700;
     color: var(--navy);
     padding: 18px 22px;
   }
 
-  .dtable__cell--link {
-    color: var(--text-subtle);
-    white-space: nowrap;
+  .dtable--evidence .dtable__head,
+  .dtable--evidence .dtable__row {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+
+  .dtable--backward .dtable__head,
+  .dtable--backward .dtable__row {
+    grid-template-columns: 300px minmax(0, 1fr);
   }
 
   .dtable--path .dtable__head,
@@ -1167,153 +1381,97 @@ const lessonRows = [
     grid-template-columns: 230px 1fr;
   }
 
-  .dtable--choices .dtable__head,
-  .dtable--choices .dtable__row {
-    grid-template-columns: 1fr 190px 1fr;
+  .dtable--chosen .dtable__head,
+  .dtable--chosen .dtable__row {
+    grid-template-columns: 215px 255px minmax(0, 1fr);
   }
 
-  .dtable--lessons .dtable__head,
-  .dtable--lessons .dtable__row {
-    grid-template-columns: 44px 1fr 150px 1.5fr 88px;
-  }
-
-  .dtable--lessons .dtable__cell {
-    font-size: 15px;
-    padding: 12px 16px;
-  }
-
-  .dtable__more {
-    padding: 10px 16px;
-    color: var(--text-subtle);
-    border-top: 1px solid var(--rule);
-  }
-
-  /* --- Support stages ------------------------------------------------------- */
-  .stages {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--rule);
-    margin: 0 0 30px;
-  }
-
-  .stages__row {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 24px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .stages__title {
-    margin: 0;
-    font-size: 17px;
+  .chosen__type {
+    margin: 0 0 3px;
+    font-size: var(--fs-1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
     font-weight: 700;
-    color: var(--navy);
   }
 
-  .stages__body {
+  .chosen__title {
     margin: 0;
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--text-body);
-    max-width: var(--measure-body);
-  }
-
-  /* --- Progression strip ----------------------------------------------------- */
-  .progression {
-    background: var(--tint);
-    border-left: 3px solid var(--accent);
-    padding: 24px 28px;
-    margin: 0 0 36px;
-  }
-
-  .progression__intro {
-    margin: 0 0 12px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text-body);
-    max-width: var(--measure-body);
-  }
-
-  .progression__row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .progression__step {
-    background: var(--bg-card);
-    border: 1px solid var(--rule-card);
-    border-radius: 2px;
-    padding: 10px 16px;
-    font-size: 15.5px;
+    font-size: var(--fs-2);
+    line-height: 1.5;
     font-weight: 600;
     color: var(--navy);
   }
 
-  .progression__arrow {
-    color: var(--accent);
-    white-space: nowrap;
+  .dtable--lessons .dtable__head,
+  .dtable--lessons .dtable__row {
+    grid-template-columns: 40px 1fr 1.1fr 1.9fr;
   }
 
-  /* --- Support phases --------------------------------------------------------- */
-  .phases {
+  .dtable--lessons .dtable__cell {
+    padding: 14px 12px;
+    line-height: 1.5;
+  }
+
+  .dtable--lessons .dtable__head .dtable__cell {
+    padding: 12px 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .dtable__cell--type {
+    font-weight: 600;
+    color: var(--level-assets-dark);
+  }
+
+  /* Sample asset titles. Deliberately not links — there is nothing real to
+     point at yet. */
+  .dtable__cell--title {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* --- Question list --------------------------------------------------------- */
+  .qlist {
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
   }
 
-  .phases__eyebrow {
-    margin: 0 0 8px;
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    font-weight: 700;
-  }
-
-  .phases__body {
-    margin: 0 0 16px;
-    font-size: 16.5px;
-    line-height: 1.7;
-    color: var(--text-body);
-    max-width: var(--measure-body);
-  }
-
-  .phases__item > .phases__body:last-child {
-    margin-bottom: 0;
-  }
-
-  .feedback {
-    background: var(--level-assets-tint);
-    border: 1px solid var(--level-assets-tint-border);
-    border-radius: var(--radius-panel);
-    padding: 20px 24px;
-  }
-
-  .feedback__eyebrow {
-    margin: 0 0 8px;
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--level-assets-dark);
-    font-weight: 700;
-    max-width: var(--measure-body);
-  }
-
-  .feedback__quote {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 20px;
-    line-height: 1.55;
+  .qlist li {
+    font-size: var(--fs-3);
+    line-height: 1.6;
     color: var(--text-strong);
-    max-width: var(--measure-body);
+    padding-left: 18px;
+    position: relative;
+    max-width: var(--measure-section);
+  }
+
+  .qlist li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
   }
 
   /* --- Template --------------------------------------------------------------- */
+  .tmpl__labelrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 6px;
+  }
+
+  .tmpl__labelrow .tmpl__label {
+    margin: 0;
+    white-space: nowrap;
+  }
+
   .tmpl__label {
-    font-size: 15px;
     color: var(--level-module-dark);
   }
 
@@ -1329,7 +1487,7 @@ const lessonRows = [
 
   .tmpl__aim {
     margin: 0 0 14px;
-    font-size: 14.5px;
+    font-size: var(--fs-2);
     color: var(--level-assets-dark);
     font-weight: 600;
   }
@@ -1338,11 +1496,43 @@ const lessonRows = [
     border-radius: 2px;
   }
 
+  .tmpl__bar-note {
+    color: #fff;
+  }
+
   .tmpl__cta {
     background: var(--panel-warm);
   }
 
   .tmpl__cta .tmpl__help {
     margin-bottom: 16px;
+  }
+
+  .btn--gold {
+    background: var(--level-assets-dark);
+    color: #fff;
+    font-size: var(--fs-2);
+  }
+
+  .btn--gold:hover {
+    background: var(--gold-body);
+    color: #fff;
+  }
+
+  /* Lists inside a best-practice popover. */
+  .bp__list {
+    margin: 0 0 10px;
+    padding: 0 0 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .bp__rhythm {
+    background: var(--level-assets-tint);
+    border-left: 3px solid var(--level-assets);
+    padding: 12px 16px;
+    font-weight: 700;
+    color: var(--gold-body);
   }
 </style>
