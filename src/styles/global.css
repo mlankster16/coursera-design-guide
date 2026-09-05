@@ -272,6 +272,27 @@ img {
   padding: 22px 26px;
 }
 
+.note-teal {
+  background: var(--note-teal-bg);
+  border: 1px solid var(--note-teal-border);
+  border-radius: var(--radius-panel);
+  padding: 22px 26px;
+}
+
+.note-teal__title {
+  margin: 0 0 6px;
+  font-size: var(--fs-2);
+  font-weight: 700;
+  color: var(--note-teal-title);
+}
+
+.note-teal__body {
+  margin: 0;
+  font-size: var(--fs-2);
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
 .note-purple {
   background: var(--level-module-tint);
   border: 1px solid var(--level-module-tint-border);

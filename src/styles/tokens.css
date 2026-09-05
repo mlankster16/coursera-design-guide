@@ -56,6 +56,15 @@
   --badge-4: #3a2760;
   --badge-5: #8a5a0b;
 
+  /* Teal aside — a note that adds context rather than stating a
+     requirement, so it reads differently from the gold requirement notes.
+     Shares the accessibility teal used on the Learning Assets page.
+     Title is #2b7d7d rather than the #2c8080 used on white: on this tinted
+     ground #2c8080 measures 4.33:1, just under AA for 15px bold text. */
+  --note-teal-bg: #f1f8f8;
+  --note-teal-border: #cfe2e2;
+  --note-teal-title: #2b7d7d;
+
   /* --- Dimension colors — Learning Assets page only --------------------- */
   --dim-design: #00539b;
   --dim-a11y: #339898;
