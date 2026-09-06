@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Accordion from '../components/Accordion.astro';
-import { url } from '../data/site';
+import { url, designTemplateUrl } from '../data/site';
 
 /* Copy on this page is client-authored and final. The three paragraphs in
    "What is Coursera?" beyond the opening platform sentence are
@@ -127,6 +127,15 @@ const reuseRows = [
       <p class="lead m-body">
         A Learning Experience Designer (LXD) from Duke’s Center for Teaching and Learning will work
         with you throughout the process. This guide introduces the decisions you’ll make together.
+      </p>
+      <p class="lead m-body ohero__lead-2">
+        Use this guide alongside your <a
+          class="ext ext--inline"
+          href={designTemplateUrl}
+          target="_blank"
+          rel="noopener">Duke Coursera Design <span class="nowrap">Template ↗</span></a
+        >. Each page here will help you design one piece of your Specialization or Course, then
+        record those decisions in the template.
       </p>
     </div>
 
@@ -287,6 +296,23 @@ const reuseRows = [
 
   .ohero__eyebrow {
     margin: 0 0 14px;
+  }
+
+  .ohero__lead-2 {
+    margin-top: 18px;
+  }
+
+  /* The site caps external links with a trailing ↗ and pins it so a
+     renderer cannot orphan the glyph onto its own line. Inline in a
+     sentence, pinning the whole four-word phrase risks overflowing the
+     column, so only the last word carries the glyph. */
+  .ext--inline {
+    white-space: normal;
+    color: var(--blue);
+  }
+
+  .nowrap {
+    white-space: nowrap;
   }
 
   .ohero__rail {

@@ -81,6 +81,12 @@ export function assetHref(a: AssetLink): string {
   return a.page ?? `/learning-assets#${a.slug}`;
 }
 
+/** The Duke Coursera Design Template faculty fill in alongside this guide.
+    The /copy suffix is deliberate: it opens Google's "make a copy" prompt
+    so each person gets their own, rather than editing the master. */
+export const designTemplateUrl =
+  'https://docs.google.com/document/d/1C-7HTxae1Xu6AXL8WQou78ctfzDw_s5j76eKeQAMlLI/copy?usp=sharing';
+
 /** Prefix a site-root path with the configured base so links work both at
     the repo root and under /coursera-design-guide on GitHub Pages. */
 export function url(path: string): string {
