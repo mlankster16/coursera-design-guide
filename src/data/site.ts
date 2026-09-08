@@ -62,7 +62,7 @@ export const assetLinks: AssetLink[] = [
   {
     slug: 'plugin',
     label: 'Interactive Plugin',
-    guidance: 'Full guidance for designing Interactive Plugin →',
+    guidance: 'Full guidance for designing Interactive Plugins →',
   },
   { slug: 'dialogue', label: 'Coach Dialogue', guidance: 'Full guidance for designing Coach Dialogue →' },
   { slug: 'roleplay', label: 'Coach Role Play', guidance: 'Full guidance for designing Coach Role Play →' },

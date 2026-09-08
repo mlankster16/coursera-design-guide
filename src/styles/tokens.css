@@ -65,6 +65,16 @@
   --note-teal-border: #cfe2e2;
   --note-teal-title: #2b7d7d;
 
+  /* Deeper teal for the "Accessibility is a Duke requirement" callout on
+     the Learning Assets page. 6.80:1 on --note-teal-bg. */
+  --note-teal-strong: #215f60;
+
+  /* Copper panel border, pairs with --warn-bg / --warn-title. */
+  --warn-border: #efd3c6;
+
+  /* Neutral panel — the "Using AI" cards and the Reading page's meta note. */
+  --panel-neutral: #f4f5f7;
+
   /* --- Dimension colors — Learning Assets page only --------------------- */
   --dim-design: #00539b;
   --dim-a11y: #339898;
