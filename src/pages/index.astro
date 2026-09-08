@@ -17,8 +17,8 @@ const heroRail = [
     body: 'You’ll complete a Design Document with your LXD. Use this guide as a reference as you work.',
   },
   {
-    title: 'Time to read',
-    body: 'About five minutes. Use the tabs above when you’re ready for more detail.',
+    title: 'How to use this',
+    body: 'Return to each page as you reach that part of the design. You don’t need to work through it in order.',
   },
 ];
 
@@ -125,17 +125,17 @@ const reuseRows = [
       <p class="eyebrow eyebrow--copper ohero__eyebrow">For Duke faculty</p>
       <h1 class="h1">Turn your teaching expertise into a Coursera learning experience.</h1>
       <p class="lead m-body">
-        A Learning Experience Designer (LXD) from Duke’s Center for Teaching and Learning will work
-        with you throughout the process. This guide introduces the decisions you’ll make together.
-      </p>
-      <p class="lead m-body ohero__lead-2">
-        Use this guide alongside your <a
-          class="ext ext--inline"
+        This guide and your&nbsp;<a
+          class="inline-link"
           href={designTemplateUrl}
           target="_blank"
-          rel="noopener">Duke Coursera Design <span class="nowrap">Template ↗</span></a
-        >. Each page here will help you design one piece of your Specialization or Course, then
-        record those decisions in the template.
+          rel="noopener">Duke Coursera Design Template</a
+        >&nbsp;are meant to be used together, with a Learning Experience Designer (LXD) from Duke’s
+        Center for Teaching and Learning.
+      </p>
+      <p class="lead m-body ohero__lead-2">
+        You don’t need to read it end to end. Open the page for whatever you’re designing next, talk
+        it through with your LXD, and record what you decide in the template.
       </p>
     </div>
 
@@ -302,17 +302,17 @@ const reuseRows = [
     margin-top: 18px;
   }
 
-  /* The site caps external links with a trailing ↗ and pins it so a
-     renderer cannot orphan the glyph onto its own line. Inline in a
-     sentence, pinning the whole four-word phrase risks overflowing the
-     column, so only the last word carries the glyph. */
-  .ext--inline {
-    white-space: normal;
+  /* No trailing ↗ on this one: it sits mid-sentence, and the design binds
+     it to the words either side with non-breaking spaces instead. */
+  .inline-link {
+    font-weight: 600;
     color: var(--blue);
+    text-decoration: none;
   }
 
-  .nowrap {
-    white-space: nowrap;
+  .inline-link:hover {
+    text-decoration: underline;
+    color: var(--blue);
   }
 
   .ohero__rail {

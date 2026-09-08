@@ -697,6 +697,41 @@ img {
   color: var(--text-subtle);
 }
 
+/* --- Hero rail footnote — closes the at-a-glance rail on the three level
+   pages with a reminder that this is worked through with an LXD. -------- */
+
+.hero__rail-note {
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.hero__rail-note p {
+  margin: 0;
+  font-size: var(--fs-2);
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: var(--measure-body);
+}
+
+/* --- Draft note — sits just above a template section, in the page's own
+   level color, to take the pressure off filling every field. ----------- */
+
+.draftnote {
+  background: var(--tint);
+  border-left: 3px solid var(--accent);
+  padding: 18px 22px;
+  margin: 0 0 28px;
+  max-width: var(--measure-body);
+}
+
+.draftnote p {
+  margin: 0;
+  font-size: var(--fs-3);
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
 /* --- Step jump rail ------------------------------------------------------ */
 
 /* 1px gaps over the divider color fake hairline borders between cells. */

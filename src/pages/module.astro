@@ -330,6 +330,10 @@ const lessonRows = [
             ))
           }
         </div>
+
+        <div class="hero__rail-note">
+          <p>You’ll work through this section with your LXD and record your decisions in the template.</p>
+        </div>
       </div>
     </div>
 
@@ -766,6 +770,10 @@ const lessonRows = [
         >. Use it as a reference as you develop your own plan.
       </p>
 
+
+      <div class="draftnote" data-keep>
+        <p>Bring your draft answers to your next conversation with your LXD; you don’t need to complete every field first.</p>
+      </div>
       <div class="tmpl">
         <div class="tmpl__bar">
           <span class="tmpl__bar-title">Course 1 · Module 1</span>
@@ -939,8 +947,9 @@ const lessonRows = [
                     >, or <em>Activity</em>. Clear titles also make the learning path easier to scan
                     in a self-paced Course.
                   </p>
+                  <p class="bp__sub">Linking the source</p>
                   <p>
-                    <strong>Linking the source.</strong> Link to the <strong
+                    Link to the <strong
                       >most current source material your Learning Experience Designer should use to
                       build the asset</strong
                     >. Make sure the source is accessible to the project team, and indicate whether it
@@ -1517,6 +1526,17 @@ const lessonRows = [
   .btn--gold:hover {
     background: var(--gold-body);
     color: #fff;
+  }
+
+  /* A sub-heading inside a best-practice popover, styled as an eyebrow
+     rather than inline bold. */
+  .bp__sub {
+    margin: 0 0 6px;
+    font-size: var(--fs-1);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--level-assets-dark);
+    font-weight: 700;
   }
 
   /* Lists inside a best-practice popover. */

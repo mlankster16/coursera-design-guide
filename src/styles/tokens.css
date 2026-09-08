@@ -58,16 +58,11 @@
 
   /* Teal aside — a note that adds context rather than stating a
      requirement, so it reads differently from the gold requirement notes.
-     Shares the accessibility teal used on the Learning Assets page.
-     Title is #2b7d7d rather than the #2c8080 used on white: on this tinted
-     ground #2c8080 measures 4.33:1, just under AA for 15px bold text. */
+     The title is a deeper teal than the #2c8080 used on white, which only
+     reaches 4.33:1 on this tinted ground; #215f60 gives 6.80:1. */
   --note-teal-bg: #f1f8f8;
   --note-teal-border: #cfe2e2;
-  --note-teal-title: #2b7d7d;
-
-  /* Deeper teal for the "Accessibility is a Duke requirement" callout on
-     the Learning Assets page. 6.80:1 on --note-teal-bg. */
-  --note-teal-strong: #215f60;
+  --note-teal-title: #215f60;
 
   /* Copper panel border, pairs with --warn-bg / --warn-title. */
   --warn-border: #efd3c6;
