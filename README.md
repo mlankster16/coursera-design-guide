@@ -36,6 +36,11 @@ path, which matches how GitHub Pages serves the site.
   This is the file to edit when adding a page.
 - **`src/data/learning-assets-data.json`** — client-authored copy for all eight asset
   types. The Learning Assets page is generated from this file, not written by hand.
+  Only `use`, `note`, and `d` are rendered. The `a` (accessibility) and `c` (copyright)
+  arrays are no longer used: that guidance was consolidated and rewritten into the
+  Accessibility and Copyright sections at the foot of the page, which are authored in
+  `src/pages/learning-assets/index.astro`. Editing `a` or `c` here changes nothing —
+  they are kept only as a record of where the consolidated content came from.
 - **`src/styles/tokens.css`** — every color, type size, and measure in the design system.
 - **`src/styles/global.css`** — base styles and the patterns shared across pages
   (chrome, sections, panels, the level-page skeleton, accordion, print rules).
