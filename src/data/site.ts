@@ -5,6 +5,8 @@
    breadcrumbs, and footer links all follow automatically.
    ========================================================================== */
 
+import { learningAssets } from './learning-assets';
+
 export type LevelKey = 'overview' | 'specialization' | 'course' | 'module' | 'assets';
 
 /** Accent used for the active nav underline and footer neighbour names. */
@@ -41,53 +43,45 @@ export const sharedGuidance = {
   href: '/learning-assets/accessibility-copyright-ai',
 };
 
+/* ---------------------------------------------------------------------------
+   The eight asset guides are held back as a set.
+
+   Video and Reading are built, but CTL is not ready to share any of them
+   until all eight exist, so nothing links out to an asset page yet: the
+   cards read "Available soon" and the dropdown points at each asset's
+   section on the Learning Assets page instead.
+
+   Flip this to true to release them, or give an individual asset
+   `released: true` in learningAssets to let just that one through.
+   --------------------------------------------------------------------------- */
+export const assetGuidesReleased = false;
+
 export interface AssetLink {
-  /** Matches `slug` in learning-assets-data.json. */
+  /** Matches `slug` in the learningAssets list. */
   slug: string;
   label: string;
-  /** Label on the "Full guidance…" link at the foot of the asset's section.
-      Wording is client-authored and varies per asset — keep it verbatim. */
-  guidance: string;
-  /** Set once the asset has its own page. Until then the dropdown links to
-      the asset's section on the Learning Assets page. */
+  /** The asset's own page, when one exists. */
   page?: string;
 }
 
 /** All eight Coursera asset types, in the order they appear on the
-    Learning Assets page. */
-export const assetLinks: AssetLink[] = [
-  {
-    slug: 'video',
-    label: 'Video',
-    guidance: 'Full guidance for designing Videos →',
-    page: '/learning-assets/video',
-  },
-  {
-    slug: 'reading',
-    label: 'Reading',
-    guidance: 'Full guidance for designing Readings →',
-    page: '/learning-assets/reading',
-  },
-  {
-    slug: 'plugin',
-    label: 'Interactive Plugin',
-    guidance: 'Full guidance for Interactive Plugins →',
-  },
-  { slug: 'dialogue', label: 'Coach Dialogue', guidance: 'Full guidance for Coach Dialogue →' },
-  { slug: 'roleplay', label: 'Coach Role Play', guidance: 'Full guidance for Coach Role Play →' },
-  { slug: 'assessments', label: 'Assessments', guidance: 'Full guidance for designing Assessments →' },
-  {
-    slug: 'programming',
-    label: 'Programming Assignments',
-    guidance: 'Full guidance for Programming Assignments →',
-  },
-  { slug: 'labs', label: 'Coursera Labs', guidance: 'Full guidance for Coursera Labs →' },
-];
+    Learning Assets page. Derived from learningAssets so the dropdown, the
+    hero rail, and the cards share one source. */
+export const assetLinks: AssetLink[] = learningAssets.map((a) => ({
+  slug: a.slug,
+  label: a.railLabel,
+  page: a.page,
+}));
 
-/** Where a dropdown item should point: its own page if built, otherwise the
-    matching section on the Learning Assets page. */
+/** True when this asset's own page is built AND cleared for sharing. */
+export function assetPageLive(a: { page?: string }): boolean {
+  return Boolean(a.page) && assetGuidesReleased;
+}
+
+/** Where a dropdown item should point: its own page once the guides are
+    released, otherwise the matching section on the Learning Assets page. */
 export function assetHref(a: AssetLink): string {
-  return a.page ?? `/learning-assets#${a.slug}`;
+  return assetPageLive(a) ? a.page! : `/learning-assets#${a.slug}`;
 }
 
 /** The Duke Coursera Design Template faculty fill in alongside this guide.

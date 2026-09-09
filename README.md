@@ -35,12 +35,15 @@ path, which matches how GitHub Pages serves the site.
 - **`src/data/site.ts`** — the site's structure. The five top-level nav items, the eight
   Learning Asset types, and the "Zoom out / Zoom in" footer chain all come from here.
   This is the file to edit when adding a page.
-- **`src/data/learning-assets-data.json`** — client-authored copy for all eight asset
-  types. The Learning Assets page is generated from this file, not written by hand.
-  Only `use`, `note`, and `d` are rendered. The `a` (accessibility) and `c` (copyright)
-  arrays are no longer used: that guidance moved to its own page,
-  `accessibility-copyright-ai.astro`, where it is authored directly. Editing `a` or `c`
-  here changes nothing — they are kept only as a record of where that content came from.
+- **`src/data/learning-assets.ts`** — the eight asset types: names, icons, and the
+  "What is it? / When to use it?" copy on the Learning Assets cards. Order here drives
+  the hero rail, the cards, and the nav dropdown, so the three cannot drift apart. It
+  also carries each asset's `page`, once one is published.
+- **`src/data/learning-assets-data.json`** — **no longer read by anything.** It holds an
+  earlier generation of the per-asset copy (`use`, `d`, `a`, `c`). The page it fed has
+  been redesigned twice since: accessibility and copyright moved to their own page, and
+  the cards now use "What is it? / When to use it?" copy that never existed in this file.
+  Kept only as a record; editing it changes nothing. Safe to delete.
 - **`src/styles/tokens.css`** — every color, type size, and measure in the design system.
 - **`src/styles/global.css`** — base styles and the patterns shared across pages
   (chrome, sections, panels, the level-page skeleton, accordion, print rules).
@@ -58,13 +61,21 @@ Page-specific layout lives in each page's own scoped `<style>` block.
 1. Create the page, e.g. `src/pages/learning-assets/assessments.astro`. Copy
    `video.astro` as a starting point — it already has the breadcrumb and
    "← Back to Learning Assets" footer wired up.
-2. In `src/data/site.ts`, add `page: '/learning-assets/assessments'` to that asset's entry
-   in `assetLinks`.
+2. In `src/data/learning-assets.ts`, add `page: '/learning-assets/assessments'` to that
+   asset's entry.
 
-That is the whole change. The nav dropdown, the "Full guidance…" link at the foot of the
-asset's section on the Learning Assets page, and the breadcrumb all update automatically.
-Until an asset has a `page`, the dropdown and its guidance link point at that asset's
-section on the Learning Assets page instead.
+The nav dropdown, the card's link, and the breadcrumb all follow from that.
+
+## Releasing the asset guides
+
+The eight guides are held back as a set: **`assetGuidesReleased` in `src/data/site.ts`
+is `false`**, so no card links out. Each card shows an "Available soon" badge, and the
+dropdown sends every asset to its section on the Learning Assets page rather than to a
+page that isn't ready to share. Video and Reading are built and still build — they are
+simply unlinked, and remain reachable by URL for previewing.
+
+Flip that constant to `true` when all eight are ready. Every asset with a `page` then
+links out on its own.
 
 ## Adding a top-level page
 

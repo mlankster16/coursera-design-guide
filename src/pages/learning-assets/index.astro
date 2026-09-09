@@ -1,28 +1,7 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import assetData from '../../data/learning-assets-data.json';
-import { assetLinks, sharedGuidance, url } from '../../data/site';
-
-interface Asset {
-  n: string;
-  slug: string;
-  use: string;
-  note?: string;
-  /** The short considerations shown on this page's asset cards. */
-  d: string[];
-  /** Long-form accessibility and copyright guidance. Superseded by the
-      shared-guidance page and no longer rendered — kept as a record of
-      where that content came from. */
-  a: string[];
-  c: string[];
-}
-
-/* Built from the data file, not by hand. Order comes from assetLinks so the
-   nav dropdown, the hero jump list, and the cards below cannot drift. */
-const assets = assetLinks.map((link, i) => {
-  const data = (assetData as Asset[]).find((a) => a.slug === link.slug)!;
-  return { ...data, link, index: String(i + 1).padStart(2, '0') };
-});
+import { learningAssets } from '../../data/learning-assets';
+import { assetPageLive, sharedGuidance, url } from '../../data/site';
 
 const phases = [
   {
@@ -74,13 +53,25 @@ const phases = [
       </div>
 
       <nav class="hero__rail" aria-label="On this page">
-        <p class="eyebrow hero__rail-eyebrow">Coursera assets</p>
+        <p class="eyebrow hero__rail-eyebrow hero__rail-eyebrow--gold">Coursera assets</p>
         <div class="jumplist">
           {
-            assets.map((a) => (
+            learningAssets.map((a) => (
               <a class="jumplist__link" href={`#${a.slug}`}>
-                <span class="jumplist__n">{a.index}</span>
-                {a.n}
+                <svg
+                  class="jumplist__icon"
+                  viewBox="0 0 24 24"
+                  width="19"
+                  height="19"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={a.icon}
+                />
+                {a.railLabel}
               </a>
             ))
           }
@@ -138,29 +129,44 @@ const phases = [
 
       <div class="assetgrid">
         {
-          assets.map((a) => (
+          learningAssets.map((a) => (
             <div class="assetcard" id={a.slug} data-keep>
               <div>
                 <div class="assetcard__head">
-                  <span class="eyebrow assetcard__index">{a.index}</span>
-                  <p class="assetcard__title">{a.n}</p>
+                  <svg
+                    class="assetcard__icon"
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    set:html={a.icon}
+                  />
+                  <p class="assetcard__title">{a.cardTitle}</p>
                 </div>
 
-                <p class="assetcard__use">{a.use}</p>
-                {a.note && <p class="assetcard__note">{a.note}</p>}
+                <p class="eyebrow assetcard__label">What is it?</p>
+                <p class="assetcard__body">{a.whatIs}</p>
 
-                <ul class="bullets bullets--asset">
-                  {a.d.map((item) => <li>{item}</li>)}
-                </ul>
+                <p class="eyebrow assetcard__label">When to use it?</p>
+                <p class="assetcard__body assetcard__body--last">{a.whenToUse}</p>
               </div>
 
-              <a
-                class:list={['assetcard__more', !a.link.page && 'assetcard__more--pending']}
-                href={a.link.page ? url(a.link.page) : undefined}
-                aria-disabled={a.link.page ? undefined : 'true'}
-              >
-                {a.link.guidance}
-              </a>
+              {
+                assetPageLive(a) ? (
+                  <a class="assetcard__more" href={url(a.page!)}>
+                    Explore {a.railLabel} →
+                  </a>
+                ) : (
+                  /* Held back until all eight guides are ready to share.
+                     See assetGuidesReleased in site.ts. */
+                  <span class="assetcard__soon">Available soon</span>
+                )
+              }
             </div>
           ))
         }
@@ -175,6 +181,12 @@ const phases = [
     color: var(--text-strong);
   }
 
+  .hero__rail-eyebrow--gold {
+    margin-bottom: 16px;
+    letter-spacing: 0.16em;
+    color: var(--level-assets-dark);
+  }
+
   .jumplist {
     display: flex;
     flex-direction: column;
@@ -184,8 +196,8 @@ const phases = [
     text-decoration: none;
     display: flex;
     gap: 12px;
-    align-items: baseline;
-    padding: 9px 0;
+    align-items: center;
+    padding: 10px 0;
     border-top: 1px solid var(--rule);
     font-size: var(--fs-2);
     color: var(--text-strong);
@@ -199,11 +211,12 @@ const phases = [
     color: var(--level-assets-dark);
   }
 
-  .jumplist__n {
+  /* The icon keeps its gold stroke while the label darkens on hover, so
+     `color` cannot drive both. */
+  .jumplist__icon {
+    display: block;
     flex: none;
-    font-size: var(--fs-1);
-    color: var(--text-subtle);
-    font-weight: 700;
+    color: var(--level-assets-dark);
   }
 
   /* Closes the rail with a pointer to the guidance that spans every asset. */
@@ -312,7 +325,7 @@ const phases = [
     font-size: var(--fs-3);
     line-height: 1.7;
     color: var(--text-body);
-    max-width: var(--measure-body);
+    max-width: var(--measure-section);
   }
 
   .btn--gold {
@@ -351,52 +364,42 @@ const phases = [
 
   .assetcard__head {
     display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin: 0 0 10px;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 18px;
   }
 
-  .assetcard__index {
+  .assetcard__icon {
+    display: block;
     flex: none;
-    letter-spacing: 0.16em;
+    color: var(--level-assets-dark);
   }
 
   .assetcard__title {
     margin: 0;
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 26px;
+    font-size: 25px;
     line-height: 1.2;
     color: var(--navy);
+    white-space: nowrap;
   }
 
-  .assetcard__use {
+  .assetcard__label {
+    margin: 0 0 6px;
+    letter-spacing: 0.14em;
+    color: var(--level-assets-dark);
+  }
+
+  .assetcard__body {
     margin: 0 0 16px;
     font-size: var(--fs-3);
     line-height: 1.7;
-    color: var(--text-strong);
-  }
-
-  .assetcard__note {
-    margin: -6px 0 16px;
-    font-size: var(--fs-2);
-    line-height: 1.7;
-    color: var(--gold-body);
-    background: var(--level-assets-tint);
-    border-left: 3px solid var(--level-assets);
-    padding: 12px 16px;
-  }
-
-  .bullets--asset {
-    --bullet-color: var(--level-assets-dark);
-    gap: 10px;
-  }
-
-  .bullets--asset li {
-    font-size: var(--fs-2);
-    line-height: 1.65;
-    padding-left: 15px;
     color: var(--text-body);
+  }
+
+  .assetcard__body--last {
+    margin-bottom: 0;
   }
 
   .assetcard__more {
@@ -411,10 +414,19 @@ const phases = [
     color: var(--level-assets-dark);
   }
 
-  /* The six asset types whose own page has not been written yet. */
-  .assetcard__more--pending {
+  /* Reads as a status, not a disabled link — no arrow, no link colour, and
+     nothing to click. */
+  .assetcard__soon {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 7px 13px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-panel);
+    background: var(--panel-warm);
+    font-size: var(--fs-1);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-subtle);
-    cursor: default;
-    pointer-events: none;
   }
 </style>
