@@ -223,11 +223,12 @@ const phases = [
     color: var(--level-assets-dark);
   }
 
-  /* Closes the rail with a pointer to the guidance that spans every asset. */
+  /* Closes the rail with a pointer to the guidance that spans every asset.
+     No rule of its own — the jumplist's closing border already separates
+     it, and a second hairline 24px below the first read as an artefact.
+     The margin carries the space the border and padding used to hold. */
   .railout {
-    margin: 24px 0 0;
-    padding: 20px 0 0;
-    border-top: 1px solid var(--rule);
+    margin: 45px 0 0;
   }
 
   .railout__title {
