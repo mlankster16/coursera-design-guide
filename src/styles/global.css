@@ -80,7 +80,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 26px;
   padding: 22px var(--section-pad-x);
   border-bottom: 1px solid var(--rule);
 }
@@ -96,7 +96,8 @@ img {
 
 .nav__items {
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 26px;
   font-size: var(--fs-1);
   letter-spacing: 0.02em;
 }
@@ -698,7 +699,7 @@ img {
 }
 
 /* --- Hero rail footnote — closes the at-a-glance rail on the three level
-   pages with a reminder that this is worked through with an LXD. -------- */
+   pages with a reminder that this is worked through with a Learning Experience Designer. -------- */
 
 .hero__rail-note {
   margin: 24px 0 0;

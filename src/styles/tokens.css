@@ -67,6 +67,10 @@
   /* Copper panel border, pairs with --warn-bg / --warn-title. */
   --warn-border: #efd3c6;
 
+  /* Deepest copper — table headers and bullets on the shared-guidance
+     page, where the copper sits against white as well as the tint. */
+  --copper-deep: #8f3400;
+
   /* Neutral panel — the "Using AI" cards and the Reading page's meta note. */
   --panel-neutral: #f4f5f7;
 

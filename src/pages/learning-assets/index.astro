@@ -1,174 +1,55 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import assetData from '../../data/learning-assets-data.json';
-import { assetLinks, url } from '../../data/site';
+import { assetLinks, sharedGuidance, url } from '../../data/site';
 
 interface Asset {
   n: string;
   slug: string;
   use: string;
   note?: string;
-  /** Designing for independent learning — the only per-asset list the page
-      renders. Accessibility (`a`) and copyright (`c`) used to appear in a
-      column beside it; they are now covered once, at the end of the page. */
+  /** The short considerations shown on this page's asset cards. */
   d: string[];
+  /** Long-form accessibility and copyright guidance. Superseded by the
+      shared-guidance page and no longer rendered — kept as a record of
+      where that content came from. */
   a: string[];
   c: string[];
 }
 
 /* Built from the data file, not by hand. Order comes from assetLinks so the
-   nav dropdown, the hero jump list, and the sections below cannot drift. */
+   nav dropdown, the hero jump list, and the cards below cannot drift. */
 const assets = assetLinks.map((link, i) => {
   const data = (assetData as Asset[]).find((a) => a.slug === link.slug)!;
   return { ...data, link, index: String(i + 1).padStart(2, '0') };
 });
 
-/* The three concerns that apply to every asset. Rather than repeating them
-   eight times, each gets one section at the foot of the page. */
-const crossCutting = [
+const phases = [
   {
-    slug: 'accessibility',
-    title: 'Accessibility',
-    swatch: 'var(--dim-a11y)',
-    blurb:
-      'Making every asset usable by every learner. Organized by the kind of content you are creating.',
-    cls: 'x--a11y',
+    title: 'When planning',
+    body: 'Consider why the format fits this part of the learning path and what learners need from it.',
   },
   {
-    slug: 'copyright',
-    title: 'Copyright and permissions',
-    swatch: 'var(--dim-copyright)',
-    blurb:
-      'What a public, commercial Course requires, and which materials to flag for review before production.',
-    cls: 'x--copyright',
+    title: 'While drafting',
+    body: 'Use the examples, prompts, and templates to help shape the asset.',
   },
   {
-    slug: 'ai',
-    title: 'Using AI',
-    swatch: 'var(--text-body)',
-    blurb: 'Reviewing AI output before it reaches learners, and what should never go into a tool.',
-    cls: 'x--ai',
+    title: 'As you prepare to share it',
+    body: 'Review the draft with your CTL team and note anything you’d still like to work through.',
   },
-];
-
-const a11yGroups = [
-  {
-    title: 'Text and structure',
-    items: [
-      'Use a logical heading structure so learners can navigate and skim.',
-      'Use concise, direct language, and explain specialized syntax, filenames, and directory structures.',
-      'Provide instructions, code, error messages, and feedback as selectable text rather than screenshots.',
-      'Keep formatting consistent within and across assets.',
-      'Make everything learners read accessible, including question text, response options, feedback, and rubrics.',
-    ],
-  },
-  {
-    title: 'Images and visuals',
-    items: [
-      'Provide alternative text for images that carry meaning.',
-      'Describe complex charts, diagrams, and data in the surrounding text.',
-      'Identify table headers clearly.',
-    ],
-  },
-  {
-    title: 'Video and audio',
-    items: [
-      'Review and correct auto-generated captions, especially names and specialized terminology.',
-      'Describe meaningful visual information aloud so learners do not need to see the screen to follow.',
-    ],
-  },
-  {
-    title: 'Interaction and navigation',
-    items: [
-      'Make sure essential controls and information can be reached with a keyboard and assistive technology.',
-      'Do not require dragging, hovering, precise pointer movement, speech, or a particular pace.',
-      'State device, browser, account, and software requirements before learners begin.',
-      'Review the accessibility of the complete environment learners work in, including editors, consoles, visualizations, and any linked or embedded third-party tools.',
-      'Explain how learners can pause, exit, restart, or check their progress.',
-    ],
-  },
-  {
-    title: 'Never the only channel',
-    items: [
-      'Do not rely on color, sound, visual position, animation, or an image alone to communicate meaning. Pair it with a label, a shape, or text.',
-      'Avoid unnecessary time pressure.',
-    ],
-  },
-  {
-    title: 'An alternative path',
-    items: [
-      'When a format creates a barrier unrelated to the learning objective, or is unavailable to some learners, provide another way for them to meet that objective.',
-      'Do not require learners to disclose personal, medical, employment, or other sensitive information.',
-      'Review scenarios and personas for cultural assumptions, stereotypes, and sensitive content.',
-    ],
-  },
-];
-
-const flagRows = [
-  {
-    material: 'Text and publications',
-    flag: 'Articles, chapters, quotations, substantial excerpts, published cases, scripts, professional exercises, licensed question banks',
-  },
-  {
-    material: 'Images and figures',
-    flag: 'Photographs, illustrations, figures, charts, tables, and diagrams you did not create',
-  },
-  {
-    material: 'Video, audio, and music',
-    flag: 'Clips, footage, recordings, background music, and anyone appearing on camera',
-  },
-  {
-    material: 'Data and datasets',
-    flag: 'Purchased, licensed, restricted, institutional, or third-party data',
-  },
-  {
-    material: 'Code and software',
-    flag: 'Starter code, libraries, packages, APIs, software, templates, and configured environments',
-  },
-  {
-    material: 'Scenarios and personas',
-    flag: 'Personas, scenarios, rubrics, real people, copyrighted characters, proprietary cases, and confidential workplace situations',
-  },
-  {
-    material: 'Tools and platforms',
-    flag: 'External tools you embed or link, and any media, data, or simulations included in them, together with whether the tool and its content may be used inside a public Coursera Course',
-  },
-  {
-    material: 'What learners submit',
-    flag: 'Anything you ask learners to upload, paste, or enter into an activity or AI conversation',
-  },
-];
-
-/* The design file ran the last three of these together inside one bullet;
-   they are three separate obligations, so they are split here. */
-const clearedItems = [
-  'Attribute third-party material as required, and preserve open-source notices and any other attribution a license obliges you to keep.',
-  'Link to a lawful external source when learners do not need the content reproduced inside Coursera.',
-  'Keep proprietary code, credentials, private repositories, confidential data, and personally identifiable information out of the Course entirely.',
-  'Confirm that software, packages, datasets, templates, and starter files may be installed or distributed in a Coursera Lab environment.',
-  'Consult your CTL project team about accounts, data collection, privacy, or other conditions associated with an external tool.',
-  'Do not ask learners to upload or enter copyrighted, confidential, or employer-owned material.',
-];
-
-const aiBefore = [
-  'Verify every factual claim, figure, citation, and reference against a source you trust. AI tools can produce confident text that is inaccurate or fabricated.',
-  'Check that the reasoning matches how the work is actually done in your field.',
-  'Review examples, scenarios, and practice questions for bias, stereotypes, and assumptions about learners.',
-  'Rewrite the output in your own voice so it sounds like your teaching rather than generic prose.',
-];
-
-const aiAvoid = [
-  'Confidential or proprietary material, including unpublished research and employer-owned content.',
-  'Personally identifiable information about students, patients, research subjects, or colleagues.',
-  'Copyrighted material you do not have permission to use.',
-  'Anything you would not be comfortable having stored or reused by the tool’s provider.',
 ];
 ---
 
 <PageLayout
   title="Learning Assets"
-  description="Design guidance for each of the eight Coursera learning asset types, plus accessibility, copyright, and AI guidance that applies to all of them."
+  description="Choose the Coursera learning asset you're building, with considerations and resources for developing each one."
   level="assets"
+  nextTo={{
+    dir: 'Helpful throughout →',
+    label: 'Accessibility, Copyright & AI',
+    href: sharedGuidance.href,
+    color: 'var(--text-body)',
+  }}
 >
   <div class="levelpage" data-level="assets">
     <!-- Hero -->
@@ -177,18 +58,23 @@ const aiAvoid = [
         <p class="eyebrow hero__eyebrow">Learning Assets</p>
         <h1 class="hero__title">Designing Learning Assets</h1>
         <p class="hero__lead hero__lead--strong">
-          At this stage, you have identified the assets needed for each Module. Now you’ll develop
-          those assets for an asynchronous, public online Course.
+          Once you’ve planned a Module’s learning path, you and your Learning Experience Designer can
+          begin developing the Videos, Readings, Assessments, and other assets that bring it to life.
         </p>
         <p class="hero__lead">
           Creating an online asset often requires more intentional planning than preparing for a
           class session. Explanations, instructions, examples, feedback, and learner support need to
-          be built into the asset because you will not be present to clarify them in the moment.
+          be built into the asset, because you will not be present to clarify them in the moment.
+        </p>
+        <p class="hero__lead">
+          Come back to this section throughout development. Open the guide for the asset you’re
+          working on, and use the shared accessibility, copyright, and AI guidance as questions come
+          up along the way.
         </p>
       </div>
 
       <nav class="hero__rail" aria-label="On this page">
-        <p class="eyebrow hero__rail-eyebrow">Coursera assets to choose from</p>
+        <p class="eyebrow hero__rail-eyebrow">Coursera assets</p>
         <div class="jumplist">
           {
             assets.map((a) => (
@@ -200,271 +86,93 @@ const aiAvoid = [
           }
         </div>
 
-        <p class="eyebrow hero__rail-eyebrow hero__rail-eyebrow--second">And for each asset</p>
-        <div class="swatchlist">
-          {
-            crossCutting.map((c) => (
-              <a class:list={['swatchlist__link', c.cls]} href={`#${c.slug}`}>
-                <span class="swatchlist__swatch" style={`background:${c.swatch}`} aria-hidden="true" />
-                {c.title}
-              </a>
-            ))
-          }
+        <div class="railout">
+          <p class="railout__title">Helpful throughout development</p>
+          <a class="railout__link" href={url(sharedGuidance.href)}>
+            {sharedGuidance.label} →
+          </a>
         </div>
       </nav>
     </div>
 
-    <!-- How this page works -->
-    <section class="section section--tight">
-      <h2 class="h2 h2--tight">How this page works</h2>
-      <p class="prose prose--strong">
-        Each of the eight assets below has its own design guidance: what it is useful for, and how to
-        shape it so learners can work through it on their own.
-      </p>
-      <p class="prose prose--gap">
-        Three concerns apply no matter which asset you are building. Rather than repeating them eight
-        times, they are covered once at the end of the page.
+    <!-- From Module plan to Learning Assets -->
+    <section class="section section--open">
+      <h2 class="xtitle">From Module plan to Learning Assets</h2>
+      <p class="prose prose--gap-lg">
+        Once you have identified the assets your Module needs, use this page as you begin developing
+        them. Each section highlights a few important considerations for that asset type and points
+        to any available templates or resources.
       </p>
 
-      <div class="xcards">
+      <div class="phases">
         {
-          crossCutting.map((c) => (
-            <a class:list={['xcard', c.cls]} href={`#${c.slug}`}>
-              <p class="xcard__title">{c.title}</p>
-              <p class="xcard__blurb">{c.blurb}</p>
-              <p class="xcard__more">Read this section →</p>
-            </a>
+          phases.map((p) => (
+            <div class="phase">
+              <p class="phase__title">{p.title}</p>
+              <p class="phase__body">{p.body}</p>
+            </div>
           ))
         }
       </div>
+
+      <div class="promo" data-keep>
+        <div>
+          <p class="promo__title">Accessibility, Copyright &amp; AI</p>
+          <p class="promo__body">
+            Creating learning assets for a public, commercial platform like Coursera brings important
+            accessibility, copyright, and AI considerations that may be less familiar from a
+            for-credit classroom. Address these considerations throughout development, returning to
+            this reference as you work on each asset with your Learning Experience Designer.
+          </p>
+        </div>
+        <a class="btn btn--gold" href={url(sharedGuidance.href)}>Explore the shared guidance →</a>
+      </div>
     </section>
 
-    <!-- Eight asset sections -->
-    {
-      assets.map((a, i) => (
-        <section class:list={['asset', i === 0 && 'asset--first']} id={a.slug} data-keep>
-          <div class="asset__head">
-            <span class="eyebrow asset__index">{a.index}</span>
-            <h2 class="asset__title">{a.n}</h2>
-          </div>
+    <!-- Choose the asset -->
+    <section class="section section--open section--last">
+      <h2 class="xtitle">Choose the Learning Asset you’re building</h2>
+      <p class="prose prose--gap-lg">
+        Select an asset type below to find considerations and resources for developing it.
+      </p>
 
-          <p class="asset__use">{a.use}</p>
-          {a.note && <p class="asset__note">{a.note}</p>}
+      <div class="assetgrid">
+        {
+          assets.map((a) => (
+            <div class="assetcard" id={a.slug} data-keep>
+              <div>
+                <div class="assetcard__head">
+                  <span class="eyebrow assetcard__index">{a.index}</span>
+                  <p class="assetcard__title">{a.n}</p>
+                </div>
 
-          <div class="asset__design">
-            <p class="eyebrow asset__design-head">Designing for independent learning</p>
-            <ul class="bullets bullets--design">
-              {a.d.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
+                <p class="assetcard__use">{a.use}</p>
+                {a.note && <p class="assetcard__note">{a.note}</p>}
 
-          <a
-            class:list={['asset__more', !a.link.page && 'asset__more--pending']}
-            href={a.link.page ? url(a.link.page) : undefined}
-            aria-disabled={a.link.page ? undefined : 'true'}
-          >
-            {a.link.guidance}
-          </a>
-        </section>
-      ))
-    }
-
-    <!-- Applies to every asset: Accessibility -->
-    <section class="xsection" id="accessibility">
-      <div class="xsection__inner x--a11y">
-        <p class="eyebrow xsection__eyebrow">Applies to every asset</p>
-        <h2 class="xsection__title">Accessibility</h2>
-        <p class="prose prose--strong">
-          Accessibility requirements follow the kind of content you are creating rather than the
-          Coursera asset it sits in. A chart needs a description whether it appears in a Reading, a
-          quiz, or a Lab.
-        </p>
-        <p class="prose prose--gap-lg">
-          Use this as a checklist while you draft. Addressing these during planning is far easier than
-          retrofitting them after production, and your Learning Experience Designer can help you work
-          through anything that is unclear for your content.
-        </p>
-
-        <div class="a11ycols">
-          {
-            a11yGroups.map((g) => (
-              <div class="a11ygroup">
-                <p class="eyebrow a11ygroup__head">{g.title}</p>
-                <ul class="bullets bullets--a11y">
-                  {g.items.map((item) => <li>{item}</li>)}
+                <ul class="bullets bullets--asset">
+                  {a.d.map((item) => <li>{item}</li>)}
                 </ul>
               </div>
-            ))
-          }
-        </div>
 
-        <div class="note-teal note-teal--strong" data-keep>
-          <p class="note-teal__title">Accessibility is a Duke requirement, not a preference</p>
-          <p class="note-teal__body">
-            Every asset published in a Duke Coursera Course must be usable by learners who navigate
-            with a keyboard, use a screen reader, rely on captions, or adjust contrast and text size.
-            If you are unsure whether something you have created meets these expectations, send it to
-            your CTL team while it is still in draft.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Applies to every asset: Copyright -->
-    <section class="xsection" id="copyright">
-      <div class="xsection__inner x--copyright">
-        <p class="eyebrow xsection__eyebrow">Applies to every asset</p>
-        <h2 class="xsection__title">Copyright and permissions</h2>
-        <p class="prose prose--strong prose--gap-lg">
-          A Coursera Course is a public, global, commercial product. That makes it a different setting
-          from a Duke classroom, and it changes what you can include.
-        </p>
-
-        <h3 class="h3">Why Coursera is different</h3>
-        <div class="compare">
-          <div class="compare__card compare__card--then">
-            <p class="eyebrow compare__eyebrow">In a Duke classroom</p>
-            <p class="compare__body">
-              You are teaching a defined group of enrolled students for credit, behind a login.
-              Provisions that support classroom teaching often allow you to show a figure, play a
-              clip, or share an article with that group.
-            </p>
-          </div>
-          <div class="compare__card compare__card--now">
-            <p class="eyebrow compare__eyebrow">In a Coursera Course</p>
-            <p class="compare__body compare__body--strong">
-              Anyone in the world can enroll, Coursera charges for access, and the material stays
-              published indefinitely. Those same provisions generally do not apply, so material that
-              was fine in your classroom may need a license or written permission here.
-            </p>
-          </div>
-        </div>
-
-        <div class="warn warn--wide" data-keep>
-          <p class="warn__title warn__title--display">When in doubt, use what you made</p>
-          <p class="warn__body">
-            The most reliable path is to build your Course from material you created yourself. For
-            anything you did not create, confirm before production that you have permission, a
-            license, or a public-domain or other free-use right that covers public, global, commercial
-            distribution.
-          </p>
-          <p class="warn__body warn__body--last">
-            Publicly available does not mean cleared. Material can be free to view online and still
-            be unavailable for use in a paid Course.
-          </p>
-        </div>
-
-        <h3 class="h3 h3--tight">What to flag for review</h3>
-        <p class="prose prose--gap">
-          Clearance depends on the material and its source, not on which asset it appears in. As you
-          draft, note anything in these categories that you did not create.
-        </p>
-
-        <div class="flagtable" data-keep>
-          <div class="flagtable__head">
-            <div class="flagtable__cell">Material</div>
-            <div class="flagtable__cell">Flag it when it includes</div>
-          </div>
-          {
-            flagRows.map((r) => (
-              <div class="flagtable__row">
-                <div class="flagtable__cell flagtable__cell--key">{r.material}</div>
-                <div class="flagtable__cell">{r.flag}</div>
-              </div>
-            ))
-          }
-        </div>
-
-        <h3 class="h3">Once something is cleared</h3>
-        <ul class="bullets bullets--copper">
-          {clearedItems.map((item) => <li>{item}</li>)}
-        </ul>
-
-        <div class="note-gold" data-keep>
-          <p class="note-gold__title">A note on this guidance</p>
-          <p class="note-gold__body">
-            This page is intended to help you identify materials that may require review. Copyright
-            and licensing decisions can depend on the material, its source, and how you plan to use
-            it.
-          </p>
-          <p class="note-gold__body note-gold__body--last">
-            If you are unsure whether an item can be included, share it with your CTL team before
-            production.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Applies to every asset: Using AI -->
-    <section class="xsection" id="ai">
-      <div class="xsection__inner x--ai">
-        <p class="eyebrow xsection__eyebrow">Applies to every asset</p>
-        <h2 class="xsection__title">Using AI to help develop content</h2>
-        <p class="prose prose--strong">
-          AI tools can help you draft, restructure, summarize, or generate examples and practice
-          questions. They can also introduce errors and copyright problems that are difficult to
-          detect later.
-        </p>
-        <p class="prose prose--gap-lg">
-          You remain the author of your Course. Anything an AI tool produces is a draft that needs
-          your subject-matter review before it reaches learners.
-        </p>
-
-        <div class="aicards">
-          <div class="aicard">
-            <p class="eyebrow aicard__head">Before you use the output</p>
-            <ul class="bullets bullets--ai">
-              {aiBefore.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
-          <div class="aicard">
-            <p class="eyebrow aicard__head">What not to put into a tool</p>
-            <ul class="bullets bullets--ai">
-              {aiAvoid.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
-        </div>
-
-        <div class="warn" data-keep>
-          <p class="warn__title">AI output carries copyright risk too</p>
-          <p class="warn__body warn__body--last">
-            AI-generated text, images, audio, and code can closely reproduce material the tool was
-            trained on, and the rights status of generated content is often unsettled. Treat AI output
-            the same way you would treat any material you did not create yourself: review it before
-            production, and raise anything you are unsure about with your CTL team.
-          </p>
-        </div>
+              <a
+                class:list={['assetcard__more', !a.link.page && 'assetcard__more--pending']}
+                href={a.link.page ? url(a.link.page) : undefined}
+                aria-disabled={a.link.page ? undefined : 'true'}
+              >
+                {a.link.guidance}
+              </a>
+            </div>
+          ))
+        }
       </div>
     </section>
   </div>
 </PageLayout>
 
 <style>
-  /* --- The three cross-cutting concerns each carry one accent, used in the
-     hero swatch, the "How this page works" card, and the section itself. */
-  .x--a11y {
-    --x: var(--dim-a11y);
-    --x-text: var(--dim-a11y-text);
-  }
-
-  .x--copyright {
-    --x: var(--dim-copyright);
-    --x-text: var(--warn-title);
-  }
-
-  .x--ai {
-    --x: var(--text-body);
-    --x-text: var(--text-strong);
-  }
-
   /* --- Hero ---------------------------------------------------------------- */
   .hero__lead--strong {
     color: var(--text-strong);
-  }
-
-  .hero__rail-eyebrow--second {
-    margin: 26px 0 12px;
-    white-space: nowrap;
   }
 
   .jumplist {
@@ -494,487 +202,219 @@ const aiAvoid = [
   .jumplist__n {
     flex: none;
     font-size: var(--fs-1);
-    color: var(--text-muted);
+    color: var(--text-subtle);
     font-weight: 700;
   }
 
-  .swatchlist {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+  /* Closes the rail with a pointer to the guidance that spans every asset. */
+  .railout {
+    margin: 24px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--rule);
   }
 
-  .swatchlist__link {
-    text-decoration: none;
-    display: flex;
-    align-items: baseline;
-    gap: 11px;
+  .railout__title {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: 21px;
+    color: var(--navy);
+  }
+
+  .railout__link {
     font-size: var(--fs-2);
-    color: var(--text-strong);
+    font-weight: 600;
+    color: var(--level-assets-dark);
+    text-decoration: none;
   }
 
-  .swatchlist__link:hover {
-    color: var(--x-text);
+  .railout__link:hover {
+    text-decoration: underline;
+    color: var(--level-assets-dark);
   }
 
-  .swatchlist__swatch {
-    flex: none;
-    width: 9px;
-    height: 9px;
-    border-radius: 2px;
-    display: block;
+  /* --- Sections ------------------------------------------------------------ */
+  .section--open {
+    padding: 68px var(--section-pad-x) 0;
   }
 
-  /* --- Shared prose -------------------------------------------------------- */
-  .section--tight {
-    padding: 64px var(--section-pad-x) 0;
+  .section--last {
+    padding-bottom: 8px;
   }
 
-  .h2--tight {
-    margin: 0 0 14px;
+  .xtitle {
+    margin: 0 0 16px;
+    font-size: var(--fs-7);
+    line-height: 1.15;
   }
 
   .prose {
-    margin: 0 0 14px;
+    margin: 0 0 17px;
     font-size: var(--fs-3);
     line-height: 1.7;
     color: var(--text-body);
     max-width: var(--measure-body);
-  }
-
-  .prose--strong {
-    color: var(--text-strong);
-  }
-
-  .prose--gap {
-    margin-bottom: 22px;
   }
 
   .prose--gap-lg {
     margin-bottom: 32px;
   }
 
-  .h3 {
-    margin: 0 0 18px;
-  }
-
-  .h3--tight {
-    margin-bottom: 12px;
-  }
-
-  /* --- "How this page works" cards ---------------------------------------- */
-  .xcards {
+  /* --- Three phases of development ----------------------------------------- */
+  .phases {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 28px;
   }
 
-  .xcard {
-    text-decoration: none;
-    display: block;
-    border-top: 3px solid var(--x);
+  .phase {
+    border-top: 3px solid var(--level-assets);
     padding: 20px 0 0;
   }
 
-  .xcard:hover {
-    opacity: 0.75;
-  }
-
-  .xcard__title {
+  .phase__title {
     margin: 0 0 10px;
     font-family: var(--font-display);
-    font-size: var(--fs-5);
+    font-size: 23px;
     line-height: 1.25;
     color: var(--navy);
   }
 
-  .xcard__blurb {
-    margin: 0 0 12px;
-    font-size: var(--fs-2);
-    line-height: 1.65;
+  .phase__body {
+    margin: 0;
+    font-size: var(--fs-3);
+    line-height: 1.7;
     color: var(--text-body);
   }
 
-  .xcard__more {
+  /* --- Shared-guidance promo ------------------------------------------------ */
+  .promo {
+    margin: 34px 0 0;
+    background: var(--level-assets-tint);
+    border: 1px solid var(--level-assets-tint-border);
+    border-radius: var(--radius-panel);
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .promo__title {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    color: var(--navy);
+  }
+
+  .promo__body {
     margin: 0;
-    font-size: var(--fs-2);
-    font-weight: 600;
-    color: var(--x-text);
-    white-space: nowrap;
-  }
-
-  /* --- Asset sections ------------------------------------------------------ */
-  .asset {
-    padding: 48px var(--section-pad-x) 0;
-    scroll-margin-top: 12px;
-  }
-
-  .asset--first {
-    padding-top: 56px;
-  }
-
-  .asset__head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin: 0 0 12px;
-  }
-
-  .asset__index {
-    flex: none;
-    letter-spacing: 0.16em;
-    white-space: nowrap;
-  }
-
-  /* nowrap + flex:none keeps the asset name on one line. */
-  .asset__title {
-    margin: 0;
-    flex: none;
-    white-space: nowrap;
-    font-size: var(--fs-7);
-  }
-
-  .asset__use {
-    margin: 0 0 24px;
     font-size: var(--fs-3);
     line-height: 1.7;
-    color: var(--text-strong);
+    color: var(--text-body);
     max-width: var(--measure-body);
   }
 
-  .asset__note {
-    margin: -10px 0 24px;
+  .btn--gold {
+    flex: none;
+    align-self: center;
+    background: var(--level-assets-dark);
+    color: #fff;
+    font-size: var(--fs-2);
+    font-weight: 700;
+    padding: 13px 24px;
+  }
+
+  .btn--gold:hover {
+    background: var(--gold-body);
+    color: #fff;
+  }
+
+  /* --- Asset cards ---------------------------------------------------------- */
+  .assetgrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .assetcard {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--level-assets);
+    border-radius: var(--radius-panel);
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    scroll-margin-top: 12px;
+  }
+
+  .assetcard__head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 10px;
+  }
+
+  .assetcard__index {
+    flex: none;
+    letter-spacing: 0.16em;
+  }
+
+  .assetcard__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+
+  .assetcard__use {
+    margin: 0 0 16px;
     font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-strong);
+  }
+
+  .assetcard__note {
+    margin: -6px 0 16px;
+    font-size: var(--fs-2);
     line-height: 1.7;
     color: var(--gold-body);
     background: var(--level-assets-tint);
     border-left: 3px solid var(--level-assets);
-    padding: 14px 20px;
-    max-width: var(--measure-body);
+    padding: 12px 16px;
   }
 
-  .asset__design {
-    padding: 22px 0 0;
-    border-top: 1px solid var(--rule);
+  .bullets--asset {
+    --bullet-color: var(--level-assets-dark);
+    gap: 10px;
   }
 
-  .asset__design-head {
-    margin: 0 0 14px;
-    letter-spacing: 0.14em;
-    color: var(--dim-design);
-    white-space: nowrap;
+  .bullets--asset li {
+    font-size: var(--fs-2);
+    line-height: 1.65;
+    padding-left: 15px;
+    color: var(--text-body);
   }
 
-  .bullets--design {
-    --bullet-color: var(--dim-design);
-  }
-
-  .bullets--design li {
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    padding-left: 17px;
-  }
-
-  .asset__more {
-    display: inline-block;
-    margin: 22px 0 0;
+  .assetcard__more {
     font-size: var(--fs-2);
     font-weight: 600;
     color: var(--level-assets-dark);
     text-decoration: none;
-    white-space: nowrap;
   }
 
-  .asset__more:hover {
+  .assetcard__more:hover {
     text-decoration: underline;
     color: var(--level-assets-dark);
   }
 
-  /* Assets whose own page has not been built yet. */
-  .asset__more--pending {
+  /* The six asset types whose own page has not been written yet. */
+  .assetcard__more--pending {
     color: var(--text-subtle);
     cursor: default;
     pointer-events: none;
-  }
-
-  /* --- Cross-cutting sections --------------------------------------------- */
-  .xsection {
-    padding: 76px var(--section-pad-x) 0;
-    scroll-margin-top: 12px;
-  }
-
-  .xsection__inner {
-    border-top: 3px solid var(--x);
-    padding: 26px 0 0;
-  }
-
-  .xsection__eyebrow {
-    margin: 0 0 10px;
-    letter-spacing: 0.18em;
-    color: var(--x-text);
-    white-space: nowrap;
-  }
-
-  .xsection__title {
-    margin: 0 0 16px;
-    font-size: var(--fs-7);
-  }
-
-  /* --- Accessibility checklist -------------------------------------------- */
-
-  /* Two newspaper columns: the groups have very uneven lengths, and CSS
-     columns balance them better than a grid would. break-inside keeps a
-     group's heading with its list. */
-  .a11ycols {
-    columns: 2;
-    column-gap: 40px;
-  }
-
-  .a11ygroup {
-    min-width: 0;
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    margin: 0 0 30px;
-  }
-
-  .a11ygroup__head {
-    margin: 0 0 14px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--dim-a11y);
-    letter-spacing: 0.14em;
-    color: var(--dim-a11y-text);
-  }
-
-  .bullets--a11y {
-    --bullet-color: var(--dim-a11y-text);
-  }
-
-  .bullets--a11y li {
-    font-size: var(--fs-2);
-    line-height: 1.65;
-    padding-left: 15px;
-  }
-
-  .note-teal--strong {
-    margin: 34px 0 0;
-    padding: 24px 28px;
-  }
-
-  .note-teal--strong .note-teal__title {
-    font-size: var(--fs-3);
-    color: var(--note-teal-title);
-  }
-
-  .note-teal--strong .note-teal__body {
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    max-width: var(--measure-body);
-  }
-
-  /* --- Classroom vs Coursera ---------------------------------------------- */
-  .compare {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin: 0 0 34px;
-  }
-
-  .compare__card {
-    padding: 22px 26px;
-  }
-
-  .compare__card--then {
-    background: var(--panel-warm);
-    border-left: 3px solid var(--rule-strong);
-  }
-
-  .compare__card--now {
-    background: var(--warn-bg);
-    border-left: 3px solid var(--dim-copyright);
-  }
-
-  .compare__eyebrow {
-    margin: 0 0 10px;
-    letter-spacing: 0.16em;
-    color: var(--text-muted);
-    white-space: nowrap;
-  }
-
-  .compare__card--now .compare__eyebrow {
-    color: var(--warn-title);
-  }
-
-  .compare__body {
-    margin: 0;
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    color: var(--text-body);
-  }
-
-  .compare__body--strong {
-    color: var(--text-strong);
-  }
-
-  /* --- Copper callouts ----------------------------------------------------- */
-  .warn {
-    background: var(--warn-bg);
-    border: 1px solid var(--warn-border);
-    border-radius: var(--radius-panel);
-    padding: 24px 28px;
-  }
-
-  .warn--wide {
-    padding: 26px 30px;
-    margin: 0 0 34px;
-  }
-
-  .warn__title {
-    margin: 0 0 8px;
-    font-size: var(--fs-3);
-    font-weight: 700;
-    color: var(--warn-title);
-  }
-
-  .warn__title--display {
-    margin-bottom: 10px;
-    font-family: var(--font-display);
-    font-size: var(--fs-6);
-    font-weight: 500;
-  }
-
-  .warn__body {
-    margin: 0 0 12px;
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    color: var(--text-body);
-    max-width: var(--measure-body);
-  }
-
-  .warn__body--last {
-    margin-bottom: 0;
-  }
-
-  /* --- What to flag table -------------------------------------------------- */
-  .flagtable {
-    border: 1px solid var(--rule-card);
-    border-radius: var(--radius-panel);
-    margin: 0 0 30px;
-  }
-
-  .flagtable__head,
-  .flagtable__row {
-    display: grid;
-    grid-template-columns: 250px minmax(0, 1fr);
-  }
-
-  .flagtable__head {
-    background: var(--warn-bg);
-    border-bottom: 1px solid var(--warn-border);
-    border-radius: var(--radius-panel) var(--radius-panel) 0 0;
-    font-size: var(--fs-1);
-    letter-spacing: 0.13em;
-    text-transform: uppercase;
-    color: var(--warn-title);
-    font-weight: 700;
-  }
-
-  .flagtable__head .flagtable__cell {
-    padding: 13px 22px;
-    border-left-color: var(--warn-border);
-    white-space: nowrap;
-  }
-
-  .flagtable__row {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .flagtable__row:last-child {
-    border-bottom: 0;
-  }
-
-  .flagtable__cell {
-    padding: 16px 22px;
-    font-size: var(--fs-3);
-    line-height: 1.6;
-    color: var(--text-body);
-    border-left: 1px solid var(--rule);
-  }
-
-  .flagtable__cell:first-child {
-    border-left: 0;
-  }
-
-  .flagtable__cell--key {
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--navy);
-  }
-
-  .bullets--copper {
-    --bullet-color: var(--dim-copyright);
-    margin-bottom: 32px;
-  }
-
-  .bullets--copper li {
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    padding-left: 17px;
-  }
-
-  /* --- Gold note ----------------------------------------------------------- */
-  .note-gold {
-    background: var(--level-assets-tint);
-    border-color: var(--level-assets-tint-border);
-    padding: 24px 28px;
-  }
-
-  .note-gold__title {
-    margin: 0 0 8px;
-    font-size: var(--fs-3);
-    font-weight: 700;
-    color: var(--level-assets-dark);
-  }
-
-  .note-gold__body {
-    margin: 0 0 12px;
-    font-size: var(--fs-3);
-    line-height: 1.7;
-    color: var(--gold-body);
-    max-width: var(--measure-body);
-  }
-
-  .note-gold__body--last {
-    margin-bottom: 0;
-  }
-
-  /* --- Using AI cards ------------------------------------------------------ */
-  .aicards {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin: 0 0 32px;
-  }
-
-  .aicard {
-    background: var(--panel-neutral);
-    border-left: 3px solid var(--text-body);
-    padding: 22px 26px;
-  }
-
-  .aicard__head {
-    margin: 0 0 10px;
-    letter-spacing: 0.16em;
-    color: var(--text-strong);
-    white-space: nowrap;
-  }
-
-  .bullets--ai {
-    --bullet-color: var(--text-strong);
-  }
-
-  .bullets--ai li {
-    font-size: var(--fs-2);
-    line-height: 1.65;
-    padding-left: 15px;
   }
 </style>

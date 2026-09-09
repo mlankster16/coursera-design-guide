@@ -6,15 +6,20 @@ interface Props {
   level?: LevelKey;
   /** Sub-pages (Video, Reading) show a single "← Back to" link instead. */
   backTo?: { label: string; href: string; color: string };
+  /** Replaces the hierarchy's "Zoom in" link where a page leads somewhere
+      other than the next level down. */
+  nextTo?: { dir: string; label: string; href: string; color: string };
 }
-const { level, backTo } = Astro.props;
+const { level, backTo, nextTo } = Astro.props;
 
-const { prev, next } = level ? neighbours(level) : { prev: undefined, next: undefined };
-const single = Boolean(backTo) || !prev || !next;
+const chain = level ? neighbours(level) : { prev: undefined, next: undefined };
+const prev = chain.prev;
+const next = nextTo ? undefined : chain.next;
+const single = Boolean(backTo) ? !nextTo : !prev || (!next && !nextTo);
 ---
 
 {
-  (prev || next || backTo) && (
+  (prev || next || backTo || nextTo) && (
     <div class:list={['pagefoot', single && 'pagefoot--single']}>
       {backTo ? (
         <a href={url(backTo.href)}>
@@ -39,6 +44,15 @@ const single = Boolean(backTo) || !prev || !next;
           <span class="pagefoot__dir">Zoom in →</span>
           <span class="pagefoot__name" style={`color:${levelColor[next.key]}`}>
             {next.label}
+          </span>
+        </a>
+      )}
+
+      {nextTo && (
+        <a class="pagefoot__next" href={url(nextTo.href)}>
+          <span class="pagefoot__dir">{nextTo.dir}</span>
+          <span class="pagefoot__name" style={`color:${nextTo.color}`}>
+            {nextTo.label}
           </span>
         </a>
       )}

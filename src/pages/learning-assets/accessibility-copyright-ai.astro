@@ -1,0 +1,836 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { url, levelColor } from '../../data/site';
+
+/* Guidance that applies to every asset, so it lives on its own page rather
+   than repeating inside all eight asset sections. Reached from the Learning
+   Assets dropdown, where it is the emphasized child. */
+
+const whenHelpful = [
+  {
+    title: 'While planning',
+    body: 'Think ahead about the format, source materials, and tools you may want to use.',
+  },
+  {
+    title: 'While developing',
+    body: 'Find guidance for the text, media, interaction, or other content you’re creating.',
+  },
+  {
+    title: 'Before handoff',
+    body: 'Take stock of what’s in place and note anything you’d like to review with your Learning Experience Designer.',
+  },
+];
+
+const chooser = [
+  {
+    slug: 'accessibility',
+    title: 'Accessibility',
+    blurb:
+      'Plan content and interactions that learners with a range of access needs can use meaningfully.',
+    cta: 'Explore accessibility →',
+    cls: 'x--a11y',
+  },
+  {
+    slug: 'copyright',
+    title: 'Copyright and permissions',
+    blurb:
+      'Keep track of materials you didn’t create and bring questions about using them in a public, commercial Course to your CTL team.',
+    cta: 'Explore copyright →',
+    cls: 'x--copyright',
+  },
+  {
+    slug: 'ai',
+    title: 'Using AI',
+    blurb:
+      'Use AI thoughtfully, protect sensitive material, and review what it contributes to the Course.',
+    cta: 'Explore AI guidance →',
+    cls: 'x--ai',
+  },
+];
+
+const a11yGroups = [
+  {
+    title: 'Text and structure',
+    items: [
+      'Use a logical heading structure and consistent formatting.',
+      'Use concise, direct language and explain specialized terminology or syntax.',
+      'Provide instructions, code, feedback, and rubrics as selectable text.',
+    ],
+  },
+  {
+    title: 'Images and visuals',
+    items: [
+      'Provide alternative text for meaningful images.',
+      'Describe complex charts, diagrams, and data in the surrounding content.',
+      'Identify table headers clearly and avoid using color or position alone.',
+    ],
+  },
+  {
+    title: 'Video and audio',
+    items: [
+      'Review captions and transcripts, especially names and specialized terminology.',
+      'Describe meaningful visual information aloud.',
+      'Make essential names, citations, links, and resources available in writing.',
+    ],
+  },
+  {
+    title: 'Interaction and navigation',
+    items: [
+      'Ensure essential controls can be reached with a keyboard and assistive technology.',
+      'Avoid requiring dragging, hovering, speech, precise movement, or a particular pace.',
+      'Explain how learners can pause, exit, restart, and check progress.',
+    ],
+  },
+  {
+    title: 'Never the only channel',
+    items: [
+      'Do not rely on color, sound, animation, an image, or visual position alone.',
+      'Avoid unnecessary time pressure.',
+      'Make instructions and feedback available in an accessible form.',
+    ],
+  },
+  {
+    title: 'Alternative paths',
+    items: [
+      'When a format creates a barrier unrelated to the objective, or is unavailable to some learners, provide another way to participate.',
+      'Review third-party tools and the complete environment learners work in—including editors, consoles, and visualizations—not only the surrounding page.',
+      'Do not require unnecessary disclosure of personal or sensitive information.',
+    ],
+  },
+];
+
+const a11yShare = [
+  'Editable source files whenever possible',
+  'What important images, charts, media, or interactions are meant to communicate',
+  'Any tool, plugin, software, or file format learners will use',
+  'Questions about alternatives or possible access barriers',
+];
+
+const flagRows = [
+  {
+    material: 'Text and publications',
+    flag: 'Articles, chapters, quotations, substantial excerpts, cases, scripts, exercises, or licensed question banks',
+  },
+  {
+    material: 'Images and figures',
+    flag: 'Photographs, illustrations, figures, charts, tables, or diagrams you did not create',
+  },
+  {
+    material: 'Video, audio, and music',
+    flag: 'Clips, footage, recordings, background music, or people appearing in a recording',
+  },
+  {
+    material: 'Data and datasets',
+    flag: 'Purchased, licensed, restricted, institutional, or third-party data',
+  },
+  {
+    material: 'Code and software',
+    flag: 'Starter code, libraries, packages, APIs, software, templates, or configured environments',
+  },
+  {
+    material: 'Scenarios and personas',
+    flag: 'Real people, copyrighted characters, proprietary cases, confidential situations, rubrics, or published exercises',
+  },
+  {
+    material: 'Tools and platforms',
+    flag: 'External tools, embedded content, accounts, data collection, privacy conditions, media, or simulations',
+  },
+  {
+    material: 'What learners submit',
+    flag: 'Anything learners are asked to upload, paste, or enter into an activity or AI conversation',
+  },
+];
+
+const copyrightShare = [
+  'A link to the original source',
+  'The creator or rights holder, when known',
+  'Any license, permission, or purchase information you already have',
+  'How much you hope to use, and whether you want to reproduce, adapt, embed, or link to it',
+];
+
+const confirmed = [
+  'Attribute third-party material and preserve required license notices, including open-source notices.',
+  'Link to a lawful source when the material does not need to be reproduced in Coursera.',
+  'Keep credentials, confidential data, private repositories, and personally identifiable information out of the Course.',
+  'Confirm distribution rights for software, packages, datasets, templates, and starter files used in Labs.',
+];
+
+const aiCards = [
+  {
+    title: 'Protect what goes in',
+    items: [
+      'Do not enter confidential, proprietary, personally identifiable, or restricted material.',
+      'Do not provide copyrighted material you are not authorized to use.',
+      'Consider what the tool provider may store or reuse.',
+    ],
+  },
+  {
+    title: 'Review what comes out',
+    items: [
+      'Verify facts, figures, citations, and disciplinary reasoning.',
+      'Review for bias, stereotypes, close reproduction, and accessibility concerns.',
+      'Revise the output to reflect your expertise, voice, learners, and objectives.',
+    ],
+  },
+  {
+    title: 'Tell your CTL team',
+    items: [
+      'Identify when AI contributed substantially to an asset.',
+      'Explain what tool was used and how the output was reviewed.',
+      'Flag anything whose accuracy, rights status, or appropriateness remains uncertain.',
+    ],
+  },
+];
+
+const aiShare = [
+  'The AI tool you used',
+  'How it contributed to the asset',
+  'Any source material or instructions used to guide it',
+  'What you have already verified or revised, and what you’d still like help reviewing',
+];
+
+const handoff = [
+  'Have accessibility needs and possible alternatives been considered?',
+  'Are editable and accessible source files available?',
+  'Have third-party materials and their sources been identified?',
+  'Are permission and attribution needs recorded?',
+  'Has substantial AI-supported work been shared and reviewed?',
+  'Are any open questions clearly noted for your CTL team?',
+];
+---
+
+<PageLayout
+  title="Accessibility, Copyright & AI"
+  description="Guidance that applies to every Coursera learning asset: accessibility, copyright and permissions, and using AI during Course development."
+  level="assets"
+  breadcrumb="Accessibility, Copyright & AI"
+  backToAssets
+  nextTo={{
+    dir: 'Asset guidance →',
+    label: 'Video',
+    href: '/learning-assets/video',
+    color: 'var(--level-assets-dark)',
+  }}
+>
+  <div class="levelpage" data-level="assets">
+    <!-- Hero -->
+    <div class="hero" data-cap="head">
+      <div>
+        <p class="eyebrow hero__eyebrow hero__eyebrow--neutral">Guidance for every Learning Asset</p>
+        <h1 class="hero__title">Accessibility, Copyright &amp; AI</h1>
+        <p class="hero__lead hero__lead--strong">
+          As you develop each Learning Asset, you’ll make choices that help it work well for
+          learners, fit a public and commercial Course, and reflect your own expertise (even if AI
+          has supported the process).
+        </p>
+        <p class="hero__lead">
+          You and your Learning Experience Designer can return to this page throughout planning,
+          production, and review. Use it to think through what applies to your work and identify
+          questions to discuss together.
+        </p>
+      </div>
+
+      <div class="hero__rail hero__rail--neutral">
+        <p class="eyebrow hero__rail-eyebrow">When this page may be helpful</p>
+        <div class="whenlist">
+          {
+            whenHelpful.map((w) => (
+              <div class="whenlist__item">
+                <p class="whenlist__title">{w.title}</p>
+                <p class="whenlist__body">{w.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Chooser -->
+    <section class="section section--open">
+      <h2 class="xtitle">Choose what you need</h2>
+      <p class="prose prose--gap-lg">
+        These questions may come up at different points in your project. Open the section that’s most
+        useful for the asset or decision you’re working through with your Learning Experience
+        Designer.
+      </p>
+
+      <div class="chooser">
+        {
+          chooser.map((c) => (
+            <a class:list={['choicecard', c.cls]} href={`#${c.slug}`} data-keep>
+              <div>
+                <p class="choicecard__title">{c.title}</p>
+                <p class="choicecard__blurb">{c.blurb}</p>
+              </div>
+              <p class="choicecard__cta">{c.cta}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="section section--open x--a11y" id="accessibility">
+      <p class="eyebrow xeyebrow">Return to this throughout development</p>
+      <h2 class="xtitle">Build in accessibility</h2>
+      <p class="prose prose--strong">
+        Accessibility is easiest to support when it’s considered from the beginning. Early choices
+        about structure, media, tools, and interactions can make an asset easier for more learners to
+        use—and much easier to produce accessibly.
+      </p>
+      <p class="prose prose--gap-lg">
+        Use the guidance below as you draft. Your Learning Experience Designer can help you decide
+        what applies and think through an accessible approach for complex content or interactions.
+      </p>
+
+      <div class="groupcols">
+        {
+          a11yGroups.map((g) => (
+            <div class="group">
+              <p class="eyebrow group__head">{g.title}</p>
+              <ul class="bullets bullets--group">
+                {g.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="sharepanel" data-keep>
+        <p class="sharepanel__title">Helpful things to share with your Learning Experience Designer</p>
+        <ul class="bullets bullets--group">
+          {a11yShare.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <div class="sharepanel" data-keep>
+        <p class="sharepanel__title">Accessibility is part of every Duke Coursera Learning Asset</p>
+        <p class="sharepanel__body">
+          You don’t need to wait until an asset is finished to ask accessibility questions. Share
+          drafts early, while the structure, format, and supporting materials can still be adjusted
+          together.
+        </p>
+      </div>
+    </section>
+
+    <!-- Copyright -->
+    <section class="section section--open x--copyright" id="copyright">
+      <p class="eyebrow xeyebrow">Return to this throughout development</p>
+      <h2 class="xtitle">Copyright and permissions</h2>
+      <p class="prose prose--strong">
+        Coursera is a public, global, commercial platform. That makes it different from a
+        face-to-face, for-credit Duke Course, and materials you already use in teaching may need
+        additional review, permission, or licensing before they can be included.
+      </p>
+      <p class="prose prose--gap-lg">
+        As you develop an asset, keep track of anything you didn’t create and where it came from.
+        Your CTL team can help you understand what may be used, what may require permission, and what
+        might be better replaced.
+      </p>
+
+      <h3 class="xsub">Why Coursera is different</h3>
+      <div class="compare">
+        <div class="compare__card compare__card--then" data-keep>
+          <p class="eyebrow compare__eyebrow">In a Duke classroom</p>
+          <p class="compare__body">
+            You are teaching a defined group of enrolled students for credit. Permissions and
+            provisions may support uses within that setting.
+          </p>
+        </div>
+        <div class="compare__card compare__card--now" data-keep>
+          <p class="eyebrow compare__eyebrow">In a Coursera Course</p>
+          <p class="compare__body">
+            The Course is available through a public, commercial platform and may remain published
+            beyond a term. Classroom permissions may not apply in the same way.
+          </p>
+        </div>
+      </div>
+
+      <div class="sharepanel" data-keep>
+        <p class="sharepanel__title">When in doubt, start with what you made</p>
+        <p class="sharepanel__body">
+          The simplest path is to build from material you created yourself. For anything you didn’t
+          create, check that its permission, license, public-domain status, or other approved use
+          covers public, global, commercial distribution.
+        </p>
+        <p class="sharepanel__body sharepanel__body--last">
+          Something can be free to view online without being free to reuse in a paid Course.
+        </p>
+      </div>
+
+      <h3 class="xsub xsub--spaced">Keep track of what you didn’t create</h3>
+      <p class="prose prose--gap">
+        As you draft, note materials in these categories and save their source information. Sharing
+        them early gives your CTL team more time to help you determine the best path forward.
+      </p>
+
+      <div class="flagtable" data-keep>
+        <div class="flagtable__head">
+          <div class="flagtable__cell">Material</div>
+          <div class="flagtable__cell">Flag it when it includes</div>
+        </div>
+        {
+          flagRows.map((r) => (
+            <div class="flagtable__row">
+              <div class="flagtable__cell flagtable__cell--key">{r.material}</div>
+              <div class="flagtable__cell">{r.flag}</div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="sharepanel" data-keep>
+        <p class="sharepanel__title">Helpful things to share with your CTL team</p>
+        <ul class="bullets bullets--group">
+          {copyrightShare.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <h3 class="xsub xsub--spaced">After permission or use is confirmed</h3>
+      <div class="checklist">
+        {
+          confirmed.map((c) => (
+            <div class="checklist__row" data-keep>
+              <span class="checklist__box" aria-hidden="true" />
+              <p class="checklist__text">{c}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Using AI -->
+    <section class="section section--open x--ai" id="ai">
+      <p class="eyebrow xeyebrow">Return to this when AI supports your work</p>
+      <h2 class="xtitle">Using AI during Course development</h2>
+      <p class="prose prose--strong">
+        AI tools can be useful for brainstorming, drafting, restructuring, summarizing, or generating
+        examples and practice questions. They can also introduce errors, bias, privacy concerns, and
+        copyright questions that aren’t always easy to spot.
+      </p>
+      <p class="prose prose--gap-lg">
+        Your expertise remains central. Treat anything an AI tool produces as a starting point to
+        verify, revise, and shape before it reaches learners.
+      </p>
+
+      <div class="aicards">
+        {
+          aiCards.map((c) => (
+            <div class="aicard" data-keep>
+              <p class="aicard__title">{c.title}</p>
+              <ul class="bullets bullets--group">
+                {c.items.map((i) => <li>{i}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="sharepanel" data-keep>
+        <p class="sharepanel__title">Helpful things to share with your Learning Experience Designer</p>
+        <ul class="bullets bullets--group">
+          {aiShare.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Handoff -->
+    <section class="section section--open x--ai">
+      <h2 class="xtitle">As you prepare for handoff</h2>
+      <p class="prose prose--gap-lg">
+        Use these questions with your Learning Experience Designer to take stock of what’s ready and
+        what may still need attention.
+      </p>
+
+      <div class="checklist">
+        {
+          handoff.map((h) => (
+            <div class="checklist__row" data-keep>
+              <span class="checklist__box" aria-hidden="true" />
+              <p class="checklist__text">{h}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="prose prose--top">
+        Record relevant decisions and source links in the Design Document so the team can carry them
+        into production.
+      </p>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  /* Each of the three concerns carries its own accent, used on the chooser
+     card, the section eyebrow, and that section's panels. */
+  .x--a11y {
+    --x: var(--dim-a11y);
+    --x-text: var(--dim-a11y-text);
+    --x-tint: var(--note-teal-bg);
+  }
+
+  .x--copyright {
+    --x: var(--dim-copyright);
+    --x-text: var(--copper-deep);
+    --x-tint: var(--warn-bg);
+  }
+
+  .x--ai {
+    --x: var(--text-body);
+    --x-text: var(--text-strong);
+    --x-tint: var(--panel-neutral);
+  }
+
+  /* --- Hero ---------------------------------------------------------------- */
+  .hero__eyebrow--neutral {
+    color: var(--text-body);
+  }
+
+  .hero__lead--strong {
+    color: var(--text-strong);
+  }
+
+  .hero__rail--neutral {
+    border-left-color: var(--text-body);
+  }
+
+  .whenlist {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .whenlist__item {
+    padding: 0 0 18px;
+  }
+
+  .whenlist__title {
+    margin: 0 0 5px;
+    font-family: var(--font-display);
+    font-size: 21px;
+    color: var(--navy);
+  }
+
+  .whenlist__body {
+    margin: 0;
+    font-size: var(--fs-2);
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: var(--measure-body);
+  }
+
+  /* --- Shared section furniture -------------------------------------------- */
+  .section--open {
+    padding: 68px var(--section-pad-x) 0;
+    scroll-margin-top: 12px;
+  }
+
+  .xeyebrow {
+    margin: 0 0 12px;
+    letter-spacing: 0.17em;
+    color: var(--x-text);
+  }
+
+  .xtitle {
+    margin: 0 0 16px;
+    font-size: var(--fs-7);
+    line-height: 1.15;
+  }
+
+  .xsub {
+    margin: 0 0 18px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+
+  .xsub--spaced {
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+
+  .prose {
+    margin: 0 0 17px;
+    font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .prose--strong {
+    color: var(--text-strong);
+  }
+
+  .prose--gap {
+    margin-bottom: 22px;
+  }
+
+  .prose--gap-lg {
+    margin-bottom: 32px;
+  }
+
+  .prose--top {
+    margin: 26px 0 0;
+  }
+
+  /* --- Chooser cards -------------------------------------------------------- */
+  .chooser {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .choicecard {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--x);
+    border-radius: var(--radius-panel);
+    padding: 24px 26px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .choicecard:hover {
+    border-color: var(--x);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .choicecard__title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: var(--fs-5);
+    line-height: 1.25;
+    color: var(--navy);
+  }
+
+  .choicecard__blurb {
+    margin: 0;
+    font-size: var(--fs-2);
+    line-height: 1.65;
+    color: var(--text-body);
+  }
+
+  .choicecard__cta {
+    margin: 0;
+    font-size: var(--fs-2);
+    font-weight: 600;
+    color: var(--x-text);
+  }
+
+  /* --- Grouped checklists --------------------------------------------------- */
+
+  /* Three columns of short groups; the groups are even enough here that a
+     grid reads better than newspaper columns. */
+  .groupcols {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 40px;
+  }
+
+  .group {
+    min-width: 0;
+    break-inside: avoid;
+  }
+
+  .group__head {
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--x);
+    letter-spacing: 0.14em;
+    color: var(--x-text);
+  }
+
+  .bullets--group {
+    --bullet-color: var(--x-text);
+    gap: 10px;
+  }
+
+  .bullets--group li {
+    font-size: var(--fs-2);
+    line-height: 1.65;
+    padding-left: 15px;
+    color: var(--text-body);
+  }
+
+  /* --- Tinted aside, in the section's own accent ---------------------------- */
+  .sharepanel {
+    background: var(--x-tint);
+    border-left: 3px solid var(--x);
+    padding: 24px 28px;
+    margin: 32px 0 0;
+  }
+
+  .sharepanel__title {
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--fs-5);
+    color: var(--navy);
+  }
+
+  .sharepanel__body {
+    margin: 0 0 12px;
+    font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: var(--measure-body);
+  }
+
+  .sharepanel__body--last {
+    margin-bottom: 0;
+  }
+
+  .sharepanel :global(p.sharepanel__title + .bullets) {
+    margin-top: 0;
+  }
+
+  /* --- Classroom vs Coursera ------------------------------------------------ */
+  .compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .compare__card {
+    padding: 2px 0 2px 22px;
+    border-left: 3px solid var(--rule-strong);
+  }
+
+  .compare__card--now {
+    border-left-color: var(--dim-copyright);
+  }
+
+  .compare__eyebrow {
+    margin: 0 0 8px;
+    letter-spacing: 0.16em;
+    color: var(--text-muted);
+  }
+
+  .compare__card--now .compare__eyebrow {
+    color: var(--copper-deep);
+  }
+
+  .compare__body {
+    margin: 0;
+    font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  /* --- What to flag table --------------------------------------------------- */
+  .flagtable {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+  }
+
+  .flagtable__head,
+  .flagtable__row {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+
+  .flagtable__head {
+    background: var(--warn-bg);
+    border-bottom: 1px solid var(--warn-border);
+    font-size: var(--fs-1);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--copper-deep);
+    font-weight: 700;
+  }
+
+  .flagtable__head .flagtable__cell {
+    padding: 14px 22px;
+    white-space: nowrap;
+    border-left-color: var(--warn-border);
+  }
+
+  .flagtable__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .flagtable__row:last-child {
+    border-bottom: 0;
+  }
+
+  .flagtable__cell {
+    padding: 16px 22px;
+    font-size: var(--fs-3);
+    line-height: 1.6;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+  }
+
+  .flagtable__cell:first-child {
+    border-left: 0;
+  }
+
+  .flagtable__cell--key {
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--navy);
+  }
+
+  /* --- Checklists ----------------------------------------------------------- */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+  }
+
+  .checklist__row {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .checklist__box {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    margin-top: 1px;
+    border-radius: var(--radius-panel);
+    border: 2px solid var(--x);
+    display: block;
+  }
+
+  .checklist__text {
+    margin: 0;
+    font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-body);
+    max-width: 700px;
+  }
+
+  /* --- Using AI cards -------------------------------------------------------- */
+  .aicards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .aicard {
+    border: 1px solid var(--rule-card);
+    border-top: 4px solid var(--x);
+    border-radius: var(--radius-panel);
+    padding: 24px 26px;
+  }
+
+  .aicard__title {
+    margin: 0 0 14px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+</style>

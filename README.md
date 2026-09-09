@@ -26,6 +26,7 @@ path, which matches how GitHub Pages serves the site.
 | Course | `/course` | `src/pages/course.astro` |
 | Module | `/module` | `src/pages/module.astro` |
 | Learning Assets | `/learning-assets` | `src/pages/learning-assets/index.astro` |
+| Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `src/pages/learning-assets/accessibility-copyright-ai.astro` |
 | Video | `/learning-assets/video` | `src/pages/learning-assets/video.astro` |
 | Reading | `/learning-assets/reading` | `src/pages/learning-assets/reading.astro` |
 
@@ -37,10 +38,9 @@ path, which matches how GitHub Pages serves the site.
 - **`src/data/learning-assets-data.json`** — client-authored copy for all eight asset
   types. The Learning Assets page is generated from this file, not written by hand.
   Only `use`, `note`, and `d` are rendered. The `a` (accessibility) and `c` (copyright)
-  arrays are no longer used: that guidance was consolidated and rewritten into the
-  Accessibility and Copyright sections at the foot of the page, which are authored in
-  `src/pages/learning-assets/index.astro`. Editing `a` or `c` here changes nothing —
-  they are kept only as a record of where the consolidated content came from.
+  arrays are no longer used: that guidance moved to its own page,
+  `accessibility-copyright-ai.astro`, where it is authored directly. Editing `a` or `c`
+  here changes nothing — they are kept only as a record of where that content came from.
 - **`src/styles/tokens.css`** — every color, type size, and measure in the design system.
 - **`src/styles/global.css`** — base styles and the patterns shared across pages
   (chrome, sections, panels, the level-page skeleton, accordion, print rules).

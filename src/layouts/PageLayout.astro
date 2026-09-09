@@ -14,8 +14,10 @@ interface Props {
   breadcrumb?: string;
   /** Set on sub-pages so the footer shows "← Back to Learning Assets". */
   backToAssets?: boolean;
+  /** Replaces the footer's "Zoom in" link. */
+  nextTo?: { dir: string; label: string; href: string; color: string };
 }
-const { title, description, level, breadcrumb, backToAssets } = Astro.props;
+const { title, description, level, breadcrumb, backToAssets, nextTo } = Astro.props;
 ---
 
 <!doctype html>
@@ -55,9 +57,10 @@ const { title, description, level, breadcrumb, backToAssets } = Astro.props;
           backToAssets ? (
             <PageFooter
               backTo={{ label: 'Learning Assets', href: '/learning-assets', color: levelColor.assets }}
+              nextTo={nextTo}
             />
           ) : (
-            <PageFooter level={level} />
+            <PageFooter level={level} nextTo={nextTo} />
           )
         }
       </div>

@@ -32,6 +32,15 @@ export const pages: NavPage[] = [
   { key: 'assets', label: 'Learning Assets', href: '/learning-assets' },
 ];
 
+/** Child pages of Learning Assets that are not one of the eight asset
+    types. The shared-guidance page sits at the top of the dropdown's child
+    list and is the only emphasized item in it — accessibility, copyright
+    and AI apply to every asset, so it is the one faculty need most. */
+export const sharedGuidance = {
+  label: 'Accessibility, Copyright & AI',
+  href: '/learning-assets/accessibility-copyright-ai',
+};
+
 export interface AssetLink {
   /** Matches `slug` in learning-assets-data.json. */
   slug: string;
@@ -50,7 +59,7 @@ export const assetLinks: AssetLink[] = [
   {
     slug: 'video',
     label: 'Video',
-    guidance: 'Full guidance for designing videos →',
+    guidance: 'Full guidance for designing Videos →',
     page: '/learning-assets/video',
   },
   {
@@ -62,17 +71,17 @@ export const assetLinks: AssetLink[] = [
   {
     slug: 'plugin',
     label: 'Interactive Plugin',
-    guidance: 'Full guidance for designing Interactive Plugins →',
+    guidance: 'Full guidance for Interactive Plugins →',
   },
-  { slug: 'dialogue', label: 'Coach Dialogue', guidance: 'Full guidance for designing Coach Dialogue →' },
-  { slug: 'roleplay', label: 'Coach Role Play', guidance: 'Full guidance for designing Coach Role Play →' },
-  { slug: 'assessments', label: 'Assessments', guidance: 'Full guidance for designing assessments →' },
+  { slug: 'dialogue', label: 'Coach Dialogue', guidance: 'Full guidance for Coach Dialogue →' },
+  { slug: 'roleplay', label: 'Coach Role Play', guidance: 'Full guidance for Coach Role Play →' },
+  { slug: 'assessments', label: 'Assessments', guidance: 'Full guidance for designing Assessments →' },
   {
     slug: 'programming',
     label: 'Programming Assignments',
-    guidance: 'Full guidance for designing Programming Assignments →',
+    guidance: 'Full guidance for Programming Assignments →',
   },
-  { slug: 'labs', label: 'Coursera Labs', guidance: 'Full guidance for designing Coursera Labs →' },
+  { slug: 'labs', label: 'Coursera Labs', guidance: 'Full guidance for Coursera Labs →' },
 ];
 
 /** Where a dropdown item should point: its own page if built, otherwise the

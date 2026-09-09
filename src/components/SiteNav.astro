@@ -1,5 +1,5 @@
 ---
-import { pages, assetLinks, assetHref, levelColor, url, type LevelKey } from '../data/site';
+import { pages, assetLinks, assetHref, sharedGuidance, levelColor, url, type LevelKey } from '../data/site';
 
 interface Props {
   /** Which top-level item is active. Learning Asset sub-pages pass 'assets'. */
@@ -32,7 +32,7 @@ const { active } = Astro.props;
               aria-current={active === 'assets' ? 'page' : undefined}
             >
               {p.label}
-              <span class="nav__caret" aria-hidden="true">▾</span>
+              <span class="nav__caret" aria-hidden="true">⌄</span>
             </a>
 
             <button
@@ -48,6 +48,11 @@ const { active } = Astro.props;
               <li>
                 <a class="nav__dd-link nav__dd-link--all" href={url('/learning-assets')}>
                   All Learning Assets
+                </a>
+              </li>
+              <li>
+                <a class="nav__dd-link nav__dd-link--featured" href={url(sharedGuidance.href)}>
+                  {sharedGuidance.label}
                 </a>
               </li>
               {
@@ -118,18 +123,18 @@ const { active } = Astro.props;
 
   .nav__dropdown {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 14px);
     right: 0;
     z-index: 20;
     margin: 0;
     padding: 8px 0;
     list-style: none;
-    min-width: 232px;
+    width: 330px;
     background: #fff;
     border: 1px solid var(--rule-card);
-    border-top: 3px solid var(--level-assets);
+    border-top: 4px solid var(--level-assets);
     border-radius: var(--radius-panel);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 12px 34px rgba(1, 33, 105, 0.16);
   }
 
   .nav__dropdown[hidden] {
@@ -138,8 +143,8 @@ const { active } = Astro.props;
 
   .nav__dd-link {
     display: block;
-    padding: 8px 20px;
-    font-size: 13.5px;
+    padding: 9px 24px;
+    font-size: var(--fs-2);
     letter-spacing: 0.02em;
     color: var(--text-muted);
     text-decoration: none;
@@ -153,25 +158,39 @@ const { active } = Astro.props;
   }
 
   .nav__dd-link--all {
-    color: var(--navy);
+    padding: 14px 24px;
+    font-size: var(--fs-3);
     font-weight: 600;
-    margin-bottom: 4px;
-    padding-bottom: 12px;
+    color: var(--navy);
+  }
+
+  /* Accessibility, copyright and AI apply to every asset, so this is the
+     one child faculty need most — the only emphasized item in the menu. */
+  .nav__dd-link--featured {
+    margin: 6px 0;
+    padding: 13px 24px 13px 21px;
+    border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
+    border-left: 3px solid var(--level-assets);
+    background: var(--level-assets-tint);
+    font-size: var(--fs-2);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .nav__dd-link--featured:hover,
+  .nav__dd-link--featured:focus-visible {
+    background: #fbefd9;
+    color: var(--navy);
   }
 
   /* Assets without a page of their own jump to their section on the
-     Learning Assets page. Marked so they read as a different kind of
-     destination. */
+     Learning Assets page. Muted rather than marked — the design asks for
+     no descriptor text in the menu. */
   .nav__dd-link[data-built='false'] {
     color: var(--text-subtle);
-  }
-
-  .nav__dd-link[data-built='false']::after {
-    content: '§';
-    margin-left: 7px;
-    font-size: 11px;
-    color: var(--rule-strong);
   }
 
   .visually-hidden {
@@ -191,9 +210,12 @@ const { active } = Astro.props;
     const menu = group.querySelector<HTMLElement>('.nav__dropdown')!;
     let hoverTimer: number | undefined;
 
+    const caret = group.querySelector<HTMLElement>('.nav__caret')!;
+
     const setOpen = (open: boolean) => {
       menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
+      caret.textContent = open ? '⌃' : '⌄';
     };
 
     // Pointer: open on hover, with a short close delay so the diagonal
@@ -215,6 +237,14 @@ const { active } = Astro.props;
     group.addEventListener('focusin', () => setOpen(true));
     group.addEventListener('focusout', (e) => {
       if (!group.contains(e.relatedTarget as Node)) setOpen(false);
+    });
+
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setOpen(true);
+        menu.querySelector<HTMLAnchorElement>('.nav__dd-link')?.focus();
+      }
     });
 
     document.addEventListener('keydown', (e) => {
