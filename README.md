@@ -36,14 +36,18 @@ path, which matches how GitHub Pages serves the site.
   Learning Asset types, and the "Zoom out / Zoom in" footer chain all come from here.
   This is the file to edit when adding a page.
 - **`src/data/learning-assets.ts`** — the eight asset types: names, icons, and the
-  "What is it? / When to use it?" copy on the Learning Assets cards. Order here drives
-  the hero rail, the cards, and the nav dropdown, so the three cannot drift apart. It
-  also carries each asset's `page`, once one is published.
+  "What is it? / When might you use it?" copy on the Learning Assets cards. Order here
+  drives the hero rail, the cards, and the nav dropdown, so the three cannot drift
+  apart. It also carries each asset's `page`, once one is published. Three assets are
+  marked `plural`, which switches their card labels to "What are they? / When might you
+  use them?" — the design words them that way.
 - **`src/data/learning-assets-data.json`** — **no longer read by anything.** It holds an
   earlier generation of the per-asset copy (`use`, `d`, `a`, `c`). The page it fed has
   been redesigned twice since: accessibility and copyright moved to their own page, and
-  the cards now use "What is it? / When to use it?" copy that never existed in this file.
-  Kept only as a record; editing it changes nothing. Safe to delete.
+  the cards now use "What is it? / When might you use it?" copy that never existed in
+  this file. The design handoff has since dropped it for the same reason, and warns
+  against reintroducing a parallel copy source — take card copy from the design's
+  `.dc.html`. Kept here only as a record; editing it changes nothing. Safe to delete.
 - **`src/styles/tokens.css`** — every color, type size, and measure in the design system.
 - **`src/styles/global.css`** — base styles and the patterns shared across pages
   (chrome, sections, panels, the level-page skeleton, accordion, print rules).

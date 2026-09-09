@@ -1,11 +1,10 @@
 /* ==========================================================================
    The eight Coursera learning asset types.
 
-   This supersedes learning-assets-data.json for the Learning Assets page.
-   The page now shows a "What is it? / When to use it?" pair per asset, and
-   that copy has never existed in the JSON — nor have the icons, which have
-   to live in code regardless. Keeping the two halves in one typed file
-   beats splitting a card between a JSON blob and a template.
+   This supersedes learning-assets-data.json, which the design handoff has
+   since removed for the same reason it stopped being read here: it held a
+   parallel copy of this content and drifted from the page three times.
+   Take card copy from the design's .dc.html, not from a data file.
 
    Order here drives the hero rail, the cards, and the nav dropdown, so the
    three cannot drift apart.
@@ -14,12 +13,17 @@
 export interface LearningAsset {
   /** Also the in-page anchor id. Matches the nav dropdown's href. */
   slug: string;
-  /** Nav dropdown and hero rail. Plural for the countable types. */
+  /** Card heading, nav dropdown, and hero rail. */
   railLabel: string;
-  /** Card heading. Singular where the design names one instance. */
-  cardTitle: string;
+  /** True for the asset types the design speaks of as a set, which take
+      "What are they? / When might you use them?" on the card instead of
+      the singular pair. */
+  plural?: boolean;
   whatIs: string;
   whenToUse: string;
+  /** Only where the "Explore …" link is worded differently from the label
+      used elsewhere. */
+  exploreLabel?: string;
   /** Route for this asset's full-guidance page, once one is published. */
   page?: string;
   /** Inner geometry of a 24×24 stroked icon, drawn at 19px in the rail and
@@ -31,7 +35,6 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'video',
     railLabel: 'Video',
-    cardTitle: 'Video',
     whatIs:
       'A planned audiovisual asset that may combine an instructor’s presence or narration with slides, demonstrations, screen recordings, interviews, animation, or other visuals.',
     whenToUse:
@@ -42,7 +45,6 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'reading',
     railLabel: 'Reading',
-    cardTitle: 'Reading',
     whatIs:
       'A Reading can be a short page that introduces a file or external resource, or a more developed learning experience that brings together written explanation, examples, graphics, code, media, and links.',
     whenToUse:
@@ -53,7 +55,7 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'plugin',
     railLabel: 'Interactive Plugin',
-    cardTitle: 'Interactive Plugin',
+    exploreLabel: 'Interactive Plugins',
     whatIs:
       'A Coursera feature that can embed a compatible external webpage, tool, or interactive experience that already exists and is hosted outside the Course.',
     whenToUse:
@@ -63,7 +65,6 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'dialogue',
     railLabel: 'Coach Dialogue',
-    cardTitle: 'Coach Dialogue',
     whatIs: 'An AI-supported conversation that responds to a learner’s ideas and choices.',
     whenToUse:
       'When learners would benefit from explaining their reasoning, considering alternatives, reflecting, or receiving personalized guidance.',
@@ -72,7 +73,6 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'roleplay',
     railLabel: 'Coach Role Play',
-    cardTitle: 'Coach Role Play',
     whatIs:
       'An AI-supported activity in which learners practice a conversation with a simulated persona.',
     whenToUse:
@@ -82,9 +82,9 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'assessments',
     railLabel: 'Assessments',
-    cardTitle: 'Assessments',
+    plural: true,
     whatIs:
-      'Graded or ungraded questions that allow learners to practice, receive pre-determined feedback, or demonstrate what they have learned.',
+      'Questions or tasks that allow learners to practice, receive feedback, or demonstrate what they have learned.',
     whenToUse:
       'Throughout a Module to help learners check their understanding, prepare for independent work, and demonstrate achievement of the Module objectives.',
     icon: '<path d="M4 3h13l3.5 3.5V21H4z"/><path d="M8 12.5l2.5 2.5L16 9.5"/>',
@@ -92,7 +92,7 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'programming',
     railLabel: 'Programming Assignments',
-    cardTitle: 'Programming Assignment',
+    plural: true,
     whatIs:
       'Code-based tasks that allow learners to write, modify, debug, or evaluate a program and receive feedback on their work.',
     whenToUse:
@@ -102,7 +102,7 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'labs',
     railLabel: 'Coursera Labs',
-    cardTitle: 'Coursera Lab',
+    plural: true,
     whatIs:
       'Configured, in-browser workspaces where learners can use code, data, software, or other technical tools.',
     whenToUse:

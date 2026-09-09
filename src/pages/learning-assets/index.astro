@@ -146,20 +146,24 @@ const phases = [
                     aria-hidden="true"
                     set:html={a.icon}
                   />
-                  <p class="assetcard__title">{a.cardTitle}</p>
+                  <p class="assetcard__title">{a.railLabel}</p>
                 </div>
 
-                <p class="eyebrow assetcard__label">What is it?</p>
+                <p class="eyebrow assetcard__label">
+                  {a.plural ? 'What are they?' : 'What is it?'}
+                </p>
                 <p class="assetcard__body">{a.whatIs}</p>
 
-                <p class="eyebrow assetcard__label">When to use it?</p>
+                <p class="eyebrow assetcard__label">
+                  {a.plural ? 'When might you use them?' : 'When might you use it?'}
+                </p>
                 <p class="assetcard__body assetcard__body--last">{a.whenToUse}</p>
               </div>
 
               {
                 assetPageLive(a) ? (
                   <a class="assetcard__more" href={url(a.page!)}>
-                    Explore {a.railLabel} →
+                    Explore {a.exploreLabel ?? a.railLabel} →
                   </a>
                 ) : (
                   /* Held back until all eight guides are ready to share.
