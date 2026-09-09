@@ -122,6 +122,8 @@ publishes it to GitHub Pages. In the repository's **Settings → Pages**, set
   collapsed in the source document, so its contents were never available.
 - **Image placeholders** on the Video page (slide rebuild, caption safe zones) are dashed
   boxes awaiting real screenshots.
-- **Template and example links** (`data-template-link`, "View full script", "Watch on
-  Warpwire") point at `#` and need real URLs.
+- **Example links on the Video page** ("Make a copy", "View full script", "Watch on
+  Warpwire") still point at `#` and need real URLs. The Specialization, Course, Module,
+  and Overview template links are live — they are the two view-only sample documents in
+  `templateExamples` (`src/data/site.ts`).
 - **No dark version of the CTL logo** has been supplied, for use on light backgrounds.

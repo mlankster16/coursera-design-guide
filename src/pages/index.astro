@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import Accordion from '../components/Accordion.astro';
-import { url, designTemplateUrl } from '../data/site';
+import { url, templateExamples } from '../data/site';
 
 /* Copy on this page is client-authored and final. The three paragraphs in
    "What is Coursera?" beyond the opening platform sentence are
@@ -9,16 +9,35 @@ import { url, designTemplateUrl } from '../data/site';
 
 const heroRail = [
   {
-    title: 'Where you are now',
-    body: 'Use this guide before or after your first conversation with a Learning Experience Designer.',
+    title: 'Before your first meeting',
+    body: 'Explore this overview and preview the sample templates to get a sense of the process.',
   },
   {
-    title: 'What comes next',
-    body: 'You’ll complete a Design Document with your Learning Experience Designer. Use this guide as a reference as you work.',
+    title: 'Your project design templates',
+    body: 'Your Learning Experience Designer will share the specific templates your project needs before your first design meeting.',
+    /* Sends faculty to the samples further down rather than to a template
+       they are not meant to copy. */
+    link: { label: 'Preview the design templates ↓', href: '#templates' },
   },
   {
-    title: 'How to use this',
-    body: 'Return to each page as you reach that part of the design. You don’t need to work through it in order.',
+    title: 'Throughout development',
+    body: 'Return to the page that matches what you are working on and use your project templates to capture the decisions you make together.',
+  },
+];
+
+/* The two view-only samples at the foot of the page. */
+const templateCards = [
+  {
+    level: 'specialization',
+    title: 'Specialization Design Template',
+    body: 'See how the larger learning goal, Course sequence, and connections across Courses are mapped.',
+    href: templateExamples.specialization,
+  },
+  {
+    level: 'course',
+    title: 'Course Design Template',
+    body: 'See how Course objectives, Module plans, and Learning Assets are organized for development.',
+    href: templateExamples.course,
   },
 ];
 
@@ -122,16 +141,10 @@ const reuseRows = [
   <!-- Hero -->
   <div class="ohero">
     <div>
-      <p class="eyebrow eyebrow--copper ohero__eyebrow">For Duke faculty</p>
       <h1 class="h1">Turn your teaching expertise into a Coursera learning experience.</h1>
       <p class="lead m-body">
-        This guide and your&nbsp;<a
-          class="inline-link"
-          href={designTemplateUrl}
-          target="_blank"
-          rel="noopener">Duke Coursera Design Template</a
-        >&nbsp;are meant to be used together, with a Learning Experience Designer (LXD) from Duke’s
-        Center for Teaching and Learning.
+        This guide and your Duke Coursera Design Template are meant to be used together, with a
+        Learning Experience Designer (LXD) from Duke’s Center for Teaching and Learning.
       </p>
       <p class="lead m-body ohero__lead-2">
         You’ll return to different parts of this guide throughout development. Focus on the page that
@@ -146,6 +159,11 @@ const reuseRows = [
           <div>
             <p class="ohero__rail-title">{r.title}</p>
             <p class="caption m-body ohero__rail-body">{r.body}</p>
+            {r.link && (
+              <a class="ohero__rail-link" href={r.link.href}>
+                {r.link.label}
+              </a>
+            )}
           </div>
         ))
       }
@@ -270,16 +288,35 @@ const reuseRows = [
     <Accordion id="reuse" rows={reuseRows} />
   </section>
 
-  <!-- CTA -->
+  <!-- Template samples -->
   <div class="section cta-wrap">
-    <div class="cta">
-      <div>
-        <h2 class="cta__title">Ready to start planning?</h2>
-        <p class="cta__body m-body">
-          The planning template is a blank version of this guide. You’ll complete it with your Learning Experience Designer.
-        </p>
+    <div class="cta" id="templates">
+      <h2 class="cta__title">Preview the Design Templates</h2>
+      <p class="cta__body m-body">
+        Your Learning Experience Designer will share the working templates selected for your project.
+        These view-only samples can help you see what to expect and how the pages of this guide
+        connect to the decisions you will record.
+      </p>
+
+      <div class="tmplcards">
+        {
+          templateCards.map((t) => (
+            <a
+              class:list={['tmplcard', `tmplcard--${t.level}`]}
+              href={t.href}
+              target="_blank"
+              rel="noopener"
+              data-keep
+            >
+              <div>
+                <p class="tmplcard__title">{t.title}</p>
+                <p class="tmplcard__body">{t.body}</p>
+              </div>
+              <p class="tmplcard__cta">View the example ↗</p>
+            </a>
+          ))
+        }
       </div>
-      <a class="btn" href="#" data-template-link>Open the planning template ↗</a>
     </div>
   </div>
 </PageLayout>
@@ -295,25 +332,8 @@ const reuseRows = [
     background: var(--panel-warm);
   }
 
-  .ohero__eyebrow {
-    margin: 0 0 14px;
-  }
-
   .ohero__lead-2 {
     margin-top: 18px;
-  }
-
-  /* No trailing ↗ on this one: it sits mid-sentence, and the design binds
-     it to the words either side with non-breaking spaces instead. */
-  .inline-link {
-    font-weight: 600;
-    color: var(--blue);
-    text-decoration: none;
-  }
-
-  .inline-link:hover {
-    text-decoration: underline;
-    color: var(--blue);
   }
 
   .ohero__rail {
@@ -334,6 +354,20 @@ const reuseRows = [
   .ohero__rail-body {
     margin: 0;
     color: var(--text-muted);
+  }
+
+  .ohero__rail-link {
+    display: inline-block;
+    margin: 8px 0 0;
+    font-size: var(--fs-2);
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .ohero__rail-link:hover {
+    text-decoration: underline;
+    color: var(--blue);
   }
 
   /* --- Sections ---------------------------------------------------------- */
@@ -523,24 +557,80 @@ const reuseRows = [
     padding: 64px var(--section-pad-x);
   }
 
+  /* The panel stacks now that it holds two cards rather than one button. */
+  .cta {
+    display: block;
+  }
+
   .cta__title {
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     font-size: var(--fs-7);
     color: #fff;
     white-space: nowrap;
   }
 
   .cta__body {
-    margin: 0;
+    margin: 0 0 22px;
     font-size: var(--fs-3);
-    line-height: 1.6;
-    color: #b9cae4;
+    line-height: 1.7;
+    color: #dce6f4;
+    max-width: var(--measure-body);
   }
 
-  .cta .btn {
-    flex: none;
+  .tmplcards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  /* White cards on the navy ground, each topped in its own level colour. */
+  .tmplcard {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    background: var(--bg-card);
+    border-top: 4px solid var(--tc);
+    border-radius: var(--radius-panel);
+    padding: 24px 26px;
+    transition: background 0.15s ease;
+  }
+
+  .tmplcard--specialization {
+    --tc: var(--level-specialization);
+    --tc-wash: var(--level-specialization-tint);
+  }
+
+  .tmplcard--course {
+    --tc: var(--level-course);
+    --tc-wash: var(--level-course-tint);
+  }
+
+  .tmplcard:hover {
+    background: var(--tc-wash);
+  }
+
+  .tmplcard__title {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--tc);
+  }
+
+  .tmplcard__body {
+    margin: 0;
+    font-size: var(--fs-3);
+    line-height: 1.7;
+    color: var(--text-body);
+  }
+
+  .tmplcard__cta {
+    margin: 0;
     font-size: var(--fs-2);
-    font-weight: 700;
-    padding: 15px 28px;
+    font-weight: 600;
+    color: var(--tc);
   }
 </style>

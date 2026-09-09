@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { templateExamples } from '../data/site';
 import WorkedExample from '../components/WorkedExample.astro';
 import BestPractice from '../components/BestPractice.astro';
 
@@ -280,15 +281,15 @@ const objectives = [
       </div>
       <h2 class="step__title">Complete your Specialization plan</h2>
       <p class="step__q">
-        Use this page to work through the course-design decisions, then record them in the Design
-        Document. The sample below shows how those decisions might come together for the example
+        Use this page to work through your design decisions, then record them in your Coursera
+        Specialization Design Document. The sample below shows how those decisions might come together for the example
         <strong>Specialization: <span class="nostyle">Data Analytics for Business Decisions</span></strong
         >. Use it as a reference as you develop your own plan.
       </p>
 
 
       <div class="draftnote" data-keep>
-        <p>Bring your draft answers to your next conversation with your Learning Experience Designer; you don’t need to complete every field first.</p>
+        <p>Bring draft answers to your next meeting with your Learning Experience Designer. It’s okay to leave fields blank if you’re unsure, and we’ll work through it together.</p>
       </div>
       <div class="tmpl">
         <div class="tmpl__bar">
@@ -589,8 +590,22 @@ const objectives = [
           </div>
         </div>
 
-        <div class="tmpl__cta">
-          <a class="btn btn--level" href="#" data-template-link>Open the template in Google Docs ↗</a>
+        <div class="tmpl__cta" data-keep>
+          <p class="eyebrow tmpl__cta-eyebrow">Your templates</p>
+          <p class="tmpl__cta-body">
+            Your Learning Experience Designer will share your template(s) ahead of your first design
+            meeting. That may be a Specialization Template or a Course Template on its own. The
+            examples below are view-only, so you can see how each page of this guide maps onto the
+            document.
+          </p>
+          <div class="tmpl__cta-links">
+            <a class="btn-outline" href={templateExamples.specialization} target="_blank" rel="noopener">
+              See an example Specialization Template ↗
+            </a>
+            <a class="btn-outline" href={templateExamples.course} target="_blank" rel="noopener">
+              See an example Course Template ↗
+            </a>
+          </div>
         </div>
       </div>
     </section>

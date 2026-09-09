@@ -1061,11 +1061,57 @@ img {
   color: var(--accent-dark);
 }
 
+/* Closes the template with the two view-only sample documents. Takes the
+   level's own tint rather than the neutral warm ground, so it reads as part
+   of the template above it. */
 .tmpl__cta {
   padding: 24px 26px;
-  background: var(--panel-warm);
-  border-top: 1px solid var(--rule);
+  background: var(--tint);
+  border-top: 1px solid var(--tint-border);
   border-radius: 0 0 var(--radius-panel) var(--radius-panel);
+}
+
+.tmpl__cta-eyebrow {
+  margin: 0 0 6px;
+  letter-spacing: 0.16em;
+  color: var(--accent-dark);
+}
+
+.tmpl__cta-body {
+  margin: 0 0 16px;
+  font-size: var(--fs-3);
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: var(--measure-body);
+}
+
+.tmpl__cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Outline button on a tinted ground — the counterpart to the solid .btn.
+   Colours come from the enclosing level, so re-declaring --accent on a
+   wrapper re-tints it. */
+.btn-outline {
+  display: inline-block;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  color: var(--accent-dark);
+  font-size: var(--fs-2);
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: var(--radius-panel);
+  text-decoration: none;
+  /* Without nowrap the PDF renderer orphans the trailing glyph onto a
+     second line, pushing it outside the button box. */
+  white-space: nowrap;
+}
+
+.btn-outline:hover {
+  background: var(--tint);
+  color: var(--accent-dark);
 }
 
 /* --- Grid tables (1px gaps over the divider color fake hairlines) ------- */

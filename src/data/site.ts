@@ -84,11 +84,20 @@ export function assetHref(a: AssetLink): string {
   return assetPageLive(a) ? a.page! : `/learning-assets#${a.slug}`;
 }
 
-/** The Duke Coursera Design Template faculty fill in alongside this guide.
-    The /copy suffix is deliberate: it opens Google's "make a copy" prompt
-    so each person gets their own, rather than editing the master. */
-export const designTemplateUrl =
-  'https://docs.google.com/document/d/1C-7HTxae1Xu6AXL8WQou78ctfzDw_s5j76eKeQAMlLI/copy?usp=sharing';
+/* ---------------------------------------------------------------------------
+   The two design templates, as view-only examples.
+
+   Faculty do not copy these. Their Learning Experience Designer sends the
+   working template their project actually needs; these exist so they can
+   see the shape of the document before that meeting. That is why the links
+   end in /edit rather than the /copy prompt an earlier single template used.
+   --------------------------------------------------------------------------- */
+export const templateExamples = {
+  specialization:
+    'https://docs.google.com/document/d/1qsH5U9GwQzpmc12p7Rx9avnceBAEWQWel7NsS-s16C0/edit?usp=sharing',
+  course:
+    'https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing',
+};
 
 /** Prefix a site-root path with the configured base so links work both at
     the repo root and under /coursera-design-guide on GitHub Pages. */
