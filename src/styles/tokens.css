@@ -71,6 +71,10 @@
      page, where the copper sits against white as well as the tint. */
   --copper-deep: #8f3400;
 
+  /* The AI section's own near-black, a step darker than --text-strong for
+     its eyebrow and panel bullets. */
+  --ai-deep: #2a313b;
+
   /* Neutral panel — the "Using AI" cards and the Reading page's meta note. */
   --panel-neutral: #f4f5f7;
 

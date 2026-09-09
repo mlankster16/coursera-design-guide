@@ -1,6 +1,5 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { url, levelColor } from '../../data/site';
 
 /* Guidance that applies to every asset, so it lives on its own page rather
    than repeating inside all eight asset sections. Reached from the Learning
@@ -34,7 +33,7 @@ const chooser = [
     slug: 'copyright',
     title: 'Copyright and permissions',
     blurb:
-      'Keep track of materials you didn’t create and bring questions about using them in a public, commercial Course to your CTL team.',
+      'Identify materials you did not create and work with your CTL team to confirm that they can be used in a public, commercial Course.',
     cta: 'Explore copyright →',
     cls: 'x--copyright',
   },
@@ -42,7 +41,7 @@ const chooser = [
     slug: 'ai',
     title: 'Using AI',
     blurb:
-      'Use AI thoughtfully, protect sensitive material, and review what it contributes to the Course.',
+      'Use AI thoughtfully, protect material you share with AI tools, and carefully review anything AI contributes to the Course.',
     cta: 'Explore AI guidance →',
     cls: 'x--ai',
   },
@@ -76,25 +75,25 @@ const a11yGroups = [
   {
     title: 'Interaction and navigation',
     items: [
-      'Ensure essential controls can be reached with a keyboard and assistive technology.',
-      'Avoid requiring dragging, hovering, speech, precise movement, or a particular pace.',
-      'Explain how learners can pause, exit, restart, and check progress.',
+      'Design essential controls so they can be reached with a keyboard and assistive technology.',
+      'Whenever possible, choose interactions that do not depend on dragging, hovering, speech, precise movement, or a particular pace.',
+      'Explain how learners can pause, exit, restart, and check their progress.',
     ],
   },
   {
-    title: 'Never the only channel',
+    title: 'Multiple ways to engage',
     items: [
-      'Do not rely on color, sound, animation, an image, or visual position alone.',
-      'Avoid unnecessary time pressure.',
-      'Make instructions and feedback available in an accessible form.',
+      'Pair color, sound, animation, images, and visual position with another way of understanding the information.',
+      'Provide instructions and feedback in an accessible form learners can return to.',
+      'Give learners flexibility in how quickly they work through an experience unless timing is essential to the objective.',
     ],
   },
   {
     title: 'Alternative paths',
     items: [
       'When a format creates a barrier unrelated to the objective, or is unavailable to some learners, provide another way to participate.',
-      'Review third-party tools and the complete environment learners work in—including editors, consoles, and visualizations—not only the surrounding page.',
-      'Do not require unnecessary disclosure of personal or sensitive information.',
+      'Consider the accessibility of the complete environment learners will use, including third-party tools, editors, consoles, and visualizations.',
+      'Ask learners only for information needed to complete the activity, avoiding personal or sensitive information whenever possible.',
     ],
   },
 ];
@@ -149,9 +148,9 @@ const copyrightShare = [
 ];
 
 const confirmed = [
-  'Attribute third-party material and preserve required license notices, including open-source notices.',
-  'Link to a lawful source when the material does not need to be reproduced in Coursera.',
-  'Keep credentials, confidential data, private repositories, and personally identifiable information out of the Course.',
+  'Attribute third-party materials and preserve any required license notices, including open-source notices.',
+  'When material does not need to be reproduced in Coursera, consider linking learners to a lawful source.',
+  'Protect private and sensitive information by keeping credentials, confidential data, private repositories, and personally identifiable information out of the Course.',
   'Confirm distribution rights for software, packages, datasets, templates, and starter files used in Labs.',
 ];
 
@@ -159,9 +158,9 @@ const aiCards = [
   {
     title: 'Protect what goes in',
     items: [
-      'Do not enter confidential, proprietary, personally identifiable, or restricted material.',
-      'Do not provide copyrighted material you are not authorized to use.',
-      'Consider what the tool provider may store or reuse.',
+      'Use AI tools only with material you are permitted to share.',
+      'Keep confidential, proprietary, personally identifiable, and restricted information out of AI tools.',
+      'Consider what the AI provider may store, retain, or reuse.',
     ],
   },
   {
@@ -173,11 +172,11 @@ const aiCards = [
     ],
   },
   {
-    title: 'Tell your CTL team',
+    title: 'Keep your CTL team informed',
     items: [
-      'Identify when AI contributed substantially to an asset.',
-      'Explain what tool was used and how the output was reviewed.',
-      'Flag anything whose accuracy, rights status, or appropriateness remains uncertain.',
+      'Let your CTL team know when AI has contributed substantially to an asset.',
+      'Share which tool you used and how you reviewed or revised its output.',
+      'Bring forward any remaining questions about accuracy, rights, bias, accessibility, or appropriateness.',
     ],
   },
 ];
@@ -217,7 +216,7 @@ const handoff = [
     <div class="hero" data-cap="head">
       <div>
         <p class="eyebrow hero__eyebrow hero__eyebrow--neutral">Guidance for every Learning Asset</p>
-        <h1 class="hero__title">Accessibility, Copyright &amp; AI</h1>
+        <h1 class="hero__title hero__title--tight">Accessibility, Copyright &amp; AI</h1>
         <p class="hero__lead hero__lead--strong">
           As you develop each Learning Asset, you’ll make choices that help it work well for
           learners, fit a public and commercial Course, and reflect your own expertise (even if AI
@@ -247,7 +246,7 @@ const handoff = [
 
     <!-- Chooser -->
     <section class="section section--open">
-      <h2 class="xtitle">Choose what you need</h2>
+      <h2 class="xtitle">Three considerations throughout development</h2>
       <p class="prose prose--gap-lg">
         These questions may come up at different points in your project. Open the section that’s most
         useful for the asset or decision you’re working through with your Learning Experience
@@ -273,14 +272,15 @@ const handoff = [
     <section class="section section--open x--a11y" id="accessibility">
       <p class="eyebrow xeyebrow">Return to this throughout development</p>
       <h2 class="xtitle">Build in accessibility</h2>
-      <p class="prose prose--strong">
-        Accessibility is easiest to support when it’s considered from the beginning. Early choices
+      <p class="prose">
+        Accessibility is easiest to support when it is considered from the beginning. Early choices
         about structure, media, tools, and interactions can make an asset easier for more learners to
-        use—and much easier to produce accessibly.
+        use <em>and</em> easier to produce accessibly.
       </p>
       <p class="prose prose--gap-lg">
-        Use the guidance below as you draft. Your Learning Experience Designer can help you decide
-        what applies and think through an accessible approach for complex content or interactions.
+        Use these considerations as you develop each asset. Your Learning Experience Designer can
+        help you identify what applies and work through accessible approaches for complex content or
+        interactions.
       </p>
 
       <div class="groupcols">
@@ -298,14 +298,14 @@ const handoff = [
 
       <div class="sharepanel" data-keep>
         <p class="sharepanel__title">Helpful things to share with your Learning Experience Designer</p>
-        <ul class="bullets bullets--group">
+        <ul class="bullets bullets--share">
           {a11yShare.map((i) => <li>{i}</li>)}
         </ul>
       </div>
 
       <div class="sharepanel" data-keep>
         <p class="sharepanel__title">Accessibility is part of every Duke Coursera Learning Asset</p>
-        <p class="sharepanel__body">
+        <p class="sharepanel__body sharepanel__body--last">
           You don’t need to wait until an asset is finished to ask accessibility questions. Share
           drafts early, while the structure, format, and supporting materials can still be adjusted
           together.
@@ -317,15 +317,10 @@ const handoff = [
     <section class="section section--open x--copyright" id="copyright">
       <p class="eyebrow xeyebrow">Return to this throughout development</p>
       <h2 class="xtitle">Copyright and permissions</h2>
-      <p class="prose prose--strong">
+      <p class="prose prose--gap-lg">
         Coursera is a public, global, commercial platform. That makes it different from a
         face-to-face, for-credit Duke Course, and materials you already use in teaching may need
         additional review, permission, or licensing before they can be included.
-      </p>
-      <p class="prose prose--gap-lg">
-        As you develop an asset, keep track of anything you didn’t create and where it came from.
-        Your CTL team can help you understand what may be used, what may require permission, and what
-        might be better replaced.
       </p>
 
       <h3 class="xsub">Why Coursera is different</h3>
@@ -358,10 +353,11 @@ const handoff = [
         </p>
       </div>
 
-      <h3 class="xsub xsub--spaced">Keep track of what you didn’t create</h3>
+      <h3 class="xsub xsub--spaced">Keep track of materials you did not create</h3>
       <p class="prose prose--gap">
-        As you draft, note materials in these categories and save their source information. Sharing
-        them early gives your CTL team more time to help you determine the best path forward.
+        As you develop an asset, take note when it includes anything you didn’t create and where it
+        came from. Your CTL team can help you understand what may be used, what may require
+        permission, and what might be better replaced.
       </p>
 
       <div class="flagtable" data-keep>
@@ -381,7 +377,7 @@ const handoff = [
 
       <div class="sharepanel" data-keep>
         <p class="sharepanel__title">Helpful things to share with your CTL team</p>
-        <ul class="bullets bullets--group">
+        <ul class="bullets bullets--share">
           {copyrightShare.map((i) => <li>{i}</li>)}
         </ul>
       </div>
@@ -403,12 +399,12 @@ const handoff = [
     <section class="section section--open x--ai" id="ai">
       <p class="eyebrow xeyebrow">Return to this when AI supports your work</p>
       <h2 class="xtitle">Using AI during Course development</h2>
-      <p class="prose prose--strong">
+      <p class="prose">
         AI tools can be useful for brainstorming, drafting, restructuring, summarizing, or generating
         examples and practice questions. They can also introduce errors, bias, privacy concerns, and
         copyright questions that aren’t always easy to spot.
       </p>
-      <p class="prose prose--gap-lg">
+      <p class="prose prose--gap-xl">
         Your expertise remains central. Treat anything an AI tool produces as a starting point to
         verify, revise, and shape before it reaches learners.
       </p>
@@ -428,7 +424,7 @@ const handoff = [
 
       <div class="sharepanel" data-keep>
         <p class="sharepanel__title">Helpful things to share with your Learning Experience Designer</p>
-        <ul class="bullets bullets--group">
+        <ul class="bullets bullets--share">
           {aiShare.map((i) => <li>{i}</li>)}
         </ul>
       </div>
@@ -467,24 +463,31 @@ const handoff = [
   .x--a11y {
     --x: var(--dim-a11y);
     --x-text: var(--dim-a11y-text);
+    --x-deep: var(--note-teal-title);
     --x-tint: var(--note-teal-bg);
   }
 
   .x--copyright {
     --x: var(--dim-copyright);
-    --x-text: var(--copper-deep);
+    --x-text: var(--warn-title);
+    --x-deep: var(--copper-deep);
     --x-tint: var(--warn-bg);
   }
 
   .x--ai {
     --x: var(--text-body);
-    --x-text: var(--text-strong);
+    --x-text: var(--ai-deep);
+    --x-deep: var(--ai-deep);
     --x-tint: var(--panel-neutral);
   }
 
   /* --- Hero ---------------------------------------------------------------- */
   .hero__eyebrow--neutral {
     color: var(--text-body);
+  }
+
+  .hero__title--tight {
+    line-height: 1.08;
   }
 
   .hero__lead--strong {
@@ -495,13 +498,24 @@ const handoff = [
     border-left-color: var(--text-body);
   }
 
+  /* Hairlines between the three moments, so the rail reads as a sequence. */
   .whenlist {
     display: flex;
     flex-direction: column;
   }
 
   .whenlist__item {
-    padding: 0 0 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .whenlist__item:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .whenlist__item:last-child {
+    padding-bottom: 0;
   }
 
   .whenlist__title {
@@ -516,7 +530,7 @@ const handoff = [
     font-size: var(--fs-2);
     line-height: 1.6;
     color: var(--text-muted);
-    max-width: var(--measure-body);
+    max-width: 340px;
   }
 
   /* --- Shared section furniture -------------------------------------------- */
@@ -538,7 +552,7 @@ const handoff = [
   }
 
   .xsub {
-    margin: 0 0 18px;
+    margin: 0 0 16px;
     font-family: var(--font-display);
     font-weight: 500;
     font-size: 25px;
@@ -559,16 +573,16 @@ const handoff = [
     max-width: var(--measure-body);
   }
 
-  .prose--strong {
-    color: var(--text-strong);
-  }
-
   .prose--gap {
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
 
   .prose--gap-lg {
     margin-bottom: 32px;
+  }
+
+  .prose--gap-xl {
+    margin-bottom: 34px;
   }
 
   .prose--top {
@@ -588,6 +602,7 @@ const handoff = [
     flex-direction: column;
     justify-content: space-between;
     gap: 18px;
+    min-height: 210px;
     border: 1px solid var(--rule-card);
     border-top: 4px solid var(--x);
     border-radius: var(--radius-panel);
@@ -603,8 +618,9 @@ const handoff = [
   .choicecard__title {
     margin: 0 0 10px;
     font-family: var(--font-display);
-    font-size: var(--fs-5);
-    line-height: 1.25;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.2;
     color: var(--navy);
   }
 
@@ -622,19 +638,20 @@ const handoff = [
     color: var(--x-text);
   }
 
-  /* --- Grouped checklists --------------------------------------------------- */
+  /* --- Grouped considerations ----------------------------------------------- */
 
-  /* Three columns of short groups; the groups are even enough here that a
-     grid reads better than newspaper columns. */
+  /* Newspaper columns rather than a grid: the six groups are close in
+     height, and columns keep each one whole across the break. */
   .groupcols {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px 40px;
+    columns: 2;
+    column-gap: 40px;
   }
 
   .group {
     min-width: 0;
     break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    margin: 0 0 30px;
   }
 
   .group__head {
@@ -647,7 +664,7 @@ const handoff = [
 
   .bullets--group {
     --bullet-color: var(--x-text);
-    gap: 10px;
+    gap: 11px;
   }
 
   .bullets--group li {
@@ -675,18 +692,29 @@ const handoff = [
 
   .sharepanel__body {
     margin: 0 0 12px;
-    font-size: var(--fs-3);
+    font-size: 16px;
     line-height: 1.7;
     color: var(--text-body);
-    max-width: var(--measure-body);
+    max-width: 740px;
   }
 
   .sharepanel__body--last {
     margin-bottom: 0;
   }
 
-  .sharepanel :global(p.sharepanel__title + .bullets) {
-    margin-top: 0;
+  /* Panel bullets sit a step up in size from the column lists, and take the
+     section's deepest accent. */
+  .bullets--share {
+    --bullet-color: var(--x-deep);
+    gap: 10px;
+  }
+
+  .bullets--share li {
+    font-size: 16px;
+    line-height: 1.65;
+    padding-left: 16px;
+    color: var(--text-body);
+    max-width: 740px;
   }
 
   /* --- Classroom vs Coursera ------------------------------------------------ */
@@ -712,7 +740,7 @@ const handoff = [
   }
 
   .compare__card--now .compare__eyebrow {
-    color: var(--copper-deep);
+    color: var(--warn-title);
   }
 
   .compare__body {
@@ -786,7 +814,7 @@ const handoff = [
 
   .checklist__row {
     display: grid;
-    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-columns: 34px minmax(0, 1fr);
     gap: 16px;
     align-items: start;
     padding: 18px 0;
@@ -832,5 +860,11 @@ const handoff = [
     font-size: 24px;
     line-height: 1.2;
     color: var(--navy);
+  }
+
+  /* The AI cards' bullets sit on white, so they take the strong body colour
+     rather than the section's deepest accent. */
+  .x--ai .aicard .bullets--group {
+    --bullet-color: var(--text-strong);
   }
 </style>
