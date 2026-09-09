@@ -76,8 +76,8 @@ const a11yGroups = [
     title: 'Interaction and navigation',
     items: [
       'Design essential controls so they can be reached with a keyboard and assistive technology.',
-      'Whenever possible, choose interactions that do not depend on dragging, hovering, speech, precise movement, or a particular pace.',
-      'Explain how learners can pause, exit, restart, and check their progress.',
+      'Whenever possible, choose interactions that do not depend on dragging, hovering, speech, or precise movement.',
+      'Provide accessible static resources for all interactions.',
     ],
   },
   {
@@ -85,7 +85,7 @@ const a11yGroups = [
     items: [
       'Pair color, sound, animation, images, and visual position with another way of understanding the information.',
       'Provide instructions and feedback in an accessible form learners can return to.',
-      'Give learners flexibility in how quickly they work through an experience unless timing is essential to the objective.',
+      'Give flexibility in how quickly they work through a task.',
     ],
   },
   {
@@ -103,6 +103,24 @@ const a11yShare = [
   'What important images, charts, media, or interactions are meant to communicate',
   'Any tool, plugin, software, or file format learners will use',
   'Questions about alternatives or possible access barriers',
+];
+
+/* Two settings side by side, each a column of the same three points. */
+const compare = [
+  {
+    eyebrow: 'In a Duke classroom',
+    body: [
+      'Course materials are shared with a defined group of enrolled students for a limited educational purpose. Depending on the material and how it is used, classroom exceptions, fair use, library licenses, Course Reserves, or other permissions may support limited use within that setting.',
+      'These provisions do not mean that any material may be copied or shared for teaching. They apply under particular conditions and may limit who can access the material, how much can be used, and how long it remains available.',
+    ],
+  },
+  {
+    eyebrow: 'In a Coursera Course',
+    body: [
+      'Course materials are distributed through a public, global, commercial platform and may remain available well beyond an academic term. Permissions, licenses, and fair-use decisions made for a closed classroom may not extend to this setting.',
+      'Materials generally need to be created for the Course, in the public domain, covered by a license that permits commercial use, or used with the rights holder’s permission. Bring other proposed uses to your CTL team for review.',
+    ],
+  },
 ];
 
 const flagRows = [
@@ -140,11 +158,42 @@ const flagRows = [
   },
 ];
 
+/* NC is called out rather than listed alphabetically last by accident: it
+   is the one row that does not clear on the licence alone. */
+const ccLicenses = [
+  {
+    licence: 'CC0',
+    use: 'Generally permitted',
+    note: 'The creator has waived copyright restrictions to the extent legally possible. Attribution is appreciated even when it is not required.',
+  },
+  {
+    licence: 'CC BY',
+    use: 'Generally permitted',
+    note: 'Commercial use and adaptation are allowed. Credit the creator and provide the license information.',
+  },
+  {
+    licence: 'CC BY-SA',
+    use: 'May be permitted',
+    note: 'Commercial use and adaptation are allowed, but an adapted work must be shared under the same license. Review adaptations with your CTL team.',
+  },
+  {
+    licence: 'CC BY-ND',
+    use: 'May be permitted if unchanged',
+    note: 'Commercial redistribution is allowed, but adaptations are not. Cropping, translating, editing, or otherwise modifying the work may require additional review.',
+  },
+  {
+    licence: 'Any license containing NC',
+    use: 'Not cleared for Coursera by the license alone',
+    note: 'NC means noncommercial. Obtain additional permission from the rights holder before using the material in a Coursera Course.',
+    flagged: true,
+  },
+];
+
 const copyrightShare = [
   'A link to the original source',
   'The creator or rights holder, when known',
   'Any license, permission, or purchase information you already have',
-  'How much you hope to use, and whether you want to reproduce, adapt, embed, or link to it',
+  'How you would like to use the material (e.g., by reproducing, adapting, embedding, or linking to it)',
 ];
 
 const confirmed = [
@@ -219,8 +268,8 @@ const handoff = [
         <h1 class="hero__title hero__title--tight">Accessibility, Copyright &amp; AI</h1>
         <p class="hero__lead hero__lead--strong">
           As you develop each Learning Asset, you’ll make choices that help it work well for
-          learners, fit a public and commercial Course, and reflect your own expertise (even if AI
-          has supported the process).
+          learners, fit a public and commercial Coursera Course, and reflect your own expertise (even
+          if AI has supported the process).
         </p>
         <p class="hero__lead">
           You and your Learning Experience Designer can return to this page throughout planning,
@@ -273,14 +322,15 @@ const handoff = [
       <p class="eyebrow xeyebrow">Return to this throughout development</p>
       <h2 class="xtitle">Build in accessibility</h2>
       <p class="prose">
-        Accessibility is easiest to support when it is considered from the beginning. Early choices
-        about structure, media, tools, and interactions can make an asset easier for more learners to
-        use <em>and</em> easier to produce accessibly.
+        Accessibility is part of every Duke Coursera Learning Asset and is easiest to support when
+        considered from the beginning. Early decisions about structure, media, tools, and
+        interactions can make an asset easier for more learners to use <em>and</em> easier to produce
+        accessibly.
       </p>
       <p class="prose prose--gap-lg">
-        Use these considerations as you develop each asset. Your Learning Experience Designer can
-        help you identify what applies and work through accessible approaches for complex content or
-        interactions.
+        Share ideas and drafts with your Learning Experience Designer while there is still time to
+        shape the approach together. They can help you identify what applies and plan for complex
+        content, interactions, or possible access barriers.
       </p>
 
       <div class="groupcols">
@@ -302,56 +352,50 @@ const handoff = [
           {a11yShare.map((i) => <li>{i}</li>)}
         </ul>
       </div>
-
-      <div class="sharepanel" data-keep>
-        <p class="sharepanel__title">Accessibility is part of every Duke Coursera Learning Asset</p>
-        <p class="sharepanel__body sharepanel__body--last">
-          You don’t need to wait until an asset is finished to ask accessibility questions. Share
-          drafts early, while the structure, format, and supporting materials can still be adjusted
-          together.
-        </p>
-      </div>
     </section>
 
     <!-- Copyright -->
     <section class="section section--open x--copyright" id="copyright">
       <p class="eyebrow xeyebrow">Return to this throughout development</p>
       <h2 class="xtitle">Copyright and permissions</h2>
-      <p class="prose prose--gap-lg">
+      <p class="prose">
         Coursera is a public, global, commercial platform. That makes it different from a
         face-to-face, for-credit Duke Course, and materials you already use in teaching may need
         additional review, permission, or licensing before they can be included.
       </p>
+      <p class="prose prose--gap-lg">
+        Whenever possible, build from materials you created yourself. Even material free to access
+        online can have restrictions on the rights to reproduce, adapt, or distribute through
+        Coursera.
+      </p>
 
       <h3 class="xsub">Why Coursera is different</h3>
       <div class="compare">
-        <div class="compare__card compare__card--then" data-keep>
-          <p class="eyebrow compare__eyebrow">In a Duke classroom</p>
-          <p class="compare__body">
-            You are teaching a defined group of enrolled students for credit. Permissions and
-            provisions may support uses within that setting.
-          </p>
-        </div>
-        <div class="compare__card compare__card--now" data-keep>
-          <p class="eyebrow compare__eyebrow">In a Coursera Course</p>
-          <p class="compare__body">
-            The Course is available through a public, commercial platform and may remain published
-            beyond a term. Classroom permissions may not apply in the same way.
-          </p>
-        </div>
+        {
+          compare.map((c, i) => (
+            <div class:list={['compare__col', i === 1 && 'compare__col--now']} data-keep>
+              <p class="eyebrow compare__eyebrow">{c.eyebrow}</p>
+              {c.body.map((b, j) => (
+                <p class:list={['compare__body', j === c.body.length - 1 && 'compare__body--last']}>
+                  {b}
+                </p>
+              ))}
+            </div>
+          ))
+        }
       </div>
 
-      <div class="sharepanel" data-keep>
-        <p class="sharepanel__title">When in doubt, start with what you made</p>
-        <p class="sharepanel__body">
-          The simplest path is to build from material you created yourself. For anything you didn’t
-          create, check that its permission, license, public-domain status, or other approved use
-          covers public, global, commercial distribution.
-        </p>
-        <p class="sharepanel__body sharepanel__body--last">
-          Something can be free to view online without being free to reuse in a paid Course.
-        </p>
-      </div>
+      <h3 class="xsub xsub--spaced">Educational use is not automatically fair use</h3>
+      <p class="prose">
+        Fair use may allow copyrighted material to be used without permission in some circumstances,
+        but each use must be considered individually. The analysis includes the purpose of the use,
+        the nature of the material, how much is used, and the effect on the market for the original.
+      </p>
+      <p class="prose prose--flush">
+        A nonprofit educational purpose can support fair use, while a commercial context may weigh
+        against it—but neither factor decides the question on its own. Because Coursera differs from
+        a closed, for-credit classroom, share any proposed reliance on fair use with your CTL team.
+      </p>
 
       <h3 class="xsub xsub--spaced">Keep track of materials you did not create</h3>
       <p class="prose prose--gap">
@@ -363,7 +407,7 @@ const handoff = [
       <div class="flagtable" data-keep>
         <div class="flagtable__head">
           <div class="flagtable__cell">Material</div>
-          <div class="flagtable__cell">Flag it when it includes</div>
+          <div class="flagtable__cell">Take note when it includes</div>
         </div>
         {
           flagRows.map((r) => (
@@ -373,6 +417,56 @@ const handoff = [
             </div>
           ))
         }
+      </div>
+
+      <!-- Licence detail most faculty will not need on a first read, so it
+           is collapsed by default and forced open for the PDF. -->
+      <div class="disclose" data-disclose data-open="false">
+        <button
+          class="disclose__head"
+          type="button"
+          aria-expanded="false"
+          aria-controls="cc-panel"
+          id="cc-btn"
+        >
+          <span class="disclose__title">Using Creative Commons materials</span>
+          <span class="disclose__toggle">Show license guidance</span>
+        </button>
+
+        <div class="disclose__panel" id="cc-panel" role="region" aria-labelledby="cc-btn">
+          <p class="prose prose--gap">
+            A Creative Commons license gives the public permission to use a work under stated
+            conditions. Check the exact license attached to the material—not simply whether it has a
+            Creative Commons symbol.
+          </p>
+
+          <div class="cctable" data-keep>
+            <div class="cctable__head">
+              <div class="cctable__cell">License</div>
+              <div class="cctable__cell">Use in Coursera</div>
+              <div class="cctable__cell">What to keep in mind</div>
+            </div>
+            {
+              ccLicenses.map((l) => (
+                <div class:list={['cctable__row', l.flagged && 'cctable__row--flagged']}>
+                  <div class="cctable__cell cctable__cell--licence">{l.licence}</div>
+                  <div
+                    class:list={['cctable__cell', 'cctable__cell--use', l.flagged && 'cctable__cell--use-flagged']}
+                  >
+                    {l.use}
+                  </div>
+                  <div class="cctable__cell">{l.note}</div>
+                </div>
+              ))
+            }
+          </div>
+
+          <p class="prose prose--flush">
+            All Creative Commons licenses require you to follow their conditions. Unless the work is
+            marked CC0, plan to identify the creator, title, source, and license and indicate whether
+            you made changes.
+          </p>
+        </div>
       </div>
 
       <div class="sharepanel" data-keep>
@@ -573,6 +667,10 @@ const handoff = [
     max-width: var(--measure-body);
   }
 
+  .prose--flush {
+    margin-bottom: 0;
+  }
+
   .prose--gap {
     margin-bottom: 26px;
   }
@@ -626,7 +724,7 @@ const handoff = [
 
   .choicecard__blurb {
     margin: 0;
-    font-size: var(--fs-2);
+    font-size: 16px;
     line-height: 1.65;
     color: var(--text-body);
   }
@@ -690,18 +788,6 @@ const handoff = [
     color: var(--navy);
   }
 
-  .sharepanel__body {
-    margin: 0 0 12px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--text-body);
-    max-width: 740px;
-  }
-
-  .sharepanel__body--last {
-    margin-bottom: 0;
-  }
-
   /* Panel bullets sit a step up in size from the column lists, and take the
      section's deepest accent. */
   .bullets--share {
@@ -718,39 +804,60 @@ const handoff = [
   }
 
   /* --- Classroom vs Coursera ------------------------------------------------ */
+
+  /* The design lays this out as a 2x3 cell grid so the two settings' points
+     line up row by row. Kept as two column blocks instead — so each label
+     is read with its own paragraphs rather than the two columns
+     interleaving — with `subgrid` restoring the row alignment. Where
+     subgrid is unsupported the columns simply size independently, which
+     reads correctly and only loses the row-to-row alignment. */
   .compare {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    grid-template-rows: auto auto auto;
+    column-gap: 40px;
+    row-gap: 0;
   }
 
-  .compare__card {
+  .compare__col {
+    grid-row: span 3;
     padding: 2px 0 2px 22px;
     border-left: 3px solid var(--rule-strong);
   }
 
-  .compare__card--now {
+  @supports (grid-template-rows: subgrid) {
+    .compare__col {
+      display: grid;
+      grid-template-rows: subgrid;
+    }
+  }
+
+  .compare__col--now {
     border-left-color: var(--dim-copyright);
   }
 
   .compare__eyebrow {
-    margin: 0 0 8px;
+    margin: 0 0 12px;
     letter-spacing: 0.16em;
     color: var(--text-muted);
   }
 
-  .compare__card--now .compare__eyebrow {
+  .compare__col--now .compare__eyebrow {
     color: var(--warn-title);
   }
 
   .compare__body {
-    margin: 0;
+    margin: 0 0 18px;
     font-size: var(--fs-3);
     line-height: 1.7;
     color: var(--text-body);
   }
 
-  /* --- What to flag table --------------------------------------------------- */
+  .compare__body--last {
+    margin-bottom: 0;
+  }
+
+  /* --- What to take note of ------------------------------------------------- */
   .flagtable {
     border: 1px solid var(--rule-card);
     border-radius: var(--radius-panel);
@@ -803,6 +910,131 @@ const handoff = [
     font-weight: 600;
     line-height: 1.5;
     color: var(--navy);
+  }
+
+  /* --- Creative Commons disclosure ------------------------------------------ */
+  .disclose {
+    margin: 36px 0 0;
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+  }
+
+  .disclose__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    border: 0;
+    background: var(--warn-bg);
+    padding: 20px 26px;
+    cursor: pointer;
+  }
+
+  .disclose__head:hover {
+    background: var(--warn-bg-hover);
+  }
+
+  .disclose__head:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+  }
+
+  .disclose__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.2;
+    color: var(--navy);
+  }
+
+  .disclose__toggle {
+    flex: none;
+    font-size: var(--fs-2);
+    font-weight: 600;
+    color: var(--copper-deep);
+    white-space: nowrap;
+  }
+
+  .disclose__panel {
+    padding: 26px;
+    border-top: 1px solid var(--warn-border);
+  }
+
+  .disclose[data-open='false'] .disclose__panel {
+    display: none;
+  }
+
+  .cctable {
+    border: 1px solid var(--rule-card);
+    border-radius: var(--radius-panel);
+    overflow: hidden;
+    margin: 0 0 22px;
+  }
+
+  .cctable__head,
+  .cctable__row {
+    display: grid;
+    grid-template-columns: 210px 230px minmax(0, 1fr);
+  }
+
+  .cctable__head {
+    background: var(--warn-bg);
+    border-bottom: 1px solid var(--warn-border);
+    font-size: var(--fs-1);
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--copper-deep);
+    font-weight: 700;
+  }
+
+  .cctable__head .cctable__cell {
+    padding: 14px 20px;
+    white-space: nowrap;
+    border-left-color: var(--warn-border);
+  }
+
+  .cctable__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .cctable__row:last-child {
+    border-bottom: 0;
+  }
+
+  /* The one licence family that a licence check alone cannot clear. */
+  .cctable__row--flagged {
+    background: var(--warn-bg);
+  }
+
+  .cctable__cell {
+    padding: 16px 20px;
+    font-size: var(--fs-3);
+    line-height: 1.6;
+    color: var(--text-body);
+    border-left: 1px solid var(--rule);
+  }
+
+  .cctable__cell:first-child {
+    border-left: 0;
+  }
+
+  .cctable__cell--licence {
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--navy);
+  }
+
+  .cctable__cell--use {
+    font-weight: 600;
+    color: var(--text-strong);
+  }
+
+  .cctable__cell--use-flagged {
+    color: var(--copper-deep);
   }
 
   /* --- Checklists ----------------------------------------------------------- */
@@ -867,4 +1099,40 @@ const handoff = [
   .x--ai .aicard .bullets--group {
     --bullet-color: var(--text-strong);
   }
+
+  @media print {
+    /* The licence table is expanded for the PDF, and the toggle is
+       meaningless on paper. */
+    .disclose__panel {
+      display: block !important;
+    }
+
+    .disclose__toggle {
+      display: none;
+    }
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-disclose]').forEach((el) => {
+    const head = el.querySelector<HTMLButtonElement>('.disclose__head')!;
+    const toggle = el.querySelector<HTMLElement>('.disclose__toggle')!;
+
+    const set = (open: boolean) => {
+      el.dataset.open = String(open);
+      head.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Hide' : 'Show license guidance';
+    };
+
+    head.addEventListener('click', () => set(el.dataset.open !== 'true'));
+
+    // These pages get exported to PDF for review, so nothing may stay
+    // hidden in the print output.
+    let before = false;
+    window.addEventListener('beforeprint', () => {
+      before = el.dataset.open === 'true';
+      set(true);
+    });
+    window.addEventListener('afterprint', () => set(before));
+  });
+</script>
