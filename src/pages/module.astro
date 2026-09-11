@@ -389,11 +389,15 @@ const lessonRows = [
         <div class="context">
           <div class="context__row" data-depth="0">
             <span class="context__label">Specialization</span>
-            <span class="context__value">Data Analytics for Business Decisions</span>
+            <span class="context__value context__value--title"
+              >Data Analytics for Business Decisions</span
+            >
           </div>
           <div class="context__row" data-depth="1">
             <span class="context__label">Course 1</span>
-            <span class="context__value">Foundations of Data Analytics for Business</span>
+            <span class="context__value context__value--title"
+              >Foundations of Data Analytics for Business</span
+            >
           </div>
           <div class="context__row" data-depth="2">
             <span class="context__label">Module 1</span>
@@ -406,8 +410,8 @@ const lessonRows = [
         <p class="example__p">
           In <em>Foundations of Data Analytics for Business</em>, one Course objective is:
         </p>
-        <div class="objbox objbox--plain">
-          <p class="objbox__eyebrow">Course objective</p>
+        <div class="objbox objbox--course">
+          <p class="objbox__eyebrow objbox__eyebrow--course">Course objective</p>
           <p class="objbox__text">
             By the end of this Course, learners will be able to determine whether available data is
             relevant, complete, and suitable for addressing a business question.
@@ -604,7 +608,7 @@ const lessonRows = [
               <div class="dtable__row">
                 <div class="dtable__cell dtable__cell--key">{r.stage}</div>
                 <div class="dtable__cell">{r.experience}</div>
-                <div class="dtable__cell">{r.role}</div>
+                <div class="dtable__cell dtable__cell--role">{r.role}</div>
               </div>
             ))
           }
@@ -1187,6 +1191,12 @@ const lessonRows = [
     color: var(--text-strong);
   }
 
+  /* Every rung of the chain is a title, so all three are set in the same
+     weight; only the current level takes the navy. */
+  .context__value--title {
+    font-weight: 600;
+  }
+
   .context__value--here {
     font-weight: 600;
     color: var(--navy);
@@ -1206,6 +1216,12 @@ const lessonRows = [
     margin-bottom: 24px;
   }
 
+  /* A Course-level objective quoted inside a Module page keeps the Course
+     green, so the chain of levels stays legible across pages. */
+  .objbox--course {
+    border-left: 3px solid var(--level-course);
+  }
+
   .objbox__eyebrow {
     margin: 0 0 6px;
     font-size: var(--fs-1);
@@ -1218,6 +1234,10 @@ const lessonRows = [
 
   .objbox__eyebrow--accent {
     color: var(--accent-dark);
+  }
+
+  .objbox__eyebrow--course {
+    color: var(--level-course);
   }
 
   .objbox__text {
@@ -1396,6 +1416,7 @@ const lessonRows = [
   }
 
   .dtable__head .dtable__cell {
+    border-left-color: var(--rule);
     /* The ⓘ popovers hang off these cells, so each is a positioning
        context and must lay its label and trigger out in a row. */
     position: relative;
@@ -1419,8 +1440,8 @@ const lessonRows = [
   }
 
   .dtable__cell--key {
-    font-weight: 600;
-    color: var(--accent-dark);
+    font-weight: 700;
+    color: var(--navy);
   }
 
   /* Two of these cells host an ⓘ trigger, so the cell lays its label and
@@ -1500,9 +1521,17 @@ const lessonRows = [
 
   /* Sample asset titles. Deliberately not links — there is nothing real to
      point at yet. */
+  /* Styled as links but deliberately not anchors — it signals that real
+     asset titles will be hyperlinked, while these examples have nothing
+     to point at. Do not make them clickable. */
+  .dtable__cell--role {
+    color: var(--text-subtle);
+  }
+
   .dtable__cell--title {
     font-weight: 600;
-    color: var(--navy);
+    color: var(--blue);
+    text-decoration: underline;
   }
 
   /* --- Question list --------------------------------------------------------- */
@@ -1564,7 +1593,7 @@ const lessonRows = [
     margin: 0 0 14px;
     font-size: var(--fs-2);
     color: var(--level-assets-dark);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .tmpl__value {

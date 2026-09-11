@@ -9,13 +9,26 @@ import { learningAssets } from './learning-assets';
 
 export type LevelKey = 'overview' | 'specialization' | 'course' | 'module' | 'assets';
 
-/** Accent used for the active nav underline and footer neighbour names. */
+/** Accent used for the active nav underline. Decorative, so the lighter
+    gold and teal are fine here. */
 export const levelColor: Record<LevelKey, string> = {
   overview: '#339898',
   specialization: '#00539B',
   course: '#17724A',
   module: '#6B4E9E',
   assets: '#B4700C',
+};
+
+/** The same levels as *text*. Two differ from levelColor: Overview is set
+    in navy rather than its teal accent, and Learning Assets takes the
+    darker gold — #B4700C reaches only 3.74:1 on the warm tint, which does
+    not clear AA. Use this anywhere a level name is rendered as words. */
+export const levelTextColor: Record<LevelKey, string> = {
+  overview: '#012169',
+  specialization: '#00539B',
+  course: '#17724A',
+  module: '#6B4E9E',
+  assets: '#8A5A0B',
 };
 
 export interface NavPage {

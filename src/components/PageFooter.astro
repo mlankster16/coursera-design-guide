@@ -1,5 +1,5 @@
 ---
-import { neighbours, levelColor, url, type LevelKey } from '../data/site';
+import { neighbours, levelTextColor, url, type LevelKey } from '../data/site';
 
 interface Props {
   /** The page's own level. Footer shows its hierarchy neighbours. */
@@ -36,7 +36,7 @@ const single = Boolean(backTo) ? !nextTo : !prev || (!next && !nextTo);
             <span class="pagefoot__dir">
               {prev.key === 'overview' ? '← Back' : '← Zoom out'}
             </span>
-            <span class="pagefoot__name" style={`color:${levelColor[prev.key]}`}>
+            <span class="pagefoot__name" style={`color:${levelTextColor[prev.key]}`}>
               {prev.label}
             </span>
           </a>
@@ -46,7 +46,7 @@ const single = Boolean(backTo) ? !nextTo : !prev || (!next && !nextTo);
       {!backTo && next && (
         <a class="pagefoot__next" href={url(next.href)}>
           <span class="pagefoot__dir">Zoom in →</span>
-          <span class="pagefoot__name" style={`color:${levelColor[next.key]}`}>
+          <span class="pagefoot__name" style={`color:${levelTextColor[next.key]}`}>
             {next.label}
           </span>
         </a>

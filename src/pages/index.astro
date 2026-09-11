@@ -513,24 +513,30 @@ const reuseRows = [
     border-radius: 0 3px 3px 0;
   }
 
+  /* --level-text, not --level: #B4700C on the Learning Assets row's warm
+     tint is only 3.74:1 and fails AA. */
   .maptable__title--level {
-    color: var(--level);
+    color: var(--level-text);
   }
 
   .maptable__cell[data-level='specialization'] {
     --level: var(--level-specialization);
+    --level-text: var(--level-specialization);
     --tint: var(--level-specialization-tint);
   }
   .maptable__cell[data-level='course'] {
     --level: var(--level-course);
+    --level-text: var(--level-course);
     --tint: var(--level-course-tint);
   }
   .maptable__cell[data-level='module'] {
     --level: var(--level-module);
+    --level-text: var(--level-module);
     --tint: var(--level-module-tint);
   }
   .maptable__cell[data-level='assets'] {
     --level: var(--level-assets);
+    --level-text: var(--level-assets-dark);
     --tint: var(--level-assets-tint-warm);
   }
 
