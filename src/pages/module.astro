@@ -396,7 +396,7 @@ const lessonRows = [
             <span class="context__value">Foundations of Data Analytics for Business</span>
           </div>
           <div class="context__row" data-depth="2">
-            <span class="context__label context__label--here">Module 1</span>
+            <span class="context__label">Module 1</span>
             <span class="context__value context__value--here"
               >Identifying and Evaluating Business Data</span
             >
@@ -1130,55 +1130,60 @@ const lessonRows = [
   .context {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin: 0 0 24px;
+    gap: 12px;
+    margin: 0 0 28px;
     max-width: var(--measure-body);
   }
 
-  /* Each level indents one step further, and its label column narrows to
-     match, so the titles stair-step down the hierarchy. */
+  /* Each level indents one step further and its label column narrows by the
+     same amount, so the labels stay right-aligned against the values while
+     the pair stair-steps down the hierarchy. The widths have to clear the
+     longest label ("SPECIALIZATION" sets the first at 148px) — a narrower
+     column spills the label into the value beside it. */
   .context__row {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     gap: 14px;
     padding-left: calc(var(--depth) * 18px);
   }
 
   .context__row[data-depth='0'] {
     --depth: 0;
-    --label-w: 112px;
+    --label-w: 148px;
+    --label-c: var(--level-specialization);
   }
 
   .context__row[data-depth='1'] {
     --depth: 1;
-    --label-w: 94px;
+    --label-w: 130px;
+    --label-c: var(--level-course);
   }
 
   .context__row[data-depth='2'] {
     --depth: 2;
-    --label-w: 80px;
+    --label-w: 112px;
+    --label-c: var(--level-module);
   }
 
+  /* Each label takes its own level's colour, so the chain reads as the
+     hierarchy the rest of the site is coded by. */
   .context__label {
     flex: none;
     width: var(--label-w);
-    padding-top: 3px;
+    text-align: right;
     font-size: var(--fs-1);
+    line-height: 1.45;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-subtle);
+    color: var(--label-c);
     font-weight: 700;
-  }
-
-  .context__label--here {
-    color: var(--accent);
   }
 
   .context__value {
     flex: 1;
     min-width: 0;
-    font-size: var(--fs-2);
-    line-height: 1.5;
+    font-size: var(--fs-3);
+    line-height: 1.45;
     color: var(--text-strong);
   }
 

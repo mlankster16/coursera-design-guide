@@ -416,7 +416,7 @@ img {
 
 .accordion__label {
   flex: none;
-  width: 236px;
+  width: 262px;
   font-size: var(--fs-4);
   font-weight: 600;
   color: var(--text-strong);
