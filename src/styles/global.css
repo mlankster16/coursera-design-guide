@@ -1046,7 +1046,9 @@ img {
 .tmpl__value p,
 .tmpl__value li {
   margin: 0;
-  font-size: var(--fs-2);
+  /* 17px, not 15px — the design sets the filled-in template values at
+     body size, so they read as the answers faculty will write. */
+  font-size: var(--fs-3);
   line-height: 1.7;
   color: var(--text-body);
   max-width: var(--measure-body);

@@ -144,7 +144,9 @@ const { active } = Astro.props;
   .nav__dd-link {
     display: block;
     padding: 9px 24px;
-    font-size: var(--fs-2);
+    /* 16px sits between --fs-2 and --fs-3 and is the design's value here,
+       as it is for the chooser blurbs and share-panel bullets. */
+    font-size: 16px;
     letter-spacing: 0.02em;
     color: var(--text-muted);
     text-decoration: none;
@@ -167,13 +169,13 @@ const { active } = Astro.props;
   /* Accessibility, copyright and AI apply to every asset, so this is the
      one child faculty need most — the only emphasized item in the menu. */
   .nav__dd-link--featured {
+    font-size: 16px;
     margin: 6px 0;
     padding: 13px 24px 13px 21px;
     border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
     border-left: 3px solid var(--level-assets);
     background: var(--level-assets-tint);
-    font-size: var(--fs-2);
     font-weight: 700;
     color: var(--navy);
     line-height: 1.4;

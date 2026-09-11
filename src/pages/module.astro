@@ -1424,6 +1424,14 @@ const lessonRows = [
     gap: 7px;
     padding: 14px 20px;
     border-left-color: var(--rule);
+    /* .dtable__cell sets its own 15px, which defeated the 14px the head
+       row asks for, so every header rendered one step too large. */
+    font-size: var(--fs-1);
+  }
+
+  /* The long labels keep their 15px sentence-case treatment. */
+  .dtable__head .dtable__cell.head-plain {
+    font-size: var(--fs-2);
   }
 
   .dtable__head--gold .dtable__cell {
