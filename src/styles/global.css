@@ -11,12 +11,46 @@
   box-sizing: border-box;
 }
 
+/* Type rendering. Without these, Open Sans at 17px picks up noticeable
+   weight and the whole page reads softer than the design even when every
+   value matches. font-synthesis-weight forbids the browser from faking a
+   weight it does not have — a missing 600 otherwise gets smeared from the
+   400, which reads as "heavier than the design". Do not remove these in a
+   cleanup pass; they came from the design handoff. */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
+}
+
 body {
   margin: 0;
   background: var(--bg-page);
   font-family: var(--font-body);
   color: var(--text-body);
-  -webkit-font-smoothing: antialiased;
+}
+
+/* Emphasis carries its own weight rather than relying on browser defaults.
+   A host reset that neutralises these drops the emphasis silently, and a
+   flattener that keeps an outer <em> while dropping an inner <b> turns bold
+   into italic. */
+strong,
+b {
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+strong em,
+em strong,
+strong i,
+b em {
+  font-weight: 700;
+  font-style: italic;
 }
 
 a {
