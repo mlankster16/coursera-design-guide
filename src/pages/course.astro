@@ -144,7 +144,7 @@ const taggedSkills = [
       </div>
 
       <div class="hero__rail">
-        <p class="eyebrow hero__rail-eyebrow">A Course at a glance</p>
+        <p class="eyebrow eyebrow--plain hero__rail-eyebrow">A Course at a glance</p>
         <div class="hero__stats">
           {
             stats.map((s) => (
@@ -157,7 +157,7 @@ const taggedSkills = [
         </div>
 
         <div class="hero__rail-note">
-          <p>You’ll work through this section with your Learning Experience Designer and record your decisions in the template.</p>
+          <p>Use this section as a reference during your design meetings. Your Learning Experience Designer will guide you through the relevant questions, and you’ll record your decisions in the template as you work together.</p>
         </div>
       </div>
     </div>
@@ -191,7 +191,7 @@ const taggedSkills = [
       <div class="ladder" data-keep>
         <div class="ladder__row ladder__row--head">
           <div class="ladder__cell">Element</div>
-          <div class="ladder__cell">What it helps identify</div>
+          <div class="ladder__cell head-plain">What it helps identify</div>
           <div class="ladder__cell">Example</div>
         </div>
         {
@@ -213,13 +213,13 @@ const taggedSkills = [
 
       <div class="askpair" data-keep>
         <div class="askpair__good">
-          <p class="eyebrow askpair__eyebrow">Consider using observable action verbs such as</p>
+          <p class="eyebrow eyebrow--plain askpair__eyebrow">Consider using observable action verbs such as</p>
           <div class="verbs">
             {goodVerbs.map((v) => <span class="verb">{v}</span>)}
           </div>
         </div>
         <div class="askpair__weak">
-          <p class="eyebrow askpair__eyebrow">Some verbs may need more specificity</p>
+          <p class="eyebrow eyebrow--plain askpair__eyebrow">Some verbs may need more specificity</p>
           <div class="verbs verbs--gap">
             {weakVerbs.map((v) => <span class="verb verb--weak">{v}</span>)}
           </div>
@@ -288,7 +288,7 @@ const taggedSkills = [
         </p>
 
         <div class="objbox">
-          <p class="objbox__eyebrow">By the end of the Course, learners will be able to:</p>
+          <p class="objbox__eyebrow head-plain">By the end of the Course, learners will be able to:</p>
           <ul class="objbox__list">
             {objectives.map((o) => <li>{o}</li>)}
           </ul>
@@ -434,7 +434,7 @@ const taggedSkills = [
           </p>
         </div>
         <div class="askpair__weak">
-          <p class="eyebrow askpair__eyebrow">More dependent on a specific sequence</p>
+          <p class="eyebrow eyebrow--plain askpair__eyebrow">More dependent on a specific sequence</p>
           <p class="askpair__quote">
             As you learned in Course 1, you will now build on the framework introduced in Module 3…
           </p>
@@ -688,10 +688,7 @@ const taggedSkills = [
           </p>
           <div class="tmpl__cta-links">
             <a class="btn-outline" href={templateExamples.course} target="_blank" rel="noopener">
-              See an example Course Template ↗
-            </a>
-            <a class="btn-outline" href={templateExamples.specialization} target="_blank" rel="noopener">
-              See an example Specialization Template ↗
+              See sample Course Template ↗
             </a>
           </div>
         </div>

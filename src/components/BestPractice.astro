@@ -18,8 +18,19 @@ interface Props {
   /** Smaller trigger, for use inside a dense table header. */
   size?: 'md' | 'sm';
   width?: number;
+  /** Overrides the "Best practice" eyebrow — some panels state a
+      requirement or a planning note rather than a practice. */
+  eyebrow?: string;
 }
-const { title, label, tone = 'level', align = 'left', size = 'md', width = 420 } = Astro.props;
+const {
+  title,
+  label,
+  tone = 'level',
+  align = 'left',
+  size = 'md',
+  width = 420,
+  eyebrow = 'Best practice',
+} = Astro.props;
 ---
 
 <span
@@ -43,10 +54,10 @@ const { title, label, tone = 'level', align = 'left', size = 'md', width = 420 }
     </svg>
   </button>
 
-  <span class="bp__pop" role="dialog" aria-label={`Best practice: ${title}`} hidden>
+  <span class="bp__pop" role="dialog" aria-label={`${eyebrow}: ${title}`} hidden>
     <span class="bp__head">
       <span>
-        <span class="bp__eyebrow">Best practice</span>
+        <span class="bp__eyebrow">{eyebrow}</span>
         <span class="bp__title">{title}</span>
       </span>
       <button class="bp__close" type="button" aria-label="Close">✕</button>
@@ -168,6 +179,17 @@ const { title, label, tone = 'level', align = 'left', size = 'md', width = 420 }
     text-transform: uppercase;
     color: var(--bp-accent-dark);
     font-weight: 700;
+  }
+
+  /* The panel sits on a tinted ground, so a link inside it takes the
+     page's own accent rather than the global blue. */
+  .bp__link {
+    font-weight: 600;
+    color: var(--accent-dark);
+  }
+
+  .bp__link:hover {
+    color: var(--accent-dark);
   }
 
   .bp__title {

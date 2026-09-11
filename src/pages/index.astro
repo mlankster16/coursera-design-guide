@@ -47,21 +47,21 @@ const mapRows = [
     duke: 'Your whole course',
     dukeSub: 'A semester of material',
     coursera: 'A Specialization',
-    courseraSub: '3–6 courses · 8–48 hours of learner time',
+    courseraSub: '3–6 Courses · 8–48 hours of learner time',
   },
   {
     level: 'course',
     duke: 'A unit or theme',
     dukeSub: 'Often several weeks of your syllabus',
     coursera: 'A Course',
-    courseraSub: '3–6 modules · 2–8 hours of learner time',
+    courseraSub: '3–6 Modules · 2–8 hours of learner time',
   },
   {
     level: 'module',
     duke: 'A topic inside that unit',
     dukeSub: 'A concept, method, or skill',
     coursera: 'A Module',
-    courseraSub: '2–5 lessons · 30 min–2 hours of learner time',
+    courseraSub: '~10 Learning Assets · 30 min–2 hours of learner time',
   },
   {
     level: 'assets',
@@ -195,13 +195,20 @@ const reuseRows = [
         <p class="eyebrow callout__eyebrow">See it in practice</p>
         <p class="body--sm m-body callout__body">
           Duke already offers courses and Specializations on Coursera. Browsing a few is a good way
-          to see the format before you plan your own.
+          to see the format before you plan your own. If you’re new to Coursera, you can also learn
+          more about accessing the platform through Duke.
         </p>
         <a
           class="ext"
           href="https://www.coursera.org/search?query=duke%20university"
           target="_blank"
           rel="noopener">Explore Duke courses on Coursera ↗</a
+        >
+        <a
+          class="ext ext--stacked"
+          href="https://online.duke.edu/coursera-for-duke/"
+          target="_blank"
+          rel="noopener">Learn about Coursera access through Duke ↗</a
         >
       </div>
     </div>
@@ -257,8 +264,8 @@ const reuseRows = [
     <h2 class="h2 h2--close">How the pieces fit together</h2>
     <p class="body--sm m-section step__intro">
       A Coursera learning experience is built from connected pieces: a Specialization includes
-      courses, a course includes Modules, and a Module includes the learning assets learners use
-      along the way.
+      Courses, a Course includes Modules, and a Module includes the Learning Assets learners use
+      along the way. Some Modules organize those assets into optional Lessons.
     </p>
 
     <div class="cardgrid">
@@ -312,7 +319,7 @@ const reuseRows = [
                 <p class="tmplcard__title">{t.title}</p>
                 <p class="tmplcard__body">{t.body}</p>
               </div>
-              <p class="tmplcard__cta">View the example ↗</p>
+              <p class="tmplcard__cta">View the sample ↗</p>
             </a>
           ))
         }
@@ -428,6 +435,13 @@ const reuseRows = [
   .callout__body {
     margin: 0 0 16px;
     color: var(--text-body);
+  }
+
+  /* The second link sits under the first rather than beside it. */
+  .ext--stacked {
+    display: block;
+    margin: 8px 0 0;
+    white-space: normal;
   }
 
   .callout .ext {

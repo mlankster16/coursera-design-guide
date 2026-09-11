@@ -69,6 +69,10 @@
   /* Hover ground for the copper disclosure header on the shared-guidance
      page. #012169 and #8F3400 both still clear AA on it. */
   --warn-bg-hover: #f8ebe2;
+  /* Border for the "Pilot" pill — a shade deeper than --warn-border so the
+     pill reads as an object rather than a panel. Persimmon is the pilot
+     accent, not an error color. */
+  --pilot-border: #e8c3ac;
 
   /* Deepest copper — table headers and bullets on the shared-guidance
      page, where the copper sits against white as well as the tint. */

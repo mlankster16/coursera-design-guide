@@ -31,7 +31,11 @@ const single = Boolean(backTo) ? !nextTo : !prev || (!next && !nextTo);
       ) : (
         prev && (
           <a href={url(prev.href)}>
-            <span class="pagefoot__dir">← Zoom out</span>
+            {/* Overview is not a level of the hierarchy, so Specialization
+                goes "Back" to it rather than zooming out to it. */}
+            <span class="pagefoot__dir">
+              {prev.key === 'overview' ? '← Back' : '← Zoom out'}
+            </span>
             <span class="pagefoot__name" style={`color:${levelColor[prev.key]}`}>
               {prev.label}
             </span>

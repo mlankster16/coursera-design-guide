@@ -97,6 +97,13 @@ export const templateExamples = {
     'https://docs.google.com/document/d/1qsH5U9GwQzpmc12p7Rx9avnceBAEWQWel7NsS-s16C0/edit?usp=sharing',
   course:
     'https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing',
+  /* Module planning and the Graded Quiz Import Template are sections of the
+     Course Template, not documents of their own, so these are tab anchors
+     into it rather than separate files. */
+  moduleTab:
+    'https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?tab=t.qpfvp9skgp9o',
+  quizTab:
+    'https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?tab=t.l0nglesxgcaj',
 };
 
 /** Prefix a site-root path with the configured base so links work both at

@@ -7,7 +7,7 @@ import BestPractice from '../components/BestPractice.astro';
 const stats = [
   { figure: '1–3 learning objectives', label: 'per Module' },
   { figure: '~30 minutes minimum', label: 'of learner time' },
-  { figure: '0–5 lessons*', label: '*optional grouping' },
+  { figure: '~10 Learning Assets', label: '' },
   { figure: '1 graded assessment', label: 'required per Module' },
 ];
 
@@ -320,7 +320,7 @@ const lessonRows = [
       </div>
 
       <div class="hero__rail">
-        <p class="eyebrow hero__rail-eyebrow">A Module at a glance</p>
+        <p class="eyebrow eyebrow--plain hero__rail-eyebrow">A Module at a glance</p>
         <div class="hero__stats">
           {
             stats.map((s) => (
@@ -333,7 +333,7 @@ const lessonRows = [
         </div>
 
         <div class="hero__rail-note">
-          <p>You’ll work through this section with your Learning Experience Designer and record your decisions in the template.</p>
+          <p>Use this section as a reference during your design meetings. Your Learning Experience Designer will guide you through the relevant questions, and you’ll record your decisions in the template as you work together.</p>
         </div>
       </div>
     </div>
@@ -524,7 +524,7 @@ const lessonRows = [
         <div class="dtable dtable--backward">
           <div class="dtable__head">
             <div class="dtable__cell">Planning question</div>
-            <div class="dtable__cell">Decision for this Module</div>
+            <div class="dtable__cell head-plain">Decision for this Module</div>
           </div>
           {
             backwardRows.map((r) => (
@@ -597,7 +597,7 @@ const lessonRows = [
           <div class="dtable__head">
             <div class="dtable__cell">Stage</div>
             <div class="dtable__cell">Learner experience</div>
-            <div class="dtable__cell">Role in the learning path</div>
+            <div class="dtable__cell head-plain">Role in the learning path</div>
           </div>
           {
             pathRows.map((r) => (
@@ -651,24 +651,66 @@ const lessonRows = [
       <div class="dtable dtable--assets" data-keep>
         <div class="dtable__head">
           <div class="dtable__cell">Coursera asset</div>
-          <div class="dtable__cell">Especially useful when learners need to…</div>
+          <div class="dtable__cell head-plain">Especially useful when learners need to…</div>
         </div>
         {
           assetTable.map((a) => (
             <div class="dtable__row">
-              <div class="dtable__cell dtable__cell--asset">{a.asset}</div>
+              <div class="dtable__cell dtable__cell--asset">
+                <span>{a.asset}</span>
+
+                {/* Two rows carry a panel rather than a standalone callout
+                    below the table: what shapes a Video, and the graded
+                    Assessment requirement. */}
+                {a.asset === 'Video' && (
+                  <BestPractice
+                    title="Video"
+                    eyebrow="Before you plan"
+                    tone="gold"
+                    size="sm"
+                    width={440}
+                  >
+                    <p>
+                      Video can take several forms, and the form affects what learners see and how
+                      the video is produced.{' '}
+                      <a
+                        class="bp__link"
+                        href="https://ctl.duke.edu/video-examples/"
+                        target="_blank"
+                        rel="noopener">Review the video examples gallery ↗</a
+                      > and note anything you would like to discuss with your CTL team.
+                    </p>
+                    <p>
+                      Most Coursera videos are planned as in-studio green screen recordings, and
+                      self-recording is always an option. Other recording types, such as
+                      on-location video or recordings that need special equipment, are usually
+                      discussed earlier in project scoping so that budget and timeline can
+                      accommodate them.
+                    </p>
+                  </BestPractice>
+                )}
+
+                {a.asset === 'Assessments' && (
+                  <BestPractice
+                    title="Assessments"
+                    eyebrow="Requirement"
+                    tone="gold"
+                    size="sm"
+                    align="right"
+                    width={440}
+                  >
+                    <p>
+                      Each Module must include at least one graded Assessment. Ungraded Assessments
+                      are also encouraged as opportunities for learners to practice, check their
+                      understanding, and receive feedback before graded work.
+                    </p>
+                  </BestPractice>
+                )}
+              </div>
               <div class="dtable__cell">{a.use}</div>
             </div>
           ))
         }
-      </div>
-
-      <div class="note-gold note-gold--gap" data-keep>
-        <p class="note-gold__text note-gold__text--only">
-          Each Module must include at least one graded Assessment. Ungraded Assessments are also
-          encouraged as opportunities for learners to practice, check their understanding, and
-          receive feedback before graded work.
-        </p>
       </div>
 
       <h3 class="h3">Choose a Learning Asset that fits the learning need</h3>
@@ -772,9 +814,6 @@ const lessonRows = [
       </p>
 
 
-      <div class="draftnote" data-keep>
-        <p>Bring draft answers to your next meeting with your Learning Experience Designer. It’s okay to leave fields blank if you’re unsure, and we’ll work through it together.</p>
-      </div>
       <div class="tmpl">
         <div class="tmpl__bar">
           <span class="tmpl__bar-title">Course 1 · Module 1</span>
@@ -1037,9 +1076,14 @@ const lessonRows = [
               design meeting. Module planning and the Graded Quiz Import Template live inside the
               Course Template, with a section for each Module.
             </p>
-            <a class="btn-outline" href={templateExamples.course} target="_blank" rel="noopener">
-              See an example Course Template ↗
-            </a>
+            <div class="tmpl__cta-links">
+              <a class="btn-outline" href={templateExamples.moduleTab} target="_blank" rel="noopener">
+                See sample Module Template ↗
+              </a>
+              <a class="btn-outline" href={templateExamples.quizTab} target="_blank" rel="noopener">
+                See sample Quiz Template ↗
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1374,7 +1418,13 @@ const lessonRows = [
     color: var(--accent-dark);
   }
 
+  /* Two of these cells host an ⓘ trigger, so the cell lays its label and
+     trigger out in a row and is the popover's positioning context. */
   .dtable__cell--asset {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: var(--fs-3);
     font-weight: 700;
     color: var(--navy);

@@ -26,6 +26,10 @@ export interface LearningAsset {
   exploreLabel?: string;
   /** Route for this asset's full-guidance page, once one is published. */
   page?: string;
+  /** CTL has not tested this asset type yet. Carries a "Pilot" pill in the
+      rail and on the card, a persimmon top rule, and a note asking faculty
+      to raise it early. Persimmon is the pilot accent, not an error color. */
+  pilot?: string;
   /** Inner geometry of a 24×24 stroked icon, drawn at 19px in the rail and
       26px on the card. */
   icon: string;
@@ -46,7 +50,7 @@ export const learningAssets: LearningAsset[] = [
     slug: 'reading',
     railLabel: 'Reading',
     whatIs:
-      'A Reading can be a short page that introduces a file or external resource, or a more developed learning experience that brings together written explanation, examples, graphics, code, media, and links.',
+      'A Reading can be a short page that introduces a file or external resource or a more developed learning experience that brings together written explanation, examples, graphics, code, media, and links.',
     whenToUse:
       'When learners need time to examine information closely, follow instructions, revisit important material, or use a resource during another part of the Course.',
     page: '/learning-assets/reading',
@@ -65,7 +69,7 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'dialogue',
     railLabel: 'Coach Dialogue',
-    whatIs: 'An AI-supported conversation that responds to a learner’s ideas and choices.',
+    whatIs: 'An AI-powered conversation that responds to a learner’s ideas and choices.',
     whenToUse:
       'When learners would benefit from explaining their reasoning, considering alternatives, reflecting, or receiving personalized guidance.',
     icon: '<path d="M21 12a8 8 0 0 1-8 8H4l2.5-3A8 8 0 1 1 21 12z"/><path d="M9 11h6"/><path d="M9 14.5h3.5"/>',
@@ -73,8 +77,10 @@ export const learningAssets: LearningAsset[] = [
   {
     slug: 'roleplay',
     railLabel: 'Coach Role Play',
+    pilot:
+      'Our team has not fully tested this AI-supported tool. If you are interested in using it, talk with your CTL team early so we can plan it as a pilot.',
     whatIs:
-      'An AI-supported activity in which learners practice a conversation with a simulated persona.',
+      'An AI-powered activity in which learners practice a conversation with a simulated persona.',
     whenToUse:
       'When learners need to practice an interpersonal or job-related skill, such as coaching, interviewing, negotiating, or responding to a difficult situation.',
     icon: '<circle cx="8.5" cy="8" r="3.2"/><path d="M3 20a5.5 5.5 0 0 1 11 0"/><path d="M16 6.5a3.2 3.2 0 0 1 0 6.2"/><path d="M17.5 20a5.5 5.5 0 0 0-2.2-4.4"/>',

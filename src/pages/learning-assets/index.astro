@@ -71,7 +71,8 @@ const phases = [
                   aria-hidden="true"
                   set:html={a.icon}
                 />
-                {a.railLabel}
+                <span class="jumplist__label">{a.railLabel}</span>
+                {a.pilot && <span class="pill pill--sm">Pilot</span>}
               </a>
             ))
           }
@@ -111,8 +112,8 @@ const phases = [
           <p class="promo__title">Accessibility, Copyright &amp; AI</p>
           <p class="promo__body">
             Creating learning assets for a public, commercial platform like Coursera brings important
-            accessibility, copyright, and AI considerations that may be less familiar from a
-            for-credit classroom. Address these considerations throughout development, returning to
+            accessibility, copyright, and AI considerations that may be less familiar than when you
+            prepare to teach an in-person, for-credit course. Address these considerations throughout development, returning to
             this reference as you work on each asset with your Learning Experience Designer.
           </p>
         </div>
@@ -130,7 +131,7 @@ const phases = [
       <div class="assetgrid">
         {
           learningAssets.map((a) => (
-            <div class="assetcard" id={a.slug} data-keep>
+            <div class:list={['assetcard', a.pilot && 'assetcard--pilot']} id={a.slug} data-keep>
               <div>
                 <div class="assetcard__head">
                   <svg
@@ -147,6 +148,7 @@ const phases = [
                     set:html={a.icon}
                   />
                   <p class="assetcard__title">{a.railLabel}</p>
+                  {a.pilot && <span class="pill">Pilot</span>}
                 </div>
 
                 <p class="eyebrow assetcard__label">
@@ -159,6 +161,15 @@ const phases = [
                 </p>
                 <p class="assetcard__body assetcard__body--last">{a.whenToUse}</p>
               </div>
+
+              {
+                a.pilot && (
+                  <div class="pilotnote">
+                    <p class="eyebrow pilotnote__eyebrow">Not yet piloted at Duke</p>
+                    <p class="pilotnote__body">{a.pilot}</p>
+                  </div>
+                )
+              }
 
               {
                 assetPageLive(a) ? (
@@ -205,6 +216,10 @@ const phases = [
     border-top: 1px solid var(--rule);
     font-size: var(--fs-2);
     color: var(--text-strong);
+  }
+
+  .jumplist__label {
+    flex: 1 1 auto;
   }
 
   .jumplist__link:last-child {
@@ -365,6 +380,51 @@ const phases = [
     justify-content: space-between;
     gap: 20px;
     scroll-margin-top: 12px;
+  }
+
+  /* Persimmon marks an asset type CTL has not tested yet. It is the pilot
+     accent on this page and is used nowhere else. */
+  .assetcard--pilot {
+    border-top-color: var(--copper);
+  }
+
+  .pill {
+    flex: none;
+    display: inline-block;
+    background: var(--warn-bg);
+    border: 1px solid var(--pilot-border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--warn-title);
+    white-space: nowrap;
+  }
+
+  .pill--sm {
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  .pilotnote {
+    background: var(--warn-bg);
+    border-left: 3px solid var(--copper);
+    padding: 14px 18px;
+  }
+
+  .pilotnote__eyebrow {
+    margin: 0 0 4px;
+    letter-spacing: 0.14em;
+    color: var(--warn-title);
+  }
+
+  .pilotnote__body {
+    margin: 0;
+    font-size: var(--fs-2);
+    line-height: 1.65;
+    color: var(--text-body);
   }
 
   .assetcard__head {

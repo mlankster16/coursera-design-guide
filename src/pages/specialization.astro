@@ -28,7 +28,7 @@ const ideas = [
   },
   {
     title: 'Respect the learner’s time.',
-    body: 'Prioritize what is essential and design toward a focused, achievable outcome.',
+    body: 'Prioritize what is essential, and design toward a focused, achievable outcome.',
   },
 ];
 
@@ -100,7 +100,7 @@ const objectives = [
       </div>
 
       <div class="hero__rail">
-        <p class="eyebrow hero__rail-eyebrow">A Specialization at a glance</p>
+        <p class="eyebrow eyebrow--plain hero__rail-eyebrow">A Specialization at a glance</p>
         <div class="hero__stats">
           {
             stats.map((s) => (
@@ -113,7 +113,7 @@ const objectives = [
         </div>
 
         <div class="hero__rail-note">
-          <p>You’ll work through this section with your Learning Experience Designer and record your decisions in the template.</p>
+          <p>Use this section as a reference during your design meetings. Your Learning Experience Designer will guide you through the relevant questions, and you’ll record your decisions in the template as you work together.</p>
         </div>
       </div>
     </div>
@@ -152,7 +152,7 @@ const objectives = [
         connects to their goals and how the time they invest will support their progress.
       </p>
 
-      <p class="eyebrow ideas__eyebrow">A few ideas to keep in mind</p>
+      <p class="eyebrow eyebrow--plain ideas__eyebrow">A few ideas to keep in mind</p>
       <div class="ideas">
         {
           ideas.map((i) => (
@@ -600,10 +600,7 @@ const objectives = [
           </p>
           <div class="tmpl__cta-links">
             <a class="btn-outline" href={templateExamples.specialization} target="_blank" rel="noopener">
-              See an example Specialization Template ↗
-            </a>
-            <a class="btn-outline" href={templateExamples.course} target="_blank" rel="noopener">
-              See an example Course Template ↗
+              See sample Specialization Template ↗
             </a>
           </div>
         </div>
