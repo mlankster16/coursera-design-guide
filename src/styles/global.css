@@ -615,6 +615,7 @@ img {
   --accent-dark: var(--level-specialization-dark);
   --tint: var(--level-specialization-tint);
   --tint-border: var(--level-specialization-tint-border);
+  --tint-hover: var(--level-specialization-tint-hover);
   --wash: var(--level-specialization-wash);
 }
 
@@ -623,6 +624,7 @@ img {
   --accent-dark: var(--level-course-dark);
   --tint: var(--level-course-tint);
   --tint-border: var(--level-course-tint-border);
+  --tint-hover: var(--level-course-tint-hover);
   --wash: var(--level-course-wash);
 }
 
@@ -631,6 +633,7 @@ img {
   --accent-dark: var(--level-module-dark);
   --tint: var(--level-module-tint);
   --tint-border: var(--level-module-tint-border);
+  --tint-hover: var(--level-module-tint-hover);
   --wash: var(--level-module-wash);
 }
 
@@ -639,6 +642,7 @@ img {
   --accent-dark: var(--level-assets-dark);
   --tint: var(--level-assets-tint);
   --tint-border: var(--level-assets-tint-border);
+  --tint-hover: var(--level-assets-tint-hover);
   --wash: var(--panel-warm);
 }
 

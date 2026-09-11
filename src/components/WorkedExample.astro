@@ -54,8 +54,10 @@ const { lead, name, id, open = false } = Astro.props;
     cursor: pointer;
   }
 
+  /* An explicit hover ground, not a brightness filter: a filter would
+     shift the heading and eyebrow colours along with the panel. */
   .wx__head:hover {
-    filter: brightness(0.985);
+    background: var(--tint-hover);
   }
 
   .wx__head:focus-visible {

@@ -15,21 +15,25 @@
   --level-specialization-tint: #f2f6fb;
   --level-specialization-tint-border: #cfe0f0;
   --level-specialization-wash: #fafcfe;
+  --level-specialization-tint-hover: #e8f0f9;
 
   --level-course: #17724a;
   --level-course-dark: #125e3d;
   --level-course-tint: #f0f6f2;
   --level-course-tint-border: #cfe2d8;
   --level-course-wash: #fafcfb;
+  --level-course-tint-hover: #e6f0ea;
 
   --level-module: #6b4e9e;
   --level-module-tint: #f6f3fa;
   --level-module-tint-border: #e3dbf0;
   --level-module-wash: #fbfafd;
+  --level-module-tint-hover: #efe9f7;
 
   --level-assets: #b4700c;
   --level-assets-tint: #fdf6ec;
   --level-assets-tint-border: #f0dcc0;
+  --level-assets-tint-hover: #fbefd9;
   /* Second, warmer gold tint used on the Overview mapping table's
      Learning Assets row and its learner-time note block. */
   --level-assets-tint-warm: #fcf7ee;
