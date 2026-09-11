@@ -1416,7 +1416,6 @@ const lessonRows = [
   }
 
   .dtable__head .dtable__cell {
-    border-left-color: var(--rule);
     /* The ⓘ popovers hang off these cells, so each is a positioning
        context and must lay its label and trigger out in a row. */
     position: relative;
@@ -1424,7 +1423,7 @@ const lessonRows = [
     align-items: center;
     gap: 7px;
     padding: 14px 20px;
-    border-left-color: var(--rule-card);
+    border-left-color: var(--rule);
   }
 
   .dtable__head--gold .dtable__cell {
@@ -1519,8 +1518,6 @@ const lessonRows = [
     color: var(--level-assets-dark);
   }
 
-  /* Sample asset titles. Deliberately not links — there is nothing real to
-     point at yet. */
   /* Styled as links but deliberately not anchors — it signals that real
      asset titles will be hyperlinked, while these examples have nothing
      to point at. Do not make them clickable. */
