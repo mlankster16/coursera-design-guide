@@ -74,19 +74,7 @@ const availableSoon = (s) => s.replace(
   + ' font-size:14px; font-weight:700; letter-spacing:.12em;'
   + ' text-transform:uppercase; color:#6B737F;">Available soon</span>');
 
-/** CTL asked for every rung of the worked-example hierarchy chain to read as
-    a title; the design leaves the first two at regular weight. */
-const boldChainTitles = (s) => s.replace(
-  /(<span style="flex:1; min-width:0; font-size:17px; line-height:1\.45;) (color:#1F2833;">)/g,
-  '$1 font-weight:600; $2');
-
-/** CTL removed the "Return to this…" eyebrow above each main heading on the
-    Accessibility page. Design dropped two of the three; this catches the
-    third so the headings stand alone. Remove once Design's export does. */
-const dropReturnToThisEyebrow = (s) => s.replace(
-  /[ \t]*<p style="[^"]*">Return to this[^<]*<\/p>\n/g, '');
-
-const DEVIATIONS = [availableSoon, boldChainTitles, dropReturnToThisEyebrow];
+const DEVIATIONS = [availableSoon];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
