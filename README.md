@@ -19,7 +19,7 @@ path, which matches how GitHub Pages serves the site.
 
 ## Pages
 
-The five main pages are **Design's static build, copied verbatim** — not
+The six main pages are **Design's static build, copied verbatim** — not
 rebuilt. They are checked in under `public/` and served as-is.
 
 | Page | Route | Source |
@@ -29,11 +29,11 @@ rebuilt. They are checked in under `public/` and served as-is.
 | Course | `/course` | `public/course/index.html` (Design) |
 | Module | `/module` | `public/module/index.html` (Design) |
 | Learning Assets | `/learning-assets` | `public/learning-assets/index.html` (Design) |
-| Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `src/pages/learning-assets/accessibility-copyright-ai.astro` |
+| Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `public/learning-assets/accessibility-copyright-ai/index.html` (Design) |
 | Video | `/learning-assets/video` | `src/pages/learning-assets/video.astro` |
 | Reading | `/learning-assets/reading` | `src/pages/learning-assets/reading.astro` |
 
-### Why the five pages are copied, not rebuilt
+### Why these pages are copied, not rebuilt
 
 Porting them into Astro produced four rounds of near-misses. Three whole
 categories of formatting were invisible in the old `.dc.html` design source

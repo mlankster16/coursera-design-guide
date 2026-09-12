@@ -62,18 +62,21 @@
   /* ---------- 2. accordions ---------- */
   var acc = cfg.accordion;
   if (acc) {
+    /* acc.unnumbered: a page with a single accordion names its behaviours
+       plainly (ccToggle/ccOpen/ccLabel) rather than with a 0 suffix. */
     for (var i = 0; i < acc.count; i++) {
       (function (n) {
-        var btn = trigger(acc.toggle + n);
+        var sfx = acc.unnumbered ? '' : n;
+        var btn = trigger(acc.toggle + sfx);
         if (!btn) return;
         function set(on) {
-          show(acc.open + n, on);
-          setText(acc.label + n, on ? acc.openTxt : acc.closed);
+          show(acc.open + sfx, on);
+          setText(acc.label + sfx, on ? acc.openTxt : acc.closed);
           btn.setAttribute('aria-expanded', on ? 'true' : 'false');
         }
-        btn.addEventListener('click', function () { set(!isOn(acc.open + n)); });
+        btn.addEventListener('click', function () { set(!isOn(acc.open + sfx)); });
         btn.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(!isOn(acc.open + n)); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(!isOn(acc.open + sfx)); }
           if (e.key === 'Escape') set(false);
         });
         btn.__set = set;
@@ -127,7 +130,7 @@
   /* ---------- 4. print: open everything, close popovers ---------- */
   window.addEventListener('beforeprint', function () {
     if (acc) for (var i = 0; i < acc.count; i++) {
-      var b = trigger(acc.toggle + i);
+      var b = trigger(acc.toggle + (acc.unnumbered ? '' : i));
       if (b && b.__set) b.__set(true);
     }
     if (tips) for (var k = 0; k < tips.count; k++) show('g' + k, false);

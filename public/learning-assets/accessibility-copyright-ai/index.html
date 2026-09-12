@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility, Copyright & AI — Coursera Design Guide | Duke CTL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/coursera-design-guide/guide.css">
+<style>
+  body { margin:0; background:#EFEDE8; }
+  a { color:#00539B; }
+  a:hover { color:#8A5A0B; }
+  @media screen {
+    [data-print-shell] { overflow:hidden; }
+  }
+  /* Reflow: the pages must stay usable at narrow widths and at high zoom
+     (WCAG 1.4.10). Generic selectors, so no markup hooks are needed. */
+  @media screen and (max-width: 980px) {
+    [data-print-page] { padding:24px 16px !important; }
+    [data-navrow] { flex-wrap:wrap !important; row-gap:14px !important; }
+  }
+  @media screen and (max-width: 820px) {
+    [data-print-shell] [style*="grid-template-columns"] { grid-template-columns:minmax(0,1fr) !important; }
+    [data-print-shell] [style*="columns:2"] { columns:1 !important; }
+    [data-print-shell] th, [data-print-shell] td { display:block !important; width:auto !important; }
+    [data-rail] { position:static !important; }
+  }
+  @media screen and (max-width: 680px) {
+    [data-print-shell] > div { padding-left:24px !important; padding-right:24px !important; }
+    [data-cap="nav"] { padding-left:0 !important; padding-right:0 !important; }
+    [data-cap="nav"] > div { padding-left:24px !important; padding-right:24px !important; }
+    [data-foot] { margin-left:24px !important; margin-right:24px !important; }
+    [data-print-shell] th, [data-print-shell] td { padding-left:14px !important; padding-right:14px !important; }
+  }
+  @page { margin: 0.5in; }
+  @media print {
+    html, body { height:auto !important; background:#FFFFFF !important; }
+    body, [data-print-page], [data-print-shell] { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    [data-print-page] { padding:0 !important; }
+    [data-print-shell] { width:auto !important; max-width:none !important; margin:0 !important; box-shadow:none !important; border-radius:0 !important; overflow:visible !important; }
+    [data-rail] { position:static !important; }
+    h1, h2, h3 { break-after:avoid; }
+    p, li { orphans:2; widows:2; }
+    [data-keep] { break-inside:avoid; }
+    img { max-width:100% !important; }
+  }</style>
+</head>
+<body data-page-config='{"slug":"accessibility-copyright-ai","accordion":{"toggle":"ccToggle","open":"ccOpen","label":"ccLabel","closed":"Show license guidance","openTxt":"Hide","count":1,"unnumbered":true},"tips":null,"expandForPrint":["ccOpen"]}'>
+<div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
+<div data-print-shell="" style="max-width:1080px; width:100%; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:4px;">
+
+  <div data-cap="nav">
+    <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
+      <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
+    </div>
+    <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+      <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; letter-spacing:.01em; white-space:nowrap;">Coursera Design Guide</span>
+      <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
+        <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g56">Overview</a>
+        <a href="/coursera-design-guide/specialization/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g56">Specialization</a>
+        <a href="/coursera-design-guide/course/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g56">Course</a>
+        <a href="/coursera-design-guide/module/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g56">Module</a>
+        <span data-nav-menu="" data-enter="navShow" data-leave="navHide" data-blur="navLeave" style="position:relative; display:inline-block;">
+          <span data-click="navToggle" data-focus="navShow" data-keys="navKeys" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" style="display:inline-block; color:#012169; font-weight:600; border-bottom:3px solid #B4700C; padding-bottom:3px; white-space:nowrap; cursor:pointer;" class="g64">Learning Assets  <span data-text="navCaret">⌄</span></span>
+          <div data-if="navOpen" hidden>
+            <div style="position:absolute; z-index:60; top:calc(100% + 14px); right:0; width:330px; background:#FFFFFF; border:1px solid #D8DEE7; border-top:4px solid #B4700C; box-shadow:0 12px 34px rgba(1,33,105,.16); padding:6px 0; text-align:left;">
+              <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:block; padding:14px 24px; font-size:17px; font-weight:600; color:#012169; white-space:nowrap;" class="g57">All Learning Assets</a>
+              <a href="/coursera-design-guide/learning-assets/accessibility-copyright-ai/" style="text-decoration:none; display:block; margin:6px 0; padding:13px 24px 13px 21px; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; border-left:3px solid #B4700C; background:#FDF6EC; font-size:16px; font-weight:700; color:#012169; line-height:1.4;" class="g58">Accessibility, Copyright &amp; AI</a>
+              <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Video</a>
+              <a href="/coursera-design-guide/learning-assets/#reading" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Reading</a>
+              <a href="/coursera-design-guide/learning-assets/#plugin" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Interactive Plugin</a>
+              <a href="/coursera-design-guide/learning-assets/#dialogue" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Coach Dialogue</a>
+              <a href="/coursera-design-guide/learning-assets/#roleplay" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Coach Role Play</a>
+              <a href="/coursera-design-guide/learning-assets/#assessment" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Assessments</a>
+              <a href="/coursera-design-guide/learning-assets/#programming" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Programming Assignments</a>
+              <a href="/coursera-design-guide/learning-assets/#labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g59">Coursera Labs</a>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div data-cap="head" style="padding:72px 56px 60px; display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:start; background:#FBFAF7;">
+    <div>
+      <p style="margin:0 0 20px; font-size:15px; letter-spacing:.01em; color:#3A424E; font-weight:700;">Guidance for every learning asset</p>
+      <h1 style="margin:0 0 24px; font-family:'EB Garamond',Garamond,serif; font-weight:500; font-size:50px; line-height:1.08; color:#012169; letter-spacing:-.01em; text-wrap:balance;">Accessibility, Copyright &amp; AI</h1>
+      <p style="margin:0 0 18px; font-size:17px; line-height:1.65; color:#1F2833; max-width:525px; text-wrap:pretty; box-sizing:border-box;">As you develop each Learning Asset, you’ll make choices that help it work well for learners, fit a public and commercial Coursera Course, and reflect your own expertise (even if AI has supported the process).</p>
+      <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;">You and your Learning Experience Designer can return to this page throughout planning, production, and review. Use it to think through what applies to your work and identify questions to discuss together.</p>
+    </div>
+    <div style="border-left:3px solid #3A424E; padding:4px 0 4px 26px;">
+      <p style="margin:0 0 18px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">When this page may be helpful</p>
+      <div style="display:flex; flex-direction:column; gap:0;">
+        <div style="padding:0px 0 18px;">
+          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">While planning</p>
+          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Think ahead about the format, source materials, and tools you may want to use.</p>
+        </div>
+        <div style="padding:18px 0 18px; border-top:1px solid #E4E2DD;">
+          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">While developing</p>
+          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Find guidance for the text, media, interaction, or other content you’re creating.</p>
+        </div>
+        <div style="padding:18px 0 0px; border-top:1px solid #E4E2DD;">
+          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">Before handoff</p>
+          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Take stock of what’s in place and note anything you’d like to review with your Learning Experience Designer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:68px 56px 0;">
+    <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">Three considerations throughout development</h2>    <p style="margin:0 0 32px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">These questions may come up at different points in your project. Open the section that’s most useful for the asset or decision you’re working through with your Learning Experience Designer.</p>    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;">
+      <a data-keep="" href="#accessibility" style="text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; gap:18px; border:1px solid #D8DEE7; border-top:4px solid #339898; border-radius:3px; padding:24px 26px; min-height:210px;" class="g60">
+        <div>
+          <p style="margin:0 0 10px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Accessibility</p>
+          <p style="margin:0; font-size:16px; line-height:1.65; color:#3A424E;">Plan content and interactions that learners with a range of access needs can use meaningfully.</p>
+        </div>
+        <p style="margin:0; font-size:15px; font-weight:600; color:#2C8080;">Explore accessibility →</p>
+      </a>
+      <a data-keep="" href="#copyright" style="text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; gap:18px; border:1px solid #D8DEE7; border-top:4px solid #C84E00; border-radius:3px; padding:24px 26px; min-height:210px;" class="g61">
+        <div>
+          <p style="margin:0 0 10px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Copyright and permissions</p>
+          <p style="margin:0; font-size:16px; line-height:1.65; color:#3A424E;">Identify materials you did not create and work with your CTL team to confirm that they can be used in a public, commercial Course.</p>
+        </div>
+        <p style="margin:0; font-size:15px; font-weight:600; color:#A84200;">Explore copyright →</p>
+      </a>
+      <a data-keep="" href="#ai" style="text-decoration:none; display:flex; flex-direction:column; justify-content:space-between; gap:18px; border:1px solid #D8DEE7; border-top:4px solid #3A424E; border-radius:3px; padding:24px 26px; min-height:210px;" class="g62">
+        <div>
+          <p style="margin:0 0 10px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Using AI</p>
+          <p style="margin:0; font-size:16px; line-height:1.65; color:#3A424E;">Use AI thoughtfully, protect material you share with AI tools, and carefully review anything AI contributes to the Course.</p>
+        </div>
+        <p style="margin:0; font-size:15px; font-weight:600; color:#1F2833;">Explore AI guidance →</p>
+      </a>
+    </div>
+  </div>
+
+  <div id="accessibility" style="padding:68px 56px 0;">
+        <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">Build in accessibility</h2>    <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Accessibility is part of every Duke Coursera Learning Asset and is easiest to support when considered from the beginning. Early decisions about structure, media, tools, and interactions can make an asset easier for more learners to use <i style="font-style:italic;">and</i> easier to produce accessibly.</p>
+        <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Share ideas and drafts with your Learning Experience Designer while there is still time to shape the approach together. They can help you identify what applies and plan for complex content, interactions, or possible access barriers.</p>        <div data-grid2="" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 40px; align-items:start;">
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-1" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Text and structure</p>
+          <ul role="list" aria-labelledby="a11y-cat-1" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Use <a href="https://www.w3.org/WAI/tutorials/page-structure/headings/" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">a logical heading structure</a> and consistent formatting.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Use concise, direct language and explain specialized terminology or syntax.</li>
+            
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Make sure that you use <a href="https://myusf.usfca.edu/digital-accessibility/meaningful-link-text" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">meaningful link text</a> (the text of your link makes sense independent of context) when you link to a resource.</li>
+          </ul>
+        </div>
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-2" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Images and visuals</p>
+          <ul role="list" aria-labelledby="a11y-cat-2" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span><a href="https://accessibility.huit.harvard.edu/describe-content-images" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">Provide alternative text</a> for meaningful images.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span><a href="https://www.w3.org/WAI/tutorials/images/complex/" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">Describe complex visuals</a> — charts, diagrams, and data — in the surrounding content.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Identify table headers clearly and avoid using color or position alone.</li>
+                      <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Ensure that all visuals, including slides, follow color contrast guidelines. You can use <a href="https://brand.duke.edu/color-accessibility-grid/" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">Duke's color contrast guide</a> to find appropriate color combinations.</li>
+          </ul>
+        </div>
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-3" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Video and audio</p>
+          <ul role="list" aria-labelledby="a11y-cat-3" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Coursera auto-generates captions and transcripts for videos. Leave the lower third of your slides empty for captions.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Describe meaningful visual information aloud.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Make essential names, citations, links, and resources available in writing.</li>
+                      <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>Ensure your videos have clear audio. This may influence how and where you record.</li>
+          </ul>
+        </div>
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-4" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Interaction and navigation</p>
+          <ul role="list" aria-labelledby="a11y-cat-4" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Design essential controls so they can be reached with a keyboard and assistive technology.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Whenever possible, choose interactions that do not depend on dragging, hovering, speech, or precise movement.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Provide accessible static resources for all interactions.<br></li>
+          </ul>
+        </div>
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-5" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Multiple ways to engage</p>
+          <ul role="list" aria-labelledby="a11y-cat-5" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Pair color, sound, animation, images, and visual position with another way of understanding the information.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Provide instructions and feedback in an accessible form learners can return to.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Give flexibility in how quickly they work through a task.</li>
+                      <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>All documents shared with students on Coursera must follow <a href="https://web.accessibility.duke.edu/how/documents/" target="_blank" rel="noopener" style="color:#00539B; text-decoration:underline; text-underline-offset:2px;" class="g56">digital accessibility principles</a>.</li>
+          </ul>
+        </div>
+        <div style="min-width:0; margin:0 0 30px;">
+          <p id="a11y-cat-6" style="margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid #339898; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#2C8080; font-weight:700;">Alternative paths</p>
+          <ul role="list" aria-labelledby="a11y-cat-6" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2C8080;">·</span>When a format creates a barrier unrelated to the objective, or is unavailable to some learners, provide another way to participate.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Consider the accessibility of the complete environment learners will use, including third-party tools, editors, consoles, and visualizations.</li>
+            <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(44, 128, 128);">·</span>Ask learners only for information needed to complete the activity, avoiding personal or sensitive information whenever possible. You will not be able to view learner information via Coursera.</li>
+          </ul>
+        </div>
+    </div>    <div data-keep="" style="background:#F1F8F8; border-left:3px solid #339898; padding:24px 28px; margin:32px 0 0;">
+      <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:22px; color:#012169;">Helpful things to share with your Learning Experience Designer</p>
+      <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#215F60;">·</span>Editable source files whenever possible</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#215F60;">·</span>What important images, charts, media, or interactions are meant to communicate</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#215F60;">·</span>Any tool, plugin, software, or file format learners will use</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#215F60;">·</span>Questions about alternatives or possible access barriers</li>
+      </ul>
+    </div>    
+  </div>
+
+  <div id="copyright" style="padding:68px 56px 0;">
+        <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">Copyright and permissions</h2>    <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Coursera is a public, global, commercial platform. That makes it different from a face-to-face, for-credit Duke course, and materials you already use in teaching may need additional review, permission, or licensing before they can be included.</p>
+        <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Whenever possible, build from materials you created yourself. Even material free to access online can have restrictions on the rights to reproduce, adapt, or distribute through Coursera.</p>        <h3 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Why Coursera is different</h3>    <table style="table-layout:fixed; width:100%; border-collapse:collapse; margin:0;">
+    <caption style="position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;">How course materials are used in a Duke classroom compared with a Coursera Course</caption>
+    <thead>
+      <tr>
+        <th scope="col" data-keep="" style="width:50%; box-sizing:border-box; border-left:3px solid #C9CDD4; padding:2px 40px 12px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A6472; font-weight:700;">In a Duke classroom</p></th>
+        <th scope="col" data-keep="" style="width:50%; box-sizing:border-box; border-left:3px solid #C84E00; padding:2px 0 12px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#A84200; font-weight:700;">In a Coursera Course</p></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-keep="" style="box-sizing:border-box; border-left:3px solid #C9CDD4; padding:0px 40px 18px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; text-wrap:pretty;">Course materials are shared with a defined group of enrolled students for a limited educational purpose. Depending on the material and how it is used, classroom exceptions, fair use, library licenses, Course Reserves, or other permissions may support limited use within that setting.</p></td>
+        <td data-keep="" style="box-sizing:border-box; border-left:3px solid #C84E00; padding:0px 0 18px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; text-wrap:pretty;">Course materials are distributed through a public, global, commercial platform and may remain available well beyond an academic term. Permissions, licenses, and fair-use decisions made for a closed classroom may not extend to this setting.</p></td>
+      </tr>
+      <tr>
+        <td data-keep="" style="box-sizing:border-box; border-left:3px solid #C9CDD4; padding:0px 40px 2px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; text-wrap:pretty;">These provisions do not mean that any material may be copied or shared for teaching. They apply under particular conditions and may limit who can access the material, how much can be used, and how long it remains available.</p></td>
+        <td data-keep="" style="box-sizing:border-box; border-left:3px solid #C84E00; padding:0px 0 2px 22px; text-align:left; vertical-align:top;"><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; text-wrap:pretty;">Materials generally need to be created for the Course, in the public domain, covered by a license that permits commercial use, or used with the rights holder’s permission. Have questions about using materials in your Course or elsewhere? Bring these to your CTL team for discussion.</p></td>
+      </tr>
+    </tbody>
+  </table>        <h3 style="margin:36px 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Educational use is not automatically fair use</h3>    <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Fair use may allow copyrighted material to be used without permission in some circumstances, but each use must be considered individually. The analysis includes the purpose of the use, the nature of the material, how much is used, and the effect on the market for the original.</p>    <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">A nonprofit educational purpose can support fair use, while a commercial context may weigh against it—but neither factor decides the question on its own. Because Coursera differs from a closed, for-credit classroom, share any proposed reliance on fair use with your CTL team.</p>
+    <p style="margin:16px 0 0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Do not reprint non-public-domain materials without direct permission from the copyright holder. Examples include but are not limited to: political cartoons; Getty images; popular movies, television shows, or songs; trademarks.</p>        <h3 style="margin:36px 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Keep track of materials you did not create</h3>    <p style="margin:0 0 26px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">As you develop an asset, using the table below as guidance, take note when it includes anything you didn’t create and where it came from. Your CTL team can help you understand what may be used, what may require permission, and what might be better replaced.</p>
+    <p style="margin:0 0 26px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">In general, you may need to link to third-party sites to share readings or other resources, rather than posting them directly on Coursera.</p>    <div style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden;">
+      <table style="table-layout:fixed; width:100%; border-collapse:collapse; margin:0;">
+    <caption style="position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;">Types of material to take note of, and what each may include</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="width:32.09%; box-sizing:border-box; background:#FCF5F0; padding:14px 22px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#8F3400; font-weight:700; text-align:left; vertical-align:top;">Material</th>
+        <th scope="col" style="width:67.91%; box-sizing:border-box; background:#FCF5F0; padding:14px 22px; font-size:15px; letter-spacing:.01em; color:#8F3400; font-weight:700; border-left:1px solid #EFD3C6; text-align:left; vertical-align:top;">Take note when it includes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Text and publications</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Articles, chapters, quotations, substantial excerpts, cases, scripts, exercises, or licensed question banks</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Images and figures</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Photographs, illustrations, figures, charts, tables, or diagrams you did not create</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Video, audio, and music</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Clips, footage, recordings, background music, or people appearing in a recording</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Data and datasets</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Purchased, licensed, restricted, institutional, or third-party data</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Code and software</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Starter code, libraries, packages, APIs, software, templates, or configured environments</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Scenarios and personas</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Real people, copyrighted characters, proprietary cases, confidential situations, rubrics, or published exercises</td>
+      </tr>
+      <tr>
+        <th scope="row" style="box-sizing:border-box; padding:16px 22px; font-size:17px; font-weight:600; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">Tools and platforms</th>
+        <td style="box-sizing:border-box; padding:16px 22px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">External tools, embedded content, accounts, data collection, privacy conditions, media, or simulations</td>
+      </tr>
+    </tbody>
+  </table>
+      
+    </div>        <div style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden; margin:36px 0 0;">
+      <div data-click="ccToggle" data-keys="ccKeys" role="button" tabindex="0" aria-expanded="false" style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:20px 26px; cursor:pointer; background:#FCF5F0;" class="g63 g65">
+        <p style="margin:0; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">Using Creative Commons materials</p>
+        <span style="flex:none; font-size:15px; font-weight:600; color:#8F3400; white-space:nowrap;"><span data-text="ccLabel">Show license guidance</span></span>
+      </div>
+      <div data-if="ccOpen" hidden>
+        <div style="padding:26px; border-top:1px solid #EFD3C6;">
+          <p style="margin:0 0 22px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">A Creative Commons license gives the public permission to use a work under stated conditions. Check the exact license attached to the material—not simply whether it has a Creative Commons symbol. We can use two types of Creative Commons licenses for Coursera: CC0 and CC BY. Review the table below for a comparison.</p>
+          <div style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden; margin:0 0 22px;">
+            <table style="table-layout:fixed; width:100%; border-collapse:collapse; margin:0;">
+    <caption style="position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;">Creative Commons licenses usable on Coursera, and what to keep in mind</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="width:28.93%; box-sizing:border-box; background:#FCF5F0; padding:14px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#8F3400; font-weight:700; text-align:left; vertical-align:top;">License</th>
+        <th scope="col" style="width:31.68%; box-sizing:border-box; background:#FCF5F0; padding:14px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#8F3400; font-weight:700; border-left:1px solid #EFD3C6; text-align:left; vertical-align:top;">Use in Coursera</th>
+        <th scope="col" style="width:39.39%; box-sizing:border-box; background:#FCF5F0; padding:14px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#8F3400; font-weight:700; border-left:1px solid #EFD3C6; text-align:left; vertical-align:top;">What to keep in mind</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:700; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">CC0</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:600; line-height:1.6; color:#1F2833; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Generally permitted</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">The creator has waived copyright restrictions to the extent legally possible. Attribution is appreciated even when it is not required.</td>
+      </tr>
+      <tr>
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:700; line-height:1.5; color:#012169; text-align:left; vertical-align:top;">CC BY</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:600; line-height:1.6; color:#1F2833; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Generally permitted</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:17px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Commercial use and adaptation are allowed. Credit the creator and provide the license information.</td>
+      </tr>
+    </tbody>
+  </table>
+            
+            
+            
+          </div>
+          <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">All Creative Commons licenses require you to follow their conditions. Unless the work is marked CC0, plan to identify the creator, title, source, and license and indicate whether you made changes.</p>
+        </div>
+      </div>
+    </div>
+    <div data-keep="" style="background:#FCF5F0; border-left:3px solid #C84E00; padding:24px 28px; margin:32px 0 0;">
+      <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:22px; color:#012169;">Helpful things to share with your CTL team</p>
+      <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#8F3400;">·</span>A link to the original source</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#8F3400;">·</span>The creator or rights holder, when known</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#8F3400;">·</span>Any license, permission, or purchase information you already have</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(143, 52, 0);">·</span>How you would like to use the material (e.g., by reproducing, adapting, embedding, or linking to it)</li>
+      </ul>
+    </div>
+    <h3 style="margin:36px 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:25px; line-height:1.2; color:#012169;">After permission or use is confirmed</h3>    <div style="display:flex; flex-direction:column; border-top:1px solid #E4E2DD; margin:0 0 0;">
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #C84E00; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Attribute third-party materials and preserve any required license notices, including open-source notices.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #C84E00; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">When material does not need to be reproduced in Coursera, consider linking learners to a lawful source.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #C84E00; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Protect private and sensitive information by keeping credentials, confidential data, private repositories, and personally identifiable information out of the Course.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #C84E00; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Confirm distribution rights for software, packages, datasets, templates, and starter files used in Labs.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="ai" style="padding:68px 56px 0;">
+        <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">Using AI during Course development</h2>    <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#1F2833; font-weight:600; max-width:730px; text-wrap:pretty; box-sizing:border-box;">CTL will not use AI to develop course materials with your content without express permission.</p>
+    <p style="margin:0 0 17px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">AI tools can be useful for brainstorming, drafting, restructuring, summarizing, or generating examples and practice questions. They can also introduce errors, bias, privacy concerns, and copyright questions that aren’t always easy to spot.</p>    <p style="margin:0 0 34px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Your expertise remains central. Treat anything an AI tool produces as a starting point to verify, revise, and shape before it reaches learners.</p>    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;">
+      <div data-keep="" style="border:1px solid #D8DEE7; border-top:4px solid #3A424E; border-radius:3px; padding:24px 26px;">
+        <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:24px; line-height:1.2; color:#012169;">Protect what goes in</p>
+        <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Use AI tools only with material you are permitted to share.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Keep confidential, proprietary, personally identifiable, and restricted information out of AI tools.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Consider what the AI provider may store, retain, or reuse.</li>
+        </ul>
+      </div>
+      <div data-keep="" style="border:1px solid #D8DEE7; border-top:4px solid #3A424E; border-radius:3px; padding:24px 26px;">
+        <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:24px; line-height:1.2; color:#012169;">Review what comes out</p>
+        <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#1F2833;">·</span>Verify facts, figures, citations, and disciplinary reasoning.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#1F2833;">·</span>Review for bias, stereotypes, close reproduction, and accessibility concerns.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#1F2833;">·</span>Revise the output to reflect your expertise, voice, learners, and objectives.</li>
+        </ul>
+      </div>
+      <div data-keep="" style="border:1px solid #D8DEE7; border-top:4px solid #3A424E; border-radius:3px; padding:24px 26px;">
+        <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:24px; line-height:1.2; color:#012169;">Keep your CTL team informed</p>
+        <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;">
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Let your CTL team know when AI has contributed substantially to an asset.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Share which tool you used and how you reviewed or revised its output.</li>
+          <li style="font-size:15px; line-height:1.65; color:#3A424E; padding-left:15px; position:relative; text-wrap:pretty;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(31, 40, 51);">·</span>Bring forward any remaining questions about accuracy, rights, bias, accessibility, or appropriateness.</li>
+        </ul>
+      </div>
+    </div>    <div data-keep="" style="background:#F4F5F7; border-left:3px solid #3A424E; padding:24px 28px; margin:32px 0 0;">
+      <p style="margin:0 0 14px; font-family:'EB Garamond',serif; font-weight:500; font-size:22px; color:#012169;">Helpful things to share with your Learning Experience Designer</p>
+      <ul role="list" style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2A313B;">·</span>The AI tool you used</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2A313B;">·</span>How it contributed to the asset</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2A313B;">·</span>Any source material or instructions used to guide it</li>
+        <li style="font-size:16px; line-height:1.65; color:#3A424E; padding-left:16px; position:relative; max-width:740px; box-sizing:border-box; text-wrap:pretty;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#2A313B;">·</span>What you have already verified or revised, and what you’d still like help reviewing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="padding:68px 56px 0;">
+    <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">As you prepare for handoff</h2>    <p style="margin:0 0 30px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Use these questions with your Learning Experience Designer to take stock of what’s ready and what may still need attention.</p>    <div style="display:flex; flex-direction:column; border-top:1px solid #E4E2DD; margin:0 0 0;">
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Have accessibility needs and possible alternatives been considered?</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Are editable and accessible source files available?</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Have third-party materials and their sources been identified?</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Are permission and attribution needs recorded?</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Has substantial AI-supported work been shared and reviewed?</p>
+      </div>
+      <div style="display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; align-items:start; padding:18px 0; border-bottom:1px solid #E4E2DD;">
+        <span style="flex:none; width:22px; height:22px; margin-top:1px; border-radius:3px; border:2px solid #3A424E; display:block;"></span>
+        <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:700px; box-sizing:border-box; text-wrap:pretty;">Are any open questions clearly noted for your CTL team?</p>
+      </div>
+    </div>
+    <p style="margin:26px 0 0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Record relevant decisions and source links in the Design Document so the team can carry them into production.</p>
+  </div>
+
+  <div data-foot="" style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+    <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px;">
+      <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">← Back to</span>
+      <span style="font-family:'EB Garamond',serif; font-size:24px; color:#8A5A0B;">Learning Assets</span>
+    </a>
+    <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:flex; flex-direction:column; gap:3px; text-align:right;">
+      <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Asset guidance →</span>
+      <span style="font-family:'EB Garamond',serif; font-size:24px; color:#8A5A0B;">Video</span>
+    </a>
+  </div>
+</div>
+</div>
+<script src="/coursera-design-guide/guide.js"></script>
+</body>
+</html>
