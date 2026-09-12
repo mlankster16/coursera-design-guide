@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specialization — Coursera Design Guide | Duke CTL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/coursera-design-guide/guide.css">
+<style>
+ body { margin:0; background:#EFEDE8; }
+ a { color:#00539B; }
+ a:hover { color:#00539B; }
+ @media screen {
+ [data-print-shell] { overflow:hidden; }
+ }
+ @page { margin: 0.5in; }
+ @media print {
+ html, body { height:auto !important; background:#FFFFFF !important; }
+ body, [data-print-page], [data-print-shell] { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+ [data-print-page] { padding:0 !important; }
+ [data-print-shell] { width:auto !important; max-width:none !important; margin:0 !important; box-shadow:none !important; border-radius:0 !important; overflow:visible !important; }
+ [data-rail] { position:static !important; }
+ h1, h2, h3 { break-after:avoid; }
+ p, li { orphans:2; widows:2; }
+ [data-keep] { break-inside:avoid; }
+ img { max-width:100% !important; }
+ }</style>
+</head>
+<body data-page-config='{"slug":"specialization","accordion":{"toggle":"t","open":"e","label":"l","closed":"Show example","openTxt":"Hide example","count":2},"tips":{"count":14,"on":"#00539B","onFg":"#FFFFFF","off":"#FFFFFF","offFg":"#00447F"}}'>
+<div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
+<div data-print-shell="" style="width:1080px; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:4px;">
+
+ <div data-cap="nav">
+ <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
+ <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
+ </div>
+ <div style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; white-space:nowrap;">Coursera Design Guide</span>
+ <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
+ <a href="/coursera-design-guide/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Overview</a>
+ <span style="color:#012169; font-weight:600; border-bottom:3px solid #00539B; padding-bottom:3px; white-space:nowrap;">Specialization</span>
+ <a href="/coursera-design-guide/course/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Course</a>
+ <a href="/coursera-design-guide/module/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Module</a>
+ <span data-nav-menu="" data-enter="navShow" data-leave="navHide" data-blur="navLeave" style="position:relative; display:inline-block;"><span data-click="navToggle" data-focus="navShow" data-keys="navKeys" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" style="display:inline-block; color:#5A6472; white-space:nowrap; cursor:pointer;" class="g8">Learning Assets <span data-text="navCaret">⌄</span></span>
+ <div data-if="navOpen" hidden>
+ <div style="position:absolute; z-index:60; top:calc(100% + 14px); right:0; width:330px; background:#FFFFFF; border:1px solid #D8DEE7; border-top:4px solid #B4700C; box-shadow:0 12px 34px rgba(1,33,105,.16); padding:6px 0; text-align:left;">
+ <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:block; padding:14px 24px; font-size:17px; font-weight:600; color:#012169; white-space:nowrap;" class="g1">All Learning Assets</a>
+ <a href="/coursera-design-guide/learning-assets/accessibility-copyright-ai/" style="text-decoration:none; display:block; margin:6px 0; padding:13px 24px 13px 21px; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; border-left:3px solid #B4700C; background:#FDF6EC; font-size:16px; font-weight:700; color:#012169; line-height:1.4;" class="g2">Accessibility, Copyright &amp; AI</a>
+ <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Video</a>
+ <a href="/coursera-design-guide/learning-assets/#reading" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Reading</a>
+ <a href="/coursera-design-guide/learning-assets/#plugin" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Interactive Plugin</a>
+ <a href="/coursera-design-guide/learning-assets/#dialogue" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Dialogue</a>
+ <a href="/coursera-design-guide/learning-assets/#roleplay" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Role Play</a>
+ <a href="/coursera-design-guide/learning-assets/#assessment" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Assessments</a>
+ <a href="/coursera-design-guide/learning-assets/#programming" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Programming Assignments</a>
+ <a href="/coursera-design-guide/learning-assets/#labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coursera Labs</a>
+ </div>
+ </div></span> 
+ </div>
+ </div>
+ </div>
+
+ 
+
+ <div data-cap="head" style="padding:72px 56px 60px; display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:start; background:#FBFAF7;">
+ <div>
+ <p style="margin:0 0 20px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#00539B; font-weight:700;">SPECIALIZATION</p>
+ <h1 style="margin:0 0 24px; font-family:'EB Garamond',Garamond,serif; font-weight:500; font-size:50px; line-height:1.1; color:#012169; letter-spacing:-.01em; text-wrap:balance;">Designing a Coursera Specialization</h1>
+ 
+ 
+ <div style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;"><div>When exploring a Specialization, learners are often asking: Is this for me? What will I be able to do? And how will this learning support my goals?</div><div><br></div><div>Use these questions to guide the design. Identify your audience, the goals they are working toward, and what they should know and be able to do by the end of the Specialization. Then shape the sequence of Courses to create a clear path and show how each Course contributes to learners’ progress.</div></div>
+ 
+ </div>
+ <div style="border-left:3px solid #00539B; padding:4px 0 4px 26px; display:flex; flex-direction:column; gap:22px;">
+ <p style="margin:0 0 18px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">A Specialization at a glance</p>
+ <div style="display:flex; flex-direction:column; gap:18px;">
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">3–6 courses</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">the whole program</p>
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">8–48 hours</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">total learner time</p>
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">1+ project per course</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">hands-on, real-world</p>
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">Specialization Certificate</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">on completing every course</p>
+ </div>
+ </div>
+ <p style="margin:24px 0 0; padding:18px 0 0; border-top:1px solid #E4E2DD;">Use this section as a reference during your design meetings. Your Learning Experience Designer will guide you through the relevant questions, and you’ll record your decisions in the template as you work together.</p>
+ </div>
+ </div>
+
+ <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#E4E2DD; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD;">
+ <a href="#step1" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g6"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#00539B;">1</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Define the goal</span></a> 
+ <a href="#step2" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g6"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#00539B;">2</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Shape the journey</span></a> 
+ <a href="#step3" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g6"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#00539B;">3</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Complete the plan</span></a> 
+ </div>
+
+ <div id="step1" style="padding:64px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#00539B; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">1</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 1 of 3</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Define the goal</h2>
+ <p style="margin:0 0 28px; font-size:17px; line-height:1.7; color:#4A5361; max-width:660px; text-wrap:pretty; box-sizing:border-box;">What should learners be able to do by the end of this Specialization?</p>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">A strong Specialization begins with a clear understanding of the learners you hope to serve and what they want to accomplish. Before planning individual Courses, take some time to consider who the experience is for, what goals they are working toward, and what they should be able to do by the end.</p>
+ <p style="margin:0 0 30px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Coursera learners are often looking for learning that feels relevant, useful, and manageable alongside their other responsibilities. As you design, help them see how the Specialization connects to their goals and how the time they invest will support their progress.</p>
+
+ <p style="margin:0 0 16px; font-size:15px; letter-spacing:.01em; color:#6B737F; font-weight:700;">A few ideas to keep in mind</p>
+ <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; margin:0 0 36px;">
+ <div style="border-top:3px solid #00539B; padding:20px 0 0;">
+ <p style="margin:0 0 8px; font-size:17px; font-weight:600; color:#1F2833;">Make the value clear.</p>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">Help learners quickly understand who the Specialization is for, what it will help them accomplish, and why that matters.</p>
+ </div>
+ <div style="border-top:3px solid #00539B; padding:20px 0 0;">
+ <p style="margin:0 0 8px; font-size:17px; font-weight:600; color:#1F2833;">Connect learning to practical goals.</p>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">Focus on skills and knowledge learners can use in a professional, academic, or other real-world context.</p>
+ </div>
+ <div style="border-top:3px solid #00539B; padding:20px 0 0;">
+ <p style="margin:0 0 8px; font-size:17px; font-weight:600; color:#1F2833;">Respect the learner’s time.</p>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">Prioritize what is essential, and design toward a focused, achievable outcome.</p>
+ </div>
+ </div>
+
+ <div data-click="t0" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F2F6FB; border:1px solid #D6E3F0; border-left:4px solid #00539B; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g9">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; white-space:nowrap;">Defining the goal for <b style="font-weight:700;">Data Analytics for Business Decisions</b></p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;"><span data-text="l0">Show example</span></span>
+ </div>
+ <div data-if="e0" hidden>
+ <div data-keep="" style="border:1px solid #D6E3F0; border-top:none; border-radius:0 0 3px 3px; background:#FAFCFE; padding:30px 34px;">
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Suppose you are designing a Specialization on <em style="font-style:italic;">Data Analytics for Business Decisions</em>. It may be tempting to begin with a list of topics or tools to cover. Instead, begin with the learner and a practical need.</p>
+ <p style="margin:0 0 20px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">This Specialization is intended for professionals who use data or make decisions informed by data but may not have formal training in analytics. They want to become more confident asking useful questions, interpreting evidence, and recommending a course of action.</p>
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">That learner need leads to a focused end goal:</p>
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-left:3px solid #00539B; border-radius:3px; padding:20px 24px; margin:0 0 20px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; max-width:730px; box-sizing:border-box;">The goal</p>
+ <p style="margin:0; font-size:17px; font-weight:600; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">By the end of the Specialization, learners will be able to frame a business question, analyze and visualize relevant data, and communicate an evidence-informed recommendation.</p>
+ </div>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">This is more useful than a broad goal such as “understand the fundamentals of data analytics.” It describes what learners will be able to do, connects the learning to a recognizable need, and provides a practical boundary for deciding what belongs in the Specialization.</p>
+ </div>
+
+ </div> </div>
+
+ <div id="step2" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#013F73; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">2</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 2 of 3</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Shape the journey</h2>
+ <p style="margin:0 0 28px; font-size:17px; line-height:1.7; color:#4A5361; max-width:660px; text-wrap:pretty; box-sizing:border-box;">How should the Courses work together to help learners reach that goal?</p>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Courses may introduce, develop, integrate, or apply different skills. Some Specializations work best as a clear progression in which each Course builds on the one before it. Others may include Courses that are more modular and useful on their own.</p>
+ <p style="margin:0 0 28px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">There is no single required structure. What matters is that each Course has a distinct purpose and that the relationship among the Courses is intentional and easy for learners to understand.</p>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 36px;">
+ <div style="background:#F2F6FB; border-left:3px solid #00539B; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700;">You might ask</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">What should each Course contribute to the larger learner journey?</p>
+ </div>
+ <div style="background:#FBFAF7; border-left:3px solid #C9CDD4; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A6472; font-weight:700;">Rather than asking</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#5A6472;">How should I divide my content into three Courses?</p>
+ </div>
+ </div>
+
+ <div data-click="t1" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F2F6FB; border:1px solid #D6E3F0; border-left:4px solid #00539B; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g9">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; white-space:nowrap;">Shaping the journey for <b style="font-weight:700;">Data Analytics for Business Decisions</b></p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;"><span data-text="l1">Show example</span></span>
+ </div>
+ <div data-if="e1" hidden>
+ <div data-keep="" style="border:1px solid #D6E3F0; border-top:none; border-radius:0 0 3px 3px; background:#FAFCFE; padding:30px 34px;">
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Once the overall goal is clear, consider what learners need to accomplish at each stage of the journey.</p>
+ <p style="margin:0 0 24px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Rather than dividing data analytics content into three roughly equal groups of topics, give each Course a distinct role in helping learners move toward the Specialization goal.</p>
+
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:3px; overflow:hidden; margin:0 0 22px;">
+ <div style="display:flex; align-items:center; justify-content:space-between; gap:20px; padding:14px 22px; background:#00539B;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#FFFFFF; white-space:nowrap;">Data Analytics for Business Decisions</span>
+ <span style="font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#FFFFFF; font-weight:700; white-space:nowrap;">Specialization</span>
+ </div>
+ <div style="padding:22px 24px; border-bottom:1px solid #E4E2DD;">
+ <div style="display:flex; align-items:baseline; gap:12px; margin:0 0 8px;">
+ <span style="flex:none; font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">1</span>
+ <p style="margin:0; font-size:19px; font-weight:600; color:#17724A;">Foundations of Data Analytics for Business</p>
+ </div>
+ <p style="margin:0 0 10px; padding-left:32px; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Learners begin by translating a business need into a question that can be investigated with data. They identify the data they need, evaluate its basic quality, and prepare it for analysis.</p>
+ <p style="margin:0; padding-left:32px; font-size:15px; line-height:1.6; color:#5A6472;"><strong style="color:#1F2833; font-weight:600;">Learners leave with:</strong> a focused business question and an analysis-ready dataset.</p>
+ </div>
+ <div style="padding:22px 24px; border-bottom:1px solid #E4E2DD;">
+ <div style="display:flex; align-items:baseline; gap:12px; margin:0 0 8px;">
+ <span style="flex:none; font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">2</span>
+ <p style="margin:0; font-size:19px; font-weight:600; color:#17724A;">Analyzing and Visualizing Business Data</p>
+ </div>
+ <p style="margin:0 0 10px; padding-left:32px; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Learners use appropriate analytical methods to investigate their question. They interpret the results and create visualizations that make important patterns and findings easier to understand.</p>
+ <p style="margin:0; padding-left:32px; font-size:15px; line-height:1.6; color:#5A6472;"><strong style="color:#1F2833; font-weight:600;">Learners leave with:</strong> analytical findings and supporting visualizations.</p>
+ </div>
+ <div style="padding:22px 24px;">
+ <div style="display:flex; align-items:baseline; gap:12px; margin:0 0 8px;">
+ <span style="flex:none; font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">3</span>
+ <p style="margin:0; font-size:19px; font-weight:600; color:#17724A;">Communicating Data-Driven Recommendations</p>
+ </div>
+ <p style="margin:0 0 10px; padding-left:32px; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Learners determine what conclusions the evidence supports, account for limitations or uncertainty, and communicate a recommendation to a relevant audience.</p>
+ <p style="margin:0; padding-left:32px; font-size:15px; line-height:1.6; color:#5A6472;"><strong style="color:#1F2833; font-weight:600;">Learners leave with:</strong> a clear, evidence-informed recommendation.</p>
+ </div>
+ </div>
+
+ <p style="margin:0 0 12px; font-size:17px; line-height:1.7; color:#3A424E;">Together, the Courses create a recognizable progression:</p>
+ <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px;">
+ <span style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:2px; padding:10px 16px; font-size:15px; font-weight:600; color:#012169; white-space:nowrap;">Frame and prepare</span>
+ <span style="font-size:17px; color:#00539B; white-space:nowrap;">→</span>
+ <span style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:2px; padding:10px 16px; font-size:15px; font-weight:600; color:#012169; white-space:nowrap;">Analyze and visualize</span>
+ <span style="font-size:17px; color:#00539B; white-space:nowrap;">→</span>
+ <span style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:2px; padding:10px 16px; font-size:15px; font-weight:600; color:#012169; white-space:nowrap;">Recommend and communicate</span>
+ </div>
+ </div>
+
+ </div> </div>
+ <div id="step3" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1F2833; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">3</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 3 of 3</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Complete your Specialization plan</h2>
+ <p style="margin:0 0 30px; font-size:17px; line-height:1.7; color:#4A5361; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Use this page to work through your design decisions, then record them in your Coursera Specialization Design Document. The sample below shows how those decisions might come together for the example <strong style="font-weight:700;">Specialization: Data Analytics for Business Decisions.</strong> Use it as a reference as you develop your own plan.</p>
+ <div data-keep="" style="background:#F2F6FB; border-left:3px solid #00539B; padding:18px 22px; margin:0 0 28px; max-width:730px; box-sizing:border-box;">
+ 
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E;">Bring draft answers to your next meeting with your Learning Experience Designer. It's okay to leave fields blank if you're unsure, and we'll work through it together.&nbsp;</p></div>
+
+ <div style="border:1px solid #C9CDD4; border-radius:3px;">
+ <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 26px; background:#00539B; border-radius:3px 3px 0 0;">
+ <span style="font-size:15px; font-weight:700; color:#FFFFFF; letter-spacing:.03em; white-space:nowrap;">Specialization Landing Page</span>
+ <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#FFFFFF; font-weight:700; white-space:nowrap;">Complete once</span>
+ </div>
+ <div style="padding:16px 26px; border-bottom:1px solid #E4E2DD; background:#FBFAF7;">
+ <a href="https://www.coursera.org/search?query=duke%20university" target="_blank" rel="noopener" style="font-size:15px; font-weight:600; color:#00539B; text-decoration:none;" class="g4">See a sample Specialization Landing Page ↗ on Coursera</a>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Specialization title</p>
+ <span data-click="gt0" role="button" tabindex="0" aria-label="Guidance for Specialization title" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g0" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Specialization title</p>
+ </div>
+ <span data-click="c0" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Write for the learner deciding whether to click. A strong title makes the <strong style="font-weight:700;color:#1F2833;">topic and value of the Specialization immediately clear</strong>. Favor specific, familiar language over academic or internally meaningful terminology.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">Data Analytics for Business Decisions</p>
+ </div>
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">About this Specialization</p>
+ <span data-click="gt1" role="button" tabindex="0" aria-label="Guidance for About this Specialization" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g1" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">About this Specialization</p>
+ </div>
+ <span data-click="c1" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Lead with what learners will <strong style="font-weight:700;color:#1F2833;">gain or be able to do</strong>, rather than with a list of topics. Help learners quickly understand who the Specialization is for, what they will experience, and why it is worth their time.</p>
+ </div>
+ </div>
+ </div>
+ <div style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">
+ <div style="margin:0; font-size:17px; line-height:1.7; color:#1F2833; max-width:730px; box-sizing:border-box;"><p dir="auto">Designed for professionals, students, and career changers who want to use data more effectively in business settings, this beginner-level Specialization introduces the process of turning business needs into focused questions, analyzing relevant data, and communicating evidence-informed recommendations. Across three courses, learners will frame business questions, identify and prepare data, analyze and visualize findings, and develop recommendations for a business audience. Learners will build skills in business problem framing, data requirements analysis, data cleaning, spreadsheet analysis, exploratory data analysis, data visualization, and data storytelling. Assessments include quizzes, guided practice, applied assignments, and a culminating project using a realistic business scenario and dataset.<!----></p><!----><div class="my-2"></div><!----><!----><p dir="auto">The series is designed for learners who may work with data or make data-informed decisions but do not have formal training in analytics. It offers a practical, end-to-end learning experience focused on the kinds of tasks professionals commonly encounter at work. Learners will leave with a portfolio-ready project, a foundation for further study, and a shareable Coursera certificate.<br><br>Led by Jordan Lee, a faculty member specializing in business analytics and evidence-informed decision-making, the Specialization emphasizes the connection between business context, analytical methods, and clear communication. This is an increasingly important capability as organizations rely on data to guide decisions.</p></div>
+ </div>
+ </div>
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Projects overview</p>
+ <span data-click="gt2" role="button" tabindex="0" aria-label="Guidance for Projects overview" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g2" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Projects overview</p>
+ </div>
+ <span data-click="c2" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Describe what learners will <strong style="font-weight:700;color:#1F2833;">make, analyze, evaluate, or solve</strong>. Projects should reflect realistic situations learners may encounter beyond the course — not simply serve as longer versions of quizzes.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">In the culminating project, learners investigate an authentic business question using a realistic dataset, prepare and analyze the data, create visualizations to communicate key findings, and develop an evidence-informed recommendation for a business audience. The project brings together common workplace tasks such as evaluating customer behavior, monitoring performance, or identifying opportunities for improvement.</p>
+ </div>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:26px 26px; border-right:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Who this is for</p>
+ <span data-click="gt3" role="button" tabindex="0" aria-label="Guidance for Who this is for" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g3" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Who this is for</p>
+ </div>
+ <span data-click="c3" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Describe learners in terms they are likely to recognize: their <strong style="font-weight:700;color:#1F2833;">role, goals, or reasons for learning</strong>. Be specific enough to help the right learners identify themselves, while avoiding requirements that unnecessarily exclude interested learners.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">Professionals who work with data or make decisions informed by data but may not have formal training in analytics; students and career changers seeking a practical introduction to business analytics; and managers or team members who want to communicate more effectively with data professionals.</p>
+ </div>
+ <div style="padding:26px 26px;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Recommended background</p>
+ <span data-click="gt4" role="button" tabindex="0" aria-label="Guidance for Recommended background" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g4" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Recommended background</p>
+ </div>
+ <span data-click="c4" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Include only the knowledge or experience learners <strong style="font-weight:700;color:#1F2833;">actually need to succeed</strong>. Distinguish essential preparation from helpful context so that ideal qualifications do not become unnecessary barriers to enrollment.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">No prior experience in data analytics or programming. Familiarity with basic workplace math is helpful.</p>
+ </div>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">What will you learn</p>
+ <span data-click="gt5" role="button" tabindex="0" aria-label="Guidance for What will you learn" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g5" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">What will you learn</p>
+ </div>
+ <span data-click="c5" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Describe <strong style="font-weight:700;color:#1F2833;">observable capabilities</strong>, not topics learners will encounter or ideas they will “understand.” Begin with an action verb such as <strong style="font-weight:700;color:#1F2833;">evaluate, apply, analyze, design,</strong> or <strong style="font-weight:700;color:#1F2833;">recommend</strong>, and make sure the objectives represent the <strong style="font-weight:700;color:#1F2833;">full Specialization</strong>, not just one course.</p>
+ </div>
+ </div>
+ </div>
+ <div style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">
+ <ol style="margin:0; padding:0 0 0 20px; display:flex; flex-direction:column; gap:8px;">
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">Frame a business question that can be investigated with data.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">Analyze and visualize relevant data to identify meaningful findings.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">Communicate an evidence-informed recommendation to a business audience.</li>
+ </ol>
+ </div>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Skills learners will gain</p>
+ <span data-click="gt6" role="button" tabindex="0" aria-label="Guidance for Skills learners will gain" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g6" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Skills learners will gain</p>
+ </div>
+ <span data-click="c6" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Name <strong style="font-weight:700;color:#1F2833;">specific, recognizable skills learners can demonstrate</strong>, rather than broad subject areas. Choose terms learners might use to describe their capabilities on a résumé, on LinkedIn, or in a conversation with an employer.</p>
+ </div>
+ </div>
+ </div>
+ <div style="display:flex; flex-wrap:wrap; gap:8px;">
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Data Cleaning</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Exploratory Data Analysis</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Data Visualization</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Spreadsheet Analysis</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Business Intelligence</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Data Storytelling</span>
+ <span style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:7px 13px; font-size:15px; color:#1F2833;">Evidence-Based Decision-Making</span>
+ </div>
+ </div>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:26px 26px; border-right:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Estimated total learning time</p>
+ <span data-click="gt7" role="button" tabindex="0" aria-label="Guidance for Estimated total learning time" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g7" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Estimated total learning time</p>
+ </div>
+ <span data-click="c7" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Estimate the learner's <strong style="font-weight:700;color:#1F2833;">total experience</strong>, not just the length of the instructional content. Include time for watching, reading, practicing, completing projects, and taking assessments. Account for the reality that Coursera learners often study in shorter sessions around other responsibilities.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">Approximately 24 hours</p>
+ </div>
+ <div style="padding:26px 26px;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Difficulty level</p>
+ <span data-click="gt8" role="button" tabindex="0" aria-label="Guidance for Difficulty level" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g8" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Difficulty level</p>
+ </div>
+ <span data-click="c8" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Choose the level based on the <strong style="font-weight:700;color:#1F2833;">knowledge, skills, and independence required of the learner</strong>, not on the sophistication of the subject itself. A complex topic can still be appropriate for beginners when concepts are introduced from the ground up.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">Beginner</p>
+ </div>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F; white-space:nowrap;">Tools, technology, or platforms</p>
+ <span data-click="gt9" role="button" tabindex="0" aria-label="Guidance for Tools, technology, or platforms" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g9" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Tools, technology, or platforms</p>
+ </div>
+ <span data-click="c9" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Identify anything learners need to <strong style="font-weight:700;color:#1F2833;">access or use to complete the learning experience</strong>, including external tools, software, accounts, or platforms. Make requirements visible early, and flag any paid licenses or institutional access requirements.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">A web browser and spreadsheet software. All datasets and practice materials are provided.</p>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <p style="margin:0 0 12px; font-size:15px; font-weight:700; color:#00447F;">Courses in this Specialization</p>
+ <div style="border:1px solid #D8DEE7; border-radius:2px;">
+ <div style="display:grid; grid-template-columns:40px 1.3fr 1.5fr 110px; background:#F2F6FB; border-bottom:1px solid #D6E3F0; border-radius:2px 2px 0 0;">
+ <div style="padding:12px 12px; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#00447F; font-weight:700;">#</div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #D6E3F0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Course title</span>
+ <span data-click="gt11" role="button" tabindex="0" aria-label="Guidance for Course title" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g11" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Course title</p>
+ </div>
+ <span data-click="c11" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Give each course a <strong style="font-weight:700;color:#1F2833;">distinct purpose within the larger learner journey</strong>. Learners should be able to see how their capabilities will develop from one course to the next.</p>
+ </div>
+ </div>
+ </div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #D6E3F0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Main outcomes</span>
+ <span data-click="gt12" role="button" tabindex="0" aria-label="Guidance for Main outcomes" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g12" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Main outcomes</p>
+ </div>
+ <span data-click="c12" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Give each course an outcome that is <strong style="font-weight:700;color:#1F2833;">meaningful on its own while contributing to the larger Specialization outcome</strong>. Organize courses around meaningful stages of the work learners will do, rather than dividing them simply by topic or amount of content.</p>
+ </div>
+ </div>
+ </div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #D6E3F0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Est. time</span>
+ <span data-click="gt13" role="button" tabindex="0" aria-label="Guidance for Est. time" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g13" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); right:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Est. time</p>
+ </div>
+ <span data-click="c13" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Aim for a <strong style="font-weight:700;color:#1F2833;">reasonable and relatively balanced learner experience across courses</strong>, while allowing the work itself to determine the exact length. Include all learning activities (i.e., video, readings, activities, and assessments) in this estimate.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1.3fr 1.5fr 110px; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#6B737F;">1</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#012169; border-left:1px solid #E4E2DD;">Foundations of Data Analytics for Business</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">A focused business question and an analysis-ready dataset</div>
+ <div style="padding:14px 12px; font-size:15px; color:#3A424E; border-left:1px solid #E4E2DD;">7 hours</div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1.3fr 1.5fr 110px; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#6B737F;">2</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#012169; border-left:1px solid #E4E2DD;">Analyzing and Visualizing Business Data</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Analytical findings and supporting visualizations</div>
+ <div style="padding:14px 12px; font-size:15px; color:#3A424E; border-left:1px solid #E4E2DD;">9 hours</div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1.3fr 1.5fr 110px;">
+ <div style="padding:14px 12px; font-size:15px; color:#6B737F;">3</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#012169; border-left:1px solid #E4E2DD;">Communicating Data-Driven Recommendations</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">A clear, evidence-informed recommendation</div>
+ <div style="padding:14px 12px; font-size:15px; color:#3A424E; border-left:1px solid #E4E2DD;">8 hours</div>
+ </div>
+ </div>
+ </div>
+
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#00447F;">Specialization project or culminating experience (optional)</p>
+ <span data-click="gt10" role="button" tabindex="0" aria-label="Guidance for Specialization project or culminating experience (optional)" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #D6E3F0; background:#FFFFFF; color:#00447F; cursor:pointer;" class="g10"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g10" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #D6E3F0; border-top:3px solid #00539B; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Specialization project or culminating experience (optional)</p>
+ </div>
+ <span data-click="c10" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Use a culminating experience to help learners <strong style="font-weight:700;color:#1F2833;">integrate skills from across the Specialization</strong>, rather than simply repeat an assignment from the final course. Give learners a realistic problem, decision, product, or scenario that requires them to draw on multiple capabilities.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F2F6FB; border:1px solid #D6E3F0; border-radius:2px; padding:14px 18px;">Learners investigate a business question using a provided dataset, clean and analyze the data, create visualizations to communicate key findings, and develop an evidence-informed recommendation for a business audience.</p>
+ </div>
+
+ <div data-keep="" style="background:#F2F6FB; border-top:1px solid #D6E3F0; padding:24px 26px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#00447F; font-weight:700;">Your templates</p>
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Your Learning Experience Designer will share your template(s) ahead of your first design meeting. That may be a Specialization Template or a Course Template on its own. The examples below are view-only, so you can see how each page of this guide maps onto the document.</p>
+ <div style="display:flex; flex-wrap:wrap; gap:12px;">
+ <a href="https://docs.google.com/document/d/1qsH5U9GwQzpmc12p7Rx9avnceBAEWQWel7NsS-s16C0/edit?usp=sharing" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #00539B; color:#00447F; background:#FFFFFF; font-size:15px; font-weight:600; padding:11px 20px; border-radius:3px; text-decoration:none; white-space:nowrap;" class="g6">See sample Specialization Template ↗</a>
+ 
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+ <a href="/coursera-design-guide/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">← Back</span>
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#012169; white-space:nowrap;">Overview</span></a> 
+ <a href="/coursera-design-guide/course/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px; text-align:right;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Zoom in →</span>
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A; white-space:nowrap;">Course</span></a> 
+ </div>
+</div>
+</div>
+<script src="/coursera-design-guide/guide.js"></script>
+</body>
+</html>

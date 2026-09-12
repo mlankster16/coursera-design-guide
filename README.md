@@ -19,16 +19,57 @@ path, which matches how GitHub Pages serves the site.
 
 ## Pages
 
-| Page | Route | File |
+The five main pages are **Design's static build, copied verbatim** — not
+rebuilt. They are checked in under `public/` and served as-is.
+
+| Page | Route | Source |
 |---|---|---|
-| Overview | `/` | `src/pages/index.astro` |
-| Specialization | `/specialization` | `src/pages/specialization.astro` |
-| Course | `/course` | `src/pages/course.astro` |
-| Module | `/module` | `src/pages/module.astro` |
-| Learning Assets | `/learning-assets` | `src/pages/learning-assets/index.astro` |
+| Overview | `/` | `public/index.html` (Design) |
+| Specialization | `/specialization` | `public/specialization/index.html` (Design) |
+| Course | `/course` | `public/course/index.html` (Design) |
+| Module | `/module` | `public/module/index.html` (Design) |
+| Learning Assets | `/learning-assets` | `public/learning-assets/index.html` (Design) |
 | Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `src/pages/learning-assets/accessibility-copyright-ai.astro` |
 | Video | `/learning-assets/video` | `src/pages/learning-assets/video.astro` |
 | Reading | `/learning-assets/reading` | `src/pages/learning-assets/reading.astro` |
+
+### Why the five pages are copied, not rebuilt
+
+Porting them into Astro produced four rounds of near-misses. Three whole
+categories of formatting were invisible in the old `.dc.html` design source
+and could not be recovered by reading the markup:
+
+- **hover and focus states** were `style-hover` attributes, inert outside
+  Design's runtime — 180 of them;
+- **type rendering** (`font-smoothing`, `text-rendering`,
+  `font-synthesis-weight`) lived in a `<helmet>` block, and without it Open
+  Sans at 17px picks up weight so the page reads softer than the design even
+  when every value matches;
+- **emphasis markup** had accumulated damage from in-place editing — stacks
+  like `<em><span style="font-style:normal"><b>…` that Design's tool renders
+  bold and any other processor renders italic.
+
+Design now ships finished HTML plus `guide.css` and `guide.js`. Copying it
+removes that entire class of bug. **Do not "port" these pages, and do not
+merge `guide.css` into the global stylesheet or strip its `!important`
+flags** — every element carries its own inline style, so unflagged rules lose.
+
+### Updating from a new Design package
+
+```bash
+node scripts/deploy-design-build.mjs /path/to/build
+npm run build
+```
+
+The script copies the files byte-for-byte and does only two things they
+cannot do for themselves: resolves the `href="#"` nav placeholders into real
+routes, and re-applies the short list of CTL decisions that post-date the
+design. That list lives at the top of the script — keep it short, and keep
+the reason attached to each one. Anything else that looks wrong on the live
+site should be fixed in Design and re-exported, not patched here.
+
+The previous Astro implementations are kept in `src/_superseded/` for
+reference. Astro ignores that directory, so they do not build.
 
 ## Where things live
 

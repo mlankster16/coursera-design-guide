@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module — Coursera Design Guide | Duke CTL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/coursera-design-guide/guide.css">
+<style>
+ body { margin:0; background:#EFEDE8; }
+ a { color:#00539B; }
+ a:hover { color:#6B4E9E; }
+ @media screen {
+ [data-print-shell] { overflow:hidden; }
+ }
+ @page { margin: 0.5in; }
+ @media print {
+ html, body { height:auto !important; background:#FFFFFF !important; }
+ body, [data-print-page], [data-print-shell] { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+ [data-print-page] { padding:0 !important; }
+ [data-print-shell] { width:auto !important; max-width:none !important; margin:0 !important; box-shadow:none !important; border-radius:0 !important; overflow:visible !important; }
+ [data-rail] { position:static !important; }
+ h1, h2, h3 { break-after:avoid; }
+ p, li { orphans:2; widows:2; }
+ [data-keep] { break-inside:avoid; }
+ img { max-width:100% !important; }
+ }</style>
+</head>
+<body data-page-config='{"slug":"module","accordion":{"toggle":"x","open":"xo","label":"xl","closed":"Show example","openTxt":"Hide example","count":4},"tips":{"count":13,"on":"#6B4E9E","onFg":"#FFFFFF","off":"#FFFFFF","offFg":"#5A3F87","goldFrom":7,"goldOn":"#8A5A0B","goldOffFg":"#8A5A0B"}}'>
+<div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
+<div data-print-shell="" style="width:1080px; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:4px;">
+
+ <div data-cap="nav">
+ <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
+ <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
+ </div>
+ <div style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; white-space:nowrap;">Coursera Design Guide</span>
+ <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
+ <a href="/coursera-design-guide/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Overview</a>
+ <a href="/coursera-design-guide/specialization/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Specialization</a>
+ <a href="/coursera-design-guide/course/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Course</a>
+ <span style="color:#012169; font-weight:600; border-bottom:3px solid #6B4E9E; padding-bottom:3px; white-space:nowrap;">Module</span>
+ <span data-nav-menu="" data-enter="navShow" data-leave="navHide" data-blur="navLeave" style="position:relative; display:inline-block;"><span data-click="navToggle" data-focus="navShow" data-keys="navKeys" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" style="display:inline-block; color:#5A6472; white-space:nowrap; cursor:pointer;" class="g8">Learning Assets <span data-text="navCaret">⌄</span></span>
+ <div data-if="navOpen" hidden>
+ <div style="position:absolute; z-index:60; top:calc(100% + 14px); right:0; width:330px; background:#FFFFFF; border:1px solid #D8DEE7; border-top:4px solid #B4700C; box-shadow:0 12px 34px rgba(1,33,105,.16); padding:6px 0; text-align:left;">
+ <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:block; padding:14px 24px; font-size:17px; font-weight:600; color:#012169; white-space:nowrap;" class="g1">All Learning Assets</a>
+ <a href="/coursera-design-guide/learning-assets/accessibility-copyright-ai/" style="text-decoration:none; display:block; margin:6px 0; padding:13px 24px 13px 21px; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; border-left:3px solid #B4700C; background:#FDF6EC; font-size:16px; font-weight:700; color:#012169; line-height:1.4;" class="g2">Accessibility, Copyright &amp; AI</a>
+ <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Video</a>
+ <a href="/coursera-design-guide/learning-assets/#reading" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Reading</a>
+ <a href="/coursera-design-guide/learning-assets/#plugin" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Interactive Plugin</a>
+ <a href="/coursera-design-guide/learning-assets/#dialogue" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Dialogue</a>
+ <a href="/coursera-design-guide/learning-assets/#roleplay" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Role Play</a>
+ <a href="/coursera-design-guide/learning-assets/#assessment" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Assessments</a>
+ <a href="/coursera-design-guide/learning-assets/#programming" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Programming Assignments</a>
+ <a href="/coursera-design-guide/learning-assets/#labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coursera Labs</a>
+ </div>
+ </div></span> 
+ </div>
+ </div>
+ </div>
+
+ 
+
+ <div data-cap="head" style="padding:64px 56px 56px; display:grid; grid-template-columns:1.2fr .8fr; gap:60px; align-items:start; background:#FBFAF7;">
+ <div>
+ <p style="margin:0 0 18px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B4E9E; font-weight:700;">MODULE</p>
+ <h1 style="margin:0 0 24px; font-family:'EB Garamond',Garamond,serif; font-weight:500; font-size:50px; line-height:1.1; color:#012169; letter-spacing:-.01em; text-wrap:balance;">Designing a Coursera Module</h1>
+ 
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;">A well-designed Module develops a focused part of the knowledge or skill learners need to achieve a Course-level objective. Define what learners should know or be able to do by the end of the Module, then plan the instruction, practice, feedback, and assessment that will help them get there.</p>
+ <div style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;"></div>
+ </div>
+ <div style="border-left:3px solid #6B4E9E; padding:4px 0 4px 26px;">
+ <p style="margin:0 0 20px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">A Module at a glance</p>
+ <div style="display:flex; flex-direction:column; gap:18px;">
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">1–3 learning objectives</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">per Module</p>
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">~30 minutes minimum</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">of learner time</p>
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">~10 Learning Assets</p>
+ 
+ </div>
+ <div>
+ <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">1 graded assessment</p>
+ <p style="margin:0; font-size:15px; color:#5A6472;">required per Module</p>
+ </div>
+ </div>
+ <p style="margin:24px 0 0; padding:18px 0 0; border-top:1px solid #E4E2DD;">Use this section as a reference during your design meetings. Your Learning Experience Designer will guide you through the relevant questions, and you’ll record your decisions in the template as you work together.</p>
+ </div>
+ </div>
+
+ <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:#E4E2DD; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD;">
+ <a href="#step1" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g14"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">1</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Write objectives</span></a> 
+ <a href="#step2" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g14"><span style="font-family: &quot;EB Garamond&quot;, serif; font-size:22px; color: rgb(107, 78, 158);">2</span>
+ <span style="font-size:15px; font-weight: 600; color: rgb(31, 40, 51);">Plan backward</span></a> 
+ <a href="#step3" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g14"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">3</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Design learning path</span></a> 
+ <a href="#step4" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g14"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">4</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Choose assets</span></a> 
+ <a href="#step5" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g14"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">5</span>
+ <span style="font-size:15px; font-weight:600; color:#1F2833;">Complete the plan</span></a> 
+ </div>
+
+ <div id="step1" style="padding:64px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#6B4E9E; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center;">1</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 1 of 5</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Write the Module objectives</h2>
+ <p style="margin:0 0 24px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Course objectives describe the larger skills learners should develop by the end of the Course. Module objectives break those skills into smaller, achievable steps.</p>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 28px;">
+ <div style="background:#F6F3FA; border-left:3px solid #6B4E9E; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700;">You might ask</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">Which part of a larger Course objective will this Module help learners develop?</p>
+ </div>
+ <div style="background:#FBFAF7; border-left:3px solid #C9CDD4; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A6472; font-weight:700;">Rather than asking</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#5A6472;">What topic should this Module cover?</p>
+ </div>
+ </div>
+
+ <p style="margin:0 0 36px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">A Module might introduce a concept, guide learners through a process, make an expert's reasoning visible, or give learners an opportunity to apply a skill. Write 1–3 objectives that describe what learners will be able to demonstrate by the end.</p>
+
+ <div data-click="x0" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F6F3FA; border:1px solid #E3DBF0; border-left:4px solid #6B4E9E; border-radius:3px; padding:18px 24px; cursor:pointer; width:100%; box-sizing:border-box;" class="g15">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin: 0; font-family: 'EB Garamond',serif; font-size:22px; color: #012169; font-weight: 700"><span style="font-weight: normal;">Writing Module objectives for</span> Identifying and Evaluating Business Data</p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;"><span data-text="xl0">Show example</span></span>
+ </div>
+ <div data-if="xo0" hidden>
+ <div style="border:1px solid #E3DBF0; border-top:none; border-radius:0 0 3px 3px; background:#FBFAFD; padding:30px 34px; margin:0 0 36px;">
+ <div style="display:flex; flex-direction:column; gap:12px; margin:0 0 28px; max-width:730px;">
+ <div style="display:flex; align-items:baseline; gap:14px;">
+ <span style="flex:none; width: 148px; font-size:14px; line-height:1.45; letter-spacing:.14em; text-transform:uppercase; color:#00539B; font-weight:700;; text-align: right">Specialization</span>
+ <span style="flex:1; min-width:0; font-size:17px; line-height:1.45; font-weight:600; color:#1F2833;">Data Analytics for Business Decisions</span>
+ </div>
+ <div style="display:flex; align-items:baseline; gap:14px; padding-left:18px;">
+ <span style="flex: none; width: 130px; font-size:14px; line-height: 1.45; letter-spacing: .14em; text-transform: uppercase; color: #17724A; font-weight: 700; text-align: right">Course 1</span>
+ <span style="flex:1; min-width:0; font-size:17px; line-height:1.45; font-weight:600; color:#1F2833;">Foundations of Data Analytics for Business</span>
+ </div>
+ <div style="display:flex; align-items:baseline; gap:14px; padding-left:36px;">
+ <span style="flex: none; width: 112px; font-size:14px; line-height: 1.45; letter-spacing: .14em; text-transform: uppercase; color: #6B4E9E; font-weight: 700; text-align: right">Module 1</span>
+ <span style="flex:1; min-width:0; font-size:17px; line-height:1.45; font-weight:600; color:#012169;">Identifying and Evaluating Business Data</span>
+ </div>
+ </div>
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">In <strong style="font-weight:700;">Foundations of Data Analytics for Business</strong>, one Course objective is:</p>
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-left:3px solid #17724A; border-radius:3px; padding:20px 24px; margin:0 0 24px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#17724A; font-weight:700; max-width:730px; box-sizing:border-box;">Course objective</p>
+ <p style="margin: 0; font-family: Open Sans; font-size:17px; line-height: 1.5; color: #1F2833; max-width: 730px; box-sizing: border-box">By the end of this Course, learners will be able to determine whether available data is relevant, complete, and suitable for addressing a business question.</p>
+ </div>
+ <p style="margin:0 0 20px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">The Module develops this larger capability through three focused objectives:</p>
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-left:3px solid #6B4E9E; border-radius:3px; padding:20px 24px; margin:0 0 24px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; max-width:730px; box-sizing:border-box;">Module objectives</p>
+ <p style="margin: 0 0 14px; font-family: Open Sans; font-size:17px; line-height: 1.5; color: #1F2833; max-width: 730px; box-sizing: border-box">By the end of this Module, learners will be able to:</p>
+ <ul style="margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
+ <li style="font-size:17px; line-height: 1.6; color: #1F2833; padding-left: 16px; position: relative; max-width: 730px; box-sizing: border-box"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Identify the data needed to investigate a business question.</li>
+ <li style="font-size:17px; line-height: 1.6; color: #1F2833; padding-left: 16px; position: relative; max-width: 730px; box-sizing: border-box"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Evaluate an available dataset for relevance, completeness, and basic quality concerns.</li>
+ <li style="font-size:17px; line-height: 1.6; color: #1F2833; padding-left: 16px; position: relative; max-width: 730px; box-sizing: border-box"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Document limitations that could affect the proposed analysis.</li>
+ </ul>
+ </div>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">These objectives give the Module a clear destination. Learners are not simply being introduced to “data quality.” They are learning to make and explain a practical judgment about whether data is fit for a particular purpose.</p>
+ </div>
+ </div>
+
+ 
+ </div>
+
+ <div id="step2" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#5A3F87; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center;">2</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 2 of 5</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Plan backward from the learning task</h2>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Once the Module objectives are clear, design the Module around how learners will show what they have learned.</p>
+ <p style="margin:0 0 28px; font-size:17px; line-height:1.7; font-weight:600; color:#1F2833; max-width:660px; text-wrap:pretty; box-sizing:border-box;">What will learners do to show what they’ve learned?</p>
+ <p style="margin:0 0 36px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Start with the task learners should be able to complete by the end of the Module. Then work backward to identify what they already know, what they still need to learn, and what practice and feedback will help them succeed.</p>
+
+ 
+ <p style="margin:0 0 20px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; box-sizing:border-box;">Use these questions to clarify the learning path:</p>
+
+ <div style="display:flex; flex-direction:column; border-top:1px solid #E4E2DD; margin:0 0 36px;">
+ <div style="display:grid; grid-template-columns:30px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">1</span>
+ <div style="min-width:0;">
+ <p style="margin:0 0 5px; font-size:17px; font-weight:700; color:#012169;">The final task</p>
+ <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">What will learners do, create, analyze, evaluate, or decide to show that they have achieved the Module objectives?</p>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:30px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">2</span>
+ <div style="min-width:0;">
+ <p style="margin:0 0 5px; font-size:17px; font-weight:700; color:#012169;">What a successful response looks like</p>
+ <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">What should learners include, do, or decide to complete the task successfully? How will the activity help learners recognize whether they have met the expectations?</p>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:30px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">3</span>
+ <div style="min-width:0;">
+ <p style="margin:0 0 5px; font-size:17px; font-weight:700; color:#012169;">What learners already know</p>
+ <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">What should learners already know or be able to do before they begin?</p>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:30px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">4</span>
+ <div style="min-width:0;">
+ <p style="margin:0 0 5px; font-size:17px; font-weight:700; color:#012169;">What learners still need to learn</p>
+ <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">What new knowledge, steps, or decision-making skills do learners need to develop? Where might they become confused or make mistakes?</p>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:30px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">5</span>
+ <div style="min-width:0;">
+ <p style="margin:0 0 5px; font-size:17px; font-weight:700; color:#012169;">How learners will know they are on track</p>
+ <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">What feedback, answer explanation, model, checklist, or other support will help learners judge their own work?</p>
+ </div>
+ </div>
+ </div>
+
+ <div data-click="x3" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F6F3FA; border:1px solid #E3DBF0; border-left:4px solid #6B4E9E; border-radius:3px; padding:18px 24px; cursor:pointer; width:100%; box-sizing:border-box;" class="g15">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; ">Turning Module objectives into a learning task</p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;"><span data-text="xl3">Show example</span></span>
+ </div>
+ <div data-if="xo3" hidden>
+ <div data-keep="" style="border:1px solid #E3DBF0; border-top:none; border-radius:0 0 3px 3px; background:#FBFAFD; padding:30px 34px;">
+ <p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">In <strong style="font-weight:700;">Identifying and Evaluating Business Data</strong>, learners are working toward three Module objectives:</p>
+ <ul style="margin:0 0 22px; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px;">
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:16px; position:relative; max-width:730px; box-sizing:border-box;"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Identify the data needed to investigate a business question.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:16px; position:relative; max-width:730px; box-sizing:border-box;"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Evaluate an available dataset for relevance, completeness, and basic quality concerns.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:16px; position:relative; max-width:730px; box-sizing:border-box;"><span style="position:absolute; left:0; top:0; color:#6B4E9E;">·</span>Document limitations that could affect the proposed analysis.</li>
+ </ul>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box; text-wrap:pretty;">To plan the final task, consider what learners would need to do to provide evidence of each objective:</p>
+
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:3px; margin:0 0 22px;">
+ <div style="display:grid; grid-template-columns:260px minmax(0,1fr); background:#F1F4F8; border-bottom:1px solid #D8DEE7; border-radius:3px 3px 0 0;">
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700;">Module objective</div>
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Evidence of learning</div>
+ </div>
+ <div style="display:grid; grid-template-columns:260px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">Identify the data needed</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Specify the variables, records, time period, and level of detail needed to investigate a business question</div>
+ </div>
+ <div style="display:grid; grid-template-columns:260px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">Evaluate an available dataset</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Compare the available data with those requirements and identify concerns</div>
+ </div>
+ <div style="display:grid; grid-template-columns:260px minmax(0,1fr);">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">Document limitations</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Explain how missing, incomplete, or poor-quality data could affect the proposed analysis</div>
+ </div>
+ </div>
+
+ <p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box; text-wrap:pretty;">These actions can be brought together in one meaningful task. Learners could receive a business question and an unfamiliar dataset, inspect the data in relation to the question, and document whether the dataset is fit for the proposed analysis.</p>
+ <p style="margin:0 0 20px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">For this Module, we will call that task a <strong style="font-weight:700;color:#1F2833;">Data Fitness Review</strong>.</p>
+
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-left:3px solid #6B4E9E; border-radius:3px; padding:20px 24px; margin:0 0 24px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">The final task</p>
+ <p style="margin: 0; font-family: Open Sans; font-size:17px; line-height: 1.5; color: #1F2833; max-width: 730px; box-sizing: border-box">Complete a Data Fitness Review that evaluates whether an available dataset is suitable for addressing a business question and documents concerns that could affect the proposed analysis.</p>
+ </div>
+
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;">Now work backward from that task:</p>
+
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:3px; margin:0 0 22px;">
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr); background:#F1F4F8; border-bottom:1px solid #D8DEE7; border-radius:3px 3px 0 0;">
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700;">Planning question</div>
+ <div style="padding:14px 20px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Decision for this Module</div>
+ </div>
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">What does a successful response look like?</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">The review identifies the data the question requires, evaluates the dataset’s relevance and completeness, notes basic quality concerns, and explains how any limitations could affect the analysis.</div>
+ </div>
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">What do learners already know?</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Learners can recognize common parts of a dataset, including records, fields, and values.</div>
+ </div>
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">What do learners still need to learn?</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">They need criteria for evaluating data in relation to a particular question and practice explaining why a limitation matters.</div>
+ </div>
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">Where might they struggle?</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Learners may focus on whether the data appears clean without noticing that essential variables, time periods, or levels of detail are missing.</div>
+ </div>
+ <div style="display:grid; grid-template-columns:300px minmax(0,1fr);">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:700; color:#012169;">How will they know they are on track?</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">A worked example, data-quality checklist, guiding questions, and explanatory feedback will help them compare their reasoning with the evaluation criteria.</div>
+ </div>
+ </div>
+
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box; text-wrap:pretty;">These decisions establish what the Module must prepare learners to do. The next step is to arrange the necessary explanation, modeling, practice, and feedback into a coherent learning path.</p>
+ </div>
+ </div>
+
+ <div id="step3" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#493274; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center;">3</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 3 of 5</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Design the learning path</h2>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Modules do not need to follow one fixed structure. Some topics require more explanation, while others benefit from repeated practice, multiple examples, or opportunities to make and correct mistakes.</p>
+ <p style="margin:0 0 24px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Many effective Modules include some version of this learning arc:</p>
+
+ <div style="display:flex; flex-direction:column; border-top:1px solid #E4E2DD; margin:0 0 24px;">
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">1</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Frame</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Introduce what learners will do, why it matters, and how it connects to the Module objectives.</span>
+ </div>
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">2</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Explain</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Introduce the essential concepts, process, or framework learners will need.</span>
+ </div>
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">3</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Model</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Show how an expert approaches the task, applies the process, or makes decisions. Think aloud where helpful.</span>
+ </div>
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">4</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Practice</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Give learners an opportunity to try part or all of the task with appropriate guidance.</span>
+ </div>
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">5</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Give feedback</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Help learners recognize what is working, correct misunderstandings, and decide what to try next. Feedback may include automated responses, answer explanations, worked examples, checklists, or prompts for self-review.</span>
+ </div>
+ <div style="display:grid; grid-template-columns:30px 172px minmax(0,1fr); gap:18px; align-items:baseline; padding:20px 0; border-bottom:1px solid #E4E2DD;">
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#6B4E9E;">6</span>
+ <span style="font-size:17px; font-weight:700; color:#012169;">Apply or assess</span>
+ <span style="font-size:17px; line-height:1.65; color:#3A424E; max-width:730px; box-sizing:border-box;">Ask learners to use what they have learned in a meaningful context. This may be an auto-graded assessment or an ungraded activity with clear guidance for self-checking.</span>
+ </div>
+ </div>
+ <p style="margin:0; font-size:17px; line-height:1.7; color:#4A5361; max-width:730px; text-wrap:pretty; box-sizing:border-box;">These stages may repeat or overlap. For example, learners may move through explanation, modeling, practice, and feedback several times before completing the final task.</p>
+ <div data-click="x1" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F6F3FA; border:1px solid #E3DBF0; border-left:4px solid #6B4E9E; border-radius:3px; padding:18px 24px; cursor:pointer; width:100%; box-sizing:border-box; margin:32px 0 0;" class="g15">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; ">Mapping and supporting the learning path</p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;"><span data-text="xl1">Show example</span></span>
+ </div>
+ <div data-if="xo1" hidden>
+ <div data-keep="" style="border:1px solid #E3DBF0; border-top:none; border-radius:0 0 3px 3px; background:#FBFAFD; padding:30px 34px;">
+ 
+ <div style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box;"><p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">The backward-planning process established that learners will complete a <strong style="font-weight:700;">Data Fitness Review</strong>. To succeed, they will need to identify the data a business question requires, evaluate an available dataset against those requirements, and explain how its limitations could affect an analysis.</p><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">The learning path prepares learners for each part of that task:</p></div>
+ 
+ 
+
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:3px; overflow:hidden;">
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; gap:0; background:#F1F4F8; border-bottom:1px solid #D8DEE7;">
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700;">Stage</div>
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Learner experience</div>
+ <div style="padding:14px 20px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Role in the learning path</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Frame</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Encounter a scenario in which a team has customer data but is unsure whether it can answer a particular business question</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Establishes why the quality and usefulness of data must be judged in relation to its intended purpose</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Explain</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Learn how relevance, completeness, level of detail, and basic quality affect whether data can support an analysis</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Introduces the criteria learners will use in the Data Fitness Review</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Model</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Watch an expert identify what data a question requires, inspect a sample dataset, and explain their judgment aloud</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Makes the reasoning and documentation process visible</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Practice</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Use the criteria and a checklist to inspect a second dataset and draft a supported conclusion</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Lets learners try the major parts of the final task with guidance</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Give feedback</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Compare their observations with an annotated response and review explanations of concerns they may have missed</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Helps learners check their reasoning, correct misunderstandings, and recognize what a complete evaluation includes</div>
+ </div>
+ <div style="display:grid; grid-template-columns:150px 1fr 1fr;">
+ <div style="padding:18px 20px; font-size:17px; font-weight:700; color:#012169;">Apply or assess</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Complete a Data Fitness Review for a new business question and dataset</div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">Asks learners to demonstrate the Module objectives independently</div>
+ </div>
+ </div>
+
+ <div style="margin:24px 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; box-sizing:border-box; text-wrap:pretty;"><div>Each stage prepares learners for something the final task requires. The explanation introduces the evaluation criteria, the model shows how to apply and document them, the practice lets learners try the process with support, and the feedback helps them refine their judgment before working independently.</div><div><br></div><div>The path may still move among explanation, modeling, practice, and feedback more than once. What matters is that learners receive the preparation they need before being asked to complete the Data Fitness Review on their own.</div></div>
+ 
+ </div>
+ </div>
+
+ </div>
+
+ <div id="step4" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#3A2760; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center;">4</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 4 of 5</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Choose Learning Assets intentionally</h2>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">After mapping the learning path, consider what learners may need at each stage. Then choose the Coursera Learning Asset that best supports that part of the experience.</p>
+ <p style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Begin with the learner’s experience rather than the format. A worked example, for instance, is an instructional strategy that might be delivered through a video or a reading. Practice might take place through an ungraded assessment, Coach Role Play, a programming assignment, an interactive plugin, or a Coursera Lab.</p>
+ <p style="margin:0 0 36px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">The same asset can serve different purposes. A video might explain a concept, demonstrate a process, or make expert reasoning visible. What matters is how the asset helps learners progress toward the Module objectives.</p>
+
+ <h3 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:26px; color:#012169;">Learning Assets available in Coursera</h3>
+ <div data-keep="" style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden; margin:0 0 26px;">
+ <div style="display:grid; grid-template-columns:230px 1fr; background:#F1F4F8; border-bottom:1px solid #D8DEE7;">
+ <div style="padding:14px 22px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700;">Coursera asset</div>
+ <div style="padding:14px 22px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Especially useful when learners need to…</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; padding:18px 22px; display:flex; align-items:center; gap:8px; font-size:17px; font-weight:700; color:#012169;">Video
+ <span data-click="gt11" role="button" tabindex="0" aria-label="Guidance for Video" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #F0DCC0; background:#FFFFFF; color:#8A5A0B; cursor:pointer;" class="g16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g11" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #F0DCC0; border-top:3px solid #B4700C; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left; font-weight:400;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Before you plan</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Video</p>
+ </div>
+ <span data-click="c11" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Video can take several forms, and the form affects what learners see and how the video is produced. <a href="https://ctl.duke.edu/video-examples/" target="_blank" rel="noopener">Review the video examples gallery ↗</a> and note anything you would like to discuss with your CTL team.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Most Coursera videos are planned as in-studio green screen recordings, and self-recording is always an option. Other recording types, such as on-location video or recordings that need special equipment, are usually discussed earlier in project scoping so that budget and timeline can accommodate them.</p>
+ </div>
+ </div>
+ </div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Hear a focused explanation, see a process demonstrated, or observe expert reasoning</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Reading</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Study detailed information, review a framework, examine graphics or code, or return to a reference while completing a task</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Interactive Plugin</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Manipulate information, explore a model, use an external tool, or see how choices affect an outcome</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Coach Dialogue</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Explain their reasoning, reflect, make decisions, or receive personalized guidance through an AI-supported conversation</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Coach Role Play</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Practice interpersonal or job-related skills through a realistic interaction with an AI persona</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; padding:18px 22px; display:flex; align-items:center; gap:8px; font-size:17px; font-weight:700; color:#012169;">Assessments
+ <span data-click="gt12" role="button" tabindex="0" aria-label="Guidance for Assessments" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #F0DCC0; background:#FFFFFF; color:#8A5A0B; cursor:pointer;" class="g16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g12" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #F0DCC0; border-top:3px solid #B4700C; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left; font-weight:400;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Requirement</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Assessments</p>
+ </div>
+ <span data-click="c12" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Each Module must include at least one graded Assessment. Ungraded Assessments are also encouraged as opportunities for learners to practice, check their understanding, and receive feedback before graded work.</p>
+ </div>
+ </div>
+ </div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Check understanding, practice with feedback, or demonstrate achievement of the Module objectives</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Programming Assignments</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Write, modify, debug, or evaluate code and receive feedback on its performance</div>
+ </div>
+ <div style="display:grid; grid-template-columns:230px 1fr;">
+ <div style="padding:18px 22px; font-size:17px; font-weight:700; color:#012169;">Coursera Labs</div>
+ <div style="padding:18px 22px; font-size:17px; line-height:1.65; color:#3A424E; border-left:1px solid #E4E2DD;">Practice with code, data, software, or technical tools in a configured, in-browser environment</div>
+ </div>
+ </div>
+
+
+
+ <h3 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:26px; color:#012169;">Choose a Learning Asset that fits the learning need</h3>
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E;">As you consider the options, ask:</p>
+ <ul style="margin:0 0 32px; padding:0 0 0 22px; display:flex; flex-direction:column; gap:12px; max-width:730px;">
+ <li style="font-size:17px; line-height:1.65; color:#3A424E; max-width:660px; box-sizing:border-box;">Does the learner need to read, watch, listen, interact, converse, practice, or create?</li>
+ <li style="font-size:17px; line-height:1.65; color:#3A424E; max-width:660px; box-sizing:border-box;">Would an explanation, reusable reference, demonstration, guided practice, feedback, or opportunity to demonstrate the objective be most helpful?</li>
+ <li style="font-size:17px; line-height:1.65; color:#3A424E; max-width:660px; box-sizing:border-box;">Would this format add meaningful value, or might another asset serve the same purpose?</li>
+ <li style="font-size:17px; line-height:1.65; color:#3A424E; max-width:660px; box-sizing:border-box;">What instructions, preparation, or support will learners need to use the asset independently?</li>
+ <li style="font-size:17px; line-height:1.65; color:#3A424E; max-width:660px; box-sizing:border-box;">How will the asset connect to what learners encountered before and what they will do next?</li>
+ </ul>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 36px;">
+ <div style="background:#F6F3FA; border-left:3px solid #6B4E9E; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700;">You might ask</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">What does the learner need to do next, and which Coursera Learning Asset might support that need most effectively?</p>
+ </div>
+ <div style="background:#FBFAF7; border-left:3px solid #C9CDD4; padding:22px 26px;">
+ <p style="margin:0 0 8px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A6472; font-weight:700;">Rather than asking</p>
+ <p style="margin:0; font-size:17px; line-height:1.6; color:#5A6472;">How many videos and readings should this Module contain?</p>
+ </div>
+ </div>
+
+ <div data-click="x2" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F6F3FA; border:1px solid #E3DBF0; border-left:4px solid #6B4E9E; border-radius:3px; padding:18px 24px; cursor:pointer; width:100%; box-sizing:border-box;" class="g15">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Worked example</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; ">Choosing Learning Assets to support your Module objectives</p>
+ </div>
+ <span style="flex:none; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;"><span data-text="xl2">Show example</span></span>
+ </div>
+ <div data-if="xo2" hidden>
+ <div style="border:1px solid #E3DBF0; border-top:none; border-radius:0 0 3px 3px; background:#FBFAFD; padding:30px 34px;">
+ <div style="margin:0 0 24px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;"><p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">The learning path for <b style="font-weight:700;">Module 1: Identifying and Evaluating Business Data</b> establishes what learners need to experience: an introduction to the evaluation criteria, a model of expert reasoning, supported practice with feedback, and an opportunity to complete the Data Fitness Review independently.</p><p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">The next step is to organize those experiences into Lessons and select the Coursera Learning Assets that will support them.</p></div>
+ <div style="background:#FFFFFF; border:1px solid #D8DEE7; border-radius:3px;">
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); background:#F1F4F8; border-bottom:1px solid #D8DEE7; border-radius:3px 3px 0 0;">
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700;">LEARNING PATH</div>
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">Learning Assets</div>
+ <div style="padding:14px 20px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700; border-left:1px solid #E4E2DD;">LEARNING PURPOSE</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Frame the task</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Video</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Start With the Business Question</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Introduces a realistic scenario and explains why data must be evaluated in relation to the question it is intended to address</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Identify the data needed</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Reading</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">From a Business Question to Data Requirements</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Helps learners identify the variables, records, time period, and level of detail a question requires</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Introduce the evaluation criteria</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Video</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Is the Data Fit for the Question?</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Explains how relevance, completeness, and basic quality affect whether data can support an analysis</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Provide a reusable reference</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Reading</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Data Fitness Criteria and Checklist</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Gives learners criteria and a checklist they can use during the model, practice activity, and assessment</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Model the process</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Video</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Think Aloud: Inspecting a Sample Dataset</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Shows an expert comparing a dataset with a business question and documenting concerns</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Practice with support</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Hands-on activity</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Practice Data Fitness Review</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Gives learners a second dataset to evaluate using guiding questions and the checklist</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr); border-bottom:1px solid #E4E2DD;">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Prepare learners to communicate their judgment</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Video</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Documenting Data Limitations</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Models how to explain why a limitation matters and how it could affect an analysis</div>
+ </div>
+ <div style="display:grid; grid-template-columns:215px 255px minmax(0,1fr);">
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; font-weight:600; color:#1F2833;">Demonstrate the Module objectives</div>
+ <div style="padding:18px 20px; border-left:1px solid #E4E2DD;">
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Auto-graded quiz</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#012169;">Data Fitness Review</p>
+ </div>
+ <div style="padding:18px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Presents a new business question and dataset and asks learners to identify requirements, evaluate the data, and make supported judgments</div>
+ </div>
+ </div>
+ <div style="margin:24px 0 0; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;"><p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">These assets can be organized into a smaller number of Lessons. A Lesson is not a single asset; it is a purposeful segment of the learning path that may bring several assets together.</p><p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">For example:</p><ul style="margin:0 0 14px; padding:0 0 0 22px; list-style:disc outside; box-sizing:border-box;"><li style="margin:0 0 8px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;"><strong style="font-weight:700;">Lesson 1: Identify the data the question requires</strong> includes a Video and a Reading.</li><li style="margin:0 0 8px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;"><strong style="font-weight:700;">Lesson 2: Evaluate whether the data is fit for purpose</strong> includes two Videos, a Reading, and a hands-on activity.</li><li style="margin:0 0 8px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;"><strong style="font-weight:700;">Lesson 3: Complete a Data Fitness Review</strong> includes a Video and the auto-graded quiz.</li></ul><p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">The Module meets Coursera’s asset expectations while keeping every selection connected to the learning path. The goal is not to minimize the number of assets, but to avoid adding assets that do not help learners progress toward the final task.</p></div>
+ </div>
+ </div>
+ </div>
+
+ <div id="step5" style="padding:68px 56px 0;">
+ <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
+ <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1F2833; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center;">5</span>
+ <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 5 of 5</span>
+ </div>
+ <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Complete your Module plan</h2>
+ <p style="margin:0 0 32px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Use this page to work through your design decisions, then record them in your Coursera Course Design Document. The sample below shows how those decisions might come together for <b style="font-weight:700;">Module 1: Identifying and Evaluating Business Data</b> from <strong style="font-weight:700;">Course 1: Foundations of Data Analytics</strong> in the example <strong style="font-weight:700;">Specialization: Data Analytics for Business Decisions.</strong> Use it as a reference as you develop your own plan.</p>
+ 
+
+ <div style="border:1px solid #C9CDD4; border-radius:3px;">
+ <div style="display:flex; align-items:center; justify-content:space-between; gap:24px; padding:16px 26px; background:#6B4E9E; border-radius:3px 3px 0 0;">
+ <span style="font-size:15px; font-weight: 700; color: rgb(255, 255, 255); letter-spacing: 0.03em; white-space: nowrap;">Course 1 · Module 1</span>
+ <span style="font-size:14px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(255, 255, 255); font-weight: 700; white-space: nowrap;">Repeats per module</span>
+ </div>
+
+ <div data-keep="" style="padding:28px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 4px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;">Module title</p>
+ <span data-click="gt0" role="button" tabindex="0" aria-label="Guidance for Module title" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g0" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Module title</p>
+ </div>
+ <span data-click="c0" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Give the Module a <strong style="font-weight:700;color:#1F2833;">clear, focused purpose within the Course</strong>. A strong title signals what learners will learn, do, or produce—not simply where the Module appears in the sequence. Favor descriptive titles over labels such as <em style="font-style:italic;">Module 2</em> or <em style="font-style:italic;">Introduction to…</em></p>
+ </div>
+ </div>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.6; color:#6B737F; font-style:italic; max-width:730px; box-sizing:border-box;">Draft what learners will learn, do, or produce in this Module.</p>
+ <p style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">Identifying and Evaluating Business Data</p>
+ </div>
+
+ <div data-keep="" style="padding:28px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 4px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;">Module description</p>
+ <span data-click="gt1" role="button" tabindex="0" aria-label="Guidance for Module description" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g1" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Module description</p>
+ </div>
+ <span data-click="c1" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Orient learners to <strong style="font-weight:700;color:#1F2833;">what they will accomplish and why it matters</strong>. Keep the description learner-facing and focused on the Module’s purpose rather than listing every topic or learning asset.</p>
+ </div>
+ </div>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.6; color:#6B737F; font-style:italic; max-width:730px; box-sizing:border-box;">Draft a learner-friendly 2-3 sentence summary of the Module content and learning outcomes.</p>
+ <p style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">Learn how to determine whether available data can address a business question. You will identify the data a question requires, evaluate a sample dataset for relevance, completeness, and quality concerns, and document limitations that could affect an analysis.</p>
+ </div>
+
+ <div data-keep="" style="padding:28px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 4px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;">Module learning objectives</p>
+ <span data-click="gt2" role="button" tabindex="0" aria-label="Guidance for Module learning objectives" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g2" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Module learning objectives</p>
+ </div>
+ <span data-click="c2" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Break the larger Course objectives into <strong style="font-weight:700;color:#1F2833;">1–3 smaller learning goals learners can reasonably achieve within this Module</strong>. Each objective should describe something learners can demonstrate and help guide the practice and assessment you design.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Begin with observable verbs such as <strong style="font-weight:700;color:#1F2833;">identify, calculate, apply, analyze, interpret, evaluate, create,</strong> or <strong style="font-weight:700;color:#1F2833;">recommend</strong>.</p>
+ </div>
+ </div>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.6; color:#6B737F; font-style:italic; max-width:730px; box-sizing:border-box;">Write 1-3 actionable, measurable learning objectives that describe what learners will be able to do by the end of the Module.</p>
+ <div style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">
+ <ol style="margin:0; padding:0 0 0 20px; display:flex; flex-direction:column; gap:8px;">
+ <li style="font-size:17px; line-height:1.6; color:#1F2833;">Identify the data needed to investigate a business question.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833;">Evaluate an available dataset for relevance, completeness, and basic quality concerns.</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; max-width:730px; box-sizing:border-box;">Document limitations that could affect the proposed analysis.</li>
+ </ol>
+ </div>
+ </div>
+
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:0; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:28px 26px; border-right:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;">Estimated learning time</p>
+ <span data-click="gt3" role="button" tabindex="0" aria-label="Guidance for Estimated learning time" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g3" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Estimated learning time</p>
+ </div>
+ <span data-click="c3" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Estimate the <strong style="font-weight:700;color:#1F2833;">complete learner experience</strong>, including videos, readings, activities, practice, and the graded assessment—not just the time spent viewing instructional content. Keep the Module focused enough to feel like a manageable step in a self-paced Course.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">Approximately 45 minutes</p>
+ </div>
+ <div style="padding:28px 26px;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87; white-space:nowrap;">Graded assessment title</p>
+ <span data-click="gt4" role="button" tabindex="0" aria-label="Guidance for Graded assessment title" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g4" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Graded assessment title</p>
+ </div>
+ <span data-click="c4" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Use a learner-facing title that reflects the <strong style="font-weight:700;color:#1F2833;">learning being demonstrated</strong>, rather than a generic label such as <em style="font-style:italic;">Module 2 Quiz</em>. The assessment title should help learners understand what they are about to do.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">Data Fitness Review</p>
+ </div>
+ </div>
+
+ <div data-keep="" style="padding:28px 26px; border-bottom:1px solid #E4E2DD;">
+ <p style="margin:0 0 4px; font-size:15px; font-weight:700; color:#8A5A0B;">Lessons &amp; Learning Assets</p>
+ <p style="margin:0 0 10px; font-size:15px; line-height:1.6; color:#6B737F; font-style:italic; max-width:730px; box-sizing:border-box;">For anything created outside this template, please include a link to the final or draft source. This will help your Learning Experience Designer build the content directly from the source. Lessons are optional, so you may leave this column blank or remove it if you're not using lessons.</p>
+ <p style="margin:0 0 16px; font-size:15px; line-height:1.6; color:#8A5A0B; font-weight:700; background:#FDF6EC; border:1px solid #F0DCC0; border-radius:2px; padding:12px 16px; display:block; box-sizing:border-box; box-sizing:border-box;">Aim for a minimum of: 3–6 videos · 1–2 readings · 1–2 activities · 1 auto-graded quiz</p>
+
+ <div style="border:1px solid #D8DEE7; border-radius:2px;">
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; background:#FDF6EC; border-bottom:1px solid #F0DCC0; border-radius:2px 2px 0 0;">
+ <div style="padding:12px 12px; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">#</div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #F0DCC0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Lesson <br>(optional)</span>
+ <span data-click="gt7" role="button" tabindex="0" aria-label="Guidance for Lesson (optional)" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #F0DCC0; background:#FFFFFF; color:#8A5A0B; cursor:pointer;" class="g16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g7" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #F0DCC0; border-top:3px solid #B4700C; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Lesson (optional)</p>
+ </div>
+ <span data-click="c7" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Use Lessons when they help organize several learning assets around a <strong style="font-weight:700;color:#1F2833;">meaningful subtopic, task, or stage of learning</strong>. A Lesson should make the Module easier to navigate—not add another layer of structure simply for its own sake.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Short Modules may not need Lessons at all. Learning assets can appear directly in the Module when that creates a clearer experience for learners.</p>
+ </div>
+ </div>
+ </div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #F0DCC0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Asset Type</span>
+ <span data-click="gt8" role="button" tabindex="0" aria-label="Guidance for Asset type" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #F0DCC0; background:#FFFFFF; color:#8A5A0B; cursor:pointer;" class="g16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g8" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #F0DCC0; border-top:3px solid #B4700C; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Asset type</p>
+ </div>
+ <span data-click="c8" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Choose the learning asset based on <strong style="font-weight:700;color:#1F2833;">what learners need to do at that point in the learning experience</strong>, rather than defaulting to video.</p>
+ <p style="margin:0 0 10px; font-size:15px; line-height:1.7; color:#3A424E;">Different formats support different purposes:</p>
+ <div style="display:flex; flex-direction:column; gap:10px; margin:0 0 14px;">
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Explain or demonstrate</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Video</p>
+ </div>
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Provide reference or step-by-step guidance</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Reading</p>
+ </div>
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Connect learning to experience or reason through a case</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Dialogue</p>
+ </div>
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Try a skill directly</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Hands-on Practice, Lab, or interactive activity</p>
+ </div>
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Check understanding and receive feedback</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Practice Quiz</p>
+ </div>
+ <div style="padding:0 0 0 12px; border-left:2px solid #F0DCC0;">
+ <p style="margin:0 0 1px; font-size:15px; line-height:1.5; font-weight:600; color:#1F2833;">Demonstrate achievement</p>
+ <p style="margin:0; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B;">→ Graded Assessment</p>
+ </div>
+ </div>
+ <p style="margin:0 0 10px; font-size:15px; line-height:1.7; color:#3A424E;">When appropriate, aim for a rhythm of:</p>
+ <p style="background:#FDF6EC; border-left:3px solid #B4700C; padding:12px 16px; margin:0 0 12px;">Learn → Try → Receive feedback → Apply</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">This often gives learners more opportunities to use what they are learning than placing all instruction first and all assessment at the end.</p>
+ </div>
+ </div>
+ </div>
+ <div style="position:relative; padding:12px 12px; border-left:1px solid #F0DCC0; display:flex; align-items:center; gap:7px;">
+ <span style="font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Asset Title + Link</span>
+ <span data-click="gt9" role="button" tabindex="0" aria-label="Guidance for Asset title" style="flex:none; display:flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid #F0DCC0; background:#FFFFFF; color:#8A5A0B; cursor:pointer;" class="g16"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:12px; height:12px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g9" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); right:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #F0DCC0; border-top:3px solid #B4700C; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Asset title + link</p>
+ </div>
+ <span data-click="c9" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 14px; font-size:15px; line-height:1.7; color:#3A424E;">Use <strong style="font-weight:700;color:#1F2833;">specific, learner-facing titles</strong> that tell learners what they are about to learn or do. Avoid production labels such as <em style="font-style:italic;">Video 2</em>, <em style="font-style:italic;">Reading 1</em>, or <em style="font-style:italic;">Activity</em>. Clear titles also make the learning path easier to scan in a self-paced Course.</p>
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Linking the source</p>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Link to the <strong style="font-weight:700;color:#1F2833;">most current source material your Learning Experience Designer should use to build the asset</strong>. Make sure the source is accessible to your CTL team, and indicate whether it is draft, under review, or final when useful.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Whenever possible, link to editable source material rather than a copy created only for review.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">1</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Identify the data the question requires</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Video</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Start With the Business Question</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">2</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Identify the data the question requires</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Reading</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">From a Business Question to Data Requirements</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">3</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Evaluate whether the data is fit for purpose</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Video</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Is the Data Fit for the Question?</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">4</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Evaluate whether the data is fit for purpose</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Reading</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Data Fitness Criteria and Checklist</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">5</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Evaluate whether the data is fit for purpose</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Video</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Think Aloud: Inspecting a Sample Dataset</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">6</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Evaluate whether the data is fit for purpose</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Hands-on activity</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Practice Data Fitness Review</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr; border-bottom:1px solid #E4E2DD;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">7</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Complete a Data Fitness Review</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Video</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Documenting Data Limitations</span></div>
+ </div>
+ <div style="display:grid; grid-template-columns:40px 1fr 1.1fr 1.9fr;">
+ <div style="padding:14px 12px; font-size:15px; color:#5A6472;">8</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; color:#3A424E; border-left:1px solid #E4E2DD;">Complete a Data Fitness Review</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; font-weight:600; color:#8A5A0B; border-left:1px solid #E4E2DD;">Auto-graded quiz</div>
+ <div style="padding:14px 12px; font-size:15px; line-height:1.5; border-left:1px solid #E4E2DD;"><span style="font-weight:600; color:#00539B; text-decoration:underline;">Data Fitness Review</span></div>
+ </div>
+ </div>
+
+ <div data-keep="" style="padding:28px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87;">Additional build notes, dependencies, or accessibility information</p>
+ <span data-click="gt5" role="button" tabindex="0" aria-label="Guidance for Additional build notes, dependencies, or accessibility information" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g5" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Additional build notes, dependencies, or accessibility information</p>
+ </div>
+ <span data-click="c5" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Use this space for information the Learning Experience Designer needs that <strong style="font-weight:700;color:#1F2833;">isn’t clear from the source material itself</strong>. Note required sequencing, dependencies between assets, setup needs, accessibility considerations, external tools, or special build behavior.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">For a self-paced Course, pay particular attention to anything learners may need in order to complete the experience without live instructor support. Consider whether learners will know what to do, what materials or tools they need, and how they can check their progress.</p>
+ </div>
+ </div>
+ </div>
+ <p style="background:#F6F3FA; border:1px solid #E3DBF0; border-radius:2px; padding:14px 18px;">Customer dataset supplied as a spreadsheet. No specialized software required. Checklist needs a screen-reader-friendly version.</p>
+ </div>
+
+ <div style="padding:28px 26px;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 8px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#5A3F87;">Course 1 · Module 1 Graded Quiz</p>
+ <span data-click="gt6" role="button" tabindex="0" aria-label="Guidance for Graded quiz" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #E3DBF0; background:#FFFFFF; color:#5A3F87; cursor:pointer;" class="g17"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g6" hidden>
+ <div style="position:absolute; z-index:40; bottom:calc(100% + 8px); left:0; width:440px; max-width:440px; background:#FFFFFF; border:1px solid #E3DBF0; border-top:3px solid #6B4E9E; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#5A3F87; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Graded quiz</p>
+ </div>
+ <span data-click="c6" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#5A6472; padding:2px 3px;" class="g11">✕</span>
+ </div>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Build the quiz around the <strong style="font-weight:700;color:#1F2833;">Module objectives</strong>, rather than testing isolated facts from videos or readings. When the objective calls for application, interpretation, or decision-making, design questions that ask learners to apply, interpret, distinguish, or decide.</p>
+ <p style="margin:0 0 12px; font-size:15px; line-height:1.7; color:#3A424E;">Provide useful feedback for <strong style="font-weight:700;color:#1F2833;">both correct and incorrect responses</strong>. Feedback can explain why an answer works, clarify a misconception, or point learners toward what they may want to review.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Use the <strong style="font-weight:700;color:#1F2833;">Graded Quiz Import Template in your Design Document</strong> when drafting quiz questions. Working in the template helps organize questions, answer options, correct answers, and feedback in a format that supports the Coursera build.</p>
+ </div>
+ </div>
+ </div>
+ <p style="margin:0 0 18px; font-size:15px; line-height:1.6; color:#6B737F; font-style:italic; max-width:730px; box-sizing:border-box;">Before writing your questions, please review the Coursera Graded Quiz Template and Guidelines. The quiz should assess the objectives for this module.</p>
+ <div data-keep="" style="background:#FDF6EC; border:1px solid #F0DCC0; border-radius:3px; padding:22px 24px;">
+ <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#8A5A0B; font-weight:700;">Your templates</p>
+ <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Your Learning Experience Designer will share your template(s) ahead of your first design meeting. Module planning and the Graded Quiz Import Template live inside the Course Template, with a section for each Module.</p>
+ <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?tab=t.qpfvp9skgp9o" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #B4700C; color:#8A5A0B; background:#FFFFFF; font-size:15px; font-weight:600; padding:11px 20px; border-radius:3px; text-decoration:none; white-space:nowrap;" class="g18">See sample Module Template ↗</a>
+ <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?tab=t.l0nglesxgcaj" target="_blank" rel="noopener" style="display:inline-block; margin-left:10px; border:1px solid #B4700C; color:#8A5A0B; background:#FFFFFF; font-size:15px; font-weight:600; padding:11px 20px; border-radius:3px; text-decoration:none; white-space:nowrap;" class="g18">See sample Quiz Template ↗</a>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div style="margin:56px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+ <a href="/coursera-design-guide/course/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">← Zoom out</span>
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A; white-space:nowrap;">Course</span></a> 
+ <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px; text-align:right;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Zoom in →</span>
+ <span style="font-family:'EB Garamond',serif; font-size:22px; color:#8A5A0B; white-space:nowrap;">Learning Assets</span></a> 
+ </div>
+
+ <div id="__end" style="height:1px;"></div>
+</div>
+</div>
+</div></div>
+<script src="/coursera-design-guide/guide.js"></script>
+</body>
+</html>
