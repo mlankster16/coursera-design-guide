@@ -15,6 +15,25 @@
  @media screen {
  [data-print-shell] { overflow:hidden; }
  }
+ /* Reflow: the pages must stay usable at narrow widths and at high zoom
+    (WCAG 1.4.10). Generic selectors, so no markup hooks are needed. */
+ @media screen and (max-width: 980px) {
+   [data-print-page] { padding:24px 16px !important; }
+   [data-navrow] { flex-wrap:wrap !important; row-gap:14px !important; }
+ }
+ @media screen and (max-width: 820px) {
+   [data-print-shell] [style*="grid-template-columns"] { grid-template-columns:minmax(0,1fr) !important; }
+   [data-print-shell] [style*="columns:2"] { columns:1 !important; }
+   [data-print-shell] th, [data-print-shell] td { display:block !important; width:auto !important; }
+   [data-rail] { position:static !important; }
+ }
+ @media screen and (max-width: 680px) {
+   [data-print-shell] > div { padding-left:24px !important; padding-right:24px !important; }
+   [data-cap="nav"] { padding-left:0 !important; padding-right:0 !important; }
+   [data-cap="nav"] > div { padding-left:24px !important; padding-right:24px !important; }
+   [data-foot] { margin-left:24px !important; margin-right:24px !important; }
+   [data-print-shell] th, [data-print-shell] td { padding-left:14px !important; padding-right:14px !important; }
+ }
  @page { margin: 0.5in; }
  @media print {
  html, body { height:auto !important; background:#FFFFFF !important; }
@@ -30,32 +49,32 @@
 </head>
 <body data-page-config='{"slug":"course","accordion":{"toggle":"x","open":"xo","label":"xl","closed":"Show example","openTxt":"Hide example","count":2},"tips":{"count":10,"on":"#17724A","onFg":"#FFFFFF","off":"#FFFFFF","offFg":"#125E3D"}}'>
 <div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
-<div data-print-shell="" style="width:1080px; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:4px;">
+<div data-print-shell="" style="max-width:1080px; width:100%; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:4px;">
 
  <div data-cap="nav">
  <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
  <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
  </div>
- <div style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+ <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
  <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; white-space:nowrap;">Coursera Design Guide</span>
  <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
- <a href="/coursera-design-guide/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Overview</a>
- <a href="/coursera-design-guide/specialization/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Specialization</a>
+ <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g1">Overview</a>
+ <a href="/coursera-design-guide/specialization/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g1">Specialization</a>
  <span style="color:#012169; font-weight:600; border-bottom:3px solid #17724A; padding-bottom:3px; white-space:nowrap;">Course</span>
- <a href="/coursera-design-guide/module/" style="color:#5A6472; white-space:nowrap; text-decoration:none;">Module</a>
- <span data-nav-menu="" data-enter="navShow" data-leave="navHide" data-blur="navLeave" style="position:relative; display:inline-block;"><span data-click="navToggle" data-focus="navShow" data-keys="navKeys" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" style="display:inline-block; color:#5A6472; white-space:nowrap; cursor:pointer;" class="g8">Learning Assets <span data-text="navCaret">⌄</span></span>
+ <a href="/coursera-design-guide/module/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="g1">Module</a>
+ <span data-nav-menu="" data-enter="navShow" data-leave="navHide" data-blur="navLeave" style="position:relative; display:inline-block;"><span data-click="navToggle" data-focus="navShow" data-keys="navKeys" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" style="display:inline-block; color:#5A6472; white-space:nowrap; cursor:pointer;" class="g9">Learning Assets <span data-text="navCaret">⌄</span></span>
  <div data-if="navOpen" hidden>
  <div style="position:absolute; z-index:60; top:calc(100% + 14px); right:0; width:330px; background:#FFFFFF; border:1px solid #D8DEE7; border-top:4px solid #B4700C; box-shadow:0 12px 34px rgba(1,33,105,.16); padding:6px 0; text-align:left;">
- <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:block; padding:14px 24px; font-size:17px; font-weight:600; color:#012169; white-space:nowrap;" class="g1">All Learning Assets</a>
- <a href="/coursera-design-guide/learning-assets/accessibility-copyright-ai/" style="text-decoration:none; display:block; margin:6px 0; padding:13px 24px 13px 21px; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; border-left:3px solid #B4700C; background:#FDF6EC; font-size:16px; font-weight:700; color:#012169; line-height:1.4;" class="g2">Accessibility, Copyright &amp; AI</a>
- <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Video</a>
- <a href="/coursera-design-guide/learning-assets/#reading" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Reading</a>
- <a href="/coursera-design-guide/learning-assets/#plugin" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Interactive Plugin</a>
- <a href="/coursera-design-guide/learning-assets/#dialogue" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Dialogue</a>
- <a href="/coursera-design-guide/learning-assets/#roleplay" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coach Role Play</a>
- <a href="/coursera-design-guide/learning-assets/#assessment" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Assessments</a>
- <a href="/coursera-design-guide/learning-assets/#programming" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Programming Assignments</a>
- <a href="/coursera-design-guide/learning-assets/#labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g3">Coursera Labs</a>
+ <a href="/coursera-design-guide/learning-assets/" style="text-decoration:none; display:block; padding:14px 24px; font-size:17px; font-weight:600; color:#012169; white-space:nowrap;" class="g2">All Learning Assets</a>
+ <a href="/coursera-design-guide/learning-assets/accessibility-copyright-ai/" style="text-decoration:none; display:block; margin:6px 0; padding:13px 24px 13px 21px; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; border-left:3px solid #B4700C; background:#FDF6EC; font-size:16px; font-weight:700; color:#012169; line-height:1.4;" class="g3">Accessibility, Copyright &amp; AI</a>
+ <a href="/coursera-design-guide/learning-assets/#video" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Video</a>
+ <a href="/coursera-design-guide/learning-assets/#reading" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Reading</a>
+ <a href="/coursera-design-guide/learning-assets/#plugin" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Interactive Plugin</a>
+ <a href="/coursera-design-guide/learning-assets/#dialogue" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Coach Dialogue</a>
+ <a href="/coursera-design-guide/learning-assets/#roleplay" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Coach Role Play</a>
+ <a href="/coursera-design-guide/learning-assets/#assessment" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Assessments</a>
+ <a href="/coursera-design-guide/learning-assets/#programming" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Programming Assignments</a>
+ <a href="/coursera-design-guide/learning-assets/#labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="g4">Coursera Labs</a>
  </div>
  </div></span> 
  </div>
@@ -97,15 +116,15 @@
  </div>
 
  <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:#E4E2DD; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD;">
- <a href="#step1" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g7"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">1</span>
+ <a href="#step1" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g8"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">1</span>
  <span style="font-size:15px; line-height:1.35; font-weight:600; color:#1F2833;">Write objectives</span></a> 
- <a href="#step2" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g7"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">2</span>
+ <a href="#step2" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g8"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">2</span>
  <span style="font-size:15px; line-height:1.35; font-weight:600; color:#1F2833;">Check objectives</span></a> 
- <a href="#step3" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g7"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">3</span>
+ <a href="#step3" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g8"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">3</span>
  <span style="font-size:15px; line-height:1.35; font-weight:600; color:#1F2833;">Focus the scope</span></a> 
- <a href="#step4" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g7"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">4</span>
+ <a href="#step4" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g8"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">4</span>
  <span style="font-size:15px; line-height:1.35; font-weight:600; color:#1F2833;">Design for flexibility</span></a> 
- <a href="#step5" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g7"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">5</span>
+ <a href="#step5" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:flex; align-items:baseline; gap:10px;" class="g8"><span style="font-family:'EB Garamond',serif; font-size:22px; color:#17724A;">5</span>
  <span style="font-size:15px; line-height:1.35; font-weight:600; color:#1F2833;">Complete the plan</span></a> 
  </div>
 
@@ -120,31 +139,38 @@
  <p style="margin:0 0 28px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Once the Course has a clear purpose, translate that purpose into 2–4 Course-level learning objectives. Use the table below to move from the subject of the Course to what learners will be able to demonstrate. A Course-level objective typically brings together relevant knowledge and skills in a meaningful context.</p>
 
  <div style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden; margin:0 0 32px;">
- <div style="display:grid; grid-template-columns:170px 1fr 1.4fr; background:#F0F6F2; border-bottom:1px solid #CFE2D8;">
- <div style="padding:13px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#125E3D; font-weight:700;">ELEMENT</div>
- <div style="padding:13px 20px; font-size:15px; letter-spacing:.01em; color:#125E3D; font-weight:700; border-left:1px solid #CFE2D8;">What it helps identify</div>
- <div style="padding:13px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#125E3D; font-weight:700; border-left:1px solid #CFE2D8;">Example</div>
- </div>
- <div style="display:grid; grid-template-columns:170px 1fr 1.4fr; border-bottom:1px solid #E4E2DD;">
- <div style="padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833;">Topic</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">The subject or area the Course addresses</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Business data</div>
- </div>
- <div style="display:grid; grid-template-columns:170px 1fr 1.4fr; border-bottom:1px solid #E4E2DD;">
- <div style="padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833;">Knowledge</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">What learners should know or understand about the topic</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Characteristics of useful business data</div>
- </div>
- <div style="display:grid; grid-template-columns:170px 1fr 1.4fr; border-bottom:1px solid #E4E2DD;">
- <div style="padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833;">Skill</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD;">A specific capability learners can develop and demonstrate</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;">Evaluate a dataset using defined quality criteria</div>
- </div>
- <div style="display:grid; grid-template-columns:170px 1fr 1.4fr; background:#F0F6F2;">
- <div style="padding:16px 20px; font-size:17px; font-weight:700; line-height:1.4; color:#125E3D;">Course-level objective</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#5A6472; border-left:1px solid #E4E2DD;">What learners will accomplish by applying their knowledge and skill in a meaningful context</div>
- <div style="padding:16px 20px; font-size:15px; line-height:1.6; color:#1F2833; border-left:1px solid #E4E2DD; font-weight:600;">Determine whether available data is relevant, complete, and suitable for addressing a business question</div>
- </div>
+ <table style="table-layout:fixed; width:100%; border-collapse:collapse; margin:0;">
+    <caption style="position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;">Parts of a Course objective, what each part identifies, and an example</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="width:23.94%; box-sizing:border-box; background:#F0F6F2; padding:13px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#125E3D; font-weight:700; text-align:left; vertical-align:top;">ELEMENT</th>
+        <th scope="col" style="width:31.69%; box-sizing:border-box; * 0.4167); background:#F0F6F2; padding:13px 20px; font-size:15px; letter-spacing:.01em; color:#125E3D; font-weight:700; border-left:1px solid #CFE2D8; text-align:left; vertical-align:top;">What it helps identify</th>
+        <th scope="col" style="width:44.37%; box-sizing:border-box; background:#F0F6F2; padding:13px 20px; font-size:14px; letter-spacing:.13em; text-transform:uppercase; color:#125E3D; font-weight:700; border-left:1px solid #CFE2D8; text-align:left; vertical-align:top;">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833; text-align:left; vertical-align:top;">Topic</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">The subject or area the Course addresses</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Business data</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833; text-align:left; vertical-align:top;">Knowledge</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">What learners should know or understand about the topic</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Characteristics of useful business data</td>
+      </tr>
+      <tr style="border-bottom:1px solid #E4E2DD;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:600; line-height:1.4; color:#1F2833; text-align:left; vertical-align:top;">Skill</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#6B737F; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">A specific capability learners can develop and demonstrate</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">Evaluate a dataset using defined quality criteria</td>
+      </tr>
+      <tr style="background:#F0F6F2;">
+        <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:700; line-height:1.4; color:#125E3D; text-align:left; vertical-align:top;">Course-level objective</th>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#5A6472; border-left:1px solid #E4E2DD; text-align:left; vertical-align:top;">What learners will accomplish by applying their knowledge and skill in a meaningful context</td>
+        <td style="box-sizing:border-box; padding:16px 20px; font-size:15px; line-height:1.6; color:#1F2833; border-left:1px solid #E4E2DD; font-weight:600; text-align:left; vertical-align:top;">Determine whether available data is relevant, complete, and suitable for addressing a business question</td>
+      </tr>
+    </tbody>
+  </table>
  </div>
 
  <h3 style="margin:44px 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:26px; color:#012169;">Draft your objectives</h3>
@@ -180,14 +206,14 @@
  </div>
 
  <p style="margin:0 0 14px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; box-sizing:border-box; text-wrap:pretty;">Complete the verb with what learners will act on and, when helpful, the context or criteria. A broad instructional intention such as “<b style="font-weight:700;">understand how data can support a business decision</b>” can be translated into different observable objectives, depending on what learners should demonstrate:</p>
- <ul style="margin:0 0 14px; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
- <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Evaluate</b> a dataset for relevance and completeness.</li>
- <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Recommend</b> a data source for a specific business question.</li>
- <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Design</b> a simple analysis plan to address a business need.</li>
+ <ul role="list" style="margin:0 0 14px; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;">
+ <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Evaluate</b> a dataset for relevance and completeness.</li>
+ <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Recommend</b> a data source for a specific business question.</li>
+ <li style="font-size:17px; line-height:1.65; color:#1F2833; padding-left:16px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span><b style="font-weight:700;">Design</b> a simple analysis plan to address a business need.</li>
  </ul>
  <p style="margin:0 0 36px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; box-sizing:border-box; text-wrap:pretty;">Choose the objective(s) that best match what learners should be able to demonstrate by the end of the Course.</p>
 
- <div data-click="x0" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F0F6F2; border:1px solid #CFE2D8; border-left:4px solid #17724A; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g12">
+ <div data-click="x0" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F0F6F2; border:1px solid #CFE2D8; border-left:4px solid #17724A; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g13">
  <div>
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Worked example</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; white-space:nowrap;">Writing Course objectives for <b style="font-weight:700;">Foundations of Data Analytics for Business</b></p>
@@ -275,10 +301,10 @@
  <h2 style="margin:0 0 12px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; color:#012169;">Focus the Course scope</h2>
  <p style="margin:0 0 28px; font-size:17px; line-height:1.7; color:#4A5361; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Now that you've checked your objectives, use them to guide decisions about the Course's scope.</p>
  <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; box-sizing:border-box;">For each topic, resource, or activity, ask:</p>
- <ul style="margin:0 0 28px; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">
- <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position:absolute; left:0; top:0; color:#17724A;">·</span>What knowledge or skills will learners gain from this?</li>
- <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span>Do learners need it to achieve a course objective?</li>
- <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span>Will it give learners an opportunity to practice or demonstrate what they should be able to do?</li>
+ <ul role="list" style="margin:0 0 28px; padding:0; list-style:none; display:flex; flex-direction:column; gap:12px;">
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position:absolute; left:0; top:0; color:#17724A;">·</span>What knowledge or skills will learners gain from this?</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span>Do learners need it to achieve a course objective?</li>
+ <li style="font-size:17px; line-height:1.6; color:#1F2833; padding-left:18px; position:relative; max-width:660px; box-sizing:border-box;"><span aria-hidden="true" style="position: absolute; left: 0px; top: 0px; color: rgb(23, 114, 74);">·</span>Will it give learners an opportunity to practice or demonstrate what they should be able to do?</li>
  </ul>
  <p style="margin:0 0 30px; font-size:17px; line-height:1.7; color:#3A424E; max-width:660px; text-wrap:pretty; box-sizing:border-box;">Use your answers to decide what to include, leave out, or save for another Course. A strong Course is not simply a collection of related topics. Each element should help learners develop the knowledge and skills they need to achieve the intended outcomes.</p>
 
@@ -293,7 +319,7 @@
  </div>
  </div>
 
- <div data-click="x1" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F0F6F2; border:1px solid #CFE2D8; border-left:4px solid #17724A; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g12">
+ <div data-click="x1" style="display:flex; align-items:center; justify-content:space-between; gap:20px; background:#F0F6F2; border:1px solid #CFE2D8; border-left:4px solid #17724A; border-radius:3px; padding:18px 24px; cursor:pointer;" class="g13">
  <div>
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Worked example</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; color:#012169; white-space:nowrap;">Using a Course objective to guide scope</p>
@@ -374,13 +400,13 @@
  <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#FFFFFF; font-weight:700; white-space:nowrap;">Repeats per Course</span>
  </div>
  <div style="padding:16px 26px; border-bottom:1px solid #E4E2DD; background:#FBFAF7;">
- <a href="https://www.coursera.org/search?query=duke%20university" target="_blank" rel="noopener" style="font-size:15px; font-weight:600; color:#125E3D; text-decoration:none;" class="g4">See a sample Course Landing Page ↗ on Coursera</a>
+ <a href="https://www.coursera.org/search?query=duke%20university" target="_blank" rel="noopener" style="font-size:15px; font-weight:600; color:#125E3D; text-decoration:none;" class="g5">See a sample Course Landing Page ↗ on Coursera</a>
  </div>
 
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Course title</p>
- <span data-click="gt0" role="button" tabindex="0" aria-label="Guidance for Course title" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt0" role="button" tabindex="0" aria-label="Guidance for Course title" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g0" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -388,7 +414,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Course title</p>
  </div>
- <span data-click="c0" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c0" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Write for the learner deciding whether this Course is relevant to them. A strong title makes the <strong style="font-weight:700;color:#1F2833;">topic and learner value immediately clear</strong> while giving the Course a distinct purpose. Favor specific, familiar language over academic numbering or internal terminology.</p>
  </div>
@@ -399,7 +425,7 @@
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Course description</p>
- <span data-click="gt1" role="button" tabindex="0" aria-label="Guidance for Course description" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt1" role="button" tabindex="0" aria-label="Guidance for Course description" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g1" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -407,7 +433,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Course description</p>
  </div>
- <span data-click="c1" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c1" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Describe the Course from the learner's perspective. Lead with what learners will <strong style="font-weight:700;color:#1F2833;">gain or be able to do</strong>, rather than with a list of topics. Provide enough context for the Course to make sense on its own, even when it is part of a larger learning pathway.</p>
  </div>
@@ -419,7 +445,7 @@
  <div style="padding:26px 26px; border-right:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Estimated time to complete</p>
- <span data-click="gt2" role="button" tabindex="0" aria-label="Guidance for Estimated time to complete" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt2" role="button" tabindex="0" aria-label="Guidance for Estimated time to complete" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g2" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -427,7 +453,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Estimated time to complete</p>
  </div>
- <span data-click="c2" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c2" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Estimate the learner's <strong style="font-weight:700;color:#1F2833;">total experience</strong>, including videos, readings, practice, activities, and assessments — not just instructional content. Keep the scope realistic for a self-paced Coursera Course that learners may complete in shorter sessions around other responsibilities.</p>
  </div>
@@ -438,7 +464,7 @@
  <div style="padding:26px 26px;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Difficulty level</p>
- <span data-click="gt3" role="button" tabindex="0" aria-label="Guidance for Difficulty level" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt3" role="button" tabindex="0" aria-label="Guidance for Difficulty level" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g3" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -446,7 +472,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Difficulty level</p>
  </div>
- <span data-click="c3" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c3" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Choose the level based on the <strong style="font-weight:700;color:#1F2833;">knowledge, skills, and independence learners need to succeed</strong>, not on how sophisticated the subject sounds. A complex topic can still be appropriate for beginners when foundational concepts and sufficient support are built into the Course.</p>
  </div>
@@ -459,7 +485,7 @@
  <div style="padding:26px 26px; border-right:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Primary domain / sub-domain</p>
- <span data-click="gt4" role="button" tabindex="0" aria-label="Guidance for Primary domain / sub-domain" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt4" role="button" tabindex="0" aria-label="Guidance for Primary domain / sub-domain" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g4" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -467,7 +493,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Primary domain / sub-domain</p>
  </div>
- <span data-click="c4" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c4" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Choose the category that most directly reflects the <strong style="font-weight:700;color:#1F2833;">Course's primary subject and learner value</strong>. Use the most specific appropriate Coursera domain rather than trying to represent every discipline the Course touches.</p>
  </div>
@@ -478,7 +504,7 @@
  <div style="padding:26px 26px;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Secondary domain / sub-domain</p>
- <span data-click="gt5" role="button" tabindex="0" aria-label="Guidance for Secondary domain / sub-domain" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt5" role="button" tabindex="0" aria-label="Guidance for Secondary domain / sub-domain" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g5" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -486,7 +512,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Secondary domain / sub-domain</p>
  </div>
- <span data-click="c5" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c5" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Use a secondary domain when another area meaningfully represents the Course. It should describe a substantial part of the learning experience, not simply broaden discoverability.</p>
  </div>
@@ -499,7 +525,7 @@
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Tagged skills</p>
- <span data-click="gt6" role="button" tabindex="0" aria-label="Guidance for Tagged skills" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt6" role="button" tabindex="0" aria-label="Guidance for Tagged skills" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g6" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -507,7 +533,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Tagged skills</p>
  </div>
- <span data-click="c6" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c6" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Choose <strong style="font-weight:700;color:#1F2833;">specific skills learners will actively practice or demonstrate in this Course</strong>. Avoid broad subject labels, and select tags that align closely with the Course objectives, activities, and assessments.</p>
  </div>
@@ -525,7 +551,7 @@
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">Recommended background</p>
- <span data-click="gt7" role="button" tabindex="0" aria-label="Guidance for Recommended background" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt7" role="button" tabindex="0" aria-label="Guidance for Recommended background" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g7" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -533,7 +559,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Recommended background</p>
  </div>
- <span data-click="c7" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c7" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Include only the knowledge or experience learners <strong style="font-weight:700;color:#1F2833;">actually need before beginning the Course</strong>. Distinguish true prerequisites from experience that may simply be helpful, and avoid creating unnecessary barriers for otherwise appropriate learners.</p>
  </div>
@@ -545,7 +571,7 @@
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D; white-space:nowrap;">What learners will learn</p>
- <span data-click="gt8" role="button" tabindex="0" aria-label="Guidance for What learners will learn" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt8" role="button" tabindex="0" aria-label="Guidance for What learners will learn" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g8" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -553,7 +579,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">What learners will learn</p>
  </div>
- <span data-click="c8" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c8" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Write <strong style="font-weight:700;color:#1F2833;">2–4 observable, measurable Course objectives</strong> that describe meaningful capabilities learners should be able to demonstrate by the end of the Course. Objectives should be achievable within the Course and valuable to learners beyond simply completing it.</p><p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Begin with action verbs such as <strong style="font-weight:700;color:#1F2833;">analyze, apply, create, evaluate, identify, interpret, recommend,</strong> or <strong style="font-weight:700;color:#1F2833;">communicate</strong>. Verbs such as <em style="font-style:italic;">understand, learn,</em> or <em style="font-style:italic;">become familiar with</em> may describe your instructional intention, but they do not clearly indicate what learners will be able to demonstrate.</p>
  </div>
@@ -572,7 +598,7 @@
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
  <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D;">Instructor information and bio source link</p>
- <span data-click="gt9" role="button" tabindex="0" aria-label="Guidance for Instructor information and bio source link" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g13"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <span data-click="gt9" role="button" tabindex="0" aria-label="Guidance for Instructor information and bio source link" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
  <div data-if="g9" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
@@ -580,7 +606,7 @@
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
  <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Instructor information and bio source link</p>
  </div>
- <span data-click="c9" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g11">✕</span>
+ <span data-click="c9" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
  <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Provide concise, learner-facing information that establishes the instructor's <strong style="font-weight:700;color:#1F2833;">relevant expertise and connection to the Course topic</strong>. Prioritize experience that helps learners understand why this instructor is well positioned to guide the learning experience.</p><p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">If an approved faculty bio and headshot already exist, provide a build-ready source link rather than recreating the material.</p>
  </div>
@@ -593,14 +619,14 @@
  <p style="margin:0 0 6px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700;">Your templates</p>
  <p style="margin:0 0 16px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">Your Learning Experience Designer will share your template(s) ahead of your first design meeting.</p>
  <div style="display:flex; flex-wrap:wrap; gap:12px;">
- <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #17724A; color:#125E3D; background:#FFFFFF; font-size:15px; font-weight:600; padding:11px 20px; border-radius:3px; text-decoration:none; white-space:nowrap;" class="g7">See sample Course Template ↗</a>
+ <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #17724A; color:#125E3D; background:#FFFFFF; font-size:15px; font-weight:600; padding:11px 20px; border-radius:3px; text-decoration:none; white-space:nowrap;" class="g8">See sample Course Template ↗</a>
  
  </div>
  </div>
  </div>
  </div>
 
- <div style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+ <div data-foot="" style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
  <a href="/coursera-design-guide/specialization/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">← Zoom out</span>
  <span style="font-family:'EB Garamond',serif; font-size:22px; color:#00539B; white-space:nowrap;">Specialization</span></a> 
  <a href="/coursera-design-guide/module/" style="text-decoration:none; display:flex; flex-direction:column; gap:3px; text-align:right;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Zoom in →</span>

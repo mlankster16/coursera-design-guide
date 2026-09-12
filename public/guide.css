@@ -24,10 +24,19 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
    inline margin, so a zero base is safe here and blocks two failure modes at
    once: a browser default creeping in, and a host reset changing the rhythm.
    Inline styles win over this rule, so the design spacing is what renders. */
-[data-print-page] :is(p, ul, ol, li, h1, h2, h3, h4, blockquote, figure, dl, dd) {
+[data-print-page] :is(p, ul, ol, li, h1, h2, h3, h4, blockquote, figure, dl, dd, table, caption) {
   margin: 0;
   padding-inline-start: 0;
 }
+
+
+/* Data tables are real tables (caption + th scope) for screen readers. Cell
+   padding, borders and widths all live inline, so only these structural bits
+   belong here. */
+[data-print-page] table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+[data-print-page] th { text-align: left; vertical-align: top; }
+[data-print-page] :is(th, td) { box-sizing: border-box; }
+[data-print-page] caption { text-align: left; }
 
 /* --- Interaction -------------------------------------------------------- */
 [data-if] { display: contents; }
@@ -36,82 +45,82 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
 [role="button"]:focus:not(:focus-visible) { outline: none; }
 
 .g1:hover {
-  background: #FBFAF7 !important;
+  color: #8A5A0B !important;
 }
 
 .g2:hover {
-  background: #FBEFD9 !important;
+  background: #FBFAF7 !important;
 }
 
 .g3:hover {
+  background: #FBEFD9 !important;
+}
+
+.g4:hover {
   background: #FBFAF7 !important;
   color: #8A5A0B !important;
 }
 
-.g4:hover {
+.g5:hover {
   text-decoration: underline !important;
 }
 
-.g5:hover {
+.g6:hover {
   border-color: #00539B !important;
   box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
 }
 
-.g6:hover {
+.g7:hover {
   background: #F2F6FB !important;
 }
 
-.g7:hover {
+.g8:hover {
   background: #F0F6F2 !important;
 }
 
-.g8:focus-visible {
+.g9:focus-visible {
   outline: 2px solid #00539B !important;
   outline-offset: 3px !important;
 }
 
-.g9:hover {
+.g10:hover {
   background: #E8F0F9 !important;
 }
 
-.g10:hover {
+.g11:hover {
   border-color: #00539B !important;
 }
 
-.g11:hover {
+.g12:hover {
   color: #1F2833 !important;
 }
 
-.g12:hover {
+.g13:hover {
   background: #E6F0EA !important;
 }
 
-.g13:hover {
+.g14:hover {
   border-color: #17724A !important;
 }
 
-.g14:hover {
+.g15:hover {
   background: #F6F3FA !important;
 }
 
-.g15:hover {
+.g16:hover {
   background: #EFE9F7 !important;
 }
 
-.g16:hover {
+.g17:hover {
   border-color: #B4700C !important;
 }
 
-.g17:hover {
+.g18:hover {
   border-color: #6B4E9E !important;
 }
 
-.g18:hover {
-  background: #FDF6EC !important;
-}
-
 .g19:hover {
-  color: #8A5A0B !important;
+  background: #FDF6EC !important;
 }
 
 .g20:hover {
