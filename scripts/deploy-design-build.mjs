@@ -74,6 +74,37 @@ const availableSoon = (s) => s.replace(
   + ' font-size:14px; font-weight:700; letter-spacing:.12em;'
   + ' text-transform:uppercase; color:#6B737F;">Available soon</span>');
 
+/** The "Learning Assets" nav item ships as a span with role="button" whose
+    only job is toggling the dropdown, so it can never reach the Learning
+    Assets page — clicking it just opens the menu. CTL reported this as a
+    dead menu item.
+
+    Split into a real link for the label plus a button for the caret. The
+    link navigates on click and Enter; the button keeps data-click/data-keys
+    so guide.js still drives the menu, and keeps aria-expanded/aria-haspopup,
+    which belong on the control that owns the menu rather than on a link.
+    Hovering the wrapper still opens the menu, as before.
+
+    Retire once Design's export makes the label navigable. */
+const navigableLearningAssets = (s, route) => s.replace(
+  /<span data-click="navToggle"[^>]*style="([^"]*)"[^>]*class="(g\d+)">Learning Assets\s*<span data-text="navCaret">[^<]*<\/span><\/span>/,
+  (_m, style, g) => {
+    // The label carries the visual treatment; strip the cursor, which
+    // belonged to the fake button.
+    const labelStyle = style.replace(/cursor:pointer;?\s*/, '').trim();
+    const here = route === 'learning-assets';
+    const label = here
+      ? `<span style="${labelStyle} text-decoration:none;">Learning Assets</span>`
+      : `<a href="${LA}" style="${labelStyle} text-decoration:none;" class="${g}">Learning Assets</a>`;
+    return label
+      + `<button type="button" data-click="navToggle" data-keys="navKeys"`
+      + ` aria-expanded="false" aria-haspopup="true"`
+      + ` aria-label="Show all Learning Assets"`
+      + ` style="appearance:none; -webkit-appearance:none; background:none; border:0;`
+      + ` padding:0 0 0 4px; margin:0; font:inherit; color:inherit; line-height:inherit;`
+      + ` cursor:pointer;"><span data-text="navCaret" aria-hidden="true">⌄</span></button>`;
+  });
+
 const DEVIATIONS = [availableSoon];
 
 for (const [file, route] of Object.entries(PAGES)) {
@@ -101,6 +132,7 @@ for (const [file, route] of Object.entries(PAGES)) {
   });
 
   for (const d of DEVIATIONS) s = d(s);
+  s = navigableLearningAssets(s, route);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
