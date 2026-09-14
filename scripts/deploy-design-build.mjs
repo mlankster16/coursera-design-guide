@@ -105,6 +105,20 @@ const navigableLearningAssets = (s, route) => s.replace(
       + ` cursor:pointer;"><span data-text="navCaret" aria-hidden="true">⌄</span></button>`;
   });
 
+/** The dropdown sits 14px below the trigger, and that 14px is outside the
+    hover wrapper — so moving the pointer down to the menu fires mouseleave
+    and the menu closes before you can reach an item. The gap is purely
+    visual, so move it inside the wrapper: the wrapper grows 14px downwards
+    (cancelled by an equal negative margin, so the nav row does not move)
+    and the panel sits at top:100% instead of 100% + 14px. Same position on
+    screen, but now there is no dead strip to cross. */
+const bridgeDropdownGap = (s) => s
+  .replace(
+    /(<span data-nav-menu=""[^>]*style=")position:relative; display:inline-block;/,
+    '$1position:relative; display:inline-block;'
+      + ' padding-bottom:14px; margin-bottom:-14px;')
+  .replace(/(z-index:60;\s*)top:calc\(100% \+ 14px\)/, '$1top:100%');
+
 const DEVIATIONS = [availableSoon];
 
 for (const [file, route] of Object.entries(PAGES)) {
@@ -133,6 +147,7 @@ for (const [file, route] of Object.entries(PAGES)) {
 
   for (const d of DEVIATIONS) s = d(s);
   s = navigableLearningAssets(s, route);
+  s = bridgeDropdownGap(s);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
