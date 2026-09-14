@@ -84,6 +84,26 @@
     }
   }
 
+  /* ---------- 2b. standalone toggles ----------
+     Independent collapsibles outside any numbered accordion group: each owns
+     its own open state, so opening one never closes another. Declared in the
+     page config as {click, panel, sign, closed, openTxt}. */
+  (cfg.toggles || []).forEach(function (t) {
+    var btn = trigger(t.click);
+    if (!btn) return;
+    var set = function (on) {
+      show(t.panel, on);
+      if (t.sign) setText(t.sign, on ? t.openTxt : t.closed);
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    };
+    set(false);
+    btn.__set = set;
+    btn.addEventListener('click', function () { set(!isOn(t.panel)); });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(!isOn(t.panel)); }
+    });
+  });
+
   /* ---------- 3. info popovers (one open at a time) ---------- */
   var tips = cfg.tips;
   if (tips) {
@@ -133,6 +153,10 @@
       var b = trigger(acc.toggle + (acc.unnumbered ? '' : i));
       if (b && b.__set) b.__set(true);
     }
+    (cfg.toggles || []).forEach(function (t) {
+      var b = trigger(t.click);
+      if (b && b.__set) b.__set(true);
+    });
     if (tips) for (var k = 0; k < tips.count; k++) show('g' + k, false);
     navSet && navSet(false);
   });
