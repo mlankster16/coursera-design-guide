@@ -6,6 +6,8 @@
         the element that responds to an event; the value is the behaviour name
      data-if="NAME"     block shown when NAME is on (hidden attribute otherwise)
      data-text="NAME"   text that swaps with state (caret, Show/Hide labels)
+     data-asset-cta="SLUG"  Learning Assets card footer: holds both the guide
+        link and the "available soon" line; the page config picks which shows
 
    Behaviours: nav dropdown, accordions, info popovers, expand-all-for-print. */
 (function () {
@@ -57,6 +59,27 @@
     document.addEventListener('focusin', function (e) {
       if (isOn('navOpen') && !navHost.contains(e.target)) navSet(false);
     }, true);
+  }
+
+  /* ---------- 1b. asset guide release state ----------
+     The eight Learning Asset guides ship held back: each card carries both its
+     "Explore" link and an "available soon" line, and this picks one. Releasing
+     a guide is a config edit, not a markup edit — in the page config,
+     "assets": {"released": ["video", "reading"]} releases those two, and
+     "assets": {"released": "all"} releases the set. Default (empty list) holds
+     every card. If JS does not run, the held-back state is what renders. */
+  var assets = cfg.assets;
+  if (assets) {
+    var relAll = assets.released === 'all';
+    var relList = Array.isArray(assets.released) ? assets.released : [];
+    var ctas = document.querySelectorAll('[data-asset-cta]');
+    for (var a = 0; a < ctas.length; a++) {
+      var out = relAll || relList.indexOf(ctas[a].getAttribute('data-asset-cta')) !== -1;
+      var link = ctas[a].querySelector('[data-asset-link]');
+      var soon = ctas[a].querySelector('[data-asset-soon]');
+      if (link) { if (out) link.removeAttribute('hidden'); else link.setAttribute('hidden', ''); }
+      if (soon) { if (out) soon.setAttribute('hidden', ''); else soon.removeAttribute('hidden'); }
+    }
   }
 
   /* ---------- 2. accordions ---------- */

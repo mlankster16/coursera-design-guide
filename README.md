@@ -61,12 +61,16 @@ node scripts/deploy-design-build.mjs /path/to/build
 npm run build
 ```
 
-The script copies the files byte-for-byte and does only two things they
-cannot do for themselves: resolves the `href="#"` nav placeholders into real
-routes, and re-applies the short list of CTL decisions that post-date the
-design. That list lives at the top of the script — keep it short, and keep
-the reason attached to each one. Anything else that looks wrong on the live
-site should be fixed in Design and re-exported, not patched here.
+The script copies the files byte-for-byte and does one thing the build
+cannot do for itself: it resolves the `href="#"` nav placeholders into real
+routes. There are currently **no content deviations** — the site is Design's
+files plus link wiring. If something looks wrong, fix it in Design and
+re-export rather than patching here; the `DEVIATIONS` array exists for
+genuine CTL overrides, and the shorter it stays the better.
+
+Six `href="#"` links remain by design, on the Learning Assets page: the
+hidden release links for the six asset guides that are not built yet. They
+become real links when those pages exist.
 
 The previous Astro implementations are kept in `src/_superseded/` for
 reference. Astro ignores that directory, so they do not build.

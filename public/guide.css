@@ -360,3 +360,21 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
   outline: 2px solid #17724A !important;
   outline-offset: -2px !important;
 }
+
+/* Learning Assets nav: the label is a link to the page, the caret button owns
+   the dropdown. Both live inside the hover wrapper, which carries the menu's
+   14px gap as padding so the pointer path to the panel is continuous. */
+.gnav-label:hover, .gnav-caret:hover {
+  color: #8A5A0B !important;
+}
+
+.gnav-label:focus-visible, .gnav-caret:focus-visible {
+  outline: 2px solid #00539B !important;
+  outline-offset: 3px !important;
+}
+
+/* Asset card footers carry both states; guide.js hides one. The !important is
+   required — the "available soon" line has an inline display:flex, which would
+   otherwise beat the hidden attribute. */
+[data-asset-cta] { display: contents; }
+[data-asset-link][hidden], [data-asset-soon][hidden] { display: none !important; }

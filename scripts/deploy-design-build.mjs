@@ -48,6 +48,10 @@ const ASSETS = [
 /** Link text -> destination, for everything that is not an asset anchor. */
 const BY_TEXT = {
   'All Learning Assets': LA,
+  // Shown only when guide.js releases the asset. The other six guides are
+  // not built, so their links stay placeholders until they are.
+  'Explore Video →': `${BASE}/learning-assets/video/`,
+  'Explore Reading →': `${BASE}/learning-assets/reading/`,
   'Accessibility, Copyright & AI': A11Y,
   'Accessibility, Copyright & AI →': A11Y,
   'Review guidance →': A11Y,
@@ -65,61 +69,7 @@ const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s
    This list is the only place the published site may differ from the build;
    keep it short and keep the reason attached. */
 
-/** CTL is holding all eight asset guides back until the set is ready, so a
-    card's link reads as a status rather than something to click. */
-const availableSoon = (s) => s.replace(
-  /<a href="#"([^>]*)>\s*Explore [^<]+?→\s*<\/a>/g,
-  '<span style="align-self:flex-start; display:inline-block; padding:7px 13px;'
-  + ' border:1px solid #E4E2DD; border-radius:3px; background:#FBFAF7;'
-  + ' font-size:14px; font-weight:700; letter-spacing:.12em;'
-  + ' text-transform:uppercase; color:#6B737F;">Available soon</span>');
-
-/** The "Learning Assets" nav item ships as a span with role="button" whose
-    only job is toggling the dropdown, so it can never reach the Learning
-    Assets page — clicking it just opens the menu. CTL reported this as a
-    dead menu item.
-
-    Split into a real link for the label plus a button for the caret. The
-    link navigates on click and Enter; the button keeps data-click/data-keys
-    so guide.js still drives the menu, and keeps aria-expanded/aria-haspopup,
-    which belong on the control that owns the menu rather than on a link.
-    Hovering the wrapper still opens the menu, as before.
-
-    Retire once Design's export makes the label navigable. */
-const navigableLearningAssets = (s, route) => s.replace(
-  /<span data-click="navToggle"[^>]*style="([^"]*)"[^>]*class="(g\d+)">Learning Assets\s*<span data-text="navCaret">[^<]*<\/span><\/span>/,
-  (_m, style, g) => {
-    // The label carries the visual treatment; strip the cursor, which
-    // belonged to the fake button.
-    const labelStyle = style.replace(/cursor:pointer;?\s*/, '').trim();
-    const here = route === 'learning-assets';
-    const label = here
-      ? `<span style="${labelStyle} text-decoration:none;">Learning Assets</span>`
-      : `<a href="${LA}" style="${labelStyle} text-decoration:none;" class="${g}">Learning Assets</a>`;
-    return label
-      + `<button type="button" data-click="navToggle" data-keys="navKeys"`
-      + ` aria-expanded="false" aria-haspopup="true"`
-      + ` aria-label="Show all Learning Assets"`
-      + ` style="appearance:none; -webkit-appearance:none; background:none; border:0;`
-      + ` padding:0 0 0 4px; margin:0; font:inherit; color:inherit; line-height:inherit;`
-      + ` cursor:pointer;"><span data-text="navCaret" aria-hidden="true">⌄</span></button>`;
-  });
-
-/** The dropdown sits 14px below the trigger, and that 14px is outside the
-    hover wrapper — so moving the pointer down to the menu fires mouseleave
-    and the menu closes before you can reach an item. The gap is purely
-    visual, so move it inside the wrapper: the wrapper grows 14px downwards
-    (cancelled by an equal negative margin, so the nav row does not move)
-    and the panel sits at top:100% instead of 100% + 14px. Same position on
-    screen, but now there is no dead strip to cross. */
-const bridgeDropdownGap = (s) => s
-  .replace(
-    /(<span data-nav-menu=""[^>]*style=")position:relative; display:inline-block;/,
-    '$1position:relative; display:inline-block;'
-      + ' padding-bottom:14px; margin-bottom:-14px;')
-  .replace(/(z-index:60;\s*)top:calc\(100% \+ 14px\)/, '$1top:100%');
-
-const DEVIATIONS = [availableSoon];
+const DEVIATIONS = [];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
@@ -138,16 +88,14 @@ for (const [file, route] of Object.entries(PAGES)) {
   // read "<direction> <destination>", so drop the direction and match the
   // destination that follows it.
   const DIRECTION = /^(?:←\s*(?:Back to|Back|Zoom out)|Zoom in\s*→|Asset guidance\s*→|Helpful throughout\s*→)\s*/;
-  s = s.replace(/<a href="#"([^>]*)>([\s\S]*?)<\/a>/g, (m, attrs, inner) => {
+  s = s.replace(/<a ([^>]*?)href="#"([^>]*)>([\s\S]*?)<\/a>/g, (m, pre, attrs, inner) => {
     const t = text(inner).replace(DIRECTION, '');
     const asset = ASSETS.find(([label]) => t === label);
     const href = BY_TEXT[t] ?? (asset ? `${LA}#${asset[1]}` : null);
-    return href ? `<a href="${href}"${attrs}>${inner}</a>` : m;
+    return href ? `<a ${pre}href="${href}"${attrs}>${inner}</a>` : m;
   });
 
   for (const d of DEVIATIONS) s = d(s);
-  s = navigableLearningAssets(s, route);
-  s = bridgeDropdownGap(s);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
