@@ -74,7 +74,14 @@ const availableSoon = (s) => s.replace(
   + ' font-size:14px; font-weight:700; letter-spacing:.12em;'
   + ' text-transform:uppercase; color:#6B737F;">Available soon</span>');
 
-const DEVIATIONS = [availableSoon];
+/** CTL renamed this Course template field. Covers the field label, its
+    popover title, and the trigger's aria-label. Retire once Design's
+    export carries the new wording. */
+const instructorFieldLabel = (s) => s.replaceAll(
+  'Instructor information and bio source link',
+  'Instructor information and headshot');
+
+const DEVIATIONS = [availableSoon, instructorFieldLabel];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
