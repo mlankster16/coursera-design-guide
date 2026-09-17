@@ -106,7 +106,13 @@ const realWorldApplicationField = (s, route) => {
   return s.replace(anchor, field + anchor);
 };
 
-const DEVIATIONS = [];
+/** CTL reworded the lead-in to the scope questions on Course step 2.
+    Retire once Design's export carries it. */
+const scopeQuestionsLeadIn = (s) => s.replace(
+  'For each topic, resource, or activity, ask:',
+  'For each Course objective, ask:');
+
+const DEVIATIONS = [scopeQuestionsLeadIn];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
