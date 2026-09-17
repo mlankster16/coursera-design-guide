@@ -69,50 +69,132 @@ const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s
    This list is the only place the published site may differ from the build;
    keep it short and keep the reason attached. */
 
-/** The revised Course Design Template adds a "Real-world application" field
-    after the instructor bio. Added here ahead of Design's export so CTL can
-    show it in a meeting; the popover copy and the worked example are CTL's
-    to supply, so both are interim — the popover carries the template's own
-    guidance line and the value cell carries the template's placeholder.
-    Replace with Design's export, do not extend this. */
-const realWorldApplicationField = (s, route) => {
-  if (route !== 'course') return s;
-  const anchor = '\n <div data-keep="" style="background:#F0F6F2; border-top:1px solid #CFE2D8;';
-  if (!s.includes(anchor)) throw new Error('course: "Your templates" block not found');
+/* --- Course page: the revised Course Design Template ---------------------
+   CTL's Course Design Template gained two fields the site's template mock
+   never carried — "Modules in this Course" and "Real-world application" —
+   and dropped the optional Course project, which Real-world application
+   now covers. Added here ahead of Design's export.
 
-  const field = `
+   Field guidance copy is interim: each popover carries the template's own
+   one-line guidance until CTL supplies the Best-practice text. The worked
+   examples are CTL's and are final.
+
+   Replace wholesale with Design's export; do not extend this. */
+
+/** Shared cell styling, lifted from the tables already in the build so the
+    new one matches rather than approximating. */
+const TH = 'box-sizing:border-box; background:#F0F6F2; padding:13px 20px;'
+  + ' font-size:14px; letter-spacing:.13em; text-transform:uppercase;'
+  + ' color:#125E3D; font-weight:700; text-align:left; vertical-align:top;';
+const TD = 'box-sizing:border-box; padding:16px 20px; font-size:15px;'
+  + ' line-height:1.6; color:#3A424E; border-left:1px solid #E4E2DD;'
+  + ' text-align:left; vertical-align:top;';
+
+const MODULE_ROWS = [
+  ['1', 'Identifying and Evaluating Business Data',
+   'Identify the data needed for a business question and evaluate an available dataset for relevance and quality.',
+   '3 hours'],
+  ['2', 'Framing Business Questions',
+   'Translate a business need into a focused question that can be investigated with data.',
+   '2 hours'],
+  ['3', 'Preparing Data for Analysis',
+   'Organize and prepare a simple dataset for an introductory business analysis.',
+   '2 hours'],
+];
+
+/** One template field: label, ⓘ popover, and its value. */
+const field = (n, label, guidance, value) => `
  <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
  <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
- <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D;">Real-world application</p>
- <span data-click="gt10" role="button" tabindex="0" aria-label="Guidance for Real-world application" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
- <div data-if="g10" hidden>
+ <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D;">${label}</p>
+ <span data-click="gt${n}" role="button" tabindex="0" aria-label="Guidance for ${label}" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g${n}" hidden>
  <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
  <div>
  <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
- <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Real-world application</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">${label}</p>
  </div>
- <span data-click="c10" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
+ <span data-click="c${n}" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
  </div>
- <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Jot down any ideas for how learners could apply this Course's objectives, whether that's a <strong style="font-weight:700;color:#1F2833;">project, exercise, tool, or dataset you already have in mind</strong>, or questions for your Learning Experience Designer about what's possible.</p>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">${guidance}</p>
  </div>
  </div>
  </div>
- <p style="margin:0; background:#F0F6F2; border:1px solid #CFE2D8; border-radius:2px; padding:14px 18px; font-size:17px; line-height:1.6; color:#6B737F;">[ ideas, questions, tools, and/or a draft description ]</p>
+${value}
  </div>`;
 
-  // the popover count on <body> drives guide.js's tip wiring
-  s = s.replace('"tips":{"count":10,', '"tips":{"count":11,');
-  return s.replace(anchor, field + anchor);
+const valueBox = (text) =>
+  ` <p style="margin:0; background:#F0F6F2; border:1px solid #CFE2D8; border-radius:2px; padding:14px 18px; font-size:17px; line-height:1.6; color:#1F2833;">${text}</p>`;
+
+const modulesTable = () => ` <div style="border:1px solid #D8DEE7; border-radius:3px; overflow:hidden;">
+ <table style="table-layout:fixed; width:100%; border-collapse:collapse; margin:0;">
+ <caption style="position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;">The Modules in this Course, what learners can do after each, and the estimated learner time</caption>
+ <thead>
+ <tr>
+ <th scope="col" style="width:7%; ${TH}">#</th>
+ <th scope="col" style="width:28%; ${TH} border-left:1px solid #CFE2D8;">Module title</th>
+ <th scope="col" style="width:45%; ${TH} border-left:1px solid #CFE2D8;">Main outcomes</th>
+ <th scope="col" style="width:20%; ${TH} border-left:1px solid #CFE2D8;">Est. time</th>
+ </tr>
+ </thead>
+ <tbody>${MODULE_ROWS.map(([n, title, outcome, time], i) => `
+ <tr${i < MODULE_ROWS.length - 1 ? ' style="border-bottom:1px solid #E4E2DD;"' : ''}>
+ <th scope="row" style="box-sizing:border-box; padding:16px 20px; font-size:17px; font-weight:700; line-height:1.4; color:#125E3D; text-align:left; vertical-align:top;">${n}</th>
+ <td style="${TD} font-size:17px; font-weight:600; color:#1F2833;">${title}</td>
+ <td style="${TD}">${outcome}</td>
+ <td style="${TD} white-space:nowrap;">${time}</td>
+ </tr>`).join('')}
+ </tbody>
+ </table>
+ </div>`;
+
+const courseTemplateRevision = (s, route) => {
+  if (route !== 'course') return s;
+
+  // The new fields sit after the instructor bio, which is the last field
+  // before the "Your templates" footer.
+  const anchor = '\n <div data-keep="" style="background:#F0F6F2; border-top:1px solid #CFE2D8;';
+  if (!s.includes(anchor)) throw new Error('course: "Your templates" block not found');
+
+  const added =
+    field(10, 'Modules in this Course',
+      'For each Module, summarize what learners will be able to do after completing it. '
+      + 'Outcomes should build toward the Course objectives rather than restate the Module topic.',
+      modulesTable())
+    + field(11, 'Real-world application',
+      "Jot down any ideas for how learners could apply this Course's objectives, whether that's a "
+      + '<strong style="font-weight:700;color:#1F2833;">project, exercise, tool, or dataset you already have in mind</strong>, '
+      + 'or questions for your Learning Experience Designer about what’s possible.',
+      valueBox('I have a realistic workplace dataset that might be useful for a hands-on activity. '
+        + 'I’m imagining that learners could use it to move from a business need to a focused question, '
+        + 'assess whether the data is suitable for that question, and prepare it for an introductory analysis. '
+        + 'A short business brief, data-quality checklist, and guiding questions could support their decisions. '
+        + 'The activity could be completed in a spreadsheet, without requiring specialized or paid software.'));
+
+  s = s.replace('"tips":{"count":10,', '"tips":{"count":12,');
+  return s.replace(anchor, added + anchor);
 };
 
-/** CTL reworded the lead-in to the scope questions on Course step 2.
-    Retire once Design's export carries it. */
-const scopeQuestionsLeadIn = (s) => s.replace(
-  'For each topic, resource, or activity, ask:',
-  'For each Course objective, ask:');
+/** CTL reworded the step-2 scope prompt and its three questions, so they
+    interrogate each Course objective rather than each candidate asset. */
+const scopeQuestions = (s) => {
+  s = s.replace('For each topic, resource, or activity, ask:', 'For each Course objective, ask:');
+  const was = [
+    'What knowledge or skills will learners gain from this?',
+    'Do learners need it to achieve a course objective?',
+    'Will it give learners an opportunity to practice or demonstrate what they should be able to do?',
+  ];
+  const now = [
+    'What do learners need to know or be able to do to achieve this objective?',
+    'What concepts, skills, or decisions make up this objective?',
+    'How will learners practice and demonstrate this capability?',
+  ];
+  was.forEach((old, i) => { s = s.replace(old, now[i]); });
+  return s;
+};
 
-const DEVIATIONS = [scopeQuestionsLeadIn];
+const DEVIATIONS = [scopeQuestions];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
@@ -139,7 +221,7 @@ for (const [file, route] of Object.entries(PAGES)) {
   });
 
   for (const d of DEVIATIONS) s = d(s);
-  s = realWorldApplicationField(s, route);
+  s = courseTemplateRevision(s, route);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
