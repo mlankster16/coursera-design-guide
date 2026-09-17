@@ -69,6 +69,43 @@ const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s
    This list is the only place the published site may differ from the build;
    keep it short and keep the reason attached. */
 
+/** The revised Course Design Template adds a "Real-world application" field
+    after the instructor bio. Added here ahead of Design's export so CTL can
+    show it in a meeting; the popover copy and the worked example are CTL's
+    to supply, so both are interim — the popover carries the template's own
+    guidance line and the value cell carries the template's placeholder.
+    Replace with Design's export, do not extend this. */
+const realWorldApplicationField = (s, route) => {
+  if (route !== 'course') return s;
+  const anchor = '\n <div data-keep="" style="background:#F0F6F2; border-top:1px solid #CFE2D8;';
+  if (!s.includes(anchor)) throw new Error('course: "Your templates" block not found');
+
+  const field = `
+ <div style="padding:26px 26px; border-bottom:1px solid #E4E2DD;">
+ <div style="position:relative; display:flex; align-items:center; gap:9px; margin:0 0 12px;">
+ <p style="margin:0; font-size:15px; font-weight:700; color:#125E3D;">Real-world application</p>
+ <span data-click="gt10" role="button" tabindex="0" aria-label="Guidance for Real-world application" style="flex:none; display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; border:1px solid #CFE2D8; background:#FFFFFF; color:#125E3D; cursor:pointer;" class="g14"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; display:block;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+ <div data-if="g10" hidden>
+ <div style="position:absolute; z-index:40; top:calc(100% + 8px); left:0; width:420px; max-width:420px; background:#FFFFFF; border:1px solid #CFE2D8; border-top:3px solid #17724A; border-radius:3px; box-shadow:0 10px 34px rgba(1,33,105,.16); padding:20px 22px; text-align:left;">
+ <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin:0 0 10px;">
+ <div>
+ <p style="margin:0 0 3px; font-size:14px; letter-spacing:.16em; text-transform:uppercase; color:#125E3D; font-weight:700; white-space:nowrap;">Best practice</p>
+ <p style="margin:0; font-family:'EB Garamond',serif; font-size:22px; line-height:1.25; color:#012169;">Real-world application</p>
+ </div>
+ <span data-click="c10" style="flex:none; cursor:pointer; font-size:17px; line-height:1; color:#6B737F; padding:2px 3px;" class="g12">✕</span>
+ </div>
+ <p style="margin:0; font-size:15px; line-height:1.7; color:#3A424E;">Jot down any ideas for how learners could apply this Course's objectives, whether that's a <strong style="font-weight:700;color:#1F2833;">project, exercise, tool, or dataset you already have in mind</strong>, or questions for your Learning Experience Designer about what's possible.</p>
+ </div>
+ </div>
+ </div>
+ <p style="margin:0; background:#F0F6F2; border:1px solid #CFE2D8; border-radius:2px; padding:14px 18px; font-size:17px; line-height:1.6; color:#6B737F;">[ ideas, questions, tools, and/or a draft description ]</p>
+ </div>`;
+
+  // the popover count on <body> drives guide.js's tip wiring
+  s = s.replace('"tips":{"count":10,', '"tips":{"count":11,');
+  return s.replace(anchor, field + anchor);
+};
+
 const DEVIATIONS = [];
 
 for (const [file, route] of Object.entries(PAGES)) {
@@ -96,6 +133,7 @@ for (const [file, route] of Object.entries(PAGES)) {
   });
 
   for (const d of DEVIATIONS) s = d(s);
+  s = realWorldApplicationField(s, route);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
