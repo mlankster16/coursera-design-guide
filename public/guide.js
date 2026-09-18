@@ -158,7 +158,12 @@
           });
         }
         var close = trigger('c' + n);
-        if (close) close.addEventListener('click', function (e) { e.stopPropagation(); setTip(null); });
+        if (close) {
+          close.addEventListener('click', function (e) { e.stopPropagation(); setTip(null); });
+          close.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); setTip(null); }
+          });
+        }
       })(k);
     }
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setTip(null); });
