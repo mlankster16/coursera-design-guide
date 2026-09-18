@@ -69,11 +69,29 @@ const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s
    This list is the only place the published site may differ from the build;
    keep it short and keep the reason attached.
 
-   Empty, as it should be: CTL's instructions go to Design, Design exports
-   them, and this script copies the result. Anything added here is a patch
-   waiting to be retired. */
+   CTL's instructions normally go to Design, Design exports them, and this
+   script copies the result. Anything here is a patch waiting to be retired
+   the moment Design's source carries it. */
 
-const DEVIATIONS = [];
+/** Two Step 2 wording changes from CTL, made ahead of Design's export:
+    "working statement" reads like jargon where "work in progress" is plain,
+    and the four questions are worked through with the LXD, not alone. */
+const stepTwoWording = (s, route) => {
+  if (route !== 'course') return s;
+  const edits = [
+    ['Course objectives are working statements at this stage.',
+     'Course objectives are works in progress at this stage.'],
+    ['For each objective, talk through four questions:',
+     'For each objective, talk through four questions with your Learning Experience Designer:'],
+  ];
+  for (const [from, to] of edits) {
+    if (!s.includes(from)) throw new Error(`course: Step 2 string not found: ${from}`);
+    s = s.replace(from, to);
+  }
+  return s;
+};
+
+const DEVIATIONS = [stepTwoWording];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
@@ -99,7 +117,7 @@ for (const [file, route] of Object.entries(PAGES)) {
     return href ? `<a ${pre}href="${href}"${attrs}>${inner}</a>` : m;
   });
 
-  for (const d of DEVIATIONS) s = d(s);
+  for (const d of DEVIATIONS) s = d(s, route);
 
   const dir = route ? join(OUT, route) : OUT;
   mkdirSync(dir, { recursive: true });
