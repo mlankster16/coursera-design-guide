@@ -91,7 +91,19 @@ const stepTwoWording = (s, route) => {
   return s;
 };
 
-const DEVIATIONS = [stepTwoWording];
+/** CTL reframed the learning-path lead-in: the stages are a planning guide,
+    not an arc every Module is expected to follow. */
+const learningPathLeadIn = (s, route) => {
+  if (route !== 'module') return s;
+  const from = 'Many effective Modules include some version of this learning arc:';
+  const to = 'These stages below are a planning guide, not a required sequence. '
+    + 'Depending on the Module, a stage may be brief, repeated, combined with '
+    + 'another stage, or unnecessary.';
+  if (!s.includes(from)) throw new Error(`module: learning-path lead-in not found`);
+  return s.replace(from, to);
+};
+
+const DEVIATIONS = [stepTwoWording, learningPathLeadIn];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
