@@ -378,3 +378,9 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
    otherwise beat the hidden attribute. */
 [data-asset-cta] { display: contents; }
 [data-asset-link][hidden], [data-asset-soon][hidden] { display: none !important; }
+
+/* Exclusive panel-group triggers (Course Step 2, Copyright section). The open
+   row's tint is set inline by guide.js, so the hover tint lives on the button
+   itself and the two never fight. */
+.pnl-g:hover { background: #F5FAF7 !important; }
+.pnl-a:hover { background: #FDF8F4 !important; }

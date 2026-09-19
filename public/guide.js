@@ -9,7 +9,8 @@
      data-asset-cta="SLUG"  Learning Assets card footer: holds both the guide
         link and the "available soon" line; the page config picks which shows
 
-   Behaviours: nav dropdown, accordions, info popovers, expand-all-for-print. */
+   Behaviours: nav dropdown, accordions, exclusive panel groups, info
+   popovers, expand-all-for-print. */
 (function () {
   'use strict';
 
@@ -127,6 +128,34 @@
     });
   });
 
+  /* ---------- 2c. exclusive panel groups ----------
+     A stack of question panels where at most one is open at a time. Declared
+     in the page config as {click, panel, label, count, closed, openTxt,
+     initial, bgOn}; "initial" is the index open on load (-1 for none). The
+     triggers are real <button>s, so Enter/Space come free. */
+  var panelGroups = [];
+  (cfg.panels || []).forEach(function (g) {
+    var setOne = function (n, on) {
+      show(g.panel + n, on);
+      if (g.label) setText(g.label + n, on ? g.openTxt : g.closed);
+      var b = trigger(g.click + n);
+      if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false');
+      var row = document.querySelector('[data-panel-row="' + g.panel + n + '"]');
+      if (row && g.bgOn) row.style.background = on ? g.bgOn : '#FFFFFF';
+    };
+    var cur = g.initial === undefined ? -1 : g.initial;
+    var apply = function () { for (var i = 0; i < g.count; i++) setOne(i, i === cur); };
+    apply();
+    for (var i = 0; i < g.count; i++) {
+      (function (n) {
+        var b = trigger(g.click + n);
+        if (!b) return;
+        b.addEventListener('click', function () { cur = (cur === n ? -1 : n); apply(); });
+      })(i);
+    }
+    panelGroups.push(function () { for (var j = 0; j < g.count; j++) setOne(j, true); });
+  });
+
   /* ---------- 3. info popovers (one open at a time) ---------- */
   var tips = cfg.tips;
   if (tips) {
@@ -185,6 +214,7 @@
       var b = trigger(t.click);
       if (b && b.__set) b.__set(true);
     });
+    panelGroups.forEach(function (openAll) { openAll(); });
     if (tips) for (var k = 0; k < tips.count; k++) show('g' + k, false);
     navSet && navSet(false);
   });
