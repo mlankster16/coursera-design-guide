@@ -29,7 +29,6 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
   padding-inline-start: 0;
 }
 
-
 /* Data tables are real tables (caption + th scope) for screen readers. Cell
    padding, borders and widths all live inline, so only these structural bits
    belong here. */
@@ -44,334 +43,9 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
 [role="button"] { -webkit-tap-highlight-color: transparent; }
 [role="button"]:focus:not(:focus-visible) { outline: none; }
 
-.g1:hover {
-  color: #8A5A0B !important;
-}
-
-.g2:hover {
-  background: #FBFAF7 !important;
-}
-
-.g3:hover {
-  background: #FBEFD9 !important;
-}
-
-.g4:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g5:hover {
-  text-decoration: underline !important;
-}
-
-.g6:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g7:hover {
-  background: #F2F6FB !important;
-}
-
-.g8:hover {
-  background: #F0F6F2 !important;
-}
-
-.g9:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g10:hover {
-  background: #E8F0F9 !important;
-}
-
-.g11:hover {
-  border-color: #00539B !important;
-}
-
-.g12:hover {
-  color: #1F2833 !important;
-}
-
-.g13:hover {
-  background: #E6F0EA !important;
-}
-
-.g14:hover {
-  border-color: #17724A !important;
-}
-
-.g15:hover {
-  background: #F6F3FA !important;
-}
-
-.g16:hover {
-  background: #EFE9F7 !important;
-}
-
-.g17:hover {
-  border-color: #B4700C !important;
-}
-
-.g18:hover {
-  border-color: #6B4E9E !important;
-}
-
-.g19:hover {
-  background: #FDF6EC !important;
-}
-
-.g20:hover {
-  background: #6B4A11 !important;
-}
-
-.g21:hover {
-  border-color: #339898 !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g22:hover {
-  border-color: #C84E00 !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g23:hover {
-  border-color: #3A424E !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g24:hover {
-  background: #F8EBE2 !important;
-}
-
-.g25:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: -2px !important;
-}
-
-.g26:hover {
-  color: #8A5A0B !important;
-}
-
-.g27:hover {
-  background: #FBFAF7 !important;
-}
-
-.g28:hover {
-  background: #FBEFD9 !important;
-}
-
-.g29:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g30:hover {
-  text-decoration: underline !important;
-}
-
-.g31:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g32:hover {
-  background: #F2F6FB !important;
-}
-
-.g33:hover {
-  background: #F0F6F2 !important;
-}
-
-.g34:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g35:hover {
-  color: #8A5A0B !important;
-}
-
-.g36:hover {
-  background: #FBFAF7 !important;
-}
-
-.g37:hover {
-  background: #FBEFD9 !important;
-}
-
-.g38:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g39:hover {
-  text-decoration: underline !important;
-}
-
-.g40:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g41:hover {
-  background: #F2F6FB !important;
-}
-
-.g42:hover {
-  background: #F0F6F2 !important;
-}
-
-.g43:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g44:hover {
-  color: #8A5A0B !important;
-}
-
-.g45:hover {
-  background: #FBFAF7 !important;
-}
-
-.g46:hover {
-  background: #FBEFD9 !important;
-}
-
-.g47:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g48:hover {
-  text-decoration: underline !important;
-}
-
-.g49:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g50:hover {
-  background: #F2F6FB !important;
-}
-
-.g51:hover {
-  background: #F0F6F2 !important;
-}
-
-.g52:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g53:focus-visible {
-  outline: 2px solid #17724A !important;
-  outline-offset: -2px !important;
-}
-
-.g54:hover {
-  color: #8A5A0B !important;
-}
-
-.g55:hover {
-  background: #FBFAF7 !important;
-}
-
-.g56:hover {
-  background: #FBEFD9 !important;
-}
-
-.g57:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g58:hover {
-  text-decoration: underline !important;
-}
-
-.g59:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g60:hover {
-  background: #F2F6FB !important;
-}
-
-.g61:hover {
-  background: #F0F6F2 !important;
-}
-
-.g62:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g63:focus-visible {
-  outline: 2px solid #17724A !important;
-  outline-offset: -2px !important;
-}
-
-.g64:hover {
-  color: #8A5A0B !important;
-}
-
-.g65:hover {
-  background: #FBFAF7 !important;
-}
-
-.g66:hover {
-  background: #FBEFD9 !important;
-}
-
-.g67:hover {
-  background: #FBFAF7 !important;
-  color: #8A5A0B !important;
-}
-
-.g68:hover {
-  text-decoration: underline !important;
-}
-
-.g69:hover {
-  border-color: #00539B !important;
-  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
-}
-
-.g70:hover {
-  background: #F2F6FB !important;
-}
-
-.g71:hover {
-  background: #F0F6F2 !important;
-}
-
-.g72:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
-
-.g73:focus-visible {
-  outline: 2px solid #17724A !important;
-  outline-offset: -2px !important;
-}
-
 /* Learning Assets nav: the label is a link to the page, the caret button owns
    the dropdown. Both live inside the hover wrapper, which carries the menu's
    14px gap as padding so the pointer path to the panel is continuous. */
-.gnav-label:hover, .gnav-caret:hover {
-  color: #8A5A0B !important;
-}
-
-.gnav-label:focus-visible, .gnav-caret:focus-visible {
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
-}
 
 /* Asset card footers carry both states; guide.js hides one. The !important is
    required — the "available soon" line has an inline display:flex, which would
@@ -382,5 +56,109 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
 /* Exclusive panel-group triggers (Course Step 2, Copyright section). The open
    row's tint is set inline by guide.js, so the hover tint lives on the button
    itself and the two never fight. */
-.pnl-g:hover { background: #F5FAF7 !important; }
-.pnl-a:hover { background: #FDF8F4 !important; }
+
+/* --- Planning-page rework (Sept 21) --------------------------------- */
+/* Hover and focus states for the reworked pages. Namespaced h* so the
+   earlier g* rules keep working. */
+
+.h1:hover {
+  color: #8A5A0B !important;
+}
+
+.h2:focus-visible {
+  outline: 2px solid #00539B !important;
+  outline-offset: 3px !important;
+}
+
+.h3:hover {
+  background: #FBFAF7 !important;
+}
+
+.h4:hover {
+  background: #FBEFD9 !important;
+}
+
+.h5:hover {
+  background: #FBFAF7 !important;
+  color: #8A5A0B !important;
+}
+
+.h6:hover {
+  background: #F2F6FB !important;
+}
+
+.h7:hover {
+  background: #FAFAF8 !important;
+}
+
+.h8:hover {
+  border-color: #00539B !important;
+}
+
+.h9:hover {
+  color: #1F2833 !important;
+}
+
+.h10:hover {
+  text-decoration: underline !important;
+}
+
+.h11:hover {
+  background: #00539B !important;
+}
+
+.h12:hover {
+  background: #F0F6F2 !important;
+}
+
+.h13:hover {
+  border-color: #17724A !important;
+}
+
+.h14:hover {
+  background: #17724A !important;
+}
+
+.h15:hover {
+  background: #F6F3FA !important;
+}
+
+.h16:hover {
+  border-color: #B4700C !important;
+}
+
+.h17:hover {
+  border-color: #6B4E9E !important;
+}
+
+.h18:hover {
+  background: #FDF6EC !important;
+}
+
+.h19:hover {
+  background: #6B4E9E !important;
+}
+
+.h20:hover {
+  border-color: #00539B !important;
+  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
+}
+
+.h21:hover {
+  background: #6B4A11 !important;
+}
+
+.h22:hover {
+  border-color: #339898 !important;
+  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
+}
+
+.h23:hover {
+  border-color: #C84E00 !important;
+  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
+}
+
+.h24:hover {
+  border-color: #3A424E !important;
+  box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
+}

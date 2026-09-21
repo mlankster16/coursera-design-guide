@@ -9,8 +9,8 @@
      data-asset-cta="SLUG"  Learning Assets card footer: holds both the guide
         link and the "available soon" line; the page config picks which shows
 
-   Behaviours: nav dropdown, accordions, exclusive panel groups, info
-   popovers, expand-all-for-print. */
+   Behaviours: nav dropdown, accordions, exclusive panel groups, tab shelves,
+   info popovers, expand-all-for-print. */
 (function () {
   'use strict';
 
@@ -32,6 +32,12 @@
     for (var i = 0; i < els.length; i++) els[i].textContent = txt;
   }
   function trigger(name) { return document.querySelector('[data-click="' + name + '"]'); }
+  /* Some behaviours appear more than once under the same name — a guidance
+     badge repeated in a step panel and again in the full template. Every copy
+     has to respond, so popovers resolve all of them, not just the first. */
+  function triggerAll(name) {
+    return document.querySelectorAll('[data-click="' + name + '"]');
+  }
 
   /* ---------- 1. nav dropdown ---------- */
   var navHost = document.querySelector('[data-nav-menu]');
@@ -156,18 +162,52 @@
     panelGroups.push(function () { for (var j = 0; j < g.count; j++) setOne(j, true); });
   });
 
+  /* ---------- 2d. tab shelves ("Explore further") ----------
+     A bordered shelf with N tabs across the top and one panel area beneath.
+     Nothing is open on load; clicking a tab opens its panel below the whole
+     row, clicking the same tab again closes it, and at most one panel per
+     shelf is open. Declared in the page config as
+     {click, panel, groups:[tabCount, …], onBd}: one entry per shelf, in
+     document order. Triggers are real <button>s, so Enter/Space come free.
+     Names are "<click><shelf>_<tab>" and "<panel><shelf>_<tab>". */
+  var tabShelves = [];
+  var tb = cfg.tabs;
+  if (tb) {
+    (tb.groups || []).forEach(function (count, gi) {
+      var cur = -1;
+      var setOne = function (n, on) {
+        show(tb.panel + gi + '_' + n, on);
+        var b = trigger(tb.click + gi + '_' + n);
+        if (!b) return;
+        b.setAttribute('aria-expanded', on ? 'true' : 'false');
+        b.style.borderBottomColor = on ? (tb.onBd || '#012169') : 'transparent';
+      };
+      var apply = function () { for (var i = 0; i < count; i++) setOne(i, i === cur); };
+      apply();
+      for (var i = 0; i < count; i++) {
+        (function (n) {
+          var b = trigger(tb.click + gi + '_' + n);
+          if (!b) return;
+          b.addEventListener('click', function () { cur = (cur === n ? -1 : n); apply(); });
+        })(i);
+      }
+      tabShelves.push(function () { for (var j = 0; j < count; j++) setOne(j, true); });
+    });
+  }
+
   /* ---------- 3. info popovers (one open at a time) ---------- */
   var tips = cfg.tips;
   if (tips) {
     var openTip = null;
-    var badgeFor = function (n) { return trigger('gt' + n); };
+    var badgeFor = function (n) { return triggerAll('gt' + n); };
     var paint = function (n, on) {
-      var b = badgeFor(n);
-      if (!b) return;
       var gold = tips.goldFrom !== undefined && n >= tips.goldFrom;
-      b.style.background = on ? (gold ? tips.goldOn : tips.on) : tips.off;
-      b.style.color = on ? tips.onFg : (gold ? tips.goldOffFg : tips.offFg);
-      b.setAttribute('aria-expanded', on ? 'true' : 'false');
+      var list = badgeFor(n);
+      for (var p = 0; p < list.length; p++) {
+        list[p].style.background = on ? (gold ? tips.goldOn : tips.on) : tips.off;
+        list[p].style.color = on ? tips.onFg : (gold ? tips.goldOffFg : tips.offFg);
+        list[p].setAttribute('aria-expanded', on ? 'true' : 'false');
+      }
     };
     var setTip = function (n) {
       if (openTip !== null) { show('g' + openTip, false); paint(openTip, false); }
@@ -176,20 +216,20 @@
     };
     for (var k = 0; k < tips.count; k++) {
       (function (n) {
-        var badge = badgeFor(n);
-        if (badge) {
-          badge.addEventListener('click', function (e) {
+        var badges = badgeFor(n);
+        for (var bi = 0; bi < badges.length; bi++) {
+          badges[bi].addEventListener('click', function (e) {
             e.preventDefault(); e.stopPropagation();
             setTip(openTip === n ? null : n);
           });
-          badge.addEventListener('keydown', function (e) {
+          badges[bi].addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTip(openTip === n ? null : n); }
           });
         }
-        var close = trigger('c' + n);
-        if (close) {
-          close.addEventListener('click', function (e) { e.stopPropagation(); setTip(null); });
-          close.addEventListener('keydown', function (e) {
+        var closes = triggerAll('c' + n);
+        for (var ci = 0; ci < closes.length; ci++) {
+          closes[ci].addEventListener('click', function (e) { e.stopPropagation(); setTip(null); });
+          closes[ci].addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); setTip(null); }
           });
         }
@@ -198,9 +238,12 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setTip(null); });
     document.addEventListener('click', function (e) {
       if (openTip === null) return;
-      var panel = document.querySelector('[data-if="g' + openTip + '"]');
-      var badge = badgeFor(openTip);
-      if (panel && !panel.contains(e.target) && badge && !badge.contains(e.target)) setTip(null);
+      var panels = document.querySelectorAll('[data-if="g' + openTip + '"]');
+      var badges = badgeFor(openTip);
+      var inside = false, z;
+      for (z = 0; z < panels.length; z++) if (panels[z].contains(e.target)) inside = true;
+      for (z = 0; z < badges.length; z++) if (badges[z].contains(e.target)) inside = true;
+      if (!inside) setTip(null);
     });
   }
 
@@ -215,6 +258,7 @@
       if (b && b.__set) b.__set(true);
     });
     panelGroups.forEach(function (openAll) { openAll(); });
+    tabShelves.forEach(function (openAll) { openAll(); });
     if (tips) for (var k = 0; k < tips.count; k++) show('g' + k, false);
     navSet && navSet(false);
   });
