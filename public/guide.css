@@ -162,3 +162,11 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
   border-color: #3A424E !important;
   box-shadow: 0 6px 20px rgba(1,33,105,.08) !important;
 }
+
+.h25:hover {
+  background: #E8F0FA !important;
+}
+
+.h26:hover {
+  background: #F6F5F1 !important;
+}

@@ -73,25 +73,7 @@ const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s
    script copies the result. Anything here is a patch waiting to be retired
    the moment Design's source carries it. */
 
-/** CTL: "working statement" reads like jargon where "work in progress" is
-    plain. Design's rework adopted the plainer phrasing in Step 2's body
-    ("Keep the objectives as works in progress at this stage") but left the
-    older wording in the "Questions to consider" shelf panel, so the page
-    says it both ways. This aligns the survivor.
-
-    The companion change — naming the Learning Experience Designer alongside
-    the four questions — is retired: that sentence is gone in the rework, and
-    Step 2 now says "Capture questions to explore with your Learning
-    Experience Designer" in its own right. */
-const stepTwoWording = (s, route) => {
-  if (route !== 'course') return s;
-  const from = 'Course objectives are working statements at this stage.';
-  const to = 'Course objectives are works in progress at this stage.';
-  if (!s.includes(from)) throw new Error('course: Step 2 wording string not found');
-  return s.replace(from, to);
-};
-
-const DEVIATIONS = [stepTwoWording];
+const DEVIATIONS = [];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
