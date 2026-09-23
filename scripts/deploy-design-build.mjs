@@ -41,35 +41,25 @@ const NAV = {
 const LA = `${BASE}/learning-assets/`;
 const A11Y = `${BASE}/learning-assets/accessibility-copyright-ai/`;
 
-/** The eight asset types, in page order, for the dropdown anchors. */
-const ASSETS = [
-  ['Video', 'video'], ['Reading', 'reading'], ['Interactive Plugin', 'plugin'],
-  ['Coach Dialogue', 'dialogue'], ['Coach Role Play', 'roleplay'],
-  ['Assessments', 'assessment'], ['Programming Assignments', 'programming'],
-  ['Coursera Labs', 'labs'],
-];
-
-/** Link text -> destination, for everything that is not an asset anchor. */
-const BY_TEXT = {
-  'All Learning Assets': LA,
-  // Shown only when guide.js releases the asset. The other six guides are
-  // not built, so their links stay placeholders until they are.
-  'Explore Video →': `${BASE}/learning-assets/video/`,
-  'Explore Reading →': `${BASE}/learning-assets/reading/`,
-  'Accessibility, Copyright & AI': A11Y,
-  'Accessibility, Copyright & AI →': A11Y,
-  'Review guidance →': A11Y,
-  'Start Here': NAV['Start Here'],
-  Orient: NAV.Orient,
-  // Orient's footer and card links name it in full.
-  'Orient to Coursera': NAV.Orient,
-  Specialization: NAV.Specialization,
-  Course: NAV.Course,
-  Module: NAV.Module,
-  'Learning Assets': LA,
+/** data-link key -> destination. Design ships every placeholder link with a
+    stable key, so resolution no longer depends on the link's visible text. */
+const BY_KEY = {
+  'start-here': `${BASE}/`,
+  orient: `${BASE}/orient/`,
+  specialization: `${BASE}/specialization/`,
+  course: `${BASE}/course/`,
+  module: `${BASE}/module/`,
+  'learning-assets': LA,
+  'accessibility-copyright-ai': A11Y,
 };
 
-const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+/** The two asset guides that are built. The other six keep their placeholder,
+    which is what the release switch in guide.js expects. */
+const ASSET_GUIDES = {
+  video: `${BASE}/learning-assets/video/`,
+  reading: `${BASE}/learning-assets/reading/`,
+};
+
 
 /* --- Deviations -----------------------------------------------------------
    Each is a CTL instruction that overrides or post-dates the design file.
@@ -92,17 +82,31 @@ for (const [file, route] of Object.entries(PAGES)) {
   // read "<direction> <destination>", so drop the direction and match the
   // destination that follows it.
   const DIRECTION = /^(?:←\s*(?:Back to|Back|Zoom out)|Zoom in\s*→|Next\s*→|Asset guidance\s*→|Helpful throughout\s*→)\s*/;
-  // Some links wrap a whole card, so their text is "<destination> <blurb>
-  // Open →" or "… Start →" rather than the bare label.
-  const CARD = /^(Start Here|Orient to Coursera|Specialization|Course|Module|Learning Assets)\b.*(?:Open|Start)\s*→$/;
-  s = s.replace(/<a ([^>]*?)href="#"([^>]*)>([\s\S]*?)<\/a>/g, (m, pre, attrs, inner) => {
-    const t = text(inner).replace(DIRECTION, '');
-    const card = t.match(CARD);
-    const asset = ASSETS.find(([label]) => t === label);
-    const href = BY_TEXT[t] ?? (card ? BY_TEXT[card[1]] : null)
-      ?? (asset ? `${LA}#${asset[1]}` : null);
-    return href ? `<a ${pre}href="${href}"${attrs}>${inner}</a>` : m;
+  // An "asset/<slug>" key means two different things: the nav dropdown item,
+  // which anchors into the Learning Assets page, and the card's "Explore →"
+  // button, which points at the guide itself. They are told apart by
+  // structure, not copy — only the button sits inside a data-asset-cta block
+  // — so mark those first, walking backwards to keep the indices valid.
+  const ctas = [...s.matchAll(/data-asset-cta="([^"]+)"/g)].reverse();
+  for (const m of ctas) {
+    const link = new RegExp(`<a (?=[^>]*data-link="asset/${m[1]}")`, 'g');
+    link.lastIndex = m.index;
+    const hit = link.exec(s);
+    if (hit) s = `${s.slice(0, hit.index)}<a data-cta ${s.slice(hit.index + 3)}`;
+  }
+
+  s = s.replace(/<a ([^>]*?)href="#"([^>]*)>/g, (m, pre, post) => {
+    const attrs = pre + post;
+    const key = (attrs.match(/data-link="([^"]+)"/) || [])[1];
+    if (!key) throw new Error(`${file}: placeholder link with no data-link key`);
+    const asset = key.startsWith('asset/') && key.slice(6);
+    const href = asset
+      ? (/\bdata-cta\b/.test(attrs) ? ASSET_GUIDES[asset] : `${LA}#${asset}`)
+      : BY_KEY[key];
+    if (!href && !asset) throw new Error(`${file}: unknown data-link key "${key}"`);
+    return href ? `<a ${pre}href="${href}"${post}>` : m;
   });
+  s = s.replace(/<a data-cta /g, '<a ');
 
   for (const d of DEVIATIONS) s = d(s, route);
 
