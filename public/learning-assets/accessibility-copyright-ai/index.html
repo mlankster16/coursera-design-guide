@@ -21,6 +21,9 @@
   @media screen and (max-width: 980px) {
     [data-print-page] { padding:24px 16px !important; }
     [data-navrow] { flex-wrap:wrap !important; row-gap:14px !important; }
+    [data-navrow] > nav { flex-wrap:wrap !important; row-gap:10px !important; column-gap:20px !important; }
+    [data-cap="nav"] img { max-width:100% !important; height:auto !important; max-height:30px !important; }
+    [data-cap="nav"] > div:first-child { min-width:0 !important; }
   }
   @media screen and (max-width: 820px) {
     [data-print-shell] [style*="grid-template-columns"] { grid-template-columns:minmax(0,1fr) !important; }
@@ -47,35 +50,19 @@
     [data-keep] { break-inside:avoid; }
     img { max-width:100% !important; }
   }:focus-visible{outline:2px solid #012169; outline-offset:2px;}</style>
-
-<style>
-/* CTL accessibility deviations — see scripts/deploy-design-build.mjs */
-.skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#012169;color:#FFFFFF;
-  padding:12px 20px;font:700 15px/1.2 'Open Sans',system-ui,sans-serif;text-decoration:none;}
-.skip-link:focus{left:0;}
-@media screen and (max-width:980px){
-  /* Design wraps [data-navrow]; its inner link list needs the same. */
-  [data-navrow] > div{flex-wrap:wrap !important;row-gap:10px !important;}
-}
-@media screen and (max-width:640px){
-  [data-cap="nav"] > div:first-child,
-  [data-navrow]{padding-left:24px !important;padding-right:24px !important;}
-  img[src$="ctl-logo-white.png"]{max-width:100% !important;height:auto !important;}
-}
-</style>
 </head>
 <body data-page-config='{"slug":"accessibility-copyright-ai","panels":[{"click":"spa","panel":"pao","label":"pal","count":4,"closed":"Open","openTxt":"Close","initial":-1,"bgOn":"#FDF8F4"}],"tips":null}'>
-<a class="skip-link" href="#main-content">Skip to main content</a>
 <div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
 <div data-print-shell="" style="max-width:1080px; width:100%; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:3px;">
+ <a href="#main" data-skip="" style="position:fixed; top:12px; left:-9999px; z-index:100; background:#012169; color:#FFFFFF; font-size:15px; font-weight:700; padding:10px 16px; border-radius:3px; text-decoration:none;" class="h27">Skip to main content</a>
 
-  <div role="banner" data-cap="nav">
+  <header data-cap="nav">
     <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
       <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
     </div>
-    <div role="navigation" aria-label="Main" data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+    <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
       <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; letter-spacing:.01em; white-space:nowrap;">Coursera Design Guide</span>
-      <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
+      <nav aria-label="Guide pages" style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
         <a href="/coursera-design-guide/" data-link="start-here" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Start Here</a>
  <a href="/coursera-design-guide/orient/" data-link="orient" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Orient</a>
         <a href="/coursera-design-guide/specialization/" data-link="specialization" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Specialization</a>
@@ -98,11 +85,11 @@
             </div>
           </div>
         </span>
-      </div>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <main id="main-content" tabindex="-1">
+  <main id="main">
  <div data-cap="head" style="padding:64px 56px 52px; background:#FBFAF7;">
  <div style="max-width:880px;">
  <p style="margin:0 0 20px; font-size:15px; letter-spacing:.01em; color:#3A424E; font-weight:700;">Guidance for every learning asset</p>
@@ -457,7 +444,7 @@
   </div>
 
   </main>
- <div role="contentinfo" data-foot="" style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+ <footer data-foot="" style="margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD; display:flex; align-items:center; justify-content:space-between; gap:24px;">
     <a href="/coursera-design-guide/learning-assets/" data-link="learning-assets" style="text-decoration:none; display:flex; flex-direction:column; gap:3px;">
       <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">← Back to</span>
       <span style="font-family:'EB Garamond',serif; font-size:24px; color:#8A5A0B;">Learning Assets</span>
@@ -466,7 +453,7 @@
       <span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Asset guidance →</span>
       <span style="font-family:'EB Garamond',serif; font-size:24px; color:#8A5A0B;">Video</span>
     </a>
-  </div>
+  </footer>
 </div>
 </div>
 

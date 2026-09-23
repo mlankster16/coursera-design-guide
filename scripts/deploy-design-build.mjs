@@ -70,59 +70,7 @@ const ASSET_GUIDES = {
    script copies the result. Anything here is a patch waiting to be retired
    the moment Design's source carries it. */
 
-/** Accessibility fixes CTL asked for, pending Design picking them up.
-
-    1. No landmarks and no skip link on any page. The shell has clean hooks:
-       [data-cap="head"] starts the page content and [data-foot] ends it, so
-       <main> wraps exactly that span rather than being faked with ARIA on
-       an element that means something else.
-    2. Design's reflow rule wraps the nav row below 980px, but the link list
-       inside it is a second flex row that does not wrap, so it still
-       overflows and [data-print-shell]'s overflow:clip cuts it off. Below
-       640px that hides real nav items — at 320px, Specialization, Module
-       and Learning Assets — and the page cannot scroll sideways to reach
-       them. One rule makes the inner list wrap too.
-
-    Delete both the moment Design's source carries them. */
-const A11Y_CSS = `
-<style>
-/* CTL accessibility deviations — see scripts/deploy-design-build.mjs */
-.skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#012169;color:#FFFFFF;
-  padding:12px 20px;font:700 15px/1.2 'Open Sans',system-ui,sans-serif;text-decoration:none;}
-.skip-link:focus{left:0;}
-@media screen and (max-width:980px){
-  /* Design wraps [data-navrow]; its inner link list needs the same. */
-  [data-navrow] > div{flex-wrap:wrap !important;row-gap:10px !important;}
-}
-@media screen and (max-width:640px){
-  [data-cap="nav"] > div:first-child,
-  [data-navrow]{padding-left:24px !important;padding-right:24px !important;}
-  img[src$="ctl-logo-white.png"]{max-width:100% !important;height:auto !important;}
-}
-</style>`;
-
-const a11yShell = (s) => {
-  const head = s.indexOf('<div data-cap="head"');
-  const foot = s.indexOf('<div data-foot');
-  if (head < 0) throw new Error('a11y: [data-cap="head"] not found');
-  if (foot < 0 || foot < head) throw new Error('a11y: [data-foot] not found after the header');
-
-  // <main> spans the page header through to just before the footer.
-  s = s.slice(0, foot) + '</main>\n ' + s.slice(foot);
-  s = s.slice(0, head) + '<main id="main-content" tabindex="-1">\n ' + s.slice(head);
-
-  s = s.replace('<div data-foot', '<div role="contentinfo" data-foot');
-  s = s.replace('<div data-navrow', '<div role="navigation" aria-label="Main" data-navrow');
-  // Only five of the seven pages wrap their nav in a [data-cap="nav"] block.
-  s = s.replace('<div data-cap="nav"', '<div role="banner" data-cap="nav"');
-
-  s = s.replace(/(<body[^>]*>)/,
-    '$1\n<a class="skip-link" href="#main-content">Skip to main content</a>');
-  return s.includes('</head>') ? s.replace('</head>', `${A11Y_CSS}\n</head>`)
-                               : s.replace(/(<body[^>]*>)/, `${A11Y_CSS}\n$1`);
-};
-
-const DEVIATIONS = [a11yShell];
+const DEVIATIONS = [];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');

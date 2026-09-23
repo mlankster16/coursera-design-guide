@@ -21,6 +21,9 @@
  @media screen and (max-width: 980px) {
    [data-print-page] { padding:24px 16px !important; }
    [data-navrow] { flex-wrap:wrap !important; row-gap:14px !important; }
+    [data-navrow] > nav { flex-wrap:wrap !important; row-gap:10px !important; column-gap:20px !important; }
+    [data-cap="nav"] img { max-width:100% !important; height:auto !important; max-height:30px !important; }
+    [data-cap="nav"] > div:first-child { min-width:0 !important; }
  }
  @media screen and (max-width: 820px) {
    [data-print-shell] [style*="grid-template-columns"] { grid-template-columns:minmax(0,1fr) !important; }
@@ -51,36 +54,21 @@
  /* Sticky step bar */
  @media print { [data-sticky-steps] { position:static !important; box-shadow:none !important; } }
  @media screen and (max-width: 820px) { [data-sticky-steps] { position:static !important; } [data-sticky-steps] nav { flex-wrap:wrap !important; } [data-sticky-steps] nav > a { flex:1 1 200px !important; } }</style>
-
-<style>
-/* CTL accessibility deviations — see scripts/deploy-design-build.mjs */
-.skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:#012169;color:#FFFFFF;
-  padding:12px 20px;font:700 15px/1.2 'Open Sans',system-ui,sans-serif;text-decoration:none;}
-.skip-link:focus{left:0;}
-@media screen and (max-width:980px){
-  /* Design wraps [data-navrow]; its inner link list needs the same. */
-  [data-navrow] > div{flex-wrap:wrap !important;row-gap:10px !important;}
-}
-@media screen and (max-width:640px){
-  [data-cap="nav"] > div:first-child,
-  [data-navrow]{padding-left:24px !important;padding-right:24px !important;}
-  img[src$="ctl-logo-white.png"]{max-width:100% !important;height:auto !important;}
-}
-</style>
 </head>
 <body data-page-config='{"slug":"orient","tips":null,"steps":{"c":"#1D6363","fg":"#1D6363","tint":"#EFF6F6","ids":["coursera","structure","mapping","process","start"]}}'>
-<a class="skip-link" href="#main-content">Skip to main content</a>
 <div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
 <div data-print-shell="" style="max-width:1080px; width:100%; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:3px;">
+ <a href="#main" data-skip="" style="position:fixed; top:12px; left:-9999px; z-index:100; background:#012169; color:#FFFFFF; font-size:15px; font-weight:700; padding:10px 16px; border-radius:3px; text-decoration:none;" class="h27">Skip to main content</a>
  
 
- <div style="padding:0 0 0 0;">
+ 
+ <header data-cap="nav">
  <div style="display:flex; align-items:center; padding:16px 56px; background:#012169;">
  <img src="/coursera-design-guide/assets/ctl-logo-white.png" alt="Duke Learning Innovation and Lifetime Education — Center for Teaching and Learning" style="height:30px; width:auto; display:block;">
  </div>
- <div role="navigation" aria-label="Main" data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
+ <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
  <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; letter-spacing:.01em; white-space:nowrap;">Coursera Design Guide</span>
- <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
+ <nav aria-label="Guide pages" style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
  <a href="/coursera-design-guide/" data-link="start-here" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Start Here</a>
  <span style="color:#012169; font-weight:600; border-bottom:3px solid #339898; padding-bottom:3px; white-space:nowrap;">Orient</span>
  <a href="/coursera-design-guide/specialization/" data-link="specialization" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Specialization</a>
@@ -101,12 +89,13 @@
  <a href="/coursera-design-guide/learning-assets/#labs" data-link="asset/labs" style="text-decoration:none; display:block; padding:9px 24px; font-size:16px; color:#5A6472; white-space:nowrap;" class="h5">Coursera Labs</a>
  </div>
  </div></span> 
+ </nav>
  </div>
- </div>
+ </header>
 
  
 
- <main id="main-content" tabindex="-1">
+ <main id="main">
  <div data-cap="head" style="padding:64px 56px 52px; background:#FBFAF7;">
  <div style="max-width:880px;">
  <p style="margin:0 0 20px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#1D6363; font-weight:700;">Orient to Coursera</p>
@@ -114,7 +103,7 @@
  <p style="margin:0; font-size:17px; line-height:1.65; color:#3A424E; max-width:880px; text-wrap:pretty; box-sizing:border-box;">Before you begin planning, it helps to understand who Coursera learners are, how a Coursera learning experience is structured, and how development moves from idea to launch. The last step points you to the page where your project’s design work begins.</p>
  </div>
  </div>
- </div>
+ 
 
 <div data-sticky-steps="" style="position:sticky; top:0; z-index:30; background:#FFFFFF; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; box-shadow:0 10px 18px -14px rgba(1,33,105,.22);">
  <nav aria-label="Steps on this page" style="display:flex; padding:0 38px;">
@@ -515,14 +504,14 @@
   </a>
  </div>
  </div>
+ </main>
  </div>
  </div>
 
- </main>
- <div role="contentinfo" data-foot="" style="display:flex; align-items:flex-start; justify-content:flex-start; margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD;">
+ <footer data-foot="" style="display:flex; align-items:flex-start; justify-content:flex-start; margin:60px 56px 56px; padding-top:28px; border-top:1px solid #E4E2DD;">
  <a href="/coursera-design-guide/" data-link="start-here" style="text-decoration:none; display:flex; flex-direction:column; gap:3px; text-align:left;"><span style="font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:#5A6472; font-weight:700; white-space:nowrap;">← Back</span>
  <span style="font-family:'EB Garamond',serif; font-size:22px; color:#00539B; white-space:nowrap;">Start Here</span></a> 
- </div>
+ </footer>
 
 
 <script src="/coursera-design-guide/guide.js"></script>

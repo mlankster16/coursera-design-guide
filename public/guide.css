@@ -170,3 +170,9 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
 .h26:hover {
   background: #F6F5F1 !important;
 }
+
+.h27:focus-visible {
+  left: 12px !important;
+  outline: 2px solid #00539B !important;
+  outline-offset: 3px !important;
+}
