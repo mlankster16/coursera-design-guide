@@ -14,7 +14,7 @@
   a { color:#00539B; }
   a:hover { color:#8A5A0B; }
   @media screen {
-    [data-print-shell] { overflow:hidden; }
+    [data-print-shell] { overflow:clip; }
   }
   /* Reflow: the pages must stay usable at narrow widths and at high zoom
      (WCAG 1.4.10). Generic selectors, so no markup hooks are needed. */
@@ -59,7 +59,8 @@
     <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
       <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; letter-spacing:.01em; white-space:nowrap;">Coursera Design Guide</span>
       <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
-        <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Overview</a>
+        <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Start Here</a>
+ <a href="/coursera-design-guide/orient/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Orient</a>
         <a href="/coursera-design-guide/specialization/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Specialization</a>
         <a href="/coursera-design-guide/course/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Course</a>
         <a href="/coursera-design-guide/module/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Module</a>
@@ -84,31 +85,16 @@
     </div>
   </div>
 
-  <div data-cap="head" style="padding:72px 56px 60px; display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:start; background:#FBFAF7;">
-    <div>
-      <p style="margin:0 0 20px; font-size:15px; letter-spacing:.01em; color:#3A424E; font-weight:700;">Guidance for every learning asset</p>
+  <div data-cap="head" style="padding:64px 56px 52px; background:#FBFAF7;">
+ <div style="max-width:880px;">
+ <p style="margin:0 0 20px; font-size:15px; letter-spacing:.01em; color:#3A424E; font-weight:700;">Guidance for every learning asset</p>
       <h1 style="margin:0 0 24px; font-family:'EB Garamond',Garamond,serif; font-weight:500; font-size:50px; line-height:1.08; color:#012169; letter-spacing:-.01em; text-wrap:balance;">Accessibility, Copyright &amp; AI</h1>
-      <p style="margin:0 0 18px; font-size:17px; line-height:1.65; color:#1F2833; max-width:525px; text-wrap:pretty; box-sizing:border-box;">As you develop each Learning Asset, you’ll make choices that help it work well for learners, fit a public and commercial Coursera Course, and reflect your own expertise (even if AI has supported the process).</p>
-      <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;">You and your Learning Experience Designer can return to this page throughout planning, production, and review. Use it to think through what applies to your work and identify questions to discuss together.</p>
-    </div>
-    <div style="border-left:3px solid #3A424E; padding:4px 0 4px 26px;">
-      <p style="margin:0 0 18px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">When this page may be helpful</p>
-      <div style="display:flex; flex-direction:column; gap:0;">
-        <div style="padding:0px 0 18px;">
-          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">While planning</p>
-          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Think ahead about the format, source materials, and tools you may want to use.</p>
-        </div>
-        <div style="padding:18px 0 18px; border-top:1px solid #E4E2DD;">
-          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">While developing</p>
-          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Find guidance for the text, media, interaction, or other content you’re creating.</p>
-        </div>
-        <div style="padding:18px 0 0px; border-top:1px solid #E4E2DD;">
-          <p style="margin:0 0 5px; font-family:'EB Garamond',serif; font-size:21px; color:#012169;">Before handoff</p>
-          <p style="margin:0; font-size:15px; line-height:1.6; color:#5A6472; max-width:340px; box-sizing:border-box;">Take stock of what’s in place and note anything you’d like to review with your Learning Experience Designer.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+      <p style="margin:0 0 18px; font-size:17px; line-height:1.65; color:#1F2833; max-width:880px; text-wrap:pretty; box-sizing:border-box;">As you develop each Learning Asset, you’ll make choices that help it work well for learners, fit a public and commercial Coursera Course, and reflect your own expertise (even if AI has supported the process).</p>
+      <p style="margin:0; font-size:17px; line-height:1.7; color:#3A424E; max-width:880px; text-wrap:pretty; box-sizing:border-box;">You and your Learning Experience Designer can return to this page throughout planning, production, and review. Use it to think through what applies to your work and identify questions to discuss together.</p>
+ </div>
+ </div>
+
+
 
   <div style="padding:68px 56px 0;">
     <h2 style="margin:0 0 16px; font-family:'EB Garamond',serif; font-weight:500; font-size:36px; line-height:1.15; color:#012169;">Three considerations throughout development</h2>    <p style="margin:0 0 32px; font-size:17px; line-height:1.7; color:#3A424E; max-width:730px; text-wrap:pretty; box-sizing:border-box;">These questions may come up at different points in your project. Open the section that’s most useful for the asset or decision you’re working through with your Learning Experience Designer.</p>    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;">

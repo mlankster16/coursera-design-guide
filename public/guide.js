@@ -10,7 +10,7 @@
         link and the "available soon" line; the page config picks which shows
 
    Behaviours: nav dropdown, accordions, exclusive panel groups, tab shelves,
-   info popovers, expand-all-for-print. */
+   info popovers, sticky step bar scroll-spy, expand-all-for-print. */
 (function () {
   'use strict';
 
@@ -245,6 +245,53 @@
       for (z = 0; z < badges.length; z++) if (badges[z].contains(e.target)) inside = true;
       if (!inside) setTip(null);
     });
+  }
+
+  /* ---------- 5. sticky step bar: highlight the step in view ----------
+     Config: "steps": {"c","fg","tint","ids":[section ids in order]}.
+     The bar is [data-sticky-steps]; each step is an <a href="#id"> whose
+     children are (row with circle), (title), (question). The markup ships in
+     the step-1-active state, so without JS the bar is correct at the top of
+     the page and simply stops tracking. */
+  var steps = cfg.steps;
+  var bar = document.querySelector('[data-sticky-steps]');
+  if (steps && bar) {
+    var links = bar.querySelectorAll('nav > a');
+    var current = 0;
+    var paintSteps = function (a) {
+      for (var i = 0; i < links.length; i++) {
+        var on = i === a, done = i < a, el = links[i];
+        var circle = el.firstElementChild && el.firstElementChild.firstElementChild;
+        var title = el.children[1], desc = el.children[2];
+        el.style.background = on ? steps.tint : '#FFFFFF';
+        el.style.borderBottomColor = on ? steps.c : 'transparent';
+        el.setAttribute('aria-current', on ? 'step' : 'false');
+        if (circle) {
+          circle.style.background = on ? steps.c : '#FFFFFF';
+          circle.style.color = on ? '#FFFFFF' : (done ? steps.fg : '#5A6472');
+          circle.style.borderColor = on || done ? steps.c : '#C9CDD4';
+        }
+        if (title) title.style.color = on ? '#012169' : '#3A424E';
+        if (desc) desc.style.color = on ? '#3A424E' : '#6B737F';
+      }
+    };
+    var ticking = false;
+    var spy = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        var edge = Math.max(bar.getBoundingClientRect().bottom, 0) + 60, a = 0;
+        for (var i = 0; i < steps.ids.length; i++) {
+          var sec = document.getElementById(steps.ids[i]);
+          if (sec && sec.getBoundingClientRect().top <= edge) a = i;
+        }
+        if (a !== current) { current = a; paintSteps(a); }
+      });
+    };
+    document.addEventListener('scroll', spy, true);
+    window.addEventListener('resize', spy);
+    spy();
   }
 
   /* ---------- 4. print: open everything, close popovers ---------- */

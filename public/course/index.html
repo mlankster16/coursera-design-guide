@@ -14,7 +14,7 @@
  a { color:#00539B; }
  a:hover { color:#17724A; }
  @media screen {
- [data-print-shell] { overflow:hidden; }
+ [data-print-shell] { overflow:clip; }
  }
  /* Reflow: the pages must stay usable at narrow widths and at high zoom
     (WCAG 1.4.10). Generic selectors, so no markup hooks are needed. */
@@ -48,9 +48,13 @@
  [data-tablist] { display:none !important; }
  [role="tabpanel"] { border-top:1px solid #E4E2DD !important; border-radius:3px !important; margin-bottom:12px; }
  img { max-width:100% !important; }
- }:focus-visible{outline:2px solid #012169; outline-offset:2px;}</style>
+ }:focus-visible{outline:2px solid #012169; outline-offset:2px;}
+
+ /* Sticky step bar */
+ @media print { [data-sticky-steps] { position:static !important; box-shadow:none !important; } }
+ @media screen and (max-width: 820px) { [data-sticky-steps] { position:static !important; } [data-sticky-steps] nav { flex-wrap:wrap !important; } [data-sticky-steps] nav > a { flex:1 1 200px !important; } }</style>
 </head>
-<body data-page-config='{"slug":"course","tabs":{"click":"sh","panel":"sho","groups":[3,3,3,2],"onBd":"#012169"},"tips":{"count":18,"on":"#17724A","onFg":"#FFFFFF","off":"#FFFFFF","offFg":"#125E3D"},"toggles":[{"click":"ft","panel":"fto","sign":"ftl","closed":"Show template","openTxt":"Hide template"}],"panels":[{"click":"sa","panel":"ao","label":"al","count":4,"closed":"Open","openTxt":"Close","initial":0,"bgOn":"#F5FAF7"}]}'>
+<body data-page-config='{"slug":"course","tabs":{"click":"sh","panel":"sho","groups":[3,3,3,2],"onBd":"#012169"},"tips":{"count":18,"on":"#17724A","onFg":"#FFFFFF","off":"#FFFFFF","offFg":"#125E3D"},"toggles":[{"click":"ft","panel":"fto","sign":"ftl","closed":"Show template","openTxt":"Hide template"}],"panels":[{"click":"sa","panel":"ao","label":"al","count":4,"closed":"Open","openTxt":"Close","initial":0,"bgOn":"#F5FAF7"}],"steps":{"c":"#17724A","fg":"#125E3D","tint":"#F0F6F2","ids":["step1","step2","step3","step4","step5"]}}'>
 <div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
 <div data-print-shell="" style="max-width:1080px; width:100%; margin:0 auto; background:#FFFFFF; box-shadow:0 2px 40px rgba(1,33,105,.10); border-radius:3px;">
 
@@ -61,7 +65,8 @@
  <div data-navrow="" style="display:flex; align-items:center; justify-content:space-between; gap:26px; padding:22px 56px; border-bottom:1px solid #E4E2DD;">
  <span style="font-family:'EB Garamond',Garamond,serif; font-size:22px; color:#012169; white-space:nowrap;">Coursera Design Guide</span>
  <div style="display:flex; align-items:center; gap:26px; font-size:14px; letter-spacing:.02em;">
- <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Overview</a>
+ <a href="/coursera-design-guide/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Start Here</a>
+ <a href="/coursera-design-guide/orient/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Orient</a>
  <a href="/coursera-design-guide/specialization/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Specialization</a>
  <span style="color:#012169; font-weight:600; border-bottom:3px solid #17724A; padding-bottom:3px; white-space:nowrap;">Course</span>
  <a href="/coursera-design-guide/module/" style="text-decoration:none; color:#5A6472; white-space:nowrap;" class="h1">Module</a>
@@ -86,53 +91,79 @@
 
  
 
- <div data-cap="head" style="padding:72px 56px 60px; display:grid; grid-template-columns:1.15fr .85fr; gap:64px; align-items:start; background:#FBFAF7;">
- <div>
+ <div data-cap="head" style="padding:64px 56px 52px; background:#FBFAF7;">
+ <div style="max-width:880px;">
  <p style="margin:0 0 20px; font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#17724A; font-weight:700;">COURSE</p>
  <h1 style="margin:0 0 24px; font-family:'EB Garamond',Garamond,serif; font-weight:500; font-size:50px; line-height:1.1; color:#012169; letter-spacing:-.01em; text-wrap:balance;">Designing a Coursera Course</h1>
  
- <div style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:525px; text-wrap:pretty; box-sizing:border-box;"><p data-start="255" data-end="677" class="PDq2pG_selectionAnchorContainer">Begin by defining the Course’s purpose, its place within a larger learning experience if applicable, and the learners it is meant to serve. Then, with your Learning Experience Designer, define the Course objectives, explore what learners may need to achieve them, and organize those ideas into Modules.<br><br>Together, you’ll also identify the content, practice, feedback, and assessment that can support learners along the way.<span aria-hidden="true" class="PDq2pG_selectionAnchor"></span></p>
+ <div style="margin:0 0 18px; font-size:17px; line-height:1.7; color:#3A424E; max-width:880px; text-wrap:pretty; box-sizing:border-box;"><p>Begin by defining the Course’s purpose, its place within a larger learning experience if applicable, and the learners it is meant to serve. Then, with your Learning Experience Designer, define the Course objectives, explore what learners may need to achieve them, and organize those ideas into Modules.<br><br>Together, you’ll also identify the content, practice, feedback, and assessment that can support learners along the way.</p>
 </div>
- 
- </div>
- <div style="border-left:3px solid #17724A; padding:4px 0 4px 26px;">
- <p style="margin:0 0 18px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">A Course at a glance</p>
- <div style="display:flex; flex-direction:column; gap:18px;">
- <div>
- <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">2–4 learning objectives</p>
- <p style="margin:0; font-size:15px; color:#5A6472;">per Course</p>
- </div>
- <div>
- <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">3–6 modules</p>
- <p style="margin:0; font-size:15px; color:#5A6472;">per Course</p>
- </div>
- <div>
- <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">2–8 hours</p>
- <p style="margin:0; font-size:15px; color:#5A6472;">of learner time</p>
- </div>
- <div>
- <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:22px; color:#012169;">Course Certificate</p>
- <p style="margin:0; font-size:15px; color:#5A6472;">on completing the Course</p>
  </div>
  </div>
- <div style="margin:28px 0 0; padding:20px 0 0; border-top:1px solid #D5DCD7; display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
- <p style="margin:0 0 2px; font-size:15px; letter-spacing:.01em; color:#5A6472; font-weight:700;">Course template quicklinks</p>
- <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #17724A; color:#125E3D; background:#FFFFFF; font-size:15px; font-weight:600; padding:9px 16px; border-radius:3px; text-decoration:none;" class="h12">View blank template ↗</a>
- <a href="https://docs.google.com/document/d/1IWk4qGemzTfPkKOOfJns8HzMYhXFExIxxs9qWhNZtRQ/edit?tab=t.eo8bee2zaoan" target="_blank" rel="noopener" style="display:inline-block; border:1px solid #17724A; color:#125E3D; background:#FFFFFF; font-size:15px; font-weight:600; padding:9px 16px; border-radius:3px; text-decoration:none;" class="h12">View completed example ↗</a>
+<div data-sticky-steps="" style="position:sticky; top:0; z-index:30; background:#FFFFFF; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD; box-shadow:0 10px 18px -14px rgba(1,33,105,.22);">
+ <nav aria-label="Steps on this page" style="display:flex; padding:0 38px;">
+  <a href="#step1" aria-current="step" style="flex:1 1 0; min-width:0; text-decoration:none; display:flex; flex-direction:column; padding:16px 18px 13px; background:#F0F6F2; border-bottom:3px solid #17724A; transition:background .2s, border-color .2s;">
+   <span style="display:flex; align-items:center; gap:10px;"><span style="flex:none; width:30px; height:30px; box-sizing:border-box; border-radius:50%; border:2px solid #17724A; background:#17724A; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; transition:background .2s, color .2s, border-color .2s;">1</span><span style="flex:1; height:2px; background:#E4E2DD;"></span></span>
+   <span style="display:block; margin:10px 0 4px; font-size:16px; font-weight:600; color:#012169;">Define</span>
+   <span style="display:block; font-size:14px; line-height:1.5; color:#3A424E; text-wrap:pretty;">What is this Course for, and what should learners be able to do?</span>
+  </a>
+  <a href="#step2" aria-current="false" style="flex:1 1 0; min-width:0; text-decoration:none; display:flex; flex-direction:column; padding:16px 18px 13px; background:#FFFFFF; border-bottom:3px solid transparent; transition:background .2s, border-color .2s;">
+   <span style="display:flex; align-items:center; gap:10px;"><span style="flex:none; width:30px; height:30px; box-sizing:border-box; border-radius:50%; border:2px solid #C9CDD4; background:#FFFFFF; color:#5A6472; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; transition:background .2s, color .2s, border-color .2s;">2</span><span style="flex:1; height:2px; background:#E4E2DD;"></span></span>
+   <span style="display:block; margin:10px 0 4px; font-size:16px; font-weight:600; color:#3A424E;">Plan</span>
+   <span style="display:block; font-size:14px; line-height:1.5; color:#6B737F; text-wrap:pretty;">What will learners need, and what do we already have or still need?</span>
+  </a>
+  <a href="#step3" aria-current="false" style="flex:1 1 0; min-width:0; text-decoration:none; display:flex; flex-direction:column; padding:16px 18px 13px; background:#FFFFFF; border-bottom:3px solid transparent; transition:background .2s, border-color .2s;">
+   <span style="display:flex; align-items:center; gap:10px;"><span style="flex:none; width:30px; height:30px; box-sizing:border-box; border-radius:50%; border:2px solid #C9CDD4; background:#FFFFFF; color:#5A6472; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; transition:background .2s, color .2s, border-color .2s;">3</span><span style="flex:1; height:2px; background:#E4E2DD;"></span></span>
+   <span style="display:block; margin:10px 0 4px; font-size:16px; font-weight:600; color:#3A424E;">Group</span>
+   <span style="display:block; font-size:14px; line-height:1.5; color:#6B737F; text-wrap:pretty;">Which ideas and goals belong together?</span>
+  </a>
+  <a href="#step4" aria-current="false" style="flex:1 1 0; min-width:0; text-decoration:none; display:flex; flex-direction:column; padding:16px 18px 13px; background:#FFFFFF; border-bottom:3px solid transparent; transition:background .2s, border-color .2s;">
+   <span style="display:flex; align-items:center; gap:10px;"><span style="flex:none; width:30px; height:30px; box-sizing:border-box; border-radius:50%; border:2px solid #C9CDD4; background:#FFFFFF; color:#5A6472; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; transition:background .2s, color .2s, border-color .2s;">4</span><span style="flex:1; height:2px; background:#E4E2DD;"></span></span>
+   <span style="display:block; margin:10px 0 4px; font-size:16px; font-weight:600; color:#3A424E;">Context</span>
+   <span style="display:block; font-size:14px; line-height:1.5; color:#6B737F; text-wrap:pretty;">What will make this Course relevant, discoverable, and appropriately scoped?</span>
+  </a>
+  <a href="#step5" aria-current="false" style="flex:1 1 0; min-width:0; text-decoration:none; display:flex; flex-direction:column; padding:16px 18px 13px; background:#FFFFFF; border-bottom:3px solid transparent; transition:background .2s, border-color .2s;">
+   <span style="display:flex; align-items:center; gap:10px;"><span style="flex:none; width:30px; height:30px; box-sizing:border-box; border-radius:50%; border:2px solid #C9CDD4; background:#FFFFFF; color:#5A6472; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; transition:background .2s, color .2s, border-color .2s;">5</span></span>
+   <span style="display:block; margin:10px 0 4px; font-size:16px; font-weight:600; color:#3A424E;">Review</span>
+   <span style="display:block; font-size:14px; line-height:1.5; color:#6B737F; text-wrap:pretty;">Review the Course plan as a learner and as a blueprint for development.</span>
+  </a>
+ </nav>
  </div>
- 
+<div style="padding:36px 56px 0;">
+ <div data-keep="" style="border:1px solid #E4E2DD; border-top:4px solid #17724A; border-radius:3px; background:#FFFFFF; box-shadow:0 6px 20px rgba(1,33,105,.08);">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; padding:14px 24px; border-bottom:1px solid #E4E2DD; background:#F0F6F2;">
+   <p style="margin:0; font-size:15px; letter-spacing:.01em; color:#125E3D; font-weight:700;">What you’ll create: a Course</p>
+   <div style="display:flex; gap:10px 20px; flex-wrap:wrap;">
+    <a href="https://docs.google.com/document/d/1tLgjw6SXVDD1EQ7fnPM7rrTAR3vgoUVrbtsn61BDzn4/edit?usp=sharing" target="_blank" rel="noopener" style="font-size:14px; font-weight:600; color:#125E3D; text-decoration:none;" class="h10">Blank template ↗</a>
+    <a href="https://docs.google.com/document/d/1IWk4qGemzTfPkKOOfJns8HzMYhXFExIxxs9qWhNZtRQ/edit?tab=t.eo8bee2zaoan" target="_blank" rel="noopener" style="font-size:14px; font-weight:600; color:#125E3D; text-decoration:none;" class="h10">Completed example ↗</a>
+   </div>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:1px; background:#E4E2DD;">
+   <div style="flex:1 1 200px; background:#FFFFFF; padding:18px 24px 20px;">
+    <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:24px; color:#012169;">2–4 learning objectives</p>
+    <p style="margin:0; font-size:14px; line-height:1.5; color:#5A6472;">per Course</p>
+   </div>
+   <div style="flex:1 1 200px; background:#FFFFFF; padding:18px 24px 20px;">
+    <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:24px; color:#012169;">3–6 Modules</p>
+    <p style="margin:0; font-size:14px; line-height:1.5; color:#5A6472;">per Course</p>
+   </div>
+   <div style="flex:1 1 200px; background:#FFFFFF; padding:18px 24px 20px;">
+    <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:24px; color:#012169;">2–8 hours</p>
+    <p style="margin:0; font-size:14px; line-height:1.5; color:#5A6472;">of learner time</p>
+   </div>
+   <div style="flex:1 1 100%; background:#FAF0DC; padding:18px 24px 20px; display:flex; align-items:center; justify-content:center; gap:16px; text-align:left;">
+    <div style="flex:none; width:44px; height:44px; border-radius:50%; background:#B4700C; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="9.4" r="4.6" fill="none" stroke="#FFFFFF" stroke-width="1.7"></circle><path d="M9 13.2l-1.7 7.3 4.7-2.3 4.7 2.3-1.7-7.3" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linejoin="round"></path></svg></div>
+    <div>
+     <p style="margin:0 0 2px; font-family:'EB Garamond',serif; font-size:24px; color:#012169;">Course Certificate</p>
+     <p style="margin:0; font-size:14px; line-height:1.5; color:#4A5361;">on completing the Course</p>
+    </div>
+   </div>
+  </div>
  </div>
  </div>
 
- <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:#E4E2DD; border-top:1px solid #E4E2DD; border-bottom:1px solid #E4E2DD;">
-  <a href="#step1" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:block; text-align:center;" class="h12"><span style="display:block; font-size:14px; letter-spacing:.06em; color:#125E3D; font-weight:700;">1 · Define</span></a>
-  <a href="#step2" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:block; text-align:center;" class="h12"><span style="display:block; font-size:14px; letter-spacing:.06em; color:#125E3D; font-weight:700;">2 · Plan</span></a>
-  <a href="#step3" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:block; text-align:center;" class="h12"><span style="display:block; font-size:14px; letter-spacing:.06em; color:#125E3D; font-weight:700;">3 · Group</span></a>
-  <a href="#step4" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:block; text-align:center;" class="h12"><span style="display:block; font-size:14px; letter-spacing:.06em; color:#125E3D; font-weight:700;">4 · Context</span></a>
-  <a href="#step5" style="text-decoration:none; background:#FFFFFF; padding:18px 20px; display:block; text-align:center;" class="h12"><span style="display:block; font-size:14px; letter-spacing:.06em; color:#125E3D; font-weight:700;">5 · Review</span></a>
- </div>
 
- <div id="step1" style="padding:64px 56px 0;">
+ <div id="step1" style="scroll-margin-top:210px; padding:64px 56px 0;">
  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#17724A; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">1</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 1 of 5</span>
@@ -371,7 +402,7 @@
  </div>
  </div>
 
- <div id="step2" style="padding:68px 56px 0;">
+ <div id="step2" style="scroll-margin-top:210px; padding:68px 56px 0;">
  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#125E3D; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">2</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 2 of 5</span>
@@ -580,7 +611,7 @@
  </div>
  </div>
 
- <div id="step3" style="padding:68px 56px 0;">
+ <div id="step3" style="scroll-margin-top:210px; padding:68px 56px 0;">
  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#0E4C31; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">3</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 3 of 5</span>
@@ -806,7 +837,7 @@
  </div>
  </div>
 
- <div id="step4" style="padding:68px 56px 0;">
+ <div id="step4" style="scroll-margin-top:210px; padding:68px 56px 0;">
  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#0A3A25; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">4</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 4 of 5</span>
@@ -1056,7 +1087,7 @@
  </div>
  </div>
 
- <div id="step5" style="padding:68px 56px 0;">
+ <div id="step5" style="scroll-margin-top:210px; padding:68px 56px 0;">
  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1F2833; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">5</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 5 of 5</span>

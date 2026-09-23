@@ -20,7 +20,10 @@ const BASE = '/coursera-design-guide';
 
 /** Design file -> published route. */
 const PAGES = {
-  'overview.html': '',
+  // Start Here replaced Overview as the landing page, so it takes the root
+  // and the old Overview URL keeps working without a redirect.
+  'start-here.html': '',
+  'orient.html': 'orient',
   'specialization.html': 'specialization',
   'course.html': 'course',
   'module.html': 'module',
@@ -29,7 +32,8 @@ const PAGES = {
 };
 
 const NAV = {
-  Overview: `${BASE}/`,
+  'Start Here': `${BASE}/`,
+  Orient: `${BASE}/orient/`,
   Specialization: `${BASE}/specialization/`,
   Course: `${BASE}/course/`,
   Module: `${BASE}/module/`,
@@ -55,7 +59,10 @@ const BY_TEXT = {
   'Accessibility, Copyright & AI': A11Y,
   'Accessibility, Copyright & AI →': A11Y,
   'Review guidance →': A11Y,
-  Overview: NAV.Overview,
+  'Start Here': NAV['Start Here'],
+  Orient: NAV.Orient,
+  // Orient's footer and card links name it in full.
+  'Orient to Coursera': NAV.Orient,
   Specialization: NAV.Specialization,
   Course: NAV.Course,
   Module: NAV.Module,
@@ -81,20 +88,13 @@ for (const [file, route] of Object.entries(PAGES)) {
   // The pages live at different depths, so root-relative the shared assets.
   s = s.replace(/(href|src)="(guide\.css|guide\.js|assets\/[^"]+)"/g, `$1="${BASE}/$2"`);
 
-  // Top-level nav items ship as spans. Only the current page is styled as
-  // current, so every other one becomes a link to its route.
-  s = s.replace(
-    /<span style="color:#5A6472; white-space:nowrap;">(Overview|Specialization|Course|Module)<\/span>/g,
-    (_m, label) =>
-      `<a href="${NAV[label]}" style="color:#5A6472; white-space:nowrap; text-decoration:none;">${label}</a>`);
-
   // Every remaining placeholder resolves by its own link text. Footer links
   // read "<direction> <destination>", so drop the direction and match the
   // destination that follows it.
-  const DIRECTION = /^(?:←\s*(?:Back to|Back|Zoom out)|Zoom in\s*→|Asset guidance\s*→|Helpful throughout\s*→)\s*/;
-  // The Overview's four level cards are one link wrapping a whole card, so
-  // their text is "<level> <question> Open →" rather than the bare label.
-  const CARD = /^(Specialization|Course|Module|Learning Assets)\b.*Open\s*→$/;
+  const DIRECTION = /^(?:←\s*(?:Back to|Back|Zoom out)|Zoom in\s*→|Next\s*→|Asset guidance\s*→|Helpful throughout\s*→)\s*/;
+  // Some links wrap a whole card, so their text is "<destination> <blurb>
+  // Open →" or "… Start →" rather than the bare label.
+  const CARD = /^(Start Here|Orient to Coursera|Specialization|Course|Module|Learning Assets)\b.*(?:Open|Start)\s*→$/;
   s = s.replace(/<a ([^>]*?)href="#"([^>]*)>([\s\S]*?)<\/a>/g, (m, pre, attrs, inner) => {
     const t = text(inner).replace(DIRECTION, '');
     const card = t.match(CARD);
