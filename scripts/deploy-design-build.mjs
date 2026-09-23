@@ -70,7 +70,17 @@ const ASSET_GUIDES = {
    script copies the result. Anything here is a patch waiting to be retired
    the moment Design's source carries it. */
 
-const DEVIATIONS = [];
+/** CTL reworded one Start Here bullet ahead of Design's next export; the
+    same change is already in the design source, so this retires itself the
+    moment that export lands — and throws if it arrives first. */
+const startHereBullet = (s, route) => {
+  if (route !== '') return s;
+  const from = '<li>Identify the learners you hope to serve</li>';
+  if (!s.includes(from)) throw new Error('start-here: learners bullet not found');
+  return s.replace(from, '<li>Identify the learners you hope to reach</li>');
+};
+
+const DEVIATIONS = [startHereBullet];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
