@@ -80,7 +80,24 @@ const startHereBullet = (s, route) => {
   return s.replace(from, '<li>Identify the learners you hope to reach</li>');
 };
 
-const DEVIATIONS = [startHereBullet];
+/** CTL rewrote Orient's step 5 heading and its lead-in. */
+const orientStepFive = (s, route) => {
+  if (route !== 'orient') return s;
+  const edits = [
+    ['>Choose your starting point</h2>', '>Your starting point</h2>'],
+    ['Your project\u2019s scope determines where the design work begins. '
+      + 'If you are not sure yet, your Learning Experience Designer can help you decide.',
+     'Your CTL team will guide you through the process based on your project scope '
+      + 'and learner goals. Click on the desired starting point below to learn more.'],
+  ];
+  for (const [from, to] of edits) {
+    if (!s.includes(from)) throw new Error(`orient: step 5 string not found: ${from.slice(0, 48)}`);
+    s = s.replace(from, to);
+  }
+  return s;
+};
+
+const DEVIATIONS = [startHereBullet, orientStepFive];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
