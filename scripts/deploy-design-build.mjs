@@ -104,11 +104,18 @@ const orientStepFive = (s, route) => {
     link's accessible name from "1 Define What is this Course for, and
     what should learners be able to do?" to "1 Define".
 
-    The bar drops 205px -> 100px, so the step sections' scroll offset, which
-    Design tuned to the taller bar, comes down with it. */
-const slimStepBar = (s) => {
+    The bar shrinks, so the step sections' scroll offset — which Design
+    tuned to the taller bar at 210px — has to come down with it, or every
+    jump lands with a gap above the heading. The offset is per page because
+    Module's bar also carries the two phase bands and stays taller: 138px
+    against 100px everywhere else. Measured on the live pages; re-measure
+    if Design changes the bar's contents. */
+const STEP_BAR_OFFSET = { module: 150, default: 110 };
+
+const slimStepBar = (s, route) => {
   if (!s.includes('<div data-sticky-steps')) return s;
-  s = s.replace(/scroll-margin-top:210px/g, 'scroll-margin-top:110px');
+  const offset = STEP_BAR_OFFSET[route] ?? STEP_BAR_OFFSET.default;
+  s = s.replace(/scroll-margin-top:210px/g, `scroll-margin-top:${offset}px`);
   const css = `
 <style>
 /* CTL deviation — see scripts/deploy-design-build.mjs */
