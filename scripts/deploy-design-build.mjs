@@ -97,7 +97,28 @@ const orientStepFive = (s, route) => {
   return s;
 };
 
-const DEVIATIONS = [startHereBullet, orientStepFive];
+/** CTL: the sticky step bar's per-step descriptions took too much of the
+    screen while scrolling — 205px of a 900px viewport on Course. Each one
+    repeats the italic question already printed under the step's own
+    heading, so hiding them loses no information, and it shortens each
+    link's accessible name from "1 Define What is this Course for, and
+    what should learners be able to do?" to "1 Define".
+
+    The bar drops 205px -> 100px, so the step sections' scroll offset, which
+    Design tuned to the taller bar, comes down with it. */
+const slimStepBar = (s) => {
+  if (!s.includes('<div data-sticky-steps')) return s;
+  s = s.replace(/scroll-margin-top:210px/g, 'scroll-margin-top:110px');
+  const css = `
+<style>
+/* CTL deviation — see scripts/deploy-design-build.mjs */
+[data-sticky-steps] a > span:last-child{display:none !important;}
+</style>`;
+  return s.includes('</head>') ? s.replace('</head>', `${css}\n</head>`)
+                               : s.replace(/(<body[^>]*>)/, `${css}\n$1`);
+};
+
+const DEVIATIONS = [startHereBullet, orientStepFive, slimStepBar];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');

@@ -54,6 +54,11 @@
  /* Sticky step bar */
  @media print { [data-sticky-steps] { position:static !important; box-shadow:none !important; } }
  @media screen and (max-width: 820px) { [data-sticky-steps] { position:static !important; } [data-sticky-steps] nav { flex-wrap:wrap !important; } [data-sticky-steps] nav > a { flex:1 1 200px !important; } }</style>
+
+<style>
+/* CTL deviation — see scripts/deploy-design-build.mjs */
+[data-sticky-steps] a > span:last-child{display:none !important;}
+</style>
 </head>
 <body data-page-config='{"slug":"orient","tips":null,"steps":{"c":"#1D6363","fg":"#1D6363","tint":"#EFF6F6","ids":["coursera","structure","mapping","process","start"]}}'>
 <div data-print-page="" style="font-family:'Open Sans',system-ui,sans-serif; padding:40px 24px;">
@@ -136,7 +141,7 @@
  </div>
 
 
- <div id="coursera" style="scroll-margin-top:210px; padding:72px 56px 0;">
+ <div id="coursera" style="scroll-margin-top:110px; padding:72px 56px 0;">
  <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1D6363; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">1</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 1 of 5</span>
@@ -195,7 +200,7 @@
  </div>
  
 
-  <div id="structure" style="scroll-margin-top:210px; padding:72px 56px 12px;">
+  <div id="structure" style="scroll-margin-top:110px; padding:72px 56px 12px;">
  <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1D6363; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">2</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 2 of 5</span>
@@ -337,7 +342,7 @@
 </div>
  </div>
 
- <div id="mapping" style="scroll-margin-top:210px; padding:72px 56px 12px;">
+ <div id="mapping" style="scroll-margin-top:110px; padding:72px 56px 12px;">
  <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1D6363; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">3</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 3 of 5</span>
@@ -410,7 +415,7 @@
  </div>
  </div>
 
- <div id="process" style="scroll-margin-top:210px; padding:72px 56px 20px;">
+ <div id="process" style="scroll-margin-top:110px; padding:72px 56px 20px;">
  <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1D6363; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">4</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 4 of 5</span>
@@ -480,7 +485,7 @@
  </div>
  </div>
 
- <div id="start" style="scroll-margin-top:210px; padding:72px 56px 12px;">
+ <div id="start" style="scroll-margin-top:110px; padding:72px 56px 12px;">
  <div style="display:flex; align-items:center; gap:14px; margin:0 0 14px;">
  <span style="flex:none; width:34px; height:34px; border-radius:50%; background:#1D6363; color:#FFFFFF; font-family:'EB Garamond',serif; font-size:22px; display:flex; align-items:center; justify-content:center; white-space:nowrap;">5</span>
  <span style="font-size:14px; letter-spacing:.18em; text-transform:uppercase; color:#6B737F; font-weight:700; white-space:nowrap;">Step 5 of 5</span>
