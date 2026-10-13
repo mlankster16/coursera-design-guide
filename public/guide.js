@@ -10,7 +10,10 @@
         link and the "available soon" line; the page config picks which shows
 
    Behaviours: nav dropdown, accordions, exclusive panel groups, tab shelves,
-   info popovers, sticky step bar scroll-spy, expand-all-for-print. */
+   info popovers, sticky step bar scroll-spy, expand-all-for-print, and (Oct
+   2026, section 6) objective filter, asset-type highlight, need selector,
+   topic tabs, hand-off checklist. Sections 1–5 are unused by the reimagined
+   pages and kept so the file stays a drop-in replacement. */
 (function () {
   'use strict';
 
@@ -294,6 +297,162 @@
     spy();
   }
 
+
+  /* ---------- 6. Reimagined pages (Oct 2026) ----------
+     Five behaviours for the Streamlined page set. Each reads its colours and
+     counts from the page config; the markup ships in the "nothing selected"
+     state, so without JS every page reads correctly and simply stops
+     responding. assertConfig in flatten.js checks every hook below against
+     the config before export. */
+  var each = function (sel, fn) { Array.prototype.forEach.call(document.querySelectorAll(sel), fn); };
+
+  /* 6a. Course: objective filter pills.
+     [data-obj-pill="N"] buttons; [data-obj="N"] goal lines. Click a pill to
+     dim every goal not tagged N; click it again to clear.
+     Config: objFilter {count, onBg, offBg, offLine, dim}. */
+  var of = cfg.objFilter;
+  if (of) {
+    var curObj = null;
+    var paintObj = function () {
+      each('[data-obj-pill]', function (p) {
+        var on = p.getAttribute('data-obj-pill') === curObj;
+        p.style.background = on ? of.onBg : of.offBg;
+        p.style.borderColor = on ? p.getAttribute('data-on-line') : of.offLine;
+        p.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      each('[data-obj]', function (g) {
+        g.style.opacity = (curObj === null || g.getAttribute('data-obj') === curObj) ? '1' : String(of.dim);
+      });
+    };
+    each('[data-obj-pill]', function (p) {
+      p.addEventListener('click', function () {
+        var v = p.getAttribute('data-obj-pill'); curObj = curObj === v ? null : v; paintObj();
+      });
+    });
+  }
+
+  /* 6b. Module: asset-type highlight pills.
+     [data-type-pill="Video"] buttons; <tr data-type="Video"> rows. Matching
+     rows get rowBg, the rest dim; click again to clear.
+     Config: typeHighlight {types, onBg, offBg, offLine, rowBg, dim}. */
+  var th = cfg.typeHighlight;
+  if (th) {
+    var curType = null;
+    var paintType = function () {
+      each('[data-type-pill]', function (p) {
+        var on = p.getAttribute('data-type-pill') === curType;
+        p.style.background = on ? th.onBg : th.offBg;
+        p.style.borderColor = on ? p.getAttribute('data-on-line') : th.offLine;
+        p.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      each('tr[data-type]', function (r) {
+        var hit = curType !== null && r.getAttribute('data-type') === curType;
+        r.style.opacity = (curType === null || hit) ? '1' : String(th.dim);
+        r.style.background = hit ? th.rowBg : 'transparent';
+      });
+    };
+    each('[data-type-pill]', function (p) {
+      p.addEventListener('click', function () {
+        var v = p.getAttribute('data-type-pill'); curType = curType === v ? null : v; paintType();
+      });
+    });
+  }
+
+  /* 6c. Learning Assets: need selector + Show all.
+     [data-need="i"] buttons carry data-need-assets="Video|Reading"; cards are
+     [data-asset-name]. Selecting a need dims non-matching cards and shows
+     the Show all link (data-if="filtered", trigger [data-need-clear]).
+     Config: needs {count, onBg, offBg, onLine, dim, cardOnBorder, cardOnTop, cardOff}. */
+  var nd = cfg.needs;
+  if (nd) {
+    var curNeed = null;
+    var paintNeed = function () {
+      var match = null;
+      each('[data-need]', function (b) {
+        var on = b.getAttribute('data-need') === curNeed;
+        if (on) match = (b.getAttribute('data-need-assets') || '').split('|');
+        b.style.background = on ? nd.onBg : nd.offBg;
+        b.style.borderLeftColor = on ? nd.onLine : 'transparent';
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      each('[data-asset-name]', function (c) {
+        var hit = !match || match.indexOf(c.getAttribute('data-asset-name')) !== -1;
+        c.style.opacity = hit ? '1' : String(nd.dim);
+        c.style.borderColor = match && hit ? nd.cardOnBorder : nd.cardOff;
+        c.style.borderTopColor = match && hit ? nd.cardOnTop : nd.cardOff;
+      });
+      show('filtered', curNeed !== null);
+    };
+    each('[data-need]', function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-need'); curNeed = curNeed === v ? null : v; paintNeed();
+      });
+    });
+    each('[data-need-clear]', function (b) {
+      b.addEventListener('click', function () { curNeed = null; paintNeed(); });
+    });
+  }
+
+  /* 6d. Accessibility: topic tabs.
+     [data-tab="id"] role=tab buttons (aria-controls="panel-id");
+     [data-tab-panel="id"] role=tabpanel. Arrow keys / Home / End move
+     between tabs (WAI-ARIA tabs pattern, automatic activation).
+     Config: topicTabs {ids, initial, onLine, offLine, onInk, offInk}. */
+  var tt = cfg.topicTabs;
+  var tabsAll = null;
+  if (tt) {
+    var curTab = tt.initial;
+    var paintTab = function (focus) {
+      each('[data-tab]', function (t) {
+        var on = t.getAttribute('data-tab') === curTab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('tabindex', on ? '0' : '-1');
+        t.style.borderBottomColor = on ? tt.onLine : tt.offLine;
+        if (t.firstElementChild) t.firstElementChild.style.color = on ? tt.onInk : tt.offInk;
+        if (on && focus) t.focus();
+      });
+      each('[data-tab-panel]', function (p) {
+        if (p.getAttribute('data-tab-panel') === curTab) p.removeAttribute('hidden'); else p.setAttribute('hidden', '');
+      });
+    };
+    each('[data-tab]', function (t) {
+      t.addEventListener('click', function () { curTab = t.getAttribute('data-tab'); paintTab(false); });
+      t.addEventListener('keydown', function (e) {
+        var i = tt.ids.indexOf(curTab), n = tt.ids.length, j = -1;
+        if (e.key === 'ArrowRight') j = (i + 1) % n;
+        else if (e.key === 'ArrowLeft') j = (i - 1 + n) % n;
+        else if (e.key === 'Home') j = 0;
+        else if (e.key === 'End') j = n - 1;
+        if (j < 0) return;
+        e.preventDefault(); curTab = tt.ids[j]; paintTab(true);
+      });
+    });
+    paintTab(false);
+    tabsAll = function () { each('[data-tab-panel]', function (p) { p.removeAttribute('hidden'); }); };
+  }
+
+  /* 6e. Accessibility: hand-off checklist.
+     [data-check="i"] role=checkbox buttons; first child is the box, second
+     the label. Session-only state, not persisted.
+     Config: checklist {count, on, offBox, offFill, onInk, offInk}. */
+  var ck = cfg.checklist;
+  if (ck) {
+    each('[data-check]', function (b) {
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-checked') !== 'true';
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+        var box = b.children[0], label = b.children[1];
+        if (box) {
+          box.textContent = on ? '\u2713' : '';
+          box.style.background = on ? ck.on : ck.offFill;
+          box.style.borderColor = on ? ck.on : ck.offBox;
+          box.style.color = on ? '#FFFFFF' : ck.on;
+        }
+        if (label) label.style.color = on ? ck.onInk : ck.offInk;
+      });
+    });
+  }
+
   /* ---------- 4. print: open everything, close popovers ---------- */
   window.addEventListener('beforeprint', function () {
     if (acc) for (var i = 0; i < acc.count; i++) {
@@ -308,5 +467,6 @@
     tabShelves.forEach(function (openAll) { openAll(); });
     if (tips) for (var k = 0; k < tips.count; k++) show('g' + k, false);
     navSet && navSet(false);
+    if (tabsAll) tabsAll();
   });
 })();

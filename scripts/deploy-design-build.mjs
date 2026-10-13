@@ -20,10 +20,10 @@ const BASE = '/coursera-design-guide';
 
 /** Design file -> published route. */
 const PAGES = {
-  // Start Here replaced Overview as the landing page, so it takes the root
-  // and the old Overview URL keeps working without a redirect.
+  // Start Here is the landing page, so it takes the root. Orient was folded
+  // into it in the October redesign; /orient/ keeps working as a redirect,
+  // written below.
   'start-here.html': '',
-  'orient.html': 'orient',
   'specialization.html': 'specialization',
   'course.html': 'course',
   'module.html': 'module',
@@ -33,7 +33,6 @@ const PAGES = {
 
 const NAV = {
   'Start Here': `${BASE}/`,
-  Orient: `${BASE}/orient/`,
   Specialization: `${BASE}/specialization/`,
   Course: `${BASE}/course/`,
   Module: `${BASE}/module/`,
@@ -45,7 +44,6 @@ const A11Y = `${BASE}/learning-assets/accessibility-copyright-ai/`;
     stable key, so resolution no longer depends on the link's visible text. */
 const BY_KEY = {
   'start-here': `${BASE}/`,
-  orient: `${BASE}/orient/`,
   specialization: `${BASE}/specialization/`,
   course: `${BASE}/course/`,
   module: `${BASE}/module/`,
@@ -70,62 +68,7 @@ const ASSET_GUIDES = {
    script copies the result. Anything here is a patch waiting to be retired
    the moment Design's source carries it. */
 
-/** CTL reworded one Start Here bullet ahead of Design's next export; the
-    same change is already in the design source, so this retires itself the
-    moment that export lands — and throws if it arrives first. */
-const startHereBullet = (s, route) => {
-  if (route !== '') return s;
-  const from = '<li>Identify the learners you hope to serve</li>';
-  if (!s.includes(from)) throw new Error('start-here: learners bullet not found');
-  return s.replace(from, '<li>Identify the learners you hope to reach</li>');
-};
-
-/** CTL rewrote Orient's step 5 heading and its lead-in. */
-const orientStepFive = (s, route) => {
-  if (route !== 'orient') return s;
-  const edits = [
-    ['>Choose your starting point</h2>', '>Your starting point</h2>'],
-    ['Your project\u2019s scope determines where the design work begins. '
-      + 'If you are not sure yet, your Learning Experience Designer can help you decide.',
-     'Your CTL team will guide you through the process based on your project scope '
-      + 'and learner goals. Click on the desired starting point below to learn more.'],
-  ];
-  for (const [from, to] of edits) {
-    if (!s.includes(from)) throw new Error(`orient: step 5 string not found: ${from.slice(0, 48)}`);
-    s = s.replace(from, to);
-  }
-  return s;
-};
-
-/** CTL: the sticky step bar's per-step descriptions took too much of the
-    screen while scrolling — 205px of a 900px viewport on Course. Each one
-    repeats the italic question already printed under the step's own
-    heading, so hiding them loses no information, and it shortens each
-    link's accessible name from "1 Define What is this Course for, and
-    what should learners be able to do?" to "1 Define".
-
-    The bar shrinks, so the step sections' scroll offset — which Design
-    tuned to the taller bar at 210px — has to come down with it, or every
-    jump lands with a gap above the heading. The offset is per page because
-    Module's bar also carries the two phase bands and stays taller: 138px
-    against 100px everywhere else. Measured on the live pages; re-measure
-    if Design changes the bar's contents. */
-const STEP_BAR_OFFSET = { module: 150, default: 110 };
-
-const slimStepBar = (s, route) => {
-  if (!s.includes('<div data-sticky-steps')) return s;
-  const offset = STEP_BAR_OFFSET[route] ?? STEP_BAR_OFFSET.default;
-  s = s.replace(/scroll-margin-top:210px/g, `scroll-margin-top:${offset}px`);
-  const css = `
-<style>
-/* CTL deviation — see scripts/deploy-design-build.mjs */
-[data-sticky-steps] a > span:last-child{display:none !important;}
-</style>`;
-  return s.includes('</head>') ? s.replace('</head>', `${css}\n</head>`)
-                               : s.replace(/(<body[^>]*>)/, `${css}\n$1`);
-};
-
-const DEVIATIONS = [startHereBullet, orientStepFive, slimStepBar];
+const DEVIATIONS = [];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');
@@ -170,6 +113,37 @@ for (const [file, route] of Object.entries(PAGES)) {
   writeFileSync(join(dir, 'index.html'), s);
   const left = (s.match(/href="#"/g) || []).length;
   console.log(`  ${file.padEnd(22)} -> /${route}${route ? '/' : ''}   ${left} placeholders left`);
+}
+
+/* Orient was folded into Start Here in the October redesign. Its URL was
+   live and shared, so it redirects rather than 404s. The refresh is
+   immediate and the page still carries a real link, so it does not become a
+   timed redirect a reader has to beat. */
+const REDIRECTS = { orient: `${BASE}/` };
+for (const [from, to] of Object.entries(REDIRECTS)) {
+  const dir = join(OUT, from);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'), `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Page moved — Coursera Design Guide</title>
+<link rel="canonical" href="${to}">
+<meta http-equiv="refresh" content="0; url=${to}">
+<style>body{font-family:'Open Sans',system-ui,sans-serif;background:#EFEDE8;color:#3A424E;margin:0;padding:80px 24px;}
+main{max-width:620px;margin:0 auto;background:#FFF;border-radius:3px;padding:40px 44px;box-shadow:0 2px 40px rgba(1,33,105,.10);}
+h1{font-family:'EB Garamond',Garamond,serif;font-weight:500;color:#012169;margin:0 0 12px;font-size:28px;}
+p{font-size:17px;line-height:1.7;margin:0;}a{color:#00539B;}</style>
+</head>
+<body>
+<main>
+<h1>This page has moved</h1>
+<p>Orienting to Coursera is now part of <a href="${to}">Start Here</a>.</p>
+</main>
+</body>
+</html>
+`);
+  console.log(`  ${from.padEnd(22)} -> redirect to ${to}`);
 }
 
 for (const f of ['guide.css', 'guide.js']) cpSync(join(SRC, f), join(OUT, f));

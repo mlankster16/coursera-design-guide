@@ -173,6 +173,37 @@ strong em, em strong, strong i, b em { font-weight: 700; font-style: italic; }
 
 .h27:focus-visible {
   left: 12px !important;
-  outline: 2px solid #00539B !important;
-  outline-offset: 3px !important;
+}
+
+.h28:hover {
+  background: #00539B !important;
+  color: #FFFFFF !important;
+}
+
+.h29:hover {
+  background: #00447F !important;
+  color: #FFFFFF !important;
+}
+
+.h30:hover {
+  background: #125E3D !important;
+  color: #FFFFFF !important;
+}
+
+.h31:hover {
+  background: #5A3F87 !important;
+  color: #FFFFFF !important;
+}
+
+.h32:hover {
+  background: #FBEFD9 !important;
+  color: #8A5A0B !important;
+}
+
+.h33:hover {
+  border-bottom-color: #E8C9A0 !important;
+}
+
+.h27:focus {
+  left: 12px !important;
 }
