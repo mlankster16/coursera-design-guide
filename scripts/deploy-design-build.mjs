@@ -68,7 +68,174 @@ const ASSET_GUIDES = {
    script copies the result. Anything here is a patch waiting to be retired
    the moment Design's source carries it. */
 
-const DEVIATIONS = [];
+/** Replace exactly one occurrence, and fail loudly if Design's markup has
+    moved on — a deviation that silently stops applying is worse than none. */
+function swap(s, find, replace, label) {
+  const n = s.split(find).length - 1;
+  if (n !== 1) throw new Error(`deviation "${label}": expected 1 match, found ${n}`);
+  return s.replace(find, () => replace);
+}
+
+/* Typical lengths (CTL, November 2026). Desired length and the practice
+   behind it for each Learning Asset type. Retire each piece once Design's
+   source carries it. */
+const ACTIVITY_LENGTH =
+  'Varies, from 5 to 30 minutes of learner time. A longer activity is best broken into smaller parts.';
+const ASSET_LENGTHS = {
+  Video:
+    '5–10 minutes. Bite-sized videos focused on one or two concepts work better than a long lecture.',
+  Reading: 'Varies with what you ask learners to do, but usually no more than 15 minutes.',
+  Assessments:
+    'Practice (ungraded) assessments are typically 5–15 minutes. Graded assessments are usually 10 auto-graded questions, about 15–20 minutes.',
+  'Coach Dialogue': ACTIVITY_LENGTH,
+  'Coach Role Play': ACTIVITY_LENGTH,
+  'Interactive Plugin': ACTIVITY_LENGTH,
+  'Coursera Lab': ACTIVITY_LENGTH,
+  'Programming Assignment': ACTIVITY_LENGTH,
+};
+
+/** Learning Assets: a "Typical length" block on every card, set like the
+    "Use it when" block it follows. */
+function assetLengths(s, route) {
+  if (route !== 'learning-assets') return s;
+  for (const [name, text] of Object.entries(ASSET_LENGTHS)) {
+    const card = s.indexOf(`data-asset-name="${name}"`);
+    const use = card < 0 ? -1 : s.indexOf('>Use it when</p>', card);
+    const next = s.indexOf('data-asset-name="', card + 1);
+    const close = '\n     </div>';
+    const end = use < 0 ? -1 : s.indexOf(close, use);
+    if (end < 0 || (next > 0 && end > next)) {
+      throw new Error(`deviation "asset lengths": no "Use it when" block on the ${name} card`);
+    }
+    const at = end + close.length;
+    s = `${s.slice(0, at)}
+     <div>
+      <p style="margin:0 0 4px; font-size:13px; font-weight:700; color:#8A5A0B;">Typical length</p>
+      <p style="margin:0; font-size:15px; line-height:1.6; color:#1F2833; text-wrap:pretty;">${text}</p>
+     </div>${s.slice(at)}`;
+  }
+  return s;
+}
+
+/** Start Here: the Learning Assets layer states its size the way the
+    Specialization, Course and Module layers above it already do. */
+function startHereLengths(s, route) {
+  if (route !== '') return s;
+  return swap(
+    s,
+    '>Videos, readings, practice, and assessments</p>',
+    '>Videos, readings, practice, and assessments · 5–30 minutes each</p>',
+    'start here lengths',
+  );
+}
+
+/** Module: a fourth planning tip on keeping each asset short. */
+function moduleLengths(s, route) {
+  if (route !== 'module') return s;
+  const tips = '<ol style="margin:0 0 32px; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px;">';
+  s = swap(s, tips, tips.replace('repeat(3,', 'repeat(4,').replace('gap:28px', 'gap:24px'), 'module tips grid');
+  const last = 'where learners demonstrate the Module objectives.</p></li>';
+  return swap(
+    s,
+    last,
+    `${last}
+   <li style="border-top:2px solid #6B4E9E; padding:14px 0 0;"><p style="margin:0 0 6px; font-size:15px; font-weight:700; color:#012169;">Keep each asset bite-sized</p><p style="margin:0; font-size:15px; line-height:1.6; color:#3A424E; text-wrap:pretty;">Videos run 5–10 minutes, Readings up to about 15, and practice or activities 5–30. If a step needs more, split it into smaller parts.</p></li>`,
+    'module length tip',
+  );
+}
+
+/* The worked example's time estimates (CTL, November 2026). Module 2 is
+   2 hours, not 3, so it sits inside the 30 minutes–2 hours a Module is given
+   on Start Here; every asset in it carries a length that follows the typical
+   lengths above, and the lengths add up to the Module's 2 hours. The Course
+   and Specialization totals follow: 2 + 2 + 2 = 6 hours, 6 + 9 + 8 = 23. */
+const MODULE_2_MINUTES = {
+  'Start With the Business Question': 6,
+  'From a Business Question to Data Requirements': 10,
+  'What Data Would You Need?': 10,
+  'Is the Data Fit for the Question?': 8,
+  'Data Fitness Criteria and Checklist': 10,
+  'Think Aloud: Inspecting a Sample Dataset': 10,
+  'Practice a Guided Data Fitness Check': 10,
+  'Practice Data Fitness Review': 20,
+  'Documenting Data Limitations': 6,
+  'Which Limitations Matter?': 10,
+  'Data Fitness Review': 20,
+};
+const MODULE_2_HOURS = 2;
+
+function swapAll(s, find, replace, count, label) {
+  const parts = s.split(find);
+  if (parts.length - 1 !== count) {
+    throw new Error(`deviation "${label}": expected ${count} matches, found ${parts.length - 1}`);
+  }
+  return parts.join(replace);
+}
+
+/** Module: an "Est. time" column on the learning path table, with a total. */
+function moduleTimes(s, route) {
+  if (route !== 'module') return s;
+  const total = Object.values(MODULE_2_MINUTES).reduce((a, b) => a + b, 0);
+  if (total > MODULE_2_HOURS * 60) {
+    throw new Error(`deviation "module times": assets total ${total} min, over ${MODULE_2_HOURS} hours`);
+  }
+  const label = 'module times';
+  s = swap(s, 'and their learning purpose</caption>', 'their learning purpose, and estimated time</caption>', label);
+  s = swap(s, '<th scope="col" style="width:26%;', '<th scope="col" style="width:24%;', label);
+  s = swap(s, '<th scope="col" style="width:32%;', '<th scope="col" style="width:30%;', label);
+  const purposeHead = '<th scope="col" style="text-align:left; padding:12px 0 12px 16px; border-bottom:2px solid #6B4E9E; font-size:14px; color:#5A6472;">Learning purpose</th>';
+  s = swap(
+    s,
+    purposeHead,
+    `${purposeHead.replace('padding:12px 0 12px 16px', 'padding:12px 16px')}
+    <th scope="col" style="width:11%; text-align:left; padding:12px 0 12px 16px; border-bottom:2px solid #6B4E9E; font-size:14px; color:#5A6472;">Est. time</th>`,
+    label,
+  );
+  s = swapAll(s, '<th colspan="3" scope="colgroup"', '<th colspan="4" scope="colgroup"', 3, label);
+
+  const purposeCell = '<td style="vertical-align:top; padding:16px 0 16px 16px; font-size:15px; line-height:1.6; color:#3A424E;">';
+  const rowEnd = '</td>\n     </tr>';
+  for (const [title, minutes] of Object.entries(MODULE_2_MINUTES)) {
+    const name = `color:#1F2833;">${title}</span></td>`;
+    if (s.split(name).length !== 2) throw new Error(`deviation "${label}": no single row for "${title}"`);
+    const cell = s.indexOf(purposeCell, s.indexOf(name));
+    const end = s.indexOf(rowEnd, cell);
+    if (cell < 0 || end < 0) throw new Error(`deviation "${label}": row for "${title}" has moved on`);
+    s = `${s.slice(0, cell)}${purposeCell.replace('padding:16px 0 16px 16px', 'padding:16px')}${s.slice(cell + purposeCell.length, end)}</td>
+      <td style="vertical-align:top; padding:16px 0 16px 16px; font-size:15px; line-height:1.6; color:#3A424E; white-space:nowrap;">${minutes} min${s.slice(end)}`;
+  }
+
+  const hours = total / 60;
+  const totalText = Number.isInteger(hours) ? `${hours} hours` : `${total} min`;
+  return swap(
+    s,
+    '</tbody>\n   \n  </table>',
+    `</tbody>
+   <tfoot>
+    <tr>
+     <th colspan="3" scope="row" style="text-align:left; padding:18px 16px 18px 0; border-top:2px solid #6B4E9E; font-size:15px; font-weight:600; color:#012169;">Estimated time for this Module</th>
+     <td style="padding:18px 0 18px 16px; border-top:2px solid #6B4E9E; font-size:15px; font-weight:600; color:#012169; white-space:nowrap;">${totalText}</td>
+    </tr>
+   </tfoot>
+  </table>`,
+    label,
+  );
+}
+
+/** Course and Specialization: the totals that follow from a 2-hour Module 2. */
+function exampleTotals(s, route) {
+  if (route === 'course') {
+    s = swap(s, 'color:#3A424E;">3 hours</td>', `color:#3A424E;">${MODULE_2_HOURS} hours</td>`, 'module 2 hours');
+    return swap(s, '>Approximately 7 hours</p>', '>Approximately 6 hours</p>', 'course total');
+  }
+  if (route === 'specialization') {
+    s = swap(s, 'color:#3A424E;">7 hours</td>', 'color:#3A424E;">6 hours</td>', 'course 1 hours');
+    return swap(s, '>Approximately 24 hours</p>', '>Approximately 23 hours</p>', 'specialization total');
+  }
+  return s;
+}
+
+const DEVIATIONS = [assetLengths, startHereLengths, moduleLengths, moduleTimes, exampleTotals];
 
 for (const [file, route] of Object.entries(PAGES)) {
   let s = readFileSync(join(SRC, file), 'utf8');

@@ -33,7 +33,7 @@ const purposes = [
   {
     purpose: 'Teaching video',
     can: 'Explain or demonstrate one focused concept, process, or judgment',
-    length: '5–8 minutes',
+    length: '5–10 minutes',
   },
 ];
 
@@ -86,6 +86,7 @@ const wordCounts = [
   { time: '3 minutes', words: '420 words' },
   { time: '5 minutes', words: '700 words' },
   { time: '8 minutes', words: '1,100 words' },
+  { time: '10 minutes', words: '1,400 words' },
 ];
 
 const examples = [
@@ -378,8 +379,10 @@ const readiness = [
       </div>
 
       <p class="step__p">
-        These lengths are planning guides, not strict requirements. If a topic becomes difficult to
-        follow at the intended length, it may be worth dividing it into two shorter videos.
+        These lengths are planning guides, not strict requirements. Coursera videos work best
+        bite-sized: most run 5–10 minutes and focus on one or two concepts, rather than a long
+        lecture. If a topic becomes difficult to follow at the intended length, it may be worth
+        dividing it into two shorter videos.
       </p>
     </section>
 
@@ -1137,7 +1140,7 @@ const readiness = [
   /* --- Word-count grid ------------------------------------------------------ */
   .counts {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
     margin: 0 0 18px;
   }
