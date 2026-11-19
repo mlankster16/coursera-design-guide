@@ -19,56 +19,69 @@ path, which matches how GitHub Pages serves the site.
 
 ## Pages
 
-The six main pages are **Design's static build, copied verbatim** — not
-rebuilt. They are checked in under `public/` and served as-is.
+The six main pages are **finished static HTML** — not Astro pages. They are
+checked in under `public/` and served as-is.
 
 | Page | Route | Source |
 |---|---|---|
-| Overview | `/` | `public/index.html` (Design) |
-| Specialization | `/specialization` | `public/specialization/index.html` (Design) |
-| Course | `/course` | `public/course/index.html` (Design) |
-| Module | `/module` | `public/module/index.html` (Design) |
-| Learning Assets | `/learning-assets` | `public/learning-assets/index.html` (Design) |
-| Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `public/learning-assets/accessibility-copyright-ai/index.html` (Design) |
+| Overview | `/` | `public/index.html` |
+| Specialization | `/specialization` | `public/specialization/index.html` |
+| Course | `/course` | `public/course/index.html` |
+| Module | `/module` | `public/module/index.html` |
+| Learning Assets | `/learning-assets` | `public/learning-assets/index.html` |
+| Accessibility, Copyright & AI | `/learning-assets/accessibility-copyright-ai` | `public/learning-assets/accessibility-copyright-ai/index.html` |
 | Video | `/learning-assets/video` | `src/pages/learning-assets/video.astro` |
 | Reading | `/learning-assets/reading` | `src/pages/learning-assets/reading.astro` |
 
-### Why these pages are copied, not rebuilt
+### Why these pages are static HTML, not Astro
 
 Porting them into Astro produced four rounds of near-misses. Three whole
-categories of formatting were invisible in the old `.dc.html` design source
-and could not be recovered by reading the markup:
+categories of formatting could not be recovered by reading the original
+markup:
 
 - **hover and focus states** were `style-hover` attributes, inert outside
-  Design's runtime — 180 of them;
+  the tool the pages were first drawn in — 180 of them;
 - **type rendering** (`font-smoothing`, `text-rendering`,
   `font-synthesis-weight`) lived in a `<helmet>` block, and without it Open
-  Sans at 17px picks up weight so the page reads softer than the design even
+  Sans at 17px picks up weight so the page reads softer than intended even
   when every value matches;
 - **emphasis markup** had accumulated damage from in-place editing — stacks
-  like `<em><span style="font-style:normal"><b>…` that Design's tool renders
-  bold and any other processor renders italic.
+  like `<em><span style="font-style:normal"><b>…` that render bold in one
+  processor and italic in another.
 
-Design now ships finished HTML plus `guide.css` and `guide.js`. Copying it
+The pages now exist as finished HTML plus `guide.css` and `guide.js`, which
 removes that entire class of bug. **Do not "port" these pages, and do not
 merge `guide.css` into the global stylesheet or strip its `!important`
 flags** — every element carries its own inline style, so unflagged rules lose.
 
-### Updating from a new Design package
+### Changing these pages
+
+The six pages in `public/` are generated. Their base files are a fixed
+static build kept locally in `_design-reference/build/`, and
+`scripts/deploy-design-build.mjs` turns that build into `public/`:
 
 ```bash
-node scripts/deploy-design-build.mjs /path/to/build
+node scripts/deploy-design-build.mjs _design-reference/build
 npm run build
 ```
 
-The script copies the files byte-for-byte and does one thing the build
-cannot do for itself: it resolves the `href="#"` nav placeholders into real
-routes. There are currently **no content deviations** — the site is Design's
-files plus link wiring. If something looks wrong, fix it in Design and
-re-export rather than patching here; the `DEVIATIONS` array exists for
-genuine CTL overrides, and the shorter it stays the better.
+The script copies the files, resolves the `href="#"` nav placeholders into
+real routes, and then applies the `DEVIATIONS` array — every content change
+made since the base build, each a small function with its reason attached.
+**To change one of these pages, add or edit a deviation and re-run the
+script**, then commit the regenerated `public/` files along with it. An edit
+made directly in `public/` is overwritten the next time the script runs.
 
-Six `href="#"` links remain by design, on the Learning Assets page: the
+Each deviation checks that the markup it expects is still there and stops
+the run if it is not, so a change cannot silently stop applying.
+
+The current deviations add the typical Learning Asset lengths (the cards on
+Learning Assets, the Learning Assets layer on Start Here, a planning tip on
+Module) and the worked example's time estimates (an "Est. time" column on
+the Module learning path, a 2-hour Module 2, and the Course and
+Specialization totals that follow from it).
+
+Six `href="#"` links remain on purpose, on the Learning Assets page: the
 hidden release links for the six asset guides that are not built yet. They
 become real links when those pages exist.
 
@@ -85,23 +98,25 @@ reference. Astro ignores that directory, so they do not build.
   drives the hero rail, the cards, and the nav dropdown, so the three cannot drift
   apart. It also carries each asset's `page`, once one is published. Three assets are
   marked `plural`, which switches their card labels to "What are they? / When might you
-  use them?" — the design words them that way.
+  use them?" — the cards are worded that way.
 - **`src/data/learning-assets-data.json`** — **no longer read by anything.** It holds an
   earlier generation of the per-asset copy (`use`, `d`, `a`, `c`). The page it fed has
   been redesigned twice since: accessibility and copyright moved to their own page, and
   the cards now use "What is it? / When might you use it?" copy that never existed in
-  this file. The design handoff has since dropped it for the same reason, and warns
-  against reintroducing a parallel copy source — take card copy from the design's
-  `.dc.html`. Kept here only as a record; editing it changes nothing. Safe to delete.
+  this file. Do not reintroduce it as a parallel copy source — the card copy lives in
+  `public/learning-assets/index.html`. Kept here only as a record; editing it changes
+  nothing. Safe to delete.
 - **`src/styles/tokens.css`** — every color, type size, and measure in the design system.
 - **`src/styles/global.css`** — base styles and the patterns shared across pages
   (chrome, sections, panels, the level-page skeleton, accordion, print rules).
 - **`src/components/`** — masthead + nav (with the Learning Assets dropdown), page footer,
   accordion.
 - **`src/layouts/PageLayout.astro`** — the shell every page renders inside.
-The original design files and the design handoff live in `_design-reference/` on the
-LX team's machine. They are deliberately untracked (see `.gitignore`), because they
-carry internal notes on client preferences and open questions and this repo is public.
+
+The base build for the six static pages, along with the original source files and
+project notes, lives in `_design-reference/` on the LX team's machine. It is
+deliberately untracked (see `.gitignore`), because it carries internal notes on client
+preferences and open questions and this repo is public.
 
 Page-specific layout lives in each page's own scoped `<style>` block.
 
@@ -134,7 +149,7 @@ pages' "Zoom out / Zoom in" links update on their own.
 
 ## Design constraints worth knowing
 
-These come from the design handoff and are deliberate:
+These are deliberate:
 
 - **Level colors are semantic**, not decorative. Each matches the color faculty already
   see in the Google Docs design template they fill in.

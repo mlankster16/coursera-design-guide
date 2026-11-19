@@ -1,14 +1,16 @@
-/* Publish Design's static build.
+/* Generate the six static pages in public/ from the base build.
  *
- * Design ships build/ as finished HTML — "copy the files, not rebuild from
- * them". Re-implementing it is what produced four rounds of near-misses, so
- * this script only does what the build cannot do for itself:
+ * The base build (_design-reference/build, kept locally) is finished HTML
+ * and is no longer edited. Re-implementing those pages is what produced four
+ * rounds of near-misses, so this script copies them and does two things on
+ * top:
  *
  *   1. turns the nav placeholders into real links between the pages
- *   2. re-applies the few decisions CTL asked for that post-date the design
+ *   2. applies DEVIATIONS — every content change made since the base build
  *
- * Everything else is copied byte-for-byte. If a value looks wrong on the
- * live site, fix it in Design and re-export — do not patch it here.
+ * Everything else is copied byte-for-byte. To change a page, add or edit a
+ * deviation below and re-run; an edit made directly in public/ is
+ * overwritten the next time this runs.
  */
 import { readFileSync, writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
@@ -18,7 +20,7 @@ if (!SRC) throw new Error('usage: node scripts/deploy-design-build.mjs <build-di
 const OUT = 'public';
 const BASE = '/coursera-design-guide';
 
-/** Design file -> published route. */
+/** Base build file -> published route. */
 const PAGES = {
   // Start Here is the landing page, so it takes the root. Orient was folded
   // into it in the October redesign; /orient/ keeps working as a redirect,
@@ -40,8 +42,8 @@ const NAV = {
 const LA = `${BASE}/learning-assets/`;
 const A11Y = `${BASE}/learning-assets/accessibility-copyright-ai/`;
 
-/** data-link key -> destination. Design ships every placeholder link with a
-    stable key, so resolution no longer depends on the link's visible text. */
+/** data-link key -> destination. Every placeholder link in the base build
+    carries a stable key, so resolution no longer depends on the link's visible text. */
 const BY_KEY = {
   'start-here': `${BASE}/`,
   specialization: `${BASE}/specialization/`,
@@ -60,16 +62,14 @@ const ASSET_GUIDES = {
 
 
 /* --- Deviations -----------------------------------------------------------
-   Each is a CTL instruction that overrides or post-dates the design file.
-   This list is the only place the published site may differ from the build;
-   keep it short and keep the reason attached.
+   Every content change made since the base build. Each one is a function
+   (page, route) -> page, with the reason attached, and each checks that the
+   markup it expects is still there. This list is the only place the
+   published pages differ from the base build, so it is also the record of
+   what has changed and why. */
 
-   CTL's instructions normally go to Design, Design exports them, and this
-   script copies the result. Anything here is a patch waiting to be retired
-   the moment Design's source carries it. */
-
-/** Replace exactly one occurrence, and fail loudly if Design's markup has
-    moved on — a deviation that silently stops applying is worse than none. */
+/** Replace exactly one occurrence, and fail loudly if the markup is not
+    what the deviation expects — a deviation that silently stops applying is worse than none. */
 function swap(s, find, replace, label) {
   const n = s.split(find).length - 1;
   if (n !== 1) throw new Error(`deviation "${label}": expected 1 match, found ${n}`);
@@ -77,8 +77,7 @@ function swap(s, find, replace, label) {
 }
 
 /* Typical lengths (CTL, November 2026). Desired length and the practice
-   behind it for each Learning Asset type. Retire each piece once Design's
-   source carries it. */
+   behind it for each Learning Asset type. */
 const ACTIVITY_LENGTH =
   'Varies, from 5 to 30 minutes of learner time. A longer activity is best broken into smaller parts.';
 const ASSET_LENGTHS = {
