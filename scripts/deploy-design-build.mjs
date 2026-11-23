@@ -1,6 +1,6 @@
 /* Generate the six static pages in public/ from the base build.
  *
- * The base build (_design-reference/build, kept locally) is finished HTML
+ * The base build (_design-reference/base-snapshot-not-live, kept locally) is finished HTML
  * and is no longer edited. Re-implementing those pages is what produced four
  * rounds of near-misses, so this script copies them and does two things on
  * top:
